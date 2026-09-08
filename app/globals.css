@@ -31,3 +31,6 @@
 /* v0.6: a persistent left scene, independently readable right chapter. */
 @media(min-width:851px){.atlas-layout{height:calc(100svh - 90px);min-height:540px}.portrait-stage{position:relative;height:100%;min-height:0}.atlas-content{height:100%;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--purple) transparent}.chapter-tabs{position:sticky;top:-1px;z-index:3;background:var(--bg)!important;padding-top:8px!important}.atlas header{position:relative}.chapter{min-height:450px}}
 .scene-error{position:absolute;top:45%;left:10%;right:10%;color:#ece4f6;background:#111727e8;padding:20px;border-radius:16px;font-size:16px}
+.brand-name{font-size:clamp(15px,2vw,22px);letter-spacing:.04em}.brand>svg{flex-shrink:0}
+.chapter{animation:chapter-in .45s ease .25s both}
+@media(max-width:520px){.atlas header{padding-inline:20px;gap:12px}.brand{gap:9px;min-width:0}.brand-name{display:block;max-width:210px;font-size:15px;line-height:1.25}.brand-sub{letter-spacing:2px}.theme{flex-shrink:0;padding:8px 11px}.theme>span{display:none}}

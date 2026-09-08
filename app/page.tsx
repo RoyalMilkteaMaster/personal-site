@@ -3,7 +3,7 @@ import {useState,useRef,useEffect} from 'react';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import {projects} from '@/lib/projects';
 import AstralScene from './astral-scene';
-import {ArrowUpRight,Sun,Moon,Sparkles,RotateCcw} from 'lucide-react';
+import {ArrowUpRight,Sun,Moon,Crown,RotateCcw} from 'lucide-react';
 const sections=['關於我','我的作品','聯絡資訊'];
 export default function Home(){
  const [light,setLight]=useState(false),[active,setActive]=useState('0'),[replay,setReplay]=useState(0),[skip,setSkip]=useState(false);
@@ -11,7 +11,7 @@ export default function Home(){
  useEffect(()=>{contentRef.current?.scrollTo({top:0,behavior:'instant'});},[active]);
  return <div className={`site atlas ${light?'light':''}`}>
  <a className="skip" href="#content">跳至主要內容</a>
- <header><a className="brand" href="#"><Sparkles size={23}/><span>Royal Milktea<span className="brand-sub">PIN HUNG LIN</span></span></a><button className="theme" onClick={()=>setLight(!light)} aria-label={light?'切換星夜':'切換日光'}>{light?<Moon size={17}/>:<Sun size={17}/>}<span>{light?'星夜':'日光'}</span></button></header>
+ <header><a className="brand" href="#"><Crown size={28} aria-hidden="true"/><span><span className="brand-name">ROYAL MILKTEA MASTER</span><span className="brand-sub">PIN HUNG LIN</span></span></a><button className="theme" onClick={()=>setLight(!light)} aria-label={light?'切換星夜':'切換日光'}>{light?<Moon size={17}/>:<Sun size={17}/>}<span>{light?'星夜':'日光'}</span></button></header>
  <main><Tabs value={active} onValueChange={v=>setActive(String(v))} className="atlas-layout">
  <aside className="portrait-stage"><div className="stage-label">ROYAL MILKTEA / PERSONAL UNIVERSE</div><AstralScene pose={Number(active)} replay={replay} skip={skip}/><div className="stage-controls"><button onClick={()=>{setActive('0');setSkip(false);setReplay(replay+1);}}><RotateCcw size={14}/>重播星塵</button><button onClick={()=>setSkip(true)}>略過動畫 →</button></div><div className="stage-caption"><span>0{Number(active)+1}</span><span>{sections[Number(active)]}</span><i>✧</i></div></aside>
  <div ref={contentRef} className="atlas-content" id="content"><p className="eyebrow">林品宏 ／ 皇家奶茶大師</p><TabsList className="chapter-tabs" aria-label="個人網站主題">{sections.map((s,i)=><TabsTrigger key={s} value={String(i)}><span>0{i+1}</span>{s}</TabsTrigger>)}</TabsList>

@@ -1,5 +1,7 @@
 export const STRIDE = 13; // xyz, rgb, normal, pivot, role (-1 sky, 0 body, 1 solid prop, 2 emissive prop).
 export function ease(t:number){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
+// A fast pose change followed by a small settling movement (HSR reference).
+export function chapterProgress(t:number){return t<.56?.985*ease(t/.56):.985+.015*ease((t-.56)/.44);}
 export class ParticleMorph {
  current:Float32Array;
  private from:Float32Array;
@@ -12,8 +14,8 @@ export class ParticleMorph {
   const raw=Math.max(0,Math.min(1,(now-this.start)/this.duration));
   if(raw===1){this.current.set(this.target);return this.current;}
   for(let k=0;k<this.current.length;k+=STRIDE){
-   const id=k/STRIDE,delay=(id*.61803398875)%1*.12;
-   const t=Math.max(0,Math.min(1,(raw-delay)/(1-delay))),p=ease(t),appearance=ease(t);
+   const id=k/STRIDE,delay=(id*.61803398875)%1*(this.direct?.025:.12);
+   const t=Math.max(0,Math.min(1,(raw-delay)/(1-delay))),p=this.direct?chapterProgress(t):ease(t),appearance=p;
    if(t===0){this.current.set(this.from.subarray(k,k+STRIDE),k);continue;}
    const arc=Math.sin(Math.PI*p);
    const phase=id*2.399963,spin=arc*1.45,c=Math.cos(spin),s=Math.sin(spin);

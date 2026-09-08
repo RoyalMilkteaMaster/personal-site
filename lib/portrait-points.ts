@@ -68,10 +68,10 @@ export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:numb
   out[k+2]=depth[p];
   // Keep the original portrait. Only soften the cropped clothing at the two
   // outer edges with a few short star wisps; never extend the face or the hem.
-  const edgeWidth=.035,u=x/width,v=y/height,edgeDistance=Math.min(u,1-u);
+  const edgeWidth=.08,u=x/width,v=y/height,edgeDistance=Math.min(u,1-u);
   if(pose>=0&&v>.55&&edgeDistance<edgeWidth){
    const strength=Math.pow(1-Math.max(0,edgeDistance)/edgeWidth,2);
-   const reach=.065*Math.pow(noise(i+891),2)*strength;
+   const reach=.11*Math.pow(noise(i+891),2)*strength;
    out[k]+=(u<.5?-1:1)*reach;
    out[k+1]+=Math.sin(v*18+pose)*reach*.25;
    out[k+2]+=Math.sin(i)*reach*.18;

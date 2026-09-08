@@ -28,6 +28,11 @@ for(const pose of [0,1,2]){
  const crown=held.filter((_,i)=>i%7===0);
  assert.ok(crown.every(p=>Math.hypot(p[0]-p[9],p[2]-p[11])<.050),'Crown remains a small inner accent');
  assert.ok(crown.some(p=>p[1]>p[10]+.04)&&crown.some(p=>p[1]<p[10]-.02),'Keep readable crown tips and band');
+ for(let side=0;side<5;side++){
+  const angle=side*Math.PI*2/5;
+  const strut=crown.filter(p=>Math.abs(p[0]-p[9]-.043*Math.cos(angle))<1e-5&&Math.abs(p[2]-p[11]-.043*Math.sin(angle))<1e-5);
+  assert.ok(strut.some(p=>p[1]-p[10]<-.015)&&strut.some(p=>p[1]-p[10]>0),'Each crown valley connects down to its band');
+ }
  assert.ok(held.length>10);assert.ok(model.every(Number.isFinite));
  assert.ok(held.some(p=>p[8]>.1)&&held.some(p=>p[8]<-.1),'Objects have front and back facing normals');
  assert.ok(Math.max(...held.map(p=>p[2]))-Math.min(...held.map(p=>p[2]))>(pose===0?.045:.08),'Held objects have depth proportional to their radius');
@@ -37,6 +42,8 @@ for(const pose of [0,1,2]){
   assert.ok(upperFlame.every(p=>p[12]>=1),'Every outer flame particle rotates with the ember');
  }
  if(pose===1){
+  assert.ok(crown.every(p=>p[3]>p[5]+.3),'Crown keeps warm gold');
+  assert.ok(held.filter((_,i)=>i%7!==0).every(p=>p[5]>p[3]+.2),'Cool crystal shell contrasts with its gold crown');
   assert.ok(held.some(p=>p[1]<p[10]-.13),'Restore the lower ornament above the palm');
   assert.ok(held.some(p=>p[1]>p[10]+.16),'Restore the upper ornament and filament');
  }
@@ -57,5 +64,5 @@ for(let y=0;y<100;y++)for(let x=0;x<100;x++)cropped.set(y>55?[80,45,160,255]:[25
 const wisps=portraitPoints(cropped,100,100,4000,0);
 const xs=Array.from({length:4000},(_,i)=>wisps[i*STRIDE]);
 assert.ok(xs.some(x=>x<-.52)&&xs.some(x=>x>.52),'Only a small continuation beyond both original crop edges');
-assert.ok(xs.every(x=>Math.abs(x)<.586),'Side extension remains bounded, not a new silhouette');
+assert.ok(xs.every(x=>Math.abs(x)<.631),'Side extension remains bounded, not a new silhouette');
 assert.equal(wisps.length,4000*STRIDE,'Edge repair retains the existing particle total');

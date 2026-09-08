@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
-import {ParticleMorph,galaxy,assignParticleIds,backgroundStars,rotateHeldObjects,STRIDE} from './particle-morph.ts';
+import {ParticleMorph,galaxy,assignParticleIds,backgroundStars,rotateHeldObjects,STRIDE,chapterProgress} from './particle-morph.ts';
+assert.equal(chapterProgress(0),0);assert.equal(chapterProgress(1),1);
+assert.ok(chapterProgress(.60)>.98,'New pose is readable before the short settling tail');
 const start=galaxy(100),target=start.map((v,i)=>i%STRIDE<3?v*.4:v*.8),third=galaxy(100,1);
 const m=new ParticleMorph(start);m.retarget(target,0,1000);
 assert.deepEqual(m.update(0),start);

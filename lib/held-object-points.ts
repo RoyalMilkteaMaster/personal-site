@@ -39,7 +39,7 @@ export function heldObjectPoints(count:number,pose:number){
      const point=[(b-.5)*.004,center,(noise(i+82)-.5)*.004];point[axis]+=sign*radius;
      [x,y,z]=point;
     }
-    colour=[1,.87,.55];emission=2;
+    colour=[.65,.78,1];emission=2;
    }else{
     // Three octagonal belts form multiple triangular facets, not a plain
     // eight-face diamond. Bright edges remain readable between sparse faces.
@@ -58,7 +58,7 @@ export function heldObjectPoints(count:number,pose:number){
     const ab=v2.map((n,j)=>n-v1[j]),ac=v3.map((n,j)=>n-v1[j]);
     nx=ab[1]*ac[2]-ab[2]*ac[1];ny=ab[2]*ac[0]-ab[0]*ac[2];nz=ab[0]*ac[1]-ab[1]*ac[0];
     if(nx*x+ny*y+nz*z<0){nx=-nx;ny=-ny;nz=-nz;}
-    colour=edge?[1,.87,.58]:[.72,.43,.17];emission=edge?2:1;
+    colour=edge?[.50,.65,1]:[.22,.29,.60];emission=edge?2:1;
    }
   }else{
    const radius=.087;
@@ -74,11 +74,12 @@ export function heldObjectPoints(count:number,pose:number){
   // A small crown replaces only the inner accent, leaving the approved shell,
   // scale, ornaments and palm anchor intact. In the flame these are the ember IDs.
   if(i%7===0){
-   const angle=noise(i+431)*Math.PI*2,segment=angle/(Math.PI*2/5)%1;
-   const peak=1-Math.abs(segment*2-1),band=Math.floor(i/7)%3===0;
-   const radius=.043*(band?1:1+peak*.16);
+   const crownId=Math.floor(i/7),part=crownId%5,connector=part===4;
+   const angle=connector?Math.floor(crownId/5)%5*Math.PI*2/5:noise(i+431)*Math.PI*2,segment=angle/(Math.PI*2/5)%1;
+   const peak=1-Math.abs(segment*2-1),band=part===0;
+   const radius=.043*(band||connector?1:1+peak*.16);
    x=Math.cos(angle)*radius;z=Math.sin(angle)*radius;
-   y=band?-.025+(b-.5)*.004:.008+peak*.045;
+   y=connector?-.025+a*.033:band?-.025+(b-.5)*.004:.008+peak*.045;
    nx=Math.cos(angle);ny=.1;nz=Math.sin(angle);
    colour=[1,.90,.56];emission=2;
   }
