@@ -25,7 +25,7 @@ const pose=slots.slice();pose.set([.1,.2,.1,1,.8,.5,0,0,-1,0,0,0,1],STRIDE*3);
 const rotated=rotateHeldObjects(pose,2,new Float32Array(pose.length));
 assert.notDeepEqual(rotated.slice(0,STRIDE*3),pose.slice(0,STRIDE*3),'Body stars drift gently');
 for(let k=0;k<STRIDE*3;k+=STRIDE){
- assert.ok(Math.hypot(rotated[k]-pose[k],rotated[k+1]-pose[k+1],rotated[k+2]-pose[k+2])<.0028,'Drift stays inside the silhouette detail budget');
+ assert.ok(Math.hypot(rotated[k]-pose[k],rotated[k+1]-pose[k+1],rotated[k+2]-pose[k+2])<.0067,'Drift stays inside the silhouette detail budget');
  assert.deepEqual(rotated.slice(k+3,k+STRIDE),pose.slice(k+3,k+STRIDE),'Drift does not change colour or surface data');
 }
 assert.notDeepEqual(rotated.slice(STRIDE*3,STRIDE*3+3),pose.slice(STRIDE*3,STRIDE*3+3),'Only the held object rotates');
@@ -58,13 +58,28 @@ direct.retarget(aligned,0,1800,first,true);
 for(const time of [300,900,1500]){
  const frame=direct.update(time);
  for(let k=0;k<frame.length;k+=STRIDE){
-  const d=[0,1,2].map(a=>aligned[k+a]-first[k+a]),v=[0,1,2].map(a=>frame[k+a]-first[k+a]);
-  assert.ok(Math.hypot(v[1]*d[2]-v[2]*d[1],v[2]*d[0]-v[0]*d[2],v[0]*d[1]-v[1]*d[0])<1e-6,'Chapter particles stay on their own direct path');
-  for(let a=0;a<6;a++)assert.ok(frame[k+a]>=Math.min(first[k+a],aligned[k+a])-1e-6&&frame[k+a]<=Math.max(first[k+a],aligned[k+a])+1e-6,'No intermediate position or palette detour');
+  const radius=(points:Float32Array)=>Math.hypot(points[k],Math.sqrt(1-.55**2)*points[k+1]-.55*points[k+2]);
+  assert.ok(radius(frame)>=Math.min(radius(first),radius(aligned))-1e-6,'Stars never collapse toward a shared intermediate hub');
+  assert.ok(radius(frame)<=Math.max(radius(first),radius(aligned))+1e-6,'Stars keep bounded personal orbits');
+  for(let a=3;a<6;a++)assert.ok(frame[k+a]>=Math.min(first[k+a],aligned[k+a])-1e-6&&frame[k+a]<=Math.max(first[k+a],aligned[k+a])+1e-6,'Colours travel directly to their destination palette');
  }
 }
 const interrupted=direct.update(700).slice();direct.retarget(first,700,1000,interrupted,true);
 assert.deepEqual(direct.update(700),interrupted);assert.deepEqual(direct.update(1700),first);
 const local=assignParticleIds(reversed,1,slots);
 assert.deepEqual(local,slots,'Local pairing must not collapse an unchanged shape into the centre');
-console.log('Direct chapter paths, local pairing, endpoint colours and interruption continuity passed.');
+// An unchanged ring must still turn, with no backwards turn or radial collapse.
+const ring=slots.slice(),orbit=new ParticleMorph(ring);
+orbit.retarget(ring,0,2200,ring,true);
+let previous=ring.slice(),turn=0;
+for(let time=20;time<=2200;time+=20){
+ const frame=orbit.update(time).slice(),u=Math.sqrt(1-.55**2);
+ const angle=(p:Float32Array)=>Math.atan2(u*p[1]-.55*p[2],p[0]);
+ const delta=Math.atan2(Math.sin(angle(frame)-angle(previous)),Math.cos(angle(frame)-angle(previous)));
+ assert.ok(delta>=-1e-6,'Orbital transport must not rewind midway');turn+=delta;previous=frame;
+}
+assert.ok(Math.abs(turn-2*Math.PI)<1e-5,'The stars complete a continuous orbit');
+assert.deepEqual(orbit.current,ring);
+const driftLater=rotateHeldObjects(pose,3,new Float32Array(pose.length));
+assert.ok([0,STRIDE,STRIDE*2].some(k=>Math.hypot(driftLater[k]-rotated[k],driftLater[k+1]-rotated[k+1])>.003),'Idle movement is visibly larger than the old subpixel drift');
+console.log('Continuous orbital paths, no hub collapse, local pairing, endpoint colours and interruption continuity passed.');

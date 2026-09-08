@@ -14,17 +14,40 @@ export class ParticleMorph {
   for(let k=0;k<this.current.length;k+=STRIDE){
    const id=k/STRIDE,delay=(id*.61803398875)%1*.12;
    const t=Math.max(0,Math.min(1,(raw-delay)/(1-delay))),p=ease(t),appearance=ease(t);
+   if(t===0){this.current.set(this.from.subarray(k,k+STRIDE),k);continue;}
    const arc=Math.sin(Math.PI*p);
    const phase=id*2.399963,spin=arc*1.45,c=Math.cos(spin),s=Math.sin(spin);
    const x=this.from[k]+(this.target[k]-this.from[k])*p;
    const y=this.from[k+1]+(this.target[k+1]-this.from[k+1])*p;
    const z=this.from[k+2]+(this.target[k+2]-this.from[k+2])*p;
-   // Keep the approved galaxy entrance. Chapters use direct endpoint paths,
-   // without a shared vortex or an intermediate colour/shape.
-   this.current[k]=this.direct?x:x*c+z*s+Math.cos(phase+t*2)*arc*.19;
-   this.current[k+1]=this.direct?y:y+Math.sin(phase+t*2)*arc*.16;
-   this.current[k+2]=this.direct?z:-x*s+z*c+Math.sin(phase)*arc*.22;
+   this.current[k]=x*c+z*s+Math.cos(phase+t*2)*arc*.19;
+   this.current[k+1]=y+Math.sin(phase+t*2)*arc*.16;
+   this.current[k+2]=-x*s+z*c+Math.sin(phase)*arc*.22;
    for(let axis=3;axis<STRIDE;axis++)this.current[k+axis]=this.from[k+axis]+(this.target[k+axis]-this.from[k+axis])*appearance;
+   if(this.direct){
+    // One continuous orbit to the destination, never a third target shape.
+    // Work in a tilted plane. Interpolating each star's radius preserves the
+    // cloud's spread; differential winding lets stars flow rather than rotate
+    // the whole portrait as a rigid card. Every orbit travels the same way.
+    const tilt=.55,u=Math.sqrt(1-tilt*tilt);
+    const sx=this.from[k],sq=u*this.from[k+1]-tilt*this.from[k+2];
+    const tx=this.target[k],tq=u*this.target[k+1]-tilt*this.target[k+2];
+    const sr=Math.hypot(sx,sq),tr=Math.hypot(tx,tq);
+    const a=Math.atan2(sq,sx),end=Math.atan2(tq,tx);
+    const delta=Math.atan2(Math.sin(end-a),Math.cos(end-a));
+    const winding=2*Math.PI*p+.8*arc*Math.sin(sr*13+phase*.04);
+    const angle=a+delta*p+winding,r=sr+(tr-sr)*p;
+    const height=tilt*y+u*z,q=Math.sin(angle)*r;
+    this.current[k]=Math.cos(angle)*r;
+    this.current[k+1]=u*q+tilt*height;
+    this.current[k+2]=-tilt*q+u*height;
+    const nx=this.current[k+6],nq=u*this.current[k+7]-tilt*this.current[k+8];
+    const nh=tilt*this.current[k+7]+u*this.current[k+8];
+    const nc=Math.cos(winding),ns=Math.sin(winding),rotatedQ=nx*ns+nq*nc;
+    this.current[k+6]=nx*nc-nq*ns;
+    this.current[k+7]=u*rotatedQ+tilt*nh;
+    this.current[k+8]=-tilt*rotatedQ+u*nh;
+   }
    for(let channel=0;!this.direct&&channel<3;channel++){
     const star=channel===0?.55:channel===1?.66:.92;
     this.current[k+3+channel]=this.current[k+3+channel]*(1-arc*.65)+star*arc*.65;
@@ -79,9 +102,9 @@ export function rotateHeldObjects(source:Float32Array,seconds:number,out:Float32
   }
   if(source[k+12]<.5){
    const phase=k/STRIDE*2.399963,ramp=ease(seconds/.8);
-   out[k]+=.0012*Math.sin(seconds*.7+phase)*ramp;
-   out[k+1]+=.0022*Math.sin(seconds*.5+phase*1.4)*ramp;
-   out[k+2]+=.001*Math.sin(seconds*.4+phase*.7)*ramp;
+   out[k]+=.0032*Math.sin(seconds*.95+phase)*ramp;
+   out[k+1]+=.0055*Math.sin(seconds*.8+phase*1.4)*ramp;
+   out[k+2]+=.002*Math.sin(seconds*.6+phase*.7)*ramp;
    continue;
   }
   const x=source[k]-source[k+9],z=source[k+2]-source[k+11];

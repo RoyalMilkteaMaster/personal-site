@@ -105,7 +105,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
      const rotation=(clock-readyAt)*.0007;
      galaxy(count,rotation,galaxyFrame);foreground.set(galaxyFrame);
      if(reduced||skipNow||cmd.skip||cmd.pose!==0||clock-readyAt>1500){transitionDuration=reduced||cmd.skip?1:cmd.pose===0?3000:1250;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground);phase='morph';surfaceAt=clock;surfaceFrom=0;active=cmd.pose;}
-    }else if(cmd.pose!==active||skipNow){transitionDuration=reduced||skipNow?1:1800;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground,true);surfaceFrom=visualSurface;phase='morph';surfaceAt=clock;active=cmd.pose;}
+    }else if(cmd.pose!==active||skipNow){transitionDuration=reduced||skipNow?1:2200;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground,true);surfaceFrom=visualSurface;phase='morph';surfaceAt=clock;active=cmd.pose;}
    }
    if(reduced&&targets.length){foreground.set(targets[cmd.pose]);phase='hold';holdAt=clock;}
    else if(phase==='morph'){

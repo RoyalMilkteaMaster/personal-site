@@ -40,7 +40,7 @@ for(const pose of [0,1,2]){
  for(const angle of [0,Math.PI/2,Math.PI,Math.PI*1.5,Math.PI*2]){
   const rotated=rotateHeldObjects(model,angle/.48,new Float32Array(model.length));
   for(let k=0;k<model.length;k+=STRIDE){
-   if(model[k+12]===0){assert.ok(Math.hypot(rotated[k]-model[k],rotated[k+1]-model[k+1],rotated[k+2]-model[k+2])<.0028,'Hand and body stars drift without moving the pose');continue;}
+   if(model[k+12]===0){assert.ok(Math.hypot(rotated[k]-model[k],rotated[k+1]-model[k+1],rotated[k+2]-model[k+2])<.0067,'Hand and body stars drift without moving the pose');continue;}
    const radius=(p:Float32Array)=>Math.hypot(p[k]-p[k+9],p[k+2]-p[k+11]);
    assert.ok(Math.abs(radius(rotated)-radius(model))<1e-6,'Rotation must not move the object away from its hand anchor');
    assert.equal(rotated[k+1],model[k+1],'Held object must not rise away from the palm');
