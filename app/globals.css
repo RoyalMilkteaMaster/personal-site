@@ -18,3 +18,9 @@
 .light .hero-copy h1{text-shadow:none}
 @media(max-width:760px){.hero-art{opacity:.2}.hero-shade{background:linear-gradient(90deg,#080f20e8,#080f2077),linear-gradient(0deg,#080f20,transparent 65%)}.hero-bottom{font-size:10px}.hero-copy .eyebrow{font-size:11px}.light .hero-art{opacity:.07}}
 @media(prefers-reduced-motion:reduce){.hero-art{transform:none!important;will-change:auto}}
+
+/* v0.4: the homepage is an abstract interactive space, independent of artwork. */
+.hero{background:radial-gradient(ellipse at 78% 45%,#202342 0%,#0d172d 42%,#080f20 76%)}
+.hero-shade{background:linear-gradient(90deg,#080f2088,transparent 70%),linear-gradient(0deg,#080f20,transparent 26%)}
+.light .hero{background:radial-gradient(ellipse at 76% 45%,#eff0ff,#fafbfe 73%)}
+.light .hero-shade{background:linear-gradient(90deg,#fafbfe88,transparent 70%),linear-gradient(0deg,#fafbfe,transparent 26%)}
