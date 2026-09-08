@@ -28,6 +28,7 @@ for(const pose of [0,1,2]){
  const crown=held.filter((_,i)=>i%7===0);
  assert.ok(crown.every(p=>Math.hypot(p[0]-p[9],p[2]-p[11])<.050),'Crown remains a small inner accent');
  assert.ok(crown.some(p=>p[1]>p[10]+.04)&&crown.some(p=>p[1]<p[10]-.02),'Keep readable crown tips and band');
+ assert.ok(crown.some(p=>p[1]<p[10]-.039)&&crown.some(p=>p[1]<p[10]-.028&&p[1]>p[10]-.037),'Crown has a second lower rim and a connecting band');
  for(let side=0;side<5;side++){
   const angle=side*Math.PI*2/5;
   const strut=crown.filter(p=>Math.abs(p[0]-p[9]-.043*Math.cos(angle))<1e-5&&Math.abs(p[2]-p[11]-.043*Math.sin(angle))<1e-5);

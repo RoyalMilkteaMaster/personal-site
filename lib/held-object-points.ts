@@ -74,14 +74,21 @@ export function heldObjectPoints(count:number,pose:number){
   // A small crown replaces only the inner accent, leaving the approved shell,
   // scale, ornaments and palm anchor intact. In the flame these are the ember IDs.
   if(i%7===0){
-   const crownId=Math.floor(i/7),part=crownId%5,connector=part===4;
-   const angle=connector?Math.floor(crownId/5)%5*Math.PI*2/5:noise(i+431)*Math.PI*2,segment=angle/(Math.PI*2/5)%1;
+   const crownId=Math.floor(i/7),part=crownId%7,connector=part===4;
+   const angle=connector?Math.floor(crownId/7)%5*Math.PI*2/5:noise(i+431)*Math.PI*2,segment=angle/(Math.PI*2/5)%1;
    const peak=1-Math.abs(segment*2-1),band=part===0;
    const radius=.043*(band||connector?1:1+peak*.16);
    x=Math.cos(angle)*radius;z=Math.sin(angle)*radius;
    y=connector?-.025+a*.033:band?-.025+(b-.5)*.004:.008+peak*.045;
    nx=Math.cos(angle);ny=.1;nz=Math.sin(angle);
    colour=[1,.90,.56];emission=2;
+   if(part>=5){
+    // A second stepped band gives the little crown a solid jewellery base.
+    const radius=part===5?.048:.043+a*.005;
+    x=Math.cos(angle)*radius;z=Math.sin(angle)*radius;
+    y=part===5?-.042+(b-.5)*.003:-.042+a*.017;
+    colour=part===5?[1,.91,.67]:[.76,.59,.34];
+   }
   }
   const length=Math.hypot(nx,ny,nz)||1;
   out.set([x+pivot[0],y+pivot[1],z+pivot[2],...colour,nx/length,ny/length,nz/length,...pivot,emission],i*STRIDE);

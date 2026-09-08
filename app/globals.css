@@ -33,4 +33,7 @@
 .scene-error{position:absolute;top:45%;left:10%;right:10%;color:#ece4f6;background:#111727e8;padding:20px;border-radius:16px;font-size:16px}
 .brand-name{font-size:clamp(15px,2vw,22px);letter-spacing:.04em}.brand>svg{flex-shrink:0}
 .chapter{animation:chapter-in .45s ease .25s both}
+.atlas-content{position:relative}.intro-copy{position:absolute;top:210px;left:clamp(24px,4.5vw,85px);right:clamp(24px,4.5vw,85px);animation:chapter-in .6s ease both;pointer-events:none}
+.atlas-content:is([data-intro="loading"],[data-intro="hair"],[data-intro="face"]) .chapter{visibility:hidden}
+@media(max-width:850px){.intro-copy{top:150px;left:24px;right:24px}}
 @media(max-width:520px){.atlas header{padding-inline:20px;gap:12px}.brand{gap:9px;min-width:0}.brand-name{display:block;max-width:210px;font-size:15px;line-height:1.25}.brand-sub{letter-spacing:2px}.theme{flex-shrink:0;padding:8px 11px}.theme>span{display:none}}
