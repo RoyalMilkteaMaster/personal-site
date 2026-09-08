@@ -1,6 +1,7 @@
 'use client';
 import {useEffect,useRef,useState} from 'react';
 import {galaxy,ParticleMorph,STRIDE} from '@/lib/particle-morph';
+import {portraitPoints} from '@/lib/portrait-points';
 
 const vertex=`
 attribute vec3 aPosition;
@@ -14,19 +15,20 @@ varying vec3 vColor;
 void main(){
  vec3 p=aPosition;
  float id=dot(aPosition,vec3(12.9898,78.233,32.4));
- p.x+=sin(uTime*.6+id)*.0025*uMotion;
- p.y+=cos(uTime*.5+id)*.0025*uMotion;
+ p.x+=sin(uTime*.6+id)*.00065*uMotion;
+ p.y+=cos(uTime*.5+id)*.00065*uMotion;
  float a=uPointer.x*.18;
  p=vec3(p.x*cos(a)+p.z*sin(a),p.y+uPointer.y*p.z*.12,-p.x*sin(a)+p.z*cos(a));
  float depth=3.0/(3.0+p.z);
- gl_Position=vec4(p.x*depth/uAspect,p.y*depth,0.0,1.0);
+ float fit=min(1.0,uAspect/.62);
+ gl_Position=vec4(p.x*depth*fit/uAspect,p.y*depth*fit,0.0,1.0);
  float bright=max(aColor.r,max(aColor.g,aColor.b));
- gl_PointSize=uDpr*(1.25+bright*.75)*depth;
- vColor=aColor*(.91+.09*sin(uTime*.7+id)*uMotion);
+ gl_PointSize=uDpr*(1.15+bright*.85)*depth;
+ vColor=aColor*(.96+.04*sin(uTime*.7+id)*uMotion);
 }`;
 const fragment=`precision mediump float;
 varying vec3 vColor;
-void main(){float r=length(gl_PointCoord-vec2(.5));if(r>.5)discard;float alpha=(1.0-smoothstep(.2,.5,r))*.9;gl_FragColor=vec4(vColor,alpha);}`;
+void main(){float r=length(gl_PointCoord-vec2(.5));if(r>.5)discard;float bright=max(vColor.r,max(vColor.g,vColor.b));float alpha=(1.0-smoothstep(.32,.5,r))*min(1.0,bright*2.8);gl_FragColor=vec4(vColor*alpha,alpha);}`;
 
 export default function AstralScene({pose,replay,skip}:{pose:number;replay:number;skip:boolean}){
  const canvasRef=useRef<HTMLCanvasElement>(null);
@@ -35,19 +37,22 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
  useEffect(()=>{command.current={pose,replay,skip};},[pose,replay,skip]);
  useEffect(()=>{
   const canvas=canvasRef.current;if(!canvas)return;
-  const gl=canvas.getContext('webgl',{alpha:true,antialias:false,premultipliedAlpha:false});
+  const gl=canvas.getContext('webgl',{alpha:true,antialias:false,premultipliedAlpha:true});
   if(!gl){setError('此裝置無法顯示星塵，右側內容仍可正常閱讀。');return;}
   let disposed=false,frame=0,w=1,h=1,dpr=1,visible=true,last=0,clock=0,readyAt=0;
   let reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   let wanted={x:0,y:0},pointer={x:0,y:0};
-  const count=window.innerWidth<850?6500:11000,backCount=500;
+  const bounds=canvas.getBoundingClientRect();
+  const count=Math.round(Math.max(24000,Math.min(64000,bounds.width*bounds.height/7))),backCount=500;
   const seed=galaxy(count);let morph=new ParticleMorph(seed),targets:Float32Array[]=[];
   let active=-1,seenReplay=replay,seenSkip=skip,phase:'galaxy'|'morph'='galaxy';
   function compile(type:number,source:string){const s=gl!.createShader(type)!;gl!.shaderSource(s,source);gl!.compileShader(s);if(!gl!.getShaderParameter(s,gl!.COMPILE_STATUS))throw new Error('Shader compilation failed');return s;}
   let program:WebGLProgram,vs:WebGLShader,fs:WebGLShader;
   try{vs=compile(gl.VERTEX_SHADER,vertex);fs=compile(gl.FRAGMENT_SHADER,fragment);program=gl.createProgram()!;gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error('Link failed');}
   catch{setError('星塵顯示暫時無法啟動，右側內容仍可正常閱讀。');return;}
-  gl.useProgram(program);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);
+  // Premultiplied colour must match both GPU blending and browser compositing.
+  // The old non-premultiplied canvas attenuated soft stars a second time.
+  gl.useProgram(program);gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
   const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
   for(const [name,offset] of [['aPosition',0],['aColor',12]] as const){const a=gl.getAttribLocation(program,name);gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,3,gl.FLOAT,false,24,offset);}
   const uniforms={aspect:gl.getUniformLocation(program,'uAspect'),time:gl.getUniformLocation(program,'uTime'),dpr:gl.getUniformLocation(program,'uDpr'),motion:gl.getUniformLocation(program,'uMotion'),pointer:gl.getUniformLocation(program,'uPointer')};
@@ -62,26 +67,15 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
   const img=new Image();
   img.onload=()=>{
    if(disposed)return;
-   const sample=document.createElement('canvas');sample.width=240;sample.height=400;const c=sample.getContext('2d');if(!c)return;
-   targets=[0,1,2].map(poseIndex=>{
-    c.clearRect(0,0,240,400);c.drawImage(img,poseIndex*img.width/3,0,img.width/3,img.height,0,0,240,400);
-    const pixels=c.getImageData(0,0,240,400).data;
-    const candidates:number[][]=[];
-    for(let y=0;y<400;y++)for(let x=0;x<240;x++){
-     const i=(y*240+x)*4,a=pixels[i+3]/255,bright=Math.max(pixels[i],pixels[i+1],pixels[i+2])/255;
-     const chroma=Math.max(pixels[i],pixels[i+1],pixels[i+2])-Math.min(pixels[i],pixels[i+1],pixels[i+2]);
-     // Reference export has a neutral checker background; exclude it from geometry.
-     if(a<.6||bright<.07||(bright>.45&&chroma<18))continue;
-     // Sparse shadow points preserve a star-built silhouette without filling it like paint.
-     if(((x*73+y*151)%101)/101>.2+bright*.8)continue;
-     candidates.push([(x/240-.5)*1.12,(.5-y/400)*1.87,(.3-bright)*.12+Math.sin(x*.04)*.025,...[pixels[i],pixels[i+1],pixels[i+2]].map(v=>Math.min(1,Math.pow(v/255,.8)*1.15))]);
-    }
-    if(!candidates.length)throw new Error('No portrait points');
-    const out=new Float32Array(count*STRIDE);
-    // Equal counts and a consistent vertical order retain the identity of every star across poses.
-    for(let i=0;i<count;i++)out.set(candidates[Math.floor(i*candidates.length/count)],i*STRIDE);
-    return out;
-   });readyAt=clock;active=command.current.pose;
+   try{
+    const sample=document.createElement('canvas');sample.width=Math.floor(img.width/3);sample.height=img.height;
+    const c=sample.getContext('2d');if(!c)throw new Error('No sampling canvas');
+    targets=[0,1,2].map(poseIndex=>{
+     c.clearRect(0,0,sample.width,sample.height);
+     c.drawImage(img,poseIndex*img.width/3,0,img.width/3,img.height,0,0,sample.width,sample.height);
+     return portraitPoints(c.getImageData(0,0,sample.width,sample.height).data,sample.width,sample.height,count);
+    });readyAt=clock;active=command.current.pose;
+   }catch{setError('人物星塵暫時無法載入，請重新整理；右側內容仍可使用。');}
   };
   img.onerror=()=>setError('人物星塵素材未載入，請重新整理；右側內容仍可使用。');img.src='/astral-reference.png';
   const render=(now:number)=>{
