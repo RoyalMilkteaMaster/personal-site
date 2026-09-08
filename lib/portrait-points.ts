@@ -40,25 +40,25 @@ export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:numb
  for(let p=0;p<mask.length;p++){if(p%width)distance[p]=Math.min(distance[p],distance[p-1]+1);if(p>=width)distance[p]=Math.min(distance[p],distance[p-width]+1);}
  for(let p=mask.length-1;p>=0;p--){if(p%width<width-1)distance[p]=Math.min(distance[p],distance[p+1]+1);if(p<mask.length-width)distance[p]=Math.min(distance[p],distance[p+width]+1);}
  const depth=distance.map(d=>-.22*(1-Math.exp(-d/(width*.045))));
- const held=pose>=0?heldObject(pose):null;
+
  const luminance=(p:number)=>{const k=p*4;return (.2126*pixels[k]+.7152*pixels[k+1]+.0722*pixels[k+2])/255;};
  let total=0;
  for(let p=0;p<mask.length;p++){
   if(mask[p]||pixels[p*4+3]<80)continue;
   const x=p%width,y=Math.floor(p/width),light=luminance(p);
-  if(held){
-   const u=x/width-held.u,v=y/height-held.v;
-   const inside=pose===2?((u*1.04*.92-v*1.76*.39)/.205)**2+((u*1.04*.39+v*1.76*.92)/.105)**2<1:(u/held.rx)**2+(v/held.ry)**2<1;
-   const ornament=pose===1&&y/height>.16&&y/height<.434&&Math.abs(u)<(y/height<.29?.09:.025);
-   if((inside&&pose!==0)||ornament)continue;
-  }
   const left=x>0?p-1:p,right=x<width-1?p+1:p,up=y>0?p-width:p,down=y<height-1?p+width:p;
   const edge=Math.max(Math.abs(luminance(left)-luminance(right)),Math.abs(luminance(up)-luminance(down)),mask[left],mask[right],mask[up],mask[down]);
   // Allocate more stars to folds, fingers and object rims, keeping shadow volume.
-  weights[p]=.13+light*.85+edge*1.5;total+=weights[p];
+  const u=x/width,v=y/height;
+  const head=pose>=0&&v<.345&&v>.035&&u>.33&&u<.79;
+  const face=head&&v>.16&&u>(pose===2?.43:.36)&&u<(pose===0?.72:.63);
+  const hand=pose===0?u<.50&&v>.40&&v<.63:pose===1?u<.33&&v>.365&&v<.51:pose===2?u>.78&&v>.26&&v<.45:false;
+  weights[p]=(.13+light*.85+edge*1.5)*(face?2.4:head?1.5:hand?1.6:.85);
+  if(head&&distance[p]<4)weights[p]+=1.5;
+  total+=weights[p];
  }
  if(!total)throw new Error('No portrait points');
- const objectCount=held?Math.round(count*(pose===0?.014:.045)):0,bodyCount=count-objectCount;
+ const bodyCount=count;
  const out=new Float32Array(count*STRIDE);let p=0,accumulated=weights[0];
  for(let i=0;i<bodyCount;i++){
   const target=(i+noise(i))*total/bodyCount;
@@ -71,65 +71,13 @@ export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:numb
   const ny=dy?(depth[p-dy*width]-depth[p+dy*width])/(2*dy/height*1.76):0;
   const length=Math.hypot(nx,ny,1);out[k+6]=nx/length;out[k+7]=ny/length;out[k+8]=-1/length;
   for(let c=0;c<3;c++)out[k+3+c]=Math.min(1,Math.pow(pixels[p*4+c]/255,.88)*1.12);
-  // Retain a quiet blue glow behind the rotating star instead of cutting a
-  // black disc in the flame or leaving a second, stationary gold star there.
-  if(pose===0&&held&&((x/width-held.u)/held.rx)**2+((y/height-held.v)/held.ry)**2<1){
-   const glow=luminance(p)*.46;out[k+3]=glow*.34;out[k+4]=glow*.56;out[k+5]=glow;
+  if(pose>=0&&y/height>.15&&y/height<.345&&x/width>.33&&x/width<.79){
+   const light=Math.max(out[k+3],out[k+4],out[k+5]);
+   const lift=light>0?Math.max(1,.30/light):1;
+   for(let c=3;c<6;c++)out[k+c]=Math.min(1,out[k+c]*lift);
   }
+
  }
- if(held)writeHeldObject(out,bodyCount,objectCount,pose,held);
+
  return out;
-}
-
-function heldObject(pose:number){
- return [{u:.282,v:.441,rx:.058,ry:.037},{u:.207,v:.354,rx:.115,ry:.081},{u:.812,v:.232,rx:.165,ry:.079}][pose];
-}
-
-// Actual 3D surfaces: an eight-faced crystal, and spheres with tilted orbital rings.
-// They have front/back points and surface normals, and rotate independently.
-function writeHeldObject(out:Float32Array,start:number,count:number,pose:number,held:ReturnType<typeof heldObject>){
- const pivot=[(held.u-.5)*1.04,(.5-held.v)*1.76,-.29];
- for(let i=0;i<count;i++){
-  let x=0,y=0,z=0,nx=0,ny=0,nz=-1;
-  const a=noise(i+31),b=noise(i+792),theta=i*2.399963;
-  if(pose===0){
-   // Six tapered rays keep a star silhouette throughout a full turn. The blue
-   // flame stays attached to the original hand; only its central star rotates.
-   const axis=Math.floor(i%24/8),sign=i%8<4?1:-1,edge=i%4;
-   const tip=[0,0,0],v1=[0,0,0],v2=[0,0,0];
-   tip[axis]=sign*.055;v1[axis]=v2[axis]=sign*.012;
-   const side=(axis+1)%3,other=(axis+2)%3;
-   v1[side]=Math.cos(edge*Math.PI/2+Math.PI/4)*.017;
-   v1[other]=Math.sin(edge*Math.PI/2+Math.PI/4)*.017;
-   v2[side]=Math.cos((edge+1)*Math.PI/2+Math.PI/4)*.017;
-   v2[other]=Math.sin((edge+1)*Math.PI/2+Math.PI/4)*.017;
-   const u=Math.sqrt(a),v=i%5===0?0:b;
-   const point=tip.map((n,j)=>n*(1-u)+v1[j]*u*(1-v)+v2[j]*u*v);
-   [x,y,z]=point;
-   const ab=v1.map((n,j)=>n-tip[j]),ac=v2.map((n,j)=>n-tip[j]);
-   nx=ab[1]*ac[2]-ab[2]*ac[1];ny=ab[2]*ac[0]-ab[0]*ac[2];nz=ab[0]*ac[1]-ab[1]*ac[0];
-   if(nx*x+ny*y+nz*z<0){nx=-nx;ny=-ny;nz=-nz;}
-  }else if(pose===1){
-   const face=i%8,angle=(face%4)*Math.PI/2,upper=face<4?1:-1;
-   const top=[0,.14*upper,0],v1=[Math.cos(angle)*.098,0,Math.sin(angle)*.098],v2=[Math.cos(angle+Math.PI/2)*.098,0,Math.sin(angle+Math.PI/2)*.098];
-   const u=Math.sqrt(a),v=i%5===0?0:b;
-   x=top[0]*(1-u)+v1[0]*u*(1-v)+v2[0]*u*v;y=top[1]*(1-u);z=v1[2]*u*(1-v)+v2[2]*u*v;
-   const ab=v1.map((n,j)=>n-top[j]),ac=v2.map((n,j)=>n-top[j]);
-   nx=ab[1]*ac[2]-ab[2]*ac[1];ny=ab[2]*ac[0]-ab[0]*ac[2];nz=ab[0]*ac[1]-ab[1]*ac[0];
-   if(nx*x+ny*y+nz*z<0){nx=-nx;ny=-ny;nz=-nz;}
-  }else{
-   const radius=.087;
-   if(i%4===0){
-    const r=radius*(1.45+a*.35);x=Math.cos(theta)*r;y=Math.sin(theta)*r*.30;z=Math.sin(theta)*r*.954;
-    nx=0;ny=.954;nz=-.30;
-   }else{
-    ny=1-2*a;const r=Math.sqrt(1-ny*ny);nx=Math.cos(theta)*r;nz=Math.sin(theta)*r;
-    x=nx*radius;y=ny*radius;z=nz*radius;
-   }
-  }
-  const length=Math.hypot(nx,ny,nz),k=(start+i)*STRIDE;
-  const colour=pose===0?[1,.92,.68]:pose===1?[1,.76,.40]:[.82,.61,1];
-  const band=pose===1?1:.84+.16*Math.sin(theta*3+y*90);
-  out.set([x+pivot[0],y+pivot[1],z+pivot[2],...colour.map(c=>c*band),nx/length,ny/length,nz/length,...pivot,1],k);
- }
 }

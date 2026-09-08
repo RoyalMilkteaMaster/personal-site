@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {backgroundMask,portraitPoints} from './portrait-points.ts';
 import {rotateHeldObjects,STRIDE} from './particle-morph.ts';
+import {heldObjectPoints} from './held-object-points.ts';
 
 // Neutral checker outside, purple silhouette enclosing a white object highlight.
 const width=9,pixels=new Uint8ClampedArray(width*width*4);
@@ -21,11 +22,21 @@ assert.ok(Array.from({length:400},(_,i)=>points[i*STRIDE+3]).some(r=>r===1),'Pre
 assert.ok(Array.from({length:400},(_,i)=>Math.abs(points[i*STRIDE])).every(x=>x<.34),'No checker geometry');
 assert.ok(Array.from({length:400},(_,i)=>Math.hypot(...points.slice(i*STRIDE+6,i*STRIDE+9))).every(n=>Math.abs(n-1)<.001),'Unit surface normals for dynamic lighting');
 for(const pose of [0,1,2]){
- const model=portraitPoints(pixels,width,width,2000,pose);
- const held=Array.from({length:2000},(_,i)=>model.slice(i*STRIDE,(i+1)*STRIDE)).filter(p=>p[12]===1);
+ const body=portraitPoints(pixels,width,width,2000,pose),object=heldObjectPoints(2000,pose);
+ const model=new Float32Array(body.length+object.length);model.set(body);model.set(object,body.length);
+ const held=Array.from({length:2000},(_,i)=>object.slice(i*STRIDE,(i+1)*STRIDE));
  assert.ok(held.length>10);assert.ok(model.every(Number.isFinite));
  assert.ok(held.some(p=>p[8]>.1)&&held.some(p=>p[8]<-.1),'Objects have front and back facing normals');
  assert.ok(Math.max(...held.map(p=>p[2]))-Math.min(...held.map(p=>p[2]))>(pose===0?.045:.08),'Held objects have depth proportional to their radius');
+ if(pose===0){
+  const upperFlame=held.filter(p=>p[1]>p[10]+.13);
+  assert.ok(upperFlame.length>300,'The entire outer flame is an independent prop, not painted on the shirt');
+  assert.ok(upperFlame.every(p=>p[12]>=1),'Every outer flame particle rotates with the ember');
+ }
+ if(pose===1){
+  assert.ok(held.some(p=>p[1]<p[10]-.13),'Restore the lower ornament above the palm');
+  assert.ok(held.some(p=>p[1]>p[10]+.16),'Restore the upper ornament and filament');
+ }
  for(const angle of [0,Math.PI/2,Math.PI,Math.PI*1.5,Math.PI*2]){
   const rotated=rotateHeldObjects(model,angle/.48,new Float32Array(model.length));
   for(let k=0;k<model.length;k+=STRIDE){

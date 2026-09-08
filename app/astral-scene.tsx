@@ -1,7 +1,8 @@
 'use client';
 import {useEffect,useRef,useState} from 'react';
-import {galaxy,matchSpatially,rotateHeldObjects,ParticleMorph,STRIDE} from '@/lib/particle-morph';
+import {galaxy,assignParticleIds,backgroundStars,rotateHeldObjects,ParticleMorph,STRIDE} from '@/lib/particle-morph';
 import {portraitPoints} from '@/lib/portrait-points';
+import {heldObjectPoints} from '@/lib/held-object-points';
 
 const vertex=`
 attribute vec3 aPosition;
@@ -19,14 +20,16 @@ void main(){
  float fit=min(1.0,uAspect/.62);
  gl_Position=vec4(p.x*depth*fit/uAspect,p.y*depth*fit,p.z*.15,1.0);
  float bright=max(aColor.r,max(aColor.g,aColor.b));
- gl_PointSize=uDpr*mix(1.0,1.15+bright*.85,uSurface)*depth;
+ gl_PointSize=uDpr*mix(1.2,1.05+bright*.78,uSurface)*depth;
+ if(aHeld<-.5)gl_PointSize=uDpr*(1.05+bright*1.2)*depth;
  vec3 normal=normalize(n+vec3(0.0,0.0,-.0001));
  vec3 key=normalize(vec3(.8,1.1,-1.6)-p);
  vec3 fill=normalize(vec3(-1.4,.1,-.8)-p);
  float diffuse=max(dot(normal,key),0.0);
  float cool=max(dot(normal,fill),0.0);
  vec3 light=vec3(.60)+vec3(1.0,.89,.75)*diffuse*.56+vec3(.46,.57,1.0)*cool*.19;
- light=mix(light,vec3(.38)+vec3(1.0,.94,.85)*diffuse*1.12+vec3(.46,.57,1.0)*cool*.22,aHeld);
+ light=mix(light,vec3(.38)+vec3(1.0,.94,.85)*diffuse*1.12+vec3(.46,.57,1.0)*cool*.22,clamp(aHeld,0.0,1.0));
+ light=mix(light,vec3(1.15),step(1.5,aHeld));
  float surface=uSurface*step(.1,length(aNormal));
  vColor=aColor*mix(vec3(1.0),light,surface);
 }`;
@@ -47,7 +50,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
   let reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const bounds=canvas.getBoundingClientRect();
   const portraitHeight=Math.min(bounds.height,bounds.width/.62);
-  const count=Math.round(Math.max(9000,Math.min(54400,portraitHeight*portraitHeight*.52*.88/6.3)))+500;
+  const count=Math.round(Math.max(10000,Math.min(45000,portraitHeight*portraitHeight*.52*.76/6.3)))+1600;
   const seed=galaxy(count),galaxyFrame=seed.slice();const morph=new ParticleMorph(seed);let targets:Float32Array[]=[];
   let active=-1,seenReplay=replay,seenSkip=skip,phase:'galaxy'|'morph'|'hold'='galaxy';
   canvas.dataset.particleCount=String(count);canvas.dataset.sharedPool='true';
@@ -76,15 +79,20 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
    try{
     const sample=document.createElement('canvas');sample.width=Math.floor(img.width/3);sample.height=img.height;
     const c=sample.getContext('2d');if(!c)throw new Error('No sampling canvas');
-    const correspondence=galaxy(count,1.05);
     targets=[0,1,2].map(poseIndex=>{
      c.clearRect(0,0,sample.width,sample.height);
      c.drawImage(img,poseIndex*img.width/3,0,img.width/3,img.height,0,0,sample.width,sample.height);
-     return matchSpatially(correspondence,portraitPoints(c.getImageData(0,0,sample.width,sample.height).data,sample.width,sample.height,count,poseIndex));
+     const skyCount=Math.round(count*[.065,.085,.075][poseIndex]);
+     const objectCount=Math.round(count*[.09,.07,.055][poseIndex]);
+     const body=portraitPoints(c.getImageData(0,0,sample.width,sample.height).data,sample.width,sample.height,count-skyCount-objectCount,poseIndex);
+     const target=new Float32Array(count*STRIDE);target.set(body);
+     target.set(heldObjectPoints(objectCount,poseIndex),body.length);
+     target.set(backgroundStars(skyCount,poseIndex),body.length+objectCount*STRIDE);
+     return assignParticleIds(target,poseIndex);
     });readyAt=clock;active=command.current.pose;
    }catch{setError('人物星塵暫時無法載入，請重新整理；右側內容仍可使用。');}
   };
-  img.onerror=()=>setError('人物星塵素材未載入，請重新整理；右側內容仍可使用。');img.src='/astral-reference.png';
+  img.onerror=()=>setError('人物星塵素材未載入，請重新整理；右側內容仍可使用。');img.src='/astral-clean-plate.png';
   const render=(now:number)=>{
    if(disposed)return;frame=requestAnimationFrame(render);
    const dt=last?Math.min(now-last,50):0;last=now;if(!visible||document.hidden)return;clock+=dt;
@@ -96,7 +104,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
      const rotation=(clock-readyAt)*.0007;
      galaxy(count,rotation,galaxyFrame);foreground.set(galaxyFrame);
      if(reduced||skipNow||cmd.skip||cmd.pose!==0||clock-readyAt>1500){transitionDuration=reduced||cmd.skip?1:cmd.pose===0?3000:1250;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground);phase='morph';surfaceAt=clock;surfaceFrom=0;active=cmd.pose;}
-    }else if(cmd.pose!==active||skipNow){transitionDuration=reduced||skipNow?1:1250;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground);surfaceFrom=visualSurface;phase='morph';surfaceAt=clock;active=cmd.pose;}
+    }else if(cmd.pose!==active||skipNow){transitionDuration=reduced||skipNow?1:1800;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground);surfaceFrom=visualSurface;phase='morph';surfaceAt=clock;active=cmd.pose;}
    }
    if(reduced&&targets.length){foreground.set(targets[cmd.pose]);phase='hold';holdAt=clock;}
    else if(phase==='morph'){
@@ -107,6 +115,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
    const progress=phase==='galaxy'?0:phase==='hold'?1:Math.max(0,Math.min(1,((clock-surfaceAt)/transitionDuration-.65)/.35));
    visualSurface=phase==='galaxy'?0:surfaceFrom+(1-surfaceFrom)*progress;
    canvas.dataset.phase=phase;
+   canvas.dataset.backgroundCount=targets.length?String(Math.round(count*[.065,.085,.075][active])):'0';
    canvas.dataset.morphStage=phase==='morph'?((clock-surfaceAt)/transitionDuration<.65?'travel':'arrive'):'none';
    gl.uniform1f(uniforms.aspect,w/h);gl.uniform1f(uniforms.dpr,dpr);gl.uniform1f(uniforms.surface,visualSurface);gl.drawArrays(gl.POINTS,0,count);
   };frame=requestAnimationFrame(render);

@@ -152,3 +152,20 @@
 - 驗證：型別檢查、正式編譯與粒子測試通過；四分之一圈、半圈、四分之三圈、整圈均檢查手與人體不變、物件高度和旋轉半徑不變。瀏覽器觀察三姿態、不同物件角度與銀河聚合中間畫面。1280 × 720 預覽共 29329 顆，數量依初始場景尺寸決定。
 - 實際重新對照毛哥首頁：其規律 ASCII 網格和完整人頭模型的明暗輪廓仍更強。本版保留彩色圓點與固定人物，僅手持物旋轉；不宣稱具備相同的完整人體模型或骨架動作。
 - 使用者已確認的規則是「物件可辨識且與手的位置穩定」，此輪形體、星點聚合觀感仍待預覽回饋，不記為已認可的成品。
+
+## v0.10 完整火種、共享星場與區域密度（2026-09-09，實作候選）
+- 使用者否決 v0.9：切換像平面點雲變形、外焰不轉、衣服過密而臉不清楚、晶體與手部細節流失、終態沒有背景星光。本節取代 v0.9 相衝突的規則，未宣稱本輪觀感已獲肯定。
+- 以內建 ImageGen 將原三聯圖編輯成同尺寸 1672 × 941 的人物底圖 `public/astral-clean-plate.png`。移除三個手持物並補回遮住的衣服，保留全部手指和掌心；白背景只供取樣排除。原參考圖保留。畫面仍只有 WebGL 粒子，不顯示底圖貼圖。
+- 火種：暖色核心、完整立體藍色焰體、彎曲尖端與環繞焰帶共用旋轉中心，全部一起轉動。衣服、手掌固定，原衣服上不再殘留不動的火焰。這是根據概念圖建立的幾何火焰，不是真實流體模擬。
+- 晶體：多個八角截面的三角切面、較亮稜線，補回上方細線與上下小星飾；下方星飾仍在掌心上方。星球保留球體及環。固體受表面光照，火焰和亮稜以發光粒子呈現。
+- 點數依初始場景面積計算，上限 46600。每姿態分別留下 6.5%／8.5%／7.5% 作背景，其餘分配人物與物件；背景和人物在同一個固定索引池中。不同姿態的排列在載入時固定，因此每次切換都有人物星進入背景、背景星進入人物。
+- 點的路徑不再採局部空間排序的短距離插值；每個固定身分有自己的空間弧線與深度轉動，章節切換 1.8 秒，開場聚合 3 秒。所有點從實際顯示位置出發，抵達指定終點，不新增或銷毀點，不以圖片淡入取代。
+- 背景星位置以獨立亂數散布，避免排成機械式同心線；終態持續緩轉與小幅閃爍。人物不跟著漂移。降低動態偏好停止運動，內容操作仍不等待動畫。
+- 衣服取樣權重 0.85，髮部 1.5、臉部 2.4、手部 1.6，頭部邊緣另加權。臉部暗色下限適度提高，但不新增明顯眼睛。係数只是這張參考圖的候選校準，不是所有專案通用值。
+- 驗證：程式檢查包含全部星點在中段確實位移、背景與人物雙向交換、總數守恆、中途切換連續、外焰全部屬於旋轉物件、晶體上下飾品存在、整圈旋轉時手與人體固定。瀏覽器實看三姿态、中間星流、銀河及終態背景，並重新對照毛哥首頁動態輪廓。
+- 1280 × 720 預覽的總數 26498，三姿態背景分別為 1722／2252／1987；尺寸不同時數量不同，但同次載入的切換不變。未測量實機 FPS。
+
+### v0.10 底圖生成紀錄
+使用內建 image_gen，單次編輯，無 CLI。最終素材：public/astral-clean-plate.png。生成提示如下：
+
+> Use case: precise-object-edit. Asset type: high fidelity character triptych clean plate for particle sampling. Input image 1 is the EDIT TARGET. Edit this exact image, do not redesign it. Produce exactly one image. Primary request: Remove ONLY the three held magical objects and replace the checkerboard backdrop with plain solid pure white #FFFFFF. Left panel: remove the ENTIRE blue flame, all its wisps and glow, AND the golden star core inside it. Reconstruct the existing lavender coat and shoulder naturally underneath the removed flame where it occluded the clothing. Preserve the extended hand, palm and every finger untouched, with the same shape and position. Middle panel: remove the golden floating crystal, its thin hanging top ornament and its bottom ornament completely. Preserve the complete cupped hand, wrist, palm and every finger, same shapes, positions and pose. Leave the hand empty. Right panel: remove the entire purple ringed planet, its rings and glow. Preserve the raised hand and all fingers exactly in their original pose. Leave the hand empty. Invariants: exact original wide composition and aspect ratio 1672:941, all three characters aligned to the original three equal width panels. Lock all body positions, proportions, poses, silhouettes, facial shapes, hair shapes, hand anatomy and garment contours. Do not move, zoom, crop or reposition any character. Preserve every detailed garment fold, lavender and navy palette, gold trim, lighting and highlights, and the original detailed illustration rendering. Faces remain dark and featureless with NO visible eyes. Preserve clothing ornamentation and star patterns on the characters. Background: uniformly pure white #FFFFFF everywhere outside the characters; no checkerboard, no background stars, no texture, no gray, no gradient. No text or watermarks. Do not add objects. Empty hands remain in identical poses.
