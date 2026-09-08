@@ -19,12 +19,16 @@ assert.equal(backgroundMask(withSliver,width,width)[4*width],1,'Remove isolated 
 const points=portraitPoints(pixels,width,width,400);
 assert.equal(points.length,400*STRIDE);assert.ok(points.every(Number.isFinite));
 assert.ok(Array.from({length:400},(_,i)=>points[i*STRIDE+3]).some(r=>r===1),'Preserve the white object core');
-assert.ok(Array.from({length:400},(_,i)=>Math.abs(points[i*STRIDE])).every(x=>x<.34),'No checker geometry');
+assert.ok(Array.from({length:400},(_,i)=>Math.abs(points[i*STRIDE])).every(x=>x<.56),'No checker geometry; preserve the square fixture aspect ratio');
 assert.ok(Array.from({length:400},(_,i)=>Math.hypot(...points.slice(i*STRIDE+6,i*STRIDE+9))).every(n=>Math.abs(n-1)<.001),'Unit surface normals for dynamic lighting');
 for(const pose of [0,1,2]){
  const body=portraitPoints(pixels,width,width,2000,pose),object=heldObjectPoints(2000,pose);
  const model=new Float32Array(body.length+object.length);model.set(body);model.set(object,body.length);
  const held=Array.from({length:2000},(_,i)=>object.slice(i*STRIDE,(i+1)*STRIDE));
+ const crown=held.filter((_,i)=>i%5<2);
+ assert.equal(crown.length,800,'Crown uses existing object identities, not an extra particle pool');
+ assert.ok(crown.some(p=>p[1]>p[10]+.05)&&crown.some(p=>p[1]<p[10]-.03),'A crown has raised points and a separate lower band');
+ assert.ok(crown.some(p=>p[2]>p[11]+.04)&&crown.some(p=>p[2]<p[11]-.04),'Crown has real front/back geometry');
  assert.ok(held.length>10);assert.ok(model.every(Number.isFinite));
  assert.ok(held.some(p=>p[8]>.1)&&held.some(p=>p[8]<-.1),'Objects have front and back facing normals');
  assert.ok(Math.max(...held.map(p=>p[2]))-Math.min(...held.map(p=>p[2]))>(pose===0?.045:.08),'Held objects have depth proportional to their radius');
@@ -32,6 +36,7 @@ for(const pose of [0,1,2]){
   const upperFlame=held.filter(p=>p[1]>p[10]+.13);
   assert.ok(upperFlame.length>300,'The entire outer flame is an independent prop, not painted on the shirt');
   assert.ok(upperFlame.every(p=>p[12]>=1),'Every outer flame particle rotates with the ember');
+  assert.ok(upperFlame.some(p=>p[5]===1),'Retain the bright outer flame tongues around the crown');
  }
  if(pose===1){
   assert.ok(held.some(p=>p[1]<p[10]-.13),'Restore the lower ornament above the palm');

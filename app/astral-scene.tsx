@@ -93,7 +93,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
     });readyAt=clock;active=command.current.pose;
    }catch{setError('人物星塵暫時無法載入，請重新整理；右側內容仍可使用。');}
   };
-  img.onerror=()=>setError('人物星塵素材未載入，請重新整理；右側內容仍可使用。');img.src='/astral-clean-plate.png';
+  img.onerror=()=>setError('人物星塵素材未載入，請重新整理；右側內容仍可使用。');img.src='/astral-complete-plate.png';
   const render=(now:number)=>{
    if(disposed)return;frame=requestAnimationFrame(render);
    const dt=last?Math.min(now-last,50):0;last=now;if(!visible||document.hidden)return;clock+=dt;
@@ -105,7 +105,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
      const rotation=(clock-readyAt)*.0007;
      galaxy(count,rotation,galaxyFrame);foreground.set(galaxyFrame);
      if(reduced||skipNow||cmd.skip||cmd.pose!==0||clock-readyAt>1500){transitionDuration=reduced||cmd.skip?1:cmd.pose===0?3000:1250;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground);phase='morph';surfaceAt=clock;surfaceFrom=0;active=cmd.pose;}
-    }else if(cmd.pose!==active||skipNow){transitionDuration=reduced||skipNow?1:2200;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground,true);surfaceFrom=visualSurface;phase='morph';surfaceAt=clock;active=cmd.pose;}
+    }else if(cmd.pose!==active||skipNow){transitionDuration=reduced||skipNow?1:1100;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground,true);surfaceFrom=visualSurface;phase='morph';surfaceAt=clock;active=cmd.pose;}
    }
    if(reduced&&targets.length){foreground.set(targets[cmd.pose]);phase='hold';holdAt=clock;}
    else if(phase==='morph'){

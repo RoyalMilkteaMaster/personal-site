@@ -1,4 +1,24 @@
-# 首頁實驗規則（含歷次候選，最新 v0.12）
+# 首頁實驗規則（含歷次候選，最新 v0.13）
+
+## v0.13：旋轉皇冠、快速切換與完整衣襬
+
+狀態：依使用者本輪要求實作，尚待視覺回饋。下列規則取代舊版相衝突的素材、手持物內核及動態數值。
+
+- 三種手持物都有五尖角、圓形底環與前後深度的金色皇冠，40% 的既有物件星點分配给皇冠；維持同一粒子總數，皇冠與外層共用掌心錨點，以原有 .48 rad/s 速度旋轉。火種外焰、晶體上下星飾與星球環保留，內部亮度降低以凸顯皇冠。
+- 章節軌道重構由 2200ms 縮至 1100ms，保留無中央暫存星團及中途改選接續。開場銀河時間不變；人物星點微浮動保留。
+- 用內建 ImageGen 編修已採用的三姿態素材，補齊兩側披帶、衣袖及下方自然尖尾。新圖 public/astral-complete-plate.png，舊圖保留。圖像只用於點雲取樣，沒有直接渲染位圖。
+- 依新圖重新標定手掌錨點、頭臉與手指的密度區域，並按圖片實際寬高比取樣，避免補圖後橫向拉寬人物。
+- 星點場景與閱讀區共用背景，不再使用單獨矩形底色；星點在畫布外緣漸融，移除人物下方橫線，操作列移到下方。亮色模式降低粒子亮度以保留對比。
+- 驗證涵蓋皇冠深度與上下輪廓、物件旋轉時掌心錨點不漂移、完整外焰、固定粒子總數、轉場端點与中斷連續性。瀏覽器檢查三姿態、較快切換、亮暗背景與完整披帶收尾。使用者尚未確認此版為永久規則。
+
+### 本輪補圖記錄
+
+- 工具：內建 image_gen（非 CLI）。
+- 編修來源：public/astral-clean-plate.png。
+- 最終專案素材：public/astral-complete-plate.png。
+- 最終提示詞（原文）：
+
+> Edit target: the attached clean triptych character plate. This is a surgical framing/outpainting repair for a particle-rendered website, NOT a character redesign. Preserve the SAME three male celestial character poses from left to right, same head orientations, curly purple hair, shadowed featureless starry faces with no prominent eyes, original navy/lavender/gold coat, exact empty open hand gestures, fingers and gold tailoring details. No objects in the hands (procedural objects will be added in code). The current coats and flowing sashes are abruptly cut off at the sides and bottom. Repair this: show each character's entire upper-body silhouette including BOTH shoulder/arm edges, all complete fingers, and extend the lower coat/sashes to graceful naturally tapering pointed fabric ends below the hips. The garments should have real completed ends, not straight cropped bottoms. No need to add legs or feet: this is a magical floating bust, whose lowest coat tips break up into a small amount of fine purple/gold stardust fading into white. Keep the upper-body design and proportions, do not add new arms or props. Layout: a wide high-resolution triptych with THREE EXACTLY EQUAL WIDTH columns, one original pose centered in each column, no dividers. Give each complete silhouette generous plain white air (at least 7% of column width) at BOTH sides and at least 6% image height below its lowest tip; no fabric or stray part crosses a column boundary. Keep all figures LARGE, approximately 87% of image height; retain sharp fine fabric and hair detail. Pure solid white background, no floor/shadows, no gray vignette, no captions, no borders, no text. All three poses isolated, no overlap. Output a clean production asset, landscape 3:2 canvas if possible, at high resolution.
 
 ## v0.12：可見微浮動與直接軌道重構
 

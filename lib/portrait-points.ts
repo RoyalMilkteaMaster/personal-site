@@ -32,6 +32,7 @@ export function backgroundMask(pixels:Uint8ClampedArray,width:number,height:numb
 const noise=(i:number)=>{const n=Math.sin(i*127.1+311.7)*43758.5453;return n-Math.floor(n);};
 
 export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:number,count:number,pose=-1){
+ const spanX=width/height*1.76;
  const mask=backgroundMask(pixels,width,height),weights=new Float32Array(width*height);
  // A rounded relief gives the existing silhouette a surface and real normals.
  // It is deliberately not presented as a reconstructed, complete human model.
@@ -50,9 +51,9 @@ export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:numb
   const edge=Math.max(Math.abs(luminance(left)-luminance(right)),Math.abs(luminance(up)-luminance(down)),mask[left],mask[right],mask[up],mask[down]);
   // Allocate more stars to folds, fingers and object rims, keeping shadow volume.
   const u=x/width,v=y/height;
-  const head=pose>=0&&v<.345&&v>.035&&u>.33&&u<.79;
-  const face=head&&v>.16&&u>(pose===2?.43:.36)&&u<(pose===0?.72:.63);
-  const hand=pose===0?u<.50&&v>.40&&v<.63:pose===1?u<.33&&v>.365&&v<.51:pose===2?u>.78&&v>.26&&v<.45:false;
+  const head=pose>=0&&v<.24&&v>.02&&u>.30&&u<.79;
+  const face=head&&v>.105&&u>(pose===2?.43:.36)&&u<(pose===0?.72:.63);
+  const hand=pose===0?u<.56&&v>.26&&v<.41:pose===1?u<.34&&v>.23&&v<.33:pose===2?u>.71&&v>.15&&v<.29:false;
   weights[p]=(.13+light*.85+edge*1.5)*(face?2.4:head?1.5:hand?1.6:.85);
   if(head&&distance[p]<4)weights[p]+=1.5;
   total+=weights[p];
@@ -64,14 +65,14 @@ export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:numb
   const target=(i+noise(i))*total/bodyCount;
   while(accumulated<target&&p<weights.length-1)accumulated+=weights[++p];
   const x=p%width+.5+(noise(i+count)-.5)*.7,y=Math.floor(p/width)+.5+(noise(i+count*2)-.5)*.7,k=i*STRIDE;
-  out[k]=(x/width-.5)*1.04;out[k+1]=(.5-y/height)*1.76;
+  out[k]=(x/width-.5)*spanX;out[k+1]=(.5-y/height)*1.76;
   out[k+2]=depth[p];
   const px=p%width,py=Math.floor(p/width),dx=Math.min(3,px,width-1-px),dy=Math.min(3,py,height-1-py);
-  const nx=dx?(depth[p+dx]-depth[p-dx])/(2*dx/width*1.04):0;
+  const nx=dx?(depth[p+dx]-depth[p-dx])/(2*dx/width*spanX):0;
   const ny=dy?(depth[p-dy*width]-depth[p+dy*width])/(2*dy/height*1.76):0;
   const length=Math.hypot(nx,ny,1);out[k+6]=nx/length;out[k+7]=ny/length;out[k+8]=-1/length;
   for(let c=0;c<3;c++)out[k+3+c]=Math.min(1,Math.pow(pixels[p*4+c]/255,.88)*1.12);
-  if(pose>=0&&y/height>.15&&y/height<.345&&x/width>.33&&x/width<.79){
+  if(pose>=0&&y/height>.105&&y/height<.24&&x/width>.33&&x/width<.79){
    const light=Math.max(out[k+3],out[k+4],out[k+5]);
    const lift=light>0?Math.max(1,.30/light):1;
    for(let c=3;c<6;c++)out[k+c]=Math.min(1,out[k+c]*lift);
