@@ -1,5 +1,5 @@
 'use client';
-import {useState} from 'react';
+import {useState,useRef,useEffect} from 'react';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import {projects} from '@/lib/projects';
 import AstralScene from './astral-scene';
@@ -7,12 +7,14 @@ import {ArrowUpRight,Sun,Moon,Sparkles,RotateCcw} from 'lucide-react';
 const sections=['關於我','我的作品','聯絡資訊'];
 export default function Home(){
  const [light,setLight]=useState(false),[active,setActive]=useState('0'),[replay,setReplay]=useState(0),[skip,setSkip]=useState(false);
+ const contentRef=useRef<HTMLDivElement>(null);
+ useEffect(()=>{contentRef.current?.scrollTo({top:0,behavior:'instant'});},[active]);
  return <div className={`site atlas ${light?'light':''}`}>
  <a className="skip" href="#content">跳至主要內容</a>
  <header><a className="brand" href="#"><Sparkles size={23}/><span>Royal Milktea<span className="brand-sub">PIN HUNG LIN</span></span></a><button className="theme" onClick={()=>setLight(!light)} aria-label={light?'切換星夜':'切換日光'}>{light?<Moon size={17}/>:<Sun size={17}/>}<span>{light?'星夜':'日光'}</span></button></header>
  <main><Tabs value={active} onValueChange={v=>setActive(String(v))} className="atlas-layout">
  <aside className="portrait-stage"><div className="stage-label">ROYAL MILKTEA / PERSONAL UNIVERSE</div><AstralScene pose={Number(active)} replay={replay} skip={skip}/><div className="stage-controls"><button onClick={()=>{setActive('0');setSkip(false);setReplay(replay+1);}}><RotateCcw size={14}/>重播星塵</button><button onClick={()=>setSkip(true)}>略過動畫 →</button></div><div className="stage-caption"><span>0{Number(active)+1}</span><span>{sections[Number(active)]}</span><i>✧</i></div></aside>
- <div className="atlas-content" id="content"><p className="eyebrow">林品宏 ／ 皇家奶茶大師</p><TabsList className="chapter-tabs" aria-label="個人網站主題">{sections.map((s,i)=><TabsTrigger key={s} value={String(i)}><span>0{i+1}</span>{s}</TabsTrigger>)}</TabsList>
+ <div ref={contentRef} className="atlas-content" id="content"><p className="eyebrow">林品宏 ／ 皇家奶茶大師</p><TabsList className="chapter-tabs" aria-label="個人網站主題">{sections.map((s,i)=><TabsTrigger key={s} value={String(i)}><span>0{i+1}</span>{s}</TabsTrigger>)}</TabsList>
  <TabsContent value="0" className="chapter"><p className="chapter-kicker">ABOUT ME</p><h1>把好奇，<br/><em>變成可能。</em></h1><p className="lead">嗨，我是林品宏。探索 AI、自動化與系統開發，讓想法走出腦海，成為能被使用的作品。</p>
  <section className="bio-block"><h2>歷程 <small>JOURNEY</small></h2><div className="timeline"><article><span>2024</span><div><h3>國立成功大學</h3><p>光電科學與工程學系畢業</p></div></article><article><span>跨域經驗</span><div><h3>從研究到製造現場</h3><p>累積政策研究與製造現場跨部門工作經驗，把問題觀察帶進系統開發。</p></div></article><article><span>現在</span><div><h3>AI 應用與多 Agent 系統</h3><p>串起研究、開發與驗證，探索實際可用的產品。</p></div></article></div></section>
  <section className="bio-block"><h2>得獎 <small>RECOGNITION</small></h2><div className="award-row"><span>2026</span><div><h3>雲湧智生黑客松</h3><p>智慧交易冠軍</p></div><span>✧</span></div><div className="award-row"><span>2026</span><div><h3>台灣未來祭</h3><p>AI 創意科技優勝 · AI 綜合第四</p></div><span>✧</span></div></section>
