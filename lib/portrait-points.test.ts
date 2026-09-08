@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {backgroundMask,portraitPoints} from './portrait-points.ts';
-import {STRIDE} from './particle-morph.ts';
+import {rotateHeldObjects,STRIDE} from './particle-morph.ts';
 
 // Neutral checker outside, purple silhouette enclosing a white object highlight.
 const width=9,pixels=new Uint8ClampedArray(width*width*4);
@@ -26,5 +26,14 @@ for(const pose of [0,1,2]){
  assert.ok(held.length>10);assert.ok(model.every(Number.isFinite));
  assert.ok(held.some(p=>p[8]>.1)&&held.some(p=>p[8]<-.1),'Objects have front and back facing normals');
  assert.ok(Math.max(...held.map(p=>p[2]))-Math.min(...held.map(p=>p[2]))>(pose===0?.045:.08),'Held objects have depth proportional to their radius');
+ for(const angle of [0,Math.PI/2,Math.PI,Math.PI*1.5,Math.PI*2]){
+  const rotated=rotateHeldObjects(model,angle/.48,new Float32Array(model.length));
+  for(let k=0;k<model.length;k+=STRIDE){
+   if(model[k+12]===0){assert.deepEqual(rotated.slice(k,k+STRIDE),model.slice(k,k+STRIDE),'Hand and body must remain fixed for the entire revolution');continue;}
+   const radius=(p:Float32Array)=>Math.hypot(p[k]-p[k+9],p[k+2]-p[k+11]);
+   assert.ok(Math.abs(radius(rotated)-radius(model))<1e-6,'Rotation must not move the object away from its hand anchor');
+   assert.equal(rotated[k+1],model[k+1],'Held object must not rise away from the palm');
+  }
+ }
 }
 console.log('Portrait sampling: exterior removal, white highlight retention and finite geometry passed.');

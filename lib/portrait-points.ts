@@ -46,11 +46,11 @@ export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:numb
  for(let p=0;p<mask.length;p++){
   if(mask[p]||pixels[p*4+3]<80)continue;
   const x=p%width,y=Math.floor(p/width),light=luminance(p);
-  if(held&&pose!==0){
+  if(held){
    const u=x/width-held.u,v=y/height-held.v;
    const inside=pose===2?((u*1.04*.92-v*1.76*.39)/.205)**2+((u*1.04*.39+v*1.76*.92)/.105)**2<1:(u/held.rx)**2+(v/held.ry)**2<1;
    const ornament=pose===1&&y/height>.16&&y/height<.434&&Math.abs(u)<(y/height<.29?.09:.025);
-   if(inside||ornament)continue;
+   if((inside&&pose!==0)||ornament)continue;
   }
   const left=x>0?p-1:p,right=x<width-1?p+1:p,up=y>0?p-width:p,down=y<height-1?p+width:p;
   const edge=Math.max(Math.abs(luminance(left)-luminance(right)),Math.abs(luminance(up)-luminance(down)),mask[left],mask[right],mask[up],mask[down]);
@@ -58,7 +58,7 @@ export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:numb
   weights[p]=.13+light*.85+edge*1.5;total+=weights[p];
  }
  if(!total)throw new Error('No portrait points');
- const objectCount=held?Math.round(count*(pose===0?.01:.045)):0,bodyCount=count-objectCount;
+ const objectCount=held?Math.round(count*(pose===0?.014:.045)):0,bodyCount=count-objectCount;
  const out=new Float32Array(count*STRIDE);let p=0,accumulated=weights[0];
  for(let i=0;i<bodyCount;i++){
   const target=(i+noise(i))*total/bodyCount;
@@ -71,6 +71,11 @@ export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:numb
   const ny=dy?(depth[p-dy*width]-depth[p+dy*width])/(2*dy/height*1.76):0;
   const length=Math.hypot(nx,ny,1);out[k+6]=nx/length;out[k+7]=ny/length;out[k+8]=-1/length;
   for(let c=0;c<3;c++)out[k+3+c]=Math.min(1,Math.pow(pixels[p*4+c]/255,.88)*1.12);
+  // Retain a quiet blue glow behind the rotating star instead of cutting a
+  // black disc in the flame or leaving a second, stationary gold star there.
+  if(pose===0&&held&&((x/width-held.u)/held.rx)**2+((y/height-held.v)/held.ry)**2<1){
+   const glow=luminance(p)*.46;out[k+3]=glow*.34;out[k+4]=glow*.56;out[k+5]=glow;
+  }
  }
  if(held)writeHeldObject(out,bodyCount,objectCount,pose,held);
  return out;
@@ -87,7 +92,24 @@ function writeHeldObject(out:Float32Array,start:number,count:number,pose:number,
  for(let i=0;i<count;i++){
   let x=0,y=0,z=0,nx=0,ny=0,nz=-1;
   const a=noise(i+31),b=noise(i+792),theta=i*2.399963;
-  if(pose===1){
+  if(pose===0){
+   // Six tapered rays keep a star silhouette throughout a full turn. The blue
+   // flame stays attached to the original hand; only its central star rotates.
+   const axis=Math.floor(i%24/8),sign=i%8<4?1:-1,edge=i%4;
+   const tip=[0,0,0],v1=[0,0,0],v2=[0,0,0];
+   tip[axis]=sign*.055;v1[axis]=v2[axis]=sign*.012;
+   const side=(axis+1)%3,other=(axis+2)%3;
+   v1[side]=Math.cos(edge*Math.PI/2+Math.PI/4)*.017;
+   v1[other]=Math.sin(edge*Math.PI/2+Math.PI/4)*.017;
+   v2[side]=Math.cos((edge+1)*Math.PI/2+Math.PI/4)*.017;
+   v2[other]=Math.sin((edge+1)*Math.PI/2+Math.PI/4)*.017;
+   const u=Math.sqrt(a),v=i%5===0?0:b;
+   const point=tip.map((n,j)=>n*(1-u)+v1[j]*u*(1-v)+v2[j]*u*v);
+   [x,y,z]=point;
+   const ab=v1.map((n,j)=>n-tip[j]),ac=v2.map((n,j)=>n-tip[j]);
+   nx=ab[1]*ac[2]-ab[2]*ac[1];ny=ab[2]*ac[0]-ab[0]*ac[2];nz=ab[0]*ac[1]-ab[1]*ac[0];
+   if(nx*x+ny*y+nz*z<0){nx=-nx;ny=-ny;nz=-nz;}
+  }else if(pose===1){
    const face=i%8,angle=(face%4)*Math.PI/2,upper=face<4?1:-1;
    const top=[0,.14*upper,0],v1=[Math.cos(angle)*.098,0,Math.sin(angle)*.098],v2=[Math.cos(angle+Math.PI/2)*.098,0,Math.sin(angle+Math.PI/2)*.098];
    const u=Math.sqrt(a),v=i%5===0?0:b;
@@ -96,7 +118,7 @@ function writeHeldObject(out:Float32Array,start:number,count:number,pose:number,
    nx=ab[1]*ac[2]-ab[2]*ac[1];ny=ab[2]*ac[0]-ab[0]*ac[2];nz=ab[0]*ac[1]-ab[1]*ac[0];
    if(nx*x+ny*y+nz*z<0){nx=-nx;ny=-ny;nz=-nz;}
   }else{
-   const radius=pose===0?.031:.087;
+   const radius=.087;
    if(i%4===0){
     const r=radius*(1.45+a*.35);x=Math.cos(theta)*r;y=Math.sin(theta)*r*.30;z=Math.sin(theta)*r*.954;
     nx=0;ny=.954;nz=-.30;
@@ -106,7 +128,7 @@ function writeHeldObject(out:Float32Array,start:number,count:number,pose:number,
    }
   }
   const length=Math.hypot(nx,ny,nz),k=(start+i)*STRIDE;
-  const colour=pose===0?[.68,.86,1]:pose===1?[1,.76,.40]:[.82,.61,1];
+  const colour=pose===0?[1,.92,.68]:pose===1?[1,.76,.40]:[.82,.61,1];
   const band=pose===1?1:.84+.16*Math.sin(theta*3+y*90);
   out.set([x+pivot[0],y+pivot[1],z+pivot[2],...colour.map(c=>c*band),nx/length,ny/length,nz/length,...pivot,1],k);
  }
