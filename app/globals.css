@@ -3,3 +3,18 @@
 @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}@keyframes color-orbit{to{--angle:360deg}}@supports(animation-timeline:scroll()){.hero-art{animation:hero-travel linear both;animation-timeline:scroll(root);animation-range:0px 850px}.workflow{animation:workflow-enter linear both;animation-timeline:view();animation-range:entry 0% cover 45%}}@keyframes hero-travel{to{transform:translateY(120px) scale(1.13)}}@keyframes workflow-enter{from{transform:perspective(900px) rotateY(-14deg) rotateX(8deg) translateY(35px)}to{transform:perspective(900px) rotateY(0) rotateX(0) translateY(0)}}
 @media(max-width:760px){header{height:82px;padding-inline:22px}.brand{font-size:17px}.brand-sub{font-size:8px}nav{gap:18px;font-size:14px}nav a:last-child{display:none}.theme{padding:9px}.theme span{display:none}.wrap{width:calc(100% - 40px)}.hero{min-height:760px;height:100svh;max-height:950px}.hero-art{background-position:62% center;opacity:.55}.hero-shade{background:linear-gradient(90deg,#080f20e0,#080f2080),linear-gradient(0deg,#080f20,transparent 70%)}.hero-copy{margin:105px 22px 90px}.hero h1{font-size:47px;letter-spacing:-1.5px}.eyebrow{font-size:9px;letter-spacing:1.7px}.intro{font-size:16px}.hero-bottom{left:22px;right:22px;font-size:9px;gap:25px}.hero-bottom>span{max-width:200px;line-height:1.8}.hero-sign span{display:block;margin:10px 0}.works{padding-block:65px}.section-head{display:block}.text-link{margin-top:20px}.featured{grid-template-columns:1fr}.feature-copy{padding:28px}.workflow{margin:0 20px 25px;transform:none}.project-grid{grid-template-columns:1fr}.project{padding:28px}.project p{min-height:0}.about{grid-template-columns:1fr;gap:30px;padding-block:55px}.contact h2{font-size:39px}.contact a{font-size:16px;gap:10px}footer{flex-wrap:wrap;line-height:1.8}footer>span:last-child{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.hero-art,.workflow{transform:none!important}}
+
+/* v0.3: layered, pointer-responsive space; text remains on a stable plane. */
+.hero{isolation:isolate;--space-x:0px;--space-y:0px}
+.hero-art{inset:-35px;opacity:.34;animation:none!important;transform:translate(calc(var(--space-x) * -1),calc(var(--space-y) * -1)) scale(1.04);will-change:transform;filter:saturate(.65)}
+.hero-shade{background:linear-gradient(90deg,#080f20ed 0%,#080f20a8 40%,#080f2033 80%),linear-gradient(0deg,#080f20,transparent 40%)}
+.interactive-space{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.hero-copy,.hero-bottom{z-index:2}
+.hero-copy h1{text-shadow:0 3px 28px #080f2055}
+.hero-copy .eyebrow{font-size:12px;letter-spacing:2px}
+.hero-sign span,.hero-bottom{font-size:12px}
+.light .hero-art{opacity:.09;filter:saturate(.7)}
+.light .hero-shade{background:linear-gradient(90deg,#fafbfeeb,#fafbfe66),linear-gradient(0deg,#fafbfe,transparent 50%)}
+.light .hero-copy h1{text-shadow:none}
+@media(max-width:760px){.hero-art{opacity:.2}.hero-shade{background:linear-gradient(90deg,#080f20e8,#080f2077),linear-gradient(0deg,#080f20,transparent 65%)}.hero-bottom{font-size:10px}.hero-copy .eyebrow{font-size:11px}.light .hero-art{opacity:.07}}
+@media(prefers-reduced-motion:reduce){.hero-art{transform:none!important;will-change:auto}}
