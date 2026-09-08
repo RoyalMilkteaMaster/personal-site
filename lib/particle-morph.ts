@@ -6,6 +6,7 @@ export class ParticleMorph {
  private target:Float32Array;
  private start=0;
  private duration=1;
+ private direct=false;
  constructor(initial:Float32Array){this.current=initial.slice();this.from=initial.slice();this.target=initial.slice();}
  update(now:number){
   const raw=Math.max(0,Math.min(1,(now-this.start)/this.duration));
@@ -18,13 +19,13 @@ export class ParticleMorph {
    const x=this.from[k]+(this.target[k]-this.from[k])*p;
    const y=this.from[k+1]+(this.target[k+1]-this.from[k+1])*p;
    const z=this.from[k+2]+(this.target[k+2]-this.from[k+2])*p;
-   // Every identity travels through depth and its own curved orbit. Endpoints
-   // are exact; the middle is a moving star field, not stretched image tiles.
-   this.current[k]=x*c+z*s+Math.cos(phase+t*2)*arc*.19;
-   this.current[k+1]=y+Math.sin(phase+t*2)*arc*.16;
-   this.current[k+2]=-x*s+z*c+Math.sin(phase)*arc*.22;
+   // Keep the approved galaxy entrance. Chapters use direct endpoint paths,
+   // without a shared vortex or an intermediate colour/shape.
+   this.current[k]=this.direct?x:x*c+z*s+Math.cos(phase+t*2)*arc*.19;
+   this.current[k+1]=this.direct?y:y+Math.sin(phase+t*2)*arc*.16;
+   this.current[k+2]=this.direct?z:-x*s+z*c+Math.sin(phase)*arc*.22;
    for(let axis=3;axis<STRIDE;axis++)this.current[k+axis]=this.from[k+axis]+(this.target[k+axis]-this.from[k+axis])*appearance;
-   for(let channel=0;channel<3;channel++){
+   for(let channel=0;!this.direct&&channel<3;channel++){
     const star=channel===0?.55:channel===1?.66:.92;
     this.current[k+3+channel]=this.current[k+3+channel]*(1-arc*.65)+star*arc*.65;
    }
@@ -32,11 +33,11 @@ export class ParticleMorph {
   return this.current;
  }
  complete(now:number){return now>=this.start+this.duration;}
- retarget(target:Float32Array,now:number,duration=1050,displayed?:Float32Array){
+ retarget(target:Float32Array,now:number,duration=1050,displayed?:Float32Array,direct=false){
   if(target.length!==this.current.length)throw new Error('Particle counts must remain equal');
   if(displayed&&displayed.length!==this.current.length)throw new Error('Displayed particle counts must remain equal');
   if(displayed)this.current.set(displayed);else this.update(now);
-  this.from.set(this.current);this.target.set(target);this.start=now;this.duration=Math.max(1,duration);
+  this.from.set(this.current);this.target.set(target);this.start=now;this.duration=Math.max(1,duration);this.direct=direct;
  }
 }
 export function galaxy(count:number,angle=0,out=new Float32Array(count*STRIDE)){
@@ -64,8 +65,8 @@ export function galaxy(count:number,angle=0,out=new Float32Array(count*STRIDE)){
  return out;
 }
 
-// Apply object rotation in the same coordinate space used by the morph. The
-// next transition can then start from the actual displayed positions/normals.
+// Apply ambient movement in the morph's coordinate space, so chapter changes
+// start at the displayed positions, including gently drifting body particles.
 export function rotateHeldObjects(source:Float32Array,seconds:number,out:Float32Array){
  if(out.length!==source.length)throw new Error('Particle counts must remain equal');
  out.set(source);const angle=seconds*.48,c=Math.cos(angle),s=Math.sin(angle),skyC=Math.cos(seconds*.025),skyS=Math.sin(seconds*.025);
@@ -76,7 +77,13 @@ export function rotateHeldObjects(source:Float32Array,seconds:number,out:Float32
    for(let j=3;j<6;j++)out[k+j]=source[k+j]*shimmer;
    continue;
   }
-  if(source[k+12]<.5)continue;
+  if(source[k+12]<.5){
+   const phase=k/STRIDE*2.399963,ramp=ease(seconds/.8);
+   out[k]+=.0012*Math.sin(seconds*.7+phase)*ramp;
+   out[k+1]+=.0022*Math.sin(seconds*.5+phase*1.4)*ramp;
+   out[k+2]+=.001*Math.sin(seconds*.4+phase*.7)*ramp;
+   continue;
+  }
   const x=source[k]-source[k+9],z=source[k+2]-source[k+11];
   out[k]=x*c+z*s+source[k+9];out[k+2]=-x*s+z*c+source[k+11];
   out[k+6]=source[k+6]*c+source[k+8]*s;out[k+8]=-source[k+6]*s+source[k+8]*c;
@@ -95,10 +102,30 @@ export function backgroundStars(count:number,pose:number){
  return out;
 }
 
-// Stable permutation per pose. Background destinations are in the same array:
-// some stars leave the silhouette and others enter it on every chapter change.
-export function assignParticleIds(target:Float32Array,pose:number){
+// Stable identities: seed the first pose, then pair nearby regions. Background
+// destinations share the array and can exchange particles with the silhouette.
+export function assignParticleIds(target:Float32Array,pose:number,reference?:Float32Array){
  const count=target.length/STRIDE,order=Array.from({length:count},(_,i)=>i),out=new Float32Array(target.length);
+ if(reference){
+  if(reference.length!==target.length)throw new Error('Particle counts must remain equal');
+  // Match nearby regions recursively. Random source/destination pairs all
+  // cross the centre even on straight paths; local pairs retain the figure.
+  const pair=(from:number[],to:number[])=>{
+   if(from.length===1){out.set(target.subarray(to[0]*STRIDE,(to[0]+1)*STRIDE),from[0]*STRIDE);return;}
+   let axis=0,largest=-1;
+   for(let a=0;a<3;a++){
+    let min=Infinity,max=-Infinity;
+    for(const i of from){const v=reference[i*STRIDE+a];min=Math.min(min,v);max=Math.max(max,v);}
+    for(const i of to){const v=target[i*STRIDE+a];min=Math.min(min,v);max=Math.max(max,v);}
+    if(max-min>largest){largest=max-min;axis=a;}
+   }
+   from.sort((a,b)=>reference[a*STRIDE+axis]-reference[b*STRIDE+axis]||a-b);
+   to.sort((a,b)=>target[a*STRIDE+axis]-target[b*STRIDE+axis]||a-b);
+   const middle=from.length>>1;
+   pair(from.slice(0,middle),to.slice(0,middle));pair(from.slice(middle),to.slice(middle));
+  };
+  if(count)pair(order.slice(),order);return out;
+ }
  let seed=19381+pose*7919;
  for(let i=count-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const j=seed%(i+1);[order[i],order[j]]=[order[j],order[i]];}
  for(let i=0;i<count;i++)out.set(target.subarray(order[i]*STRIDE,(order[i]+1)*STRIDE),i*STRIDE);

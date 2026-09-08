@@ -23,13 +23,17 @@ assert.ok(Array.from({length:100},(_,i)=>Math.max(...reused.slice(i*STRIDE+3,i*S
 
 const pose=slots.slice();pose.set([.1,.2,.1,1,.8,.5,0,0,-1,0,0,0,1],STRIDE*3);
 const rotated=rotateHeldObjects(pose,2,new Float32Array(pose.length));
-assert.deepEqual(rotated.slice(0,STRIDE*3),pose.slice(0,STRIDE*3),'The person is completely stationary');
+assert.notDeepEqual(rotated.slice(0,STRIDE*3),pose.slice(0,STRIDE*3),'Body stars drift gently');
+for(let k=0;k<STRIDE*3;k+=STRIDE){
+ assert.ok(Math.hypot(rotated[k]-pose[k],rotated[k+1]-pose[k+1],rotated[k+2]-pose[k+2])<.0028,'Drift stays inside the silhouette detail budget');
+ assert.deepEqual(rotated.slice(k+3,k+STRIDE),pose.slice(k+3,k+STRIDE),'Drift does not change colour or surface data');
+}
 assert.notDeepEqual(rotated.slice(STRIDE*3,STRIDE*3+3),pose.slice(STRIDE*3,STRIDE*3+3),'Only the held object rotates');
 const next=new ParticleMorph(pose);next.retarget(slots,2000,1250,rotated);
 assert.deepEqual(next.update(2000),rotated,'Transition starts at the actually displayed rotated positions');
 assert.deepEqual(next.update(3250),slots);
 assert.deepEqual(rotateHeldObjects(slots,0,new Float32Array(slots.length)),slots,'No position jump when idle rotation starts');
-console.log('Fixed pool, bijective correspondence, visible source stars, stationary body and rendered-position continuity passed.');
+console.log('Fixed pool, bijective correspondence, visible source stars, gentle body drift and rendered-position continuity passed.');
 
 const total=1000,a=new Float32Array(total*STRIDE),b=new Float32Array(total*STRIDE);
 a.set(galaxy(920));a.set(backgroundStars(80,0),920*STRIDE);
@@ -48,3 +52,19 @@ assert.deepEqual(cloud.update(1800),second,'No births or deaths at the end of th
 const drifting=rotateHeldObjects(second,3,new Float32Array(second.length));
 assert.ok(sky(second).some((isSky,i)=>isSky&&drifting[i*STRIDE]!==second[i*STRIDE]),'Background keeps moving after formation');
 console.log('Background/figure exchange, all-particle travel, constant totals and ambient star drift passed.');
+
+const aligned=assignParticleIds(second,1,first),direct=new ParticleMorph(first);
+direct.retarget(aligned,0,1800,first,true);
+for(const time of [300,900,1500]){
+ const frame=direct.update(time);
+ for(let k=0;k<frame.length;k+=STRIDE){
+  const d=[0,1,2].map(a=>aligned[k+a]-first[k+a]),v=[0,1,2].map(a=>frame[k+a]-first[k+a]);
+  assert.ok(Math.hypot(v[1]*d[2]-v[2]*d[1],v[2]*d[0]-v[0]*d[2],v[0]*d[1]-v[1]*d[0])<1e-6,'Chapter particles stay on their own direct path');
+  for(let a=0;a<6;a++)assert.ok(frame[k+a]>=Math.min(first[k+a],aligned[k+a])-1e-6&&frame[k+a]<=Math.max(first[k+a],aligned[k+a])+1e-6,'No intermediate position or palette detour');
+ }
+}
+const interrupted=direct.update(700).slice();direct.retarget(first,700,1000,interrupted,true);
+assert.deepEqual(direct.update(700),interrupted);assert.deepEqual(direct.update(1700),first);
+const local=assignParticleIds(reversed,1,slots);
+assert.deepEqual(local,slots,'Local pairing must not collapse an unchanged shape into the centre');
+console.log('Direct chapter paths, local pairing, endpoint colours and interruption continuity passed.');

@@ -79,6 +79,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
    try{
     const sample=document.createElement('canvas');sample.width=Math.floor(img.width/3);sample.height=img.height;
     const c=sample.getContext('2d');if(!c)throw new Error('No sampling canvas');
+    let correspondence:Float32Array|undefined;
     targets=[0,1,2].map(poseIndex=>{
      c.clearRect(0,0,sample.width,sample.height);
      c.drawImage(img,poseIndex*img.width/3,0,img.width/3,img.height,0,0,sample.width,sample.height);
@@ -88,7 +89,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
      const target=new Float32Array(count*STRIDE);target.set(body);
      target.set(heldObjectPoints(objectCount,poseIndex),body.length);
      target.set(backgroundStars(skyCount,poseIndex),body.length+objectCount*STRIDE);
-     return assignParticleIds(target,poseIndex);
+     const points=assignParticleIds(target,poseIndex,correspondence);correspondence??=points;return points;
     });readyAt=clock;active=command.current.pose;
    }catch{setError('人物星塵暫時無法載入，請重新整理；右側內容仍可使用。');}
   };
@@ -104,7 +105,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
      const rotation=(clock-readyAt)*.0007;
      galaxy(count,rotation,galaxyFrame);foreground.set(galaxyFrame);
      if(reduced||skipNow||cmd.skip||cmd.pose!==0||clock-readyAt>1500){transitionDuration=reduced||cmd.skip?1:cmd.pose===0?3000:1250;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground);phase='morph';surfaceAt=clock;surfaceFrom=0;active=cmd.pose;}
-    }else if(cmd.pose!==active||skipNow){transitionDuration=reduced||skipNow?1:1800;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground);surfaceFrom=visualSurface;phase='morph';surfaceAt=clock;active=cmd.pose;}
+    }else if(cmd.pose!==active||skipNow){transitionDuration=reduced||skipNow?1:1800;morph.retarget(targets[cmd.pose],clock,transitionDuration,foreground,true);surfaceFrom=visualSurface;phase='morph';surfaceAt=clock;active=cmd.pose;}
    }
    if(reduced&&targets.length){foreground.set(targets[cmd.pose]);phase='hold';holdAt=clock;}
    else if(phase==='morph'){
