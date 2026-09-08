@@ -93,7 +93,7 @@ export default function AstralScene({pose,replay,skip}:{pose:number;replay:numbe
     });readyAt=clock;active=command.current.pose;
    }catch{setError('人物星塵暫時無法載入，請重新整理；右側內容仍可使用。');}
   };
-  img.onerror=()=>setError('人物星塵素材未載入，請重新整理；右側內容仍可使用。');img.src='/astral-complete-plate.png';
+  img.onerror=()=>setError('人物星塵素材未載入，請重新整理；右側內容仍可使用。');img.src='/astral-clean-plate.png';
   const render=(now:number)=>{
    if(disposed)return;frame=requestAnimationFrame(render);
    const dt=last?Math.min(now-last,50):0;last=now;if(!visible||document.hidden)return;clock+=dt;

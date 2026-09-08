@@ -31,16 +31,3 @@
 /* v0.6: a persistent left scene, independently readable right chapter. */
 @media(min-width:851px){.atlas-layout{height:calc(100svh - 90px);min-height:540px}.portrait-stage{position:relative;height:100%;min-height:0}.atlas-content{height:100%;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--purple) transparent}.chapter-tabs{position:sticky;top:-1px;z-index:3;background:var(--bg)!important;padding-top:8px!important}.atlas header{position:relative}.chapter{min-height:450px}}
 .scene-error{position:absolute;top:45%;left:10%;right:10%;color:#ece4f6;background:#111727e8;padding:20px;border-radius:16px;font-size:16px}
-
-/* The completed silhouettes sit in the page's sky, without a rectangular panel. */
-.atlas-layout{background:radial-gradient(ellipse at 22% 45%,#25213f88,transparent 52%)}
-.atlas.light .atlas-layout{background:radial-gradient(ellipse at 22% 45%,#dcd7f488,transparent 52%)}
-.portrait-stage{overflow:visible;background:transparent}
-.astral-canvas{mask-image:linear-gradient(90deg,transparent,black 10%,black 86%,transparent),linear-gradient(transparent,black 7%,black 91%,transparent);mask-composite:intersect}
-.stage-caption{border-top:0;bottom:22px;left:auto;right:26px;padding:0;gap:12px;font-size:13px;color:var(--muted)}
-.stage-caption>span:first-child{font-size:18px}
-.stage-controls{bottom:22px;gap:10px}
-.light .stage-label{color:var(--muted)}
-.light .stage-controls button{color:var(--text);background:#ffffffbd;border-color:var(--line)}
-.light .astral-canvas{filter:brightness(.62) saturate(1.1)}
-@media(max-width:850px){.stage-caption{right:20px}.stage-controls{left:20px;bottom:20px}.stage-controls button{font-size:12px;padding:7px 10px}.stage-caption>span:first-child,.stage-caption i{display:none}}
