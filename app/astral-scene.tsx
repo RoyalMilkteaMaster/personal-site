@@ -36,8 +36,8 @@ void main(){
  light=mix(light,vec3(1.15),step(1.5,aHeld));
  float surface=uSurface*step(.1,length(aNormal));
  vColor=aColor*mix(vec3(1.0),light,surface);
- float phase=fract(uTime/(7.0+aSeed*13.0)+fract(aSeed*73.13));
- float pulse=pow(max(0.0,1.0-abs(phase-.5)/.045),2.0)*uTwinkle;
+ float phase=fract(uTime/(14.0+aSeed*26.0)+fract(aSeed*73.13));
+ float pulse=pow(max(0.0,1.0-abs(phase-.5)/.0225),2.0)*uTwinkle;
  vColor=mix(vColor,min(vec3(1.25),aColor*.45+vec3(.8)),pulse*.9);
  gl_PointSize*=1.0+pulse*.8;
 }`;

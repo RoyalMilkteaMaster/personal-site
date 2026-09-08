@@ -32,7 +32,7 @@ for(const pose of [0,1,2]){
  for(let side=0;side<5;side++){
   const angle=side*Math.PI*2/5;
   const strut=crown.filter(p=>Math.abs(p[0]-p[9]-.043*Math.cos(angle))<1e-5&&Math.abs(p[2]-p[11]-.043*Math.sin(angle))<1e-5);
-  assert.ok(strut.some(p=>p[1]-p[10]<-.015)&&strut.some(p=>p[1]-p[10]>0),'Each crown valley connects down to its band');
+  assert.ok(strut.some(p=>p[1]-p[10]<-.009)&&strut.some(p=>p[1]-p[10]>0),'Each crown valley connects down to its raised band');
  }
  assert.ok(held.length>10);assert.ok(model.every(Number.isFinite));
  assert.ok(held.some(p=>p[8]>.1)&&held.some(p=>p[8]<-.1),'Objects have front and back facing normals');

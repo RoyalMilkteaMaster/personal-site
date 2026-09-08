@@ -79,14 +79,14 @@ export function heldObjectPoints(count:number,pose:number){
    const peak=1-Math.abs(segment*2-1),band=part===0;
    const radius=.043*(band||connector?1:1+peak*.16);
    x=Math.cos(angle)*radius;z=Math.sin(angle)*radius;
-   y=connector?-.025+a*.033:band?-.025+(b-.5)*.004:.008+peak*.045;
+   y=connector?-.019+a*.027:band?-.019+(b-.5)*.004:.008+peak*.045;
    nx=Math.cos(angle);ny=.1;nz=Math.sin(angle);
    colour=[1,.90,.56];emission=2;
    if(part>=5){
     // A second stepped band gives the little crown a solid jewellery base.
     const radius=part===5?.048:.043+a*.005;
     x=Math.cos(angle)*radius;z=Math.sin(angle)*radius;
-    y=part===5?-.042+(b-.5)*.003:-.042+a*.017;
+    y=part===5?-.042+(b-.5)*.003:-.042+a*.023;
     colour=part===5?[1,.91,.67]:[.76,.59,.34];
    }
   }
