@@ -1,4 +1,4 @@
-export const STRIDE = 6; // xyz, rgb. Particle identity is its fixed array index.
+export const STRIDE = 13; // xyz, rgb, surface normal, rotation pivot, spin weight.
 export function ease(t:number){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
 export class ParticleMorph {
  current:Float32Array;
@@ -34,6 +34,7 @@ export function galaxy(count:number,angle=0){
   const intensity=random-Math.floor(random)>.875?1:.14+(i%13)/13*.16;
   const color=colors[(i+Math.floor(i/7))%4];
   for(let c=0;c<3;c++)out[k+3+c]=color[c]*intensity;
+  out[k+8]=-1;
  }
  return out;
 }

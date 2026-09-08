@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import {ParticleMorph,galaxy} from './particle-morph.ts';
-const start=galaxy(100),target=start.map((v,i)=>i%6<3?v*.4:v*.8),third=galaxy(100,1);
+import {ParticleMorph,galaxy,STRIDE} from './particle-morph.ts';
+const start=galaxy(100),target=start.map((v,i)=>i%STRIDE<3?v*.4:v*.8),third=galaxy(100,1);
 const m=new ParticleMorph(start);m.retarget(target,0,1000);
 assert.deepEqual(m.update(0),start);
 const middle=m.update(450).slice();m.retarget(third,450,1000);
