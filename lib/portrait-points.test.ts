@@ -44,7 +44,7 @@ for(const pose of [0,1,2]){
  }
  if(pose===1){
   assert.ok(crown.every(p=>p[3]>p[5]+.3),'Crown keeps warm gold');
-  assert.ok(held.filter((_,i)=>i%7!==0).every(p=>p[5]>p[3]+.2),'Cool crystal shell contrasts with its gold crown');
+  assert.ok(held.filter((_,i)=>i%7!==0).every(p=>p[3]>p[4]&&p[5]>p[4]),'Rosy pink crystal shell stays distinct from its gold crown');
   assert.ok(held.some(p=>p[1]<p[10]-.13),'Restore the lower ornament above the palm');
   assert.ok(held.some(p=>p[1]>p[10]+.16),'Restore the upper ornament and filament');
  }

@@ -39,7 +39,7 @@ export function heldObjectPoints(count:number,pose:number){
      const point=[(b-.5)*.004,center,(noise(i+82)-.5)*.004];point[axis]+=sign*radius;
      [x,y,z]=point;
     }
-    colour=[.65,.78,1];emission=2;
+    colour=[1,.83,.87];emission=2;
    }else{
     // Three octagonal belts form multiple triangular facets, not a plain
     // eight-face diamond. Bright edges remain readable between sparse faces.
@@ -58,7 +58,7 @@ export function heldObjectPoints(count:number,pose:number){
     const ab=v2.map((n,j)=>n-v1[j]),ac=v3.map((n,j)=>n-v1[j]);
     nx=ab[1]*ac[2]-ab[2]*ac[1];ny=ab[2]*ac[0]-ab[0]*ac[2];nz=ab[0]*ac[1]-ab[1]*ac[0];
     if(nx*x+ny*y+nz*z<0){nx=-nx;ny=-ny;nz=-nz;}
-    colour=edge?[.50,.65,1]:[.22,.29,.60];emission=edge?2:1;
+    colour=edge?[1,.72,.80]:[.72,.47,.54];emission=edge?2:1;
    }
   }else{
    const radius=.087;
