@@ -36,3 +36,7 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Local build metadata and accidental shell output
+*.tsbuildinfo
+/=880

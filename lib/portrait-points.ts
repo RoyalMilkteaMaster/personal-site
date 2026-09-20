@@ -52,8 +52,9 @@ export function portraitPoints(pixels:Uint8ClampedArray,width:number,height:numb
   const u=x/width,v=y/height;
   const head=pose>=0&&v<.345&&v>.035&&u>.33&&u<.79;
   const face=head&&v>.16&&u>(pose===2?.43:.36)&&u<(pose===0?.72:.63);
-  const hand=pose===0?u<.50&&v>.40&&v<.63:pose===1?u<.33&&v>.365&&v<.51:pose===2?u>.78&&v>.26&&v<.45:false;
-  weights[p]=(.13+light*.85+edge*1.5)*(face?2.4:head?1.5:hand?1.6:.85);
+  const hand=pose===0?u<.50&&v>.40&&v<.63:pose===1?u<.355&&v>.365&&v<.515:pose===2?u>.78&&v>.26&&v<.45:false;
+  weights[p]=(.13+light*.85+edge*1.5)*(face?2.4:head?1.5:hand?2.2:.85);
+  if(hand&&distance[p]<3)weights[p]+=2;
   if(head&&distance[p]<4)weights[p]+=1.5;
   total+=weights[p];
  }

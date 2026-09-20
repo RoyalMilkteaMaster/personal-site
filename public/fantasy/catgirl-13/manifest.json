@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "role": "素材來源與版本清單；非 runtime rig schema。裁切、接點與時序由模組求值結果持有。",
+  "assets": [
+    {
+      "url": "/fantasy/catgirl-13/layers-v1.png",
+      "sha256": "04bd208c55e10a556a88794e5eb0d79917c7fbbaaa06fb27d31da8f44f6ee42e",
+      "source": "既有首輪候選，原檔保留"
+    },
+    {
+      "url": "/fantasy/catgirl-13/gaze-v2.png",
+      "sha256": "ff8faf291db9f61ebbd02e2db67f7757d99c003877f2d54d16930b82306ff66c",
+      "source": "本輪 built-in image_gen，以原圖為編輯來源；完整 prompt 見 ticket-13/gaze-generation.txt"
+    },
+    {
+      "url": "/fantasy/catgirl-13/dress-v2.png",
+      "sha256": "7c5447a555ed80dda7fdb052181a6023ba8c47b3b248e8de240a6b3fbd9a356b",
+      "source": "本輪 built-in image_gen，以原圖為編輯來源；完整 prompt 見 ticket-13/dress-generation.txt"
+    }
+  ],
+  "appearanceReference": "output/imagegen/catgirl-2d-fullbody-cute-v2.png",
+  "evaluator": "lib/fantasy/catgirl-animation.mjs",
+  "renderer": "lib/fantasy/catgirl-renderer.mjs",
+  "acceptance": "角色 Review 修正候選；原 Reviewer 定向複查及 14 主場景整合未核准。"
+}

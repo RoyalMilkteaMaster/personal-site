@@ -1,0 +1,7 @@
+# Root actual UI — cloth inner cover R3
+
+FrozenURL http://127.0.0.1:3004/raw-cloth-inner-cover-astra-r3/index.html. ExistinghiddenQA20/browser1reused;userWC1tab19unchanged. Actualruntimeguardsmesh068e7f17/pool3a01fd89/full607702 matchfreeze;header/nearcaptioncorrectlynameR3.
+
+OperatedwideSTAR,inspectorON/propOFF,90SOLID,270SOLID,180STAR,propON/inspectorOFF/Replay. Observed12.0s pausedwideSTARpropON. Controls/rendercompleteplayfunction. Sideviews showconnectedinner/reverseclothwithoutanobviousnewfloatingpocket/oldreturningarc;backcoherent. Hemstillstraight/stiff,originalmaterialdrape/62source-overlapappropriatenessnotcertifiedbythisUIcheck. Fullclotheslikeness and A13stillopen. Neck/handhereareR13base,notnewneckR7/handcandidate;donotjudgelatestheadrepairfromthisisolatedclothpage.
+
+CUAscreenshotsdirectconversationonly,nolocalpathsclaimed. QA20currentlyR3wide12STARpropONinspectOFF. Mainuntouched, pendingOpusreviewandcontrolledcomposition.

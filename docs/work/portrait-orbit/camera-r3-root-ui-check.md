@@ -1,0 +1,5 @@
+# Coordinator UI check — camera calibration r3
+
+2026-09-12. Actual IAB tab13, URL http://127.0.0.1:3004/raw-camera-calibration-r3/index.html?cam=camera-r3.json. Runtime identifies frozen GLB cb1f177e, stars25113152, 600000 points, ANGLE RTX4090 D3D11. Clicked Play at0 then observed done12, selected4.35,5.5,9.6 with UI slider. Start head/raised shoulder visible, side continuous, back frames head/collar/shoulder without waist, return shows same subject. Fire absent at checked near/side/back/return and presentwide. No substitution/disappearance seen at checked frames. This is sampled UI observation plus actual play, not every-frame inspection. Independent Opus review-camera3 closesF34/withdrawsF35 andlocallyacceptscamera; rootagreeslocalcandidateusable.
+
+A13 NOT passed: head/fringe shape stilldiffersoriginal, hand/propneedsnewgeometry andfit, widecloth/ribbon silhouette broaderlowerthanoriginal. New head4 andhand5 were NOT included inthiscamera3test. This checkdoesnotgrantTickets01–03 ormainintegration. Latest user strictoriginal appearance continues.

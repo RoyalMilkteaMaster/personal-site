@@ -1,0 +1,323 @@
+{
+  "revision": 5,
+  "source": "work/starlit-implementation/visual-revision/cup-study/user-model/original.glb",
+  "sourceSHA256": "ea128aa8c5dee50ed54ee29b8b8542fde52360a7cbe97b6d846a74d4c0bbc92a",
+  "sourceBytes": 60961460,
+  "sourceTriangles": 1913067,
+  "count": 52185,
+  "stride": 10,
+  "fields": "x y z r g b nx ny nz alpha",
+  "counts": {
+    "ear": 4507,
+    "glass": 6644,
+    "body": 10453,
+    "body-paw-ground": 1318,
+    "tail": 3981,
+    "body-shadow-correction": 31,
+    "inner-ear": 970,
+    "face": 1386,
+    "wall": 4800,
+    "rim": 780,
+    "pearl": 5400,
+    "straw": 7560,
+    "charm-outline": 440,
+    "charm-pad-0": 440,
+    "charm-pad-1": 200,
+    "charm-pad-2": 200,
+    "charm-pad-3": 200,
+    "charm-pad-4": 200,
+    "charm-link": 235,
+    "body-paw-0-pad-0": 180,
+    "body-paw-0-outline": 350,
+    "body-paw-0-pad-1": 90,
+    "body-paw-0-pad-2": 90,
+    "body-paw-0-pad-3": 90,
+    "body-paw-0-pad-4": 90,
+    "body-paw-1-pad-0": 180,
+    "body-paw-1-outline": 350,
+    "body-paw-1-pad-1": 90,
+    "body-paw-1-pad-2": 90,
+    "body-paw-1-pad-3": 90,
+    "body-paw-1-pad-4": 90,
+    "crown": 660
+  },
+  "assetBytes": 2087400,
+  "assetSHA256": "accc8816b68c82bae63566ef6380f7f29ff127b464434ddde7d6d4b31770cbab",
+  "wallKnots": [
+    [
+      0,
+      0.145,
+      0.145
+    ],
+    [
+      0.008,
+      0.165,
+      0.165
+    ],
+    [
+      0.02,
+      0.18,
+      0.182
+    ],
+    [
+      0.04,
+      0.202,
+      0.201
+    ],
+    [
+      0.08,
+      0.212,
+      0.215
+    ],
+    [
+      0.12,
+      0.22,
+      0.221
+    ],
+    [
+      0.18,
+      0.227,
+      0.229
+    ],
+    [
+      0.23,
+      0.233,
+      0.235
+    ],
+    [
+      0.55,
+      0.275,
+      0.27
+    ]
+  ],
+  "wallCenterX": -0.04,
+  "pearls": [
+    [
+      -0.13,
+      0.062,
+      0.075,
+      0.03
+    ],
+    [
+      -0.055,
+      0.05,
+      0.115,
+      0.032
+    ],
+    [
+      0.025,
+      0.055,
+      0.115,
+      0.033
+    ],
+    [
+      0.095,
+      0.07,
+      0.08,
+      0.03
+    ],
+    [
+      -0.145,
+      0.112,
+      0.045,
+      0.032
+    ],
+    [
+      -0.075,
+      0.11,
+      0.12,
+      0.033
+    ],
+    [
+      0.005,
+      0.12,
+      0.105,
+      0.034
+    ],
+    [
+      0.085,
+      0.13,
+      0.075,
+      0.033
+    ],
+    [
+      -0.11,
+      0.17,
+      0.09,
+      0.033
+    ],
+    [
+      -0.025,
+      0.183,
+      0.12,
+      0.033
+    ],
+    [
+      0.06,
+      0.185,
+      0.07,
+      0.033
+    ],
+    [
+      -0.13,
+      0.08,
+      -0.075,
+      0.032
+    ],
+    [
+      -0.045,
+      0.065,
+      -0.11,
+      0.032
+    ],
+    [
+      0.04,
+      0.08,
+      -0.085,
+      0.033
+    ],
+    [
+      -0.12,
+      0.145,
+      -0.07,
+      0.033
+    ],
+    [
+      -0.03,
+      0.14,
+      -0.115,
+      0.034
+    ],
+    [
+      0.055,
+      0.15,
+      -0.065,
+      0.033
+    ],
+    [
+      -0.04,
+      0.09,
+      0,
+      0.034
+    ]
+  ],
+  "minimumPearlMargin": 0.07289068565428936,
+  "straw": {
+    "centerAtY094": [
+      -0.008,
+      0.94,
+      0.0817
+    ],
+    "slope": [
+      0.103,
+      1,
+      0.06
+    ],
+    "radius": 0.0386,
+    "yRange": [
+      0.15,
+      0.972
+    ],
+    "singleContinuousSurface": true,
+    "colorGradient": {
+      "bottomBrightness": 0.42,
+      "transitionY": [
+        0.18,
+        0.6
+      ]
+    }
+  },
+  "pendant": {
+    "center": [
+      0.342,
+      0.48,
+      0.09
+    ],
+    "halfWidth": 0.043,
+    "halfHeight": 0.052,
+    "pads": [
+      [
+        0,
+        -0.015,
+        0.021,
+        0.017
+      ],
+      [
+        -0.025,
+        0.007,
+        0.008,
+        0.01
+      ],
+      [
+        -0.01,
+        0.024,
+        0.008,
+        0.011
+      ],
+      [
+        0.01,
+        0.024,
+        0.008,
+        0.011
+      ],
+      [
+        0.025,
+        0.007,
+        0.008,
+        0.01
+      ]
+    ]
+  },
+  "crown": {
+    "centerY": 0.765,
+    "innerRadius": 0.058,
+    "outerRadius": 0.067,
+    "height": 0.044,
+    "peaks": 5
+  },
+  "bodyPaws": [
+    [
+      -0.184,
+      0.266
+    ],
+    [
+      0.113,
+      0.26
+    ]
+  ],
+  "limitations": [
+    "Lower wall and internal pearl spheres are locally reconstructed per user correction.",
+    "Glass uses translucent points, not refractive mesh."
+  ],
+  "sourceAssetSHA256": "e2c6527bd8d465183daea724da14970f1a127678b9a2ecc7d5e4847f97abe0a0",
+  "alphaRefinement": "rev3：珍珠恢復 r5 .90、雙爪墊 .80／邊 .55；其餘延續 rev2，XYZ/RGB/normal不變",
+  "preparedFor": "Ticket 12 / starlit-full-preview",
+  "generator": "work/starlit-implementation/visual-revision/model-development/sample.mjs",
+  "localCoordinates": "y = sourceY - 0.49; +Z 為杯臉，+Y 朝吸管頂端",
+  "contacts": {
+    "leftGrip": [
+      -0.24,
+      -0.14,
+      0
+    ],
+    "rightGrip": [
+      0.24,
+      -0.14,
+      0
+    ],
+    "strawTip": [
+      -0.004704,
+      0.482,
+      0.08362
+    ]
+  },
+  "openingPlacement": {
+    "module": "app/starlit-sky-study/cup-layout.mjs",
+    "placement": "openingCupPlacement(aspect)",
+    "contact": "openingCupContact(name, aspect, sceneSeconds, reducedMotion)",
+    "motion": "cupMotion(sceneSeconds, reducedMotion)",
+    "note": "render與contact必須傳入同一 prefers-reduced-motion 旗標；matrix不含scale／自轉，contact已含兩者"
+  },
+  "endingPlacement": "app/starlit-sky-study/cup-placement.mjs: CUP_CENTER / CUP_SCALE",
+  "visualStatus": "rev3 Finding 修正，待原 Reviewer 定向複驗"
+}

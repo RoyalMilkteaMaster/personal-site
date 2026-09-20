@@ -1,0 +1,79 @@
+/* 限於內容 host 的背景層；既有章節及頁尾維持 z-index: 1。 */
+.starlit-nebula {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: paint;
+}
+.starlit-nebula[hidden] { display: none; }
+.starlit-nebula-field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: starlit-nebula-drift 12s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.starlit-nebula-dark {
+  color: #8884a8;
+  opacity: 0.07;
+}
+.starlit-nebula-light {
+  position: absolute;
+  inset: 0;
+  color: #e0c49d;
+  opacity: 0;
+  mask-image: radial-gradient(ellipse var(--nebula-radius, 240px) 180px at var(--nebula-x, 0px) var(--nebula-y, 0px), #000 0%, transparent 100%);
+}
+.starlit-nebula-light .starlit-nebula-field { opacity: 0.24; }
+.starlit-nebula-far {
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  background:
+    radial-gradient(circle at 24px 43px, rgb(100% 81% 53%) 0.6px, transparent 1px) 0 0 / 1028px 307px,
+    radial-gradient(circle at 281px 43px, rgb(67% 75% 100%) 0.6px, transparent 1px) 0 0 / 1028px 307px,
+    radial-gradient(circle at 538px 43px, rgb(100% 81% 53%) 0.6px, transparent 1px) 0 0 / 1028px 307px,
+    radial-gradient(circle at 795px 43px, rgb(85% 64% 100%) 0.6px, transparent 1px) 0 0 / 1028px 307px;
+}
+.starlit-nebula-star {
+  position: absolute;
+  opacity: 0;
+  translate: -50% -50%;
+  background: currentColor;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+
+/* 只移動共用雲場的兩份 SVG；halo 與接縫遮罩保持 host 座標。
+   暗／亮同次掛載、同週期、同暫停條件，保持完全相同相位。 */
+@keyframes starlit-nebula-drift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(24px, -18px); }
+}
+.starlit-nebula-stars, .starlit-nebula-far {
+  position: absolute;
+  inset: 0;
+  animation: starlit-nebula-star-drift 32s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+@keyframes starlit-nebula-star-drift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(6px, -4px); }
+}
+.starlit-nebula[data-running='true'] :is(.starlit-nebula-field, .starlit-nebula-stars, .starlit-nebula-far) { animation-play-state: running; }
+@media (prefers-reduced-motion: reduce) {
+  .starlit-nebula :is(.starlit-nebula-field, .starlit-nebula-stars, .starlit-nebula-far) { animation: none; }
+}
+
+/* 光照與反應星芒一起逐像素衰減，與指標中心位置無關。 */
+.starlit-nebula-reactive {
+  position: absolute;
+  inset: 0;
+}
+@media (min-width: 851px) {
+  .starlit-nebula-reactive {
+    mask-image: linear-gradient(to right, transparent 0px, transparent 1px, #000 33.333333%, #000 100%);
+  }
+}

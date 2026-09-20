@@ -1,0 +1,2762 @@
+/* Scoped to .starlit so the shell can be previewed on its own route without
+   touching app/globals.css or the live homepage styles. */
+.starlit {
+  --starlit-bg: #080c19;
+  --starlit-surface: #111727;
+  --starlit-text: #f0ede8;
+  --starlit-muted: #b1b6ca;
+  --starlit-gold: #e0c49d;
+  --starlit-purple: #c0a7e5;
+  --starlit-line: #ffffff20;
+  /* ---------------------------------------------------------------------
+     Ticket 30-B gave the site two deliberate faces — Playfair Display for
+     Latin, NotoSansTC for real CJK bold. The user withdrew that on
+     2026-09-17 ("字體就先用原本的好了"), so the composed stack now resolves
+     to the one face the site always shipped.
+
+     The three variables are kept rather than deleted, and every rule still
+     goes through `--starlit-font-title`. That is the point: the eight
+     selectors that wanted a display face are still named in one place and
+     still pinned by components/starlit-shell.test.ts, so restoring a face
+     later is a one-line change here instead of a hunt through the file.
+
+     `--starlit-font-display` was briefly set to Georgia here, on the argument
+     that Georgia was "already on this site". Review C (MAJOR-1) disproved it
+     from the pre-30 snapshot: of the eight selectors on this stack exactly one
+     was Georgia, two were Arial and five were jfOpenHuninn — so Georgia was
+     "original" for one eighth of them, and keeping it would have turned the
+     English name, the Latin section labels, the column headings and the award
+     titles serif. The user withdrew 30-B because they could not see a
+     difference; a change they *can* see is not theirs to smuggle in. So the
+     display slot resolves to the one face the site has, and the two header
+     selectors went back to their own pre-30 declarations instead of staying
+     on this stack.
+
+     Still a bare family name, not `…, serif`: a generic serif ahead of
+     jfOpenHuninn in the composed stack answers for CJK glyphs too, so 「技能」
+     would silently stop being jfOpenHuninn. The generic fallbacks belong at
+     the end of the one composed stack.
+
+     Known and accepted: jfOpenHuninn ships weight 400 only, so the
+     `font-weight: 900` rules below are browser-synthesised bold. That is the
+     state the site was in before Ticket 30-B, not a regression from it. The
+     weights are left as written so the hierarchy still reads; size and
+     letter-spacing carry it.
+     --------------------------------------------------------------------- */
+  --starlit-font-display: 'jfOpenHuninn';
+  --starlit-font-heavy: 'jfOpenHuninn';
+  --starlit-font-title: var(--starlit-font-display), var(--starlit-font-heavy),
+    'Microsoft JhengHei', sans-serif;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--starlit-bg);
+  color: var(--starlit-text);
+  font-family: 'jfOpenHuninn', 'Microsoft JhengHei', sans-serif;
+  line-height: 1.8;
+}
+
+.starlit a:focus-visible,
+.starlit button:focus-visible,
+.starlit summary:focus-visible {
+  outline: 2px solid var(--starlit-gold);
+  outline-offset: 4px;
+}
+
+/* Brand. app/globals.css styles the bare `header` element (absolute, z-index 5)
+   for the current homepage, so the shell states its own position. */
+.starlit-header {
+  position: relative;
+  z-index: 4;
+  flex: none;
+  height: 90px;
+  padding: 0 clamp(20px, 3vw, 48px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--starlit-line);
+}
+
+.starlit-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 6px 10px;
+  margin-left: -10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--starlit-gold);
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.starlit-brand:hover {
+  background: #ffffff0e;
+}
+
+.starlit-brand svg {
+  flex: none;
+}
+
+/* Ticket 30-B.2: the brand is one of the three places the chosen Latin display
+   face is used (Georgia and Arial were the placeholders). Sizes and tracking
+   are unchanged so the floating opening header keeps its one-line fit. */
+/* Ticket 30-B.5 pulled these two into `--starlit-font-title` so the header
+   brand could reach the display face. Review C (MAJOR-1): with 30-B withdrawn
+   there is no display face to reach, and the pre-30 snapshot shows these two
+   were Georgia and Arial respectively — so they go back to exactly what they
+   were, declarations and weights included, rather than staying on a composed
+   stack that no longer composes anything. */
+.starlit-brand-name {
+  display: block;
+  font: 20px/1.3 Georgia, serif;
+  letter-spacing: 0.04em;
+}
+
+.starlit-brand-sub {
+  display: block;
+  font: 10px/2.2 Arial, sans-serif;
+  letter-spacing: 3px;
+  color: var(--starlit-muted);
+}
+
+/* Top-right controls. Language sits here now and the sound button joins the
+   same row later, so it wraps instead of claiming one fixed slot. */
+.starlit-controls {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Stage + content */
+.starlit-main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 49% 51%;
+}
+
+.starlit-main[data-stage='false'] {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.starlit-stage {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 50%, #25213f, #080c19 75%);
+}
+
+.starlit-content {
+  height: 100%;
+  min-width: 0;
+  width: 100%;
+  max-width: 1100px;
+  overflow-y: auto;
+  /* Ticket 30-A.6 cancelled the portrait bleed, so nothing has to cancel this
+     padding any more and it goes back to being stated where it is used
+     (`--starlit-content-pad` existed only for the negative margin). */
+  padding: 0 clamp(20px, 4.5vw, 85px);
+  scrollbar-width: thin;
+  scrollbar-color: var(--starlit-purple) transparent;
+}
+
+/* Desktop: the content column is its own scroller, so the chapter navigation
+   stays put while a long chapter scrolls under it. */
+@media (min-width: 851px) {
+  .starlit {
+    height: 100svh;
+    overflow: hidden;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Ticket 44-A — 內容欄的鼠標聚光（毛哥 elvismao.com 的做法，拿來當背景）。
+
+   為什麼需要一個 host 而不是直接放在 `.starlit-content` 上：桌機的內容欄自己是
+   `overflow-y: auto` 的 scroller，而 scroller 裡 `position: absolute; inset: 0`
+   的孩子只有「可視高度」那麼高，而且會跟著內容捲走 —— 捲下去之後聚光層就跑到畫面
+   上方看不見了。所以聚光層的定位祖先改成一個**包住三個分頁與頁尾、在正常流裡、
+   高度＝整欄內容高度**的 host。這樣 `inset: 0` 就真的蓋滿整欄，JS 也只要算
+   `clientX/Y − host.getBoundingClientRect().left/top`：那個 rect 會跟著內容一起
+   捲，捲動已經算在裡面（≤850px 是視窗在捲，同一條公式一樣對）。見 lib/cursor-glow.ts。
+
+   負 margin ＋ 同額 padding：內容欄的左右 padding 是 clamp(20px, 4.5vw, 85px)，
+   host 用同一個值往外退再往內補回來，於是聚光蓋到欄的整個 padding box（不然鼠標
+   靠邊時漸層會被切出一條直邊），而分頁的文字寬度一個 px 都沒變。因為退多少就補
+   多少，橫向也不會多出捲動（`.starlit-content` 的 overflow-x 跟著 overflow-y 變成
+   auto，多一個 px 就會長出橫捲軸）。≤850px 的 padding 是固定 20px，所以那邊要覆寫。
+
+   `isolation: isolate` ＋ 分頁與頁尾的 `z-index: 1`：聚光層是定位元素、z-index 0，
+   而一般在流裡的區塊本來就畫在「z-index 0 的定位元素」**下面**，不寫這兩條的話
+   聚光會蓋住全部的字。isolate 把這個 z 軸關在 host 裡，不會去跟外面那顆絕對定位
+   的 header 排順序。
+   --------------------------------------------------------------------------- */
+.starlit-glow-host {
+  --starlit-glow-pad: clamp(20px, 4.5vw, 85px);
+  position: relative;
+  /* Review 44 F1：作品頁內容比欄短時，host 不到欄底會留一段沒有聚光的死區，
+     指標貼近 host 底緣會看到一條橫貫整欄的直邊。撐到至少欄高。 */
+  min-height: 100%;
+  isolation: isolate;
+  margin: 0 calc(-1 * var(--starlit-glow-pad));
+  padding: 0 var(--starlit-glow-pad);
+}
+
+.starlit-glow-host > .starlit-chapter,
+.starlit-glow-host > .starlit-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ticket 28: chapter navigation lives in the header, immediately left of
+   Language, and only after the chapters open. It is pushed to the right by its
+   own auto margin, so Language keeps its place at the end of the row. */
+.starlit-nav {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+.starlit-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border: 1px solid var(--starlit-line);
+  border-radius: 999px;
+  background: #ffffff0a;
+  color: var(--starlit-muted);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 150ms, color 150ms, border-color 150ms;
+}
+
+
+.starlit-tab:hover {
+  border-color: var(--starlit-purple);
+  color: var(--starlit-text);
+}
+
+.starlit-tab[data-active] {
+  background: var(--starlit-gold);
+  border-color: var(--starlit-gold);
+  color: #1a1206;
+  font-weight: 700;
+}
+
+/* Chapters */
+.starlit-chapter {
+  padding: 42px 0 0;
+  outline: none;
+}
+
+.starlit-kicker {
+  font: 12px/1.6 Arial, sans-serif;
+  letter-spacing: 2px;
+  color: var(--starlit-purple);
+  margin: 0 0 20px;
+}
+
+.starlit h1 {
+  font-size: clamp(34px, 4vw, 62px);
+  line-height: 1.3;
+  font-weight: 400;
+  letter-spacing: -1.5px;
+  margin: 18px 0 24px;
+}
+
+.starlit h1 em {
+  display: block;
+  font-style: normal;
+  color: var(--starlit-gold);
+}
+
+/* 2026-09-20 使用者修訂：聯絡標題只有「奶茶」那個詞是奶茶色，所以它不是整行，
+   而是句子裡的一個詞——留在同一行，顏色沿用上面那條。 */
+.starlit h1 em.starlit-title-accent {
+  display: inline;
+  /* 上色的是一個詞，就不要從中間斷開（英文的 "milk tea" 尤其明顯）。
+     窄螢幕量過不會因此橫向溢出。 */
+  white-space: nowrap;
+}
+
+.starlit-lead {
+  font-size: 17px;
+  line-height: 2;
+  color: var(--starlit-muted);
+  max-width: 38em;
+}
+
+.starlit-block {
+  padding-top: 52px;
+}
+
+/* Ticket 30-A.1 — this hairline is the ONLY rule left in the chapter. The one
+   under every education row and the one under every award row are gone;
+   grouping is now done by whitespace and by the year marker.
+   Ticket 30-A.2 — 15–16px, a real 900, and 0.25em of tracking. The letter
+   spacing has to be stated: app/globals.css sets `letter-spacing: -1px` on the
+   bare `h2` for the current homepage, which this block inherits otherwise. */
+.starlit-block h2 {
+  font-family: var(--starlit-font-title);
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: 0.25em;
+  margin: 0;
+  border-bottom: 1px solid var(--starlit-line);
+  padding-bottom: 14px;
+}
+
+/* The Latin half of the same heading, on the same line and at the same size —
+   only the colour separates them. */
+.starlit-block h2 small {
+  font-family: var(--starlit-font-title);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  color: var(--starlit-muted);
+  margin-left: 10px;
+}
+
+.starlit h3 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 10px 0 5px;
+}
+
+/* ---------------------------------------------------------------------------
+   Ticket 29-A / 30-A — /關於我 的名片式標題與三個區塊（技能 → 教育 → 得獎）。
+
+   標題區是一層 grid：第一欄是身分文字，第二欄是個人照。照片欄用 `auto`，
+   寬度完全由圖片自己的高度乘上 4:5 決定，所以文字欄拿到的是剩下的全部寬度。
+
+   30-A.2 的型階（1440 實量，對照票面的參考站表）：
+     主名 54px（= 清單項 16px 的 3.375 倍，落在票面的 3.2–3.5）
+     英文副名 20px / 900     區塊標題 16px / 900 / 0.25em
+     欄標題 19px / 600       清單項 16px / line-height 32px
+   ------------------------------------------------------------------------ */
+.starlit-about-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  /* 照片比三行標題高得多（432 對 154），`start` 會在文字底下留一大塊空洞；
+     文字改成與照片垂直置中，兩邊的視覺重心才落在同一條線上。 */
+  align-items: center;
+  gap: 0 clamp(20px, 3vw, 44px);
+  padding-top: 10px;
+}
+
+.starlit-about-identity {
+  min-width: 0;
+}
+
+/* Keep the former portrait's desktop column width. The feathered mask also
+   removes black corners inside the reveal animation's isolated stacking group. */
+.starlit-about-portrait {
+  line-height: 0;
+  justify-self: end;
+  min-width: 0;
+  pointer-events: none;
+}
+
+.starlit-about-portrait img {
+  display: block;
+  height: auto;
+  width: clamp(152px, 24vw, 346px);
+  max-width: 100%;
+  aspect-ratio: 1;
+  mask-image: radial-gradient(circle closest-side, #000 94%, transparent 100%);
+}
+
+/* `.starlit h1` 是 0,1,1，所以這裡要連 `h1` 一起寫才蓋得過它的 400 字重與
+   -1.5px 字距。章節裡仍然只有這一個 h1。 */
+.starlit h1.starlit-about-name {
+  margin: 0;
+  font-family: var(--starlit-font-title);
+  /* 1440 → 54px。票面要的是「比現在小」且與清單項 16px 成 3.2–3.5 倍。 */
+  font-size: clamp(32px, 3.75vw, 58px);
+  font-weight: 900;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  color: var(--starlit-text);
+  /* 英文主名比中文長很多，窄螢幕折行而不是橫向溢出。 */
+  overflow-wrap: break-word;
+}
+
+.starlit-about-name-sub {
+  margin: 14px 0 0;
+  font-family: var(--starlit-font-title);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--starlit-muted);
+  overflow-wrap: break-word;
+}
+
+.starlit-about-tagline {
+  margin: 16px 0 0;
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--starlit-muted);
+  max-width: 34em;
+}
+
+/* 每個區塊的細分隔線是 `.starlit-block h2` 的 border-bottom（整條貫穿內容寬度），
+   線下才是內容 —— 沒有任何空 div 當線，列與列之間也不再有線（30-A.1）。 */
+.starlit-plain-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Ticket 31 — 教育：中央脊線 + 左右交錯（參考站的機制，但保留微斜）。
+
+   參考站 <https://elvismao.com/zh-Hant/about/> 的教育區不是左右兩欄並排：
+   一條 `::before` 脊線的高度等於整個區塊高度，每一筆是滿寬的 relative 容器，
+   卡片靠左或靠右交錯，`::after` 是 24px×1px 的短連接線。Ticket 30-A.3 做成
+   「兩欄 + 一段短彗星」，使用者看過之後要的是前者，而且「那條線可以長一點」。
+
+   這裡照抄機制，但留下使用者兩次指定的**微斜**（參考站是純垂直）。斜度一旦
+   不為零，脊線在不同高度的 x 就不一樣，於是每一筆的連接線起點也必須跟著算，
+   不能全部寫同一個 x —— 這是整票最容易做錯的地方，所以幾何寫在下面：
+
+     脊線是一條高 H、寬 2px、水平中心在 --edu-spine 的線，繞自己的中心
+     rotate(--edu-tilt)。CSS 的正角是順時針（y 軸向下），所以離中心 d 的點
+     會落到 (−d·sinθ, d·cosθ)，也就是
+
+         脊線在垂直位置 y 的 x  =  中心x − (y − H/2)·tanθ
+
+     三筆等高（--edu-row）等距（--edu-gap），所以列中心是 H/2 − pitch、H/2、
+     H/2 + pitch，位移就是 +pitch·tanθ、0、−pitch·tanθ —— 寫在每一列的
+     `--edu-off` 上，連接線與卡片的邊界都從它算，兩者永遠貼在同一條線上。
+
+   為什麼每一筆要鎖固定列高、而且列距是 0：上面那個「列中心 = H/2 ± pitch」
+   只有在三列等高時才成立。中文三筆都是一行，但英文最長那筆（National Cheng
+   Kung University — Department of Photonics Science and Engineering）在半欄
+   寬會折成**三行**——實量過，不是猜的。若讓列高隨內容跑，中英文的列中心就
+   不同，連接線在英文版會整個浮在半空。所以每一列都鎖成三行的高度
+   （--edu-row: 96px）、內容垂直置中，留白由列高自己帶（--edu-gap: 0），
+   兩語共用同一組位移，而 pitch 仍然是 96px。
+   哪天校名長到四行，列高會被撐開、pitch 不再是 96，
+   components/starlit-shell.test.ts 的列高與連接線斷言會直接紅，不會默默做錯。
+
+   區塊高度：32 + 96 + 96 + 96 + 32 = 352px（票面下限 280，參考站 272）。
+   每一筆只有校名一行，靠列距把區塊拉高才拿得回長度 —— pitch 96px 是三條
+   32px 的行，與得獎區的 96px pitch 完全相同（30-D.4 的同一條垂直網格）。
+   ------------------------------------------------------------------------ */
+.starlit-education {
+  /* tan() 在 CSS 是比較新的函式，站上要支援的瀏覽器不見得都有，所以角度與它
+     的正切各寫一次。兩者要一起改 —— 測試會實量脊線的 transform 矩陣再回推
+     每一筆連接線該落在哪裡，只改一個就會紅。 */
+  --edu-tilt: 4deg;
+  --edu-tan: 0.06993;
+  --edu-row: 96px;
+  --edu-gap: 0px;
+  --edu-pad: 32px;
+  /* = --edu-row + --edu-gap，也就是相鄰兩列中心的距離。改上面兩個要一起改。 */
+  --edu-pitch: 96px;
+  --edu-spine: 50%;
+  /* 參考站的連接線就是 24px。 */
+  --edu-arm: 24px;
+  /* 卡片外緣離脊線的距離：連接線 24px 再留 24px 白。 */
+  --edu-clear: 48px;
+  /* 每一列自己覆寫成「脊線在該列垂直中心的水平位移」。 */
+  --edu-off: 0px;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--edu-gap);
+  padding: var(--edu-pad) 0;
+}
+
+.starlit-education li {
+  position: relative;
+  /* 內容垂直置中，列高才能鎖死而不管它是一行還是兩行（見上面的說明）。 */
+  display: grid;
+  align-content: center;
+  min-height: var(--edu-row);
+  padding: 0;
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--starlit-text);
+  overflow-wrap: break-word;
+}
+
+/* 三筆的位移。順序就是 JSX 的順序（由舊到新），不必動標記。 */
+.starlit-education li:nth-child(1) {
+  --edu-off: calc(var(--edu-pitch) * var(--edu-tan));
+}
+
+.starlit-education li:nth-child(2) {
+  --edu-off: 0px;
+}
+
+.starlit-education li:nth-child(3) {
+  --edu-off: calc(var(--edu-pitch) * var(--edu-tan) * -1);
+}
+
+/* 交錯：奇數筆（青溪、成大）靠左並向脊線對齊，偶數筆（武陵）靠右。
+   卡片沒有自己的元素 —— 滿寬的 li 加一邊的 padding 就是那半欄，文字往脊線
+   那一側對齊，連接線正好接在文字與脊線之間。 */
+.starlit-education li:nth-child(odd) {
+  padding-right: calc(50% - var(--edu-off) + var(--edu-clear));
+  text-align: right;
+}
+
+.starlit-education li:nth-child(even) {
+  padding-left: calc(50% + var(--edu-off) + var(--edu-clear));
+  text-align: left;
+}
+
+/* 短連接線。`top: 50%` 是這一列的垂直中心，也就是上面公式裡的 y。 */
+.starlit-education li::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: var(--edu-arm);
+  height: 1px;
+  margin-top: -0.5px;
+  pointer-events: none;
+}
+
+.starlit-education li:nth-child(odd)::after {
+  /* 右緣 = 脊線在這一列的 x。 */
+  right: calc(50% - var(--edu-off));
+  background-image: linear-gradient(270deg, #e0c49dcc, #e0c49d00);
+}
+
+.starlit-education li:nth-child(even)::after {
+  /* 左緣 = 脊線在這一列的 x。 */
+  left: calc(50% + var(--edu-off));
+  background-image: linear-gradient(90deg, #e0c49dcc, #e0c49d00);
+}
+
+/* 脊線與會走的那顆頭都是這個 `<ul>` 自己的偽元素，沒有新檔案、沒有新依賴。
+   `top: 0; bottom: 0` 讓高度就是區塊高度（參考站的 272.292 之於 272），
+   兩端用 transparent 溶進背景。都 `position: absolute`，不會變成 grid item。 */
+/* Ticket 33-A — the line and the glow are the SAME painted gradient. The glow
+   is not a second colour laid on top; it is a moving window (a mask) onto the
+   very gradient the line is made of, so at any height it can only ever show
+   the colour the line has there (33-A.1). The line's own ends fade to
+   nothing, so the glow fades in and out with them instead of popping into
+   view (33-A.2). */
+.starlit-education::before,
+.starlit-education::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--edu-spine);
+  transform: rotate(var(--edu-tilt));
+  pointer-events: none;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--starlit-purple) 22%,
+    #f4ecffcc 42%,
+    var(--starlit-gold) 64%,
+    #e0c49d66 86%,
+    transparent 100%
+  );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* The line itself: one width, end to end (33-A.3 — the user was explicit that
+   the LINE stays uniform; it is the glow that swells). Half the width as
+   negative margin keeps the centre exactly on --edu-spine, which is what the
+   connector formula measures from. Not translateX(-50%): after rotate it
+   would land in the rotated frame and the centre would stop being a round
+   number. */
+.starlit-education::before {
+  width: 2px;
+  margin-left: -1px;
+  filter: blur(0.4px);
+  opacity: 0.85;
+}
+
+/* The glow: a wide, blurred copy of the line, revealed through one short soft
+   window that travels top to bottom. Its WIDTH is what changes along the way
+   (33-A.3): the window's mask-size starts narrow, swells to the full 18px at
+   mid-travel and narrows again at the end, so the glow is a slim spark at
+   either end and a broad halo in the middle. brightness() lifts the shared
+   gradient into a glow without changing its hue. The travel uses
+   mask-position, whose percentage is relative to "container height − window
+   height", so it runs exactly end to end however tall the block is.
+   `prefers-reduced-motion: reduce` hides this element further down. */
+.starlit-education::after {
+  width: 18px;
+  margin-left: -9px;
+  filter: blur(3px) brightness(1.7);
+  -webkit-mask-image: radial-gradient(
+    ellipse 50% 50% at 50% 50%,
+    #000 0%,
+    #000 35%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 50% 50% at 50% 50%,
+    #000 0%,
+    #000 35%,
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: starlit-comet 7s ease-in-out infinite;
+}
+
+@keyframes starlit-comet {
+  0% {
+    opacity: 0;
+    -webkit-mask-size: 30% 56px;
+    mask-size: 30% 56px;
+    -webkit-mask-position: 50% 0%;
+    mask-position: 50% 0%;
+  }
+  18% {
+    opacity: 1;
+  }
+  50% {
+    -webkit-mask-size: 100% 88px;
+    mask-size: 100% 88px;
+  }
+  86% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    -webkit-mask-size: 30% 56px;
+    mask-size: 30% 56px;
+    -webkit-mask-position: 50% 100%;
+    mask-position: 50% 100%;
+  }
+}
+
+/* Ticket 33-B / Ticket 02: the closing block's lines sit on the chapter's 32px
+   grid. Ticket 02 replaced the single placeholder with the four 近況 lines, so
+   the 24px top margin now also separates one line from the next（24 + 32 的
+   相鄰間距是刻意留著的分項感，沒有改動間距數值）。 */
+.starlit-now p {
+  margin: 24px 0 0;
+  color: var(--starlit-muted);
+  font-size: 16px;
+  line-height: 32px;
+}
+
+/* 技能：三條等寬軌。「專業」（7 項）佔一條，項目較多的那一塊（13 項）自己
+   說了算（JSX 的 `data-wide`），佔兩條並在裡面再分成兩欄文字 —— 7 / 7 / 6，
+   右側那片留白被用掉，兩塊高度也就接近（30-A.4）。 */
+.starlit-skill-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px clamp(24px, 4vw, 60px);
+  padding-top: 26px;
+}
+
+.starlit-skill-column {
+  min-width: 0;
+}
+
+.starlit-skill-column[data-wide='true'] {
+  grid-column: span 2;
+}
+
+.starlit-skill-column[data-wide='true'] .starlit-plain-list {
+  column-count: 2;
+  column-gap: clamp(24px, 4vw, 60px);
+}
+
+.starlit-skill-column[data-wide='true'] .starlit-plain-list li {
+  break-inside: avoid;
+}
+
+.starlit .starlit-skill-column h3 {
+  margin: 0 0 10px;
+  font-family: var(--starlit-font-title);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--starlit-gold);
+}
+
+.starlit-skill-column .starlit-plain-list li {
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--starlit-muted);
+  overflow-wrap: break-word;
+}
+
+/* ---------------------------------------------------------------------------
+   Ticket 30-A.5 — 得獎：兩筆各自獨立，年份在左當標記，成績一行一條。
+
+   30-A.1 把每列的 border-bottom 拿掉了，分組改由留白負責。原本掛在最右邊的
+   ✧ 也一併拿掉：線沒有了之後它右邊沒有東西可以對齊，而第二筆現在有兩行成績，
+   一顆垂直置中的 ✧ 會卡在兩行之間、指不到任何一行。這是票面授權 Developer
+   判斷的部分。
+   ------------------------------------------------------------------------ */
+.starlit-award {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  align-items: start;
+  gap: 0 24px;
+  /* Ticket 30-D.4 — same reason as the education gap. Every row inside an
+     award is already a 32px line, so a 26px lead-in was the one thing pushing
+     the second award off the grid (it measured a 90px pitch). 32 makes it 96 —
+     a multiple of the line, so the awards, the schools and the skills all sit
+     on the same set of baselines. 30-A.2 asked for one vertical grid across
+     每一份清單, and the award block is one of them. */
+  padding: 32px 0 0;
+}
+
+.starlit-award > span {
+  color: var(--starlit-gold);
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.starlit .starlit-award h3 {
+  margin: 0;
+  font-family: var(--starlit-font-title);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--starlit-text);
+}
+
+.starlit-award p {
+  margin: 0;
+  color: var(--starlit-muted);
+  font-size: 16px;
+  line-height: 32px;
+}
+
+/* ---------------------------------------------------------------------------
+   Ticket 30-C — 捲動顯現。IntersectionObserver 在 starlit-shell.tsx，這裡只有
+   起點與終點兩個狀態；顯現後不再回頭（JS 把目標 unobserve 掉）。
+
+   只掛在 /關於我 的四塊上，`/我的作品`、`/聯絡資訊` 與開場完全沒有這個 class。
+   `prefers-reduced-motion: reduce` 時直接就是最終狀態 —— JS 那邊也會直接標成
+   已顯現，兩邊都寫，不依賴誰先到。
+   ------------------------------------------------------------------------ */
+.starlit-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.starlit-reveal[data-reveal='in'] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starlit-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  /* 靜態光跡留著，會走的那顆頭在減少動態時完全不出現。 */
+  .starlit-education::after {
+    display: none;
+  }
+}
+
+.starlit-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 24px;
+}
+
+.starlit-skills span {
+  font: 13px/1.5 Arial, sans-serif;
+  border: 1px solid var(--starlit-line);
+  padding: 8px 13px;
+  border-radius: 999px;
+  color: var(--starlit-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   Ticket 39 — the star-fire palette tokens. The v3 ember cards below read
+   their per-card tint from `--ember-tint*` set inline by the shell (one hue
+   per project, drawn from this pool in components/starlit-shell.tsx); these
+   tokens stay as the single place the pool's base colours are named.
+   --------------------------------------------------------------------------- */
+
+/* The star-fire palette. Gold and purple are the site tokens; the blue is the
+   opening sky's star tint (vec3(.53,.58,.83)) lifted; the rest are the bright
+   star colours the user named. One place to tune. */
+.starlit {
+  --ember-gold: #e0c49d;
+  --ember-purple: #c0a7e5;
+  --ember-blue: #8fb8ff;
+  --ember-pink: #f3a4d8;
+  --ember-indigo: #7f7cf5;
+  --ember-yellow: #ffe28c;
+  --ember-white: #fff8ee;
+}
+
+/* ---------------------------------------------------------------------------
+   Ticket 39 v3 / Ticket 41 v4 — ember cards: the closed face is a FILM over the
+   card and the fire burns a hole through it. The summary and the links are
+   underneath the whole time and never move.
+
+   v3 did the hole with `mask-image: radial-gradient(…)` driven by a registered
+   `--hole` percentage and drew the fire as two CSS rings warped by an SVG
+   turbulence filter. The user's verdict was that it still「感覺就像一個圈往外
+   而已」, so Ticket 41 took all of it out: no `--hole`, no `.starlit-ember-fire`,
+   no `starlit-spark*`, no `#starlit-flame`. What is left here is the film, the
+   card and the turning ring; the hole is now a per-frame SVG clip path and the
+   fire is a canvas, both owned by StarlitEmberFire in components/starlit-shell.tsx.
+
+   Once the film is gone, the card's edge is a slowly turning ring of the same
+   tint in four shades — the old homepage's conic-gradient / @property angle
+   technique, one hue per card instead of a rainbow. Ticket 41.9 leaves that ring
+   alone; only its delay moved, to follow the slower 3.0s burn.
+   --------------------------------------------------------------------------- */
+
+@property --ember-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Ticket 47 — the gap and the top margin are now LOAD-BEARING, not taste.
+   燒穿期間每張卡的火會往外舔 EDGE_FLAME_MARGIN_PX（20px，lib/ember-fire-gl.ts），
+   所以每一條縫都必須比那個數字寬，鄰卡的字才不會被火蓋到：
+     · 桌機欄距 30px。票面只要求 ≥ 24px，Review 量出兩件事把它推到 30：
+       ① 真正的不變量是「火伸出去的 20px ＋ 鄰卡流光框往外凸的 4px」＝ 24，
+          24px 的欄距只是剛好相等，淨距 0px；
+       ② 24px 下三張卡同時燒的時候三條帶子在縫裡幾乎相接，整排讀起來變成一條
+          條紋色塊，而不是三張各自在燒的卡。30px 留 6px 淨距；
+     · 390 單欄的上下距 28px ＞ 20px（票面：≥ 28px）；
+     · `margin-top` 30px ＞ h1 自己的 24px 下緣 margin（相鄰 margin 取大者），
+       所以第一列卡片上方的火離作品頁 h1 還有 10px。
+   格子本身沒有 `overflow`，維持 visible —— 火就是靠這個跑出格子的。 */
+.starlit-ember-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* Every card the same height: the open face stays in flow (invisible when
+   out) so each row is as tall as its longest summary at the current width. */
+.starlit-ember {
+  position: relative;
+  display: flex;
+  min-height: 260px;
+  min-width: 0;
+  border-radius: 20px;
+  /* 保留卡片本身的堆疊脈絡。 */
+  isolation: isolate;
+  /* Ticket 47 — this used to be `inset(-3px round 21px)`: the card clipped
+     everything to its own rounded edge plus the 3px the old turning ring needed.
+     現在的值＝火的 canvas 盒子本身：卡片往外 20px（EDGE_FLAME_MARGIN_PX）、圓角
+     38px（＝膜的 18px ＋ 20），和元件寫在 canvas 上的 inline `border-radius` 一樣。
+     Ticket 48 的流光框是 3.5px（`::before` 的 inset: -2.5px）、流動框遠在這條線之內；外凸火舌已撤回。 */
+  clip-path: inset(-20px round 38px);
+}
+
+/* 共用揭露輪廓首次碰到周界時顯現，按已接觸周長增粗至 3.5px。 */
+.starlit-ember::before {
+  content: '';
+  position: absolute;
+  /* Ticket 48 — 5px → 3.5px（使用者 2026-09-19：「開啟框總厚度 3.5px，保持各卡
+     配色」）。47 的 5px 是上一步，配色與轉動一個字都沒動。
+     那 3.5px 是兩段加起來的，這是 Ticket 44-B 留下的結構：這一層往外凸 2.5px，
+     卡片的內容（膜 `inset: 1px`、開啟面 `margin: 1px`）又往內縮 1px，中間露出來
+     的就是框。2.5 ＋ 1 = 3.5，而 `EMBER_RING_PX` / `EMBER_RING_OUTSET_PX`
+     （lib/ember-fire-gl.ts）就是這兩個數字；components/starlit-shell.test.ts 讀這
+     份 CSS 把兩邊對起來，所以單獨改任何一邊都是 RED。
+     圓角跟著走：卡片是 20px，這一層往外 2.5px，所以 22.5px 才是同心的——留在 20px
+     的話四個角會比四條邊薄一截。 */
+  inset: -2.5px;
+  border-radius: 22.5px;
+  /* 同一作品色系的暗／亮／暗／亮；對邊同亮度，沿用 7 秒順時針流動。 */
+  background: conic-gradient(
+    from var(--ember-angle),
+    var(--ember-tint-deep) 0deg 30deg,
+    var(--ember-tint-light) 60deg 120deg,
+    var(--ember-tint-deep) 150deg 210deg,
+    var(--ember-tint-light) 240deg 300deg,
+    var(--ember-tint-deep) 330deg 360deg
+  );
+  opacity: 0;
+  /* 顯現與粗度由燒穿輪廓處理；收回不保留淡出殘影。 */
+  transition: none;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.starlit-ember[data-lit='true']::before {
+  opacity: 1;
+  animation: starlit-ember-orbit 7s linear infinite;
+}
+
+/* 與膜共用輪廓／周界接觸比例；不另跑定時 grow 動畫。 */
+.starlit-ember[data-lit='true']:where([data-burning='true'])::before {
+  opacity: 0;
+  inset: calc(0.5px - 3px * var(--ember-ring-coverage, 0));
+  border-radius: calc(19.5px + 3px * var(--ember-ring-coverage, 0));
+}
+
+.starlit-ember[data-lit='true']:where([data-burning='true'][data-ring='true'])::before {
+  opacity: 1;
+}
+
+.starlit-ember-grid[data-ember-paused='true'] .starlit-ember::before {
+  animation-play-state: paused;
+}
+
+.starlit-ember[data-closing='true']::before {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+@keyframes starlit-ember-orbit {
+  to { --ember-angle: 360deg; }
+}
+
+/* ---------------------------------------------------------------------------
+   Ticket 44-B — 卡片的鼠標邊框聚光（毛哥的 `::after`）。
+
+   分層的決定（票面要求說明理由）：
+   - `::before` 已經是燒開後那圈會轉的流光框，不能動，所以鼠標聚光用 `::after`。
+     兩個都 z-index 0，`::after` 在偽元素順序上比 `::before` 晚畫，所以靜止時
+     聚光在流光框之上；而兩者永遠不會同時亮（見下面 data-lit 那條）。
+   - 為什麼看起來只有 1px 的邊：聚光層蓋滿整張卡，但卡片的**內容**往內縮 1px
+     —— 開啟面 `margin: 1px`、膜（button）`inset: 1px` —— 所以只有那一圈 1px 的
+     邊會露出聚光的顏色。這就是毛哥 `.card-content { inset: 1px }` 的那一招。
+     火的 canvas 保持 `inset: 0`（蓋滿整張卡，含那 1px 邊），Ticket 45 在動火層，
+     這裡一個字都沒碰。
+   - 卡片內部那層淡聚光在膜之上、canvas 之下，`::before`／`::after` 都被佔用了，
+     所以它是一個真的元素 `.starlit-ember-spot`（z-index 3：canvas 5 ＞ spot 3
+     ＞ 膜 2 ＞ 開啟面 1 ＞ 聚光邊框／流光框 0）。
+
+   600px 圓 = lib/cursor-glow.ts 的 CARD_GLOW_PX；`--mouse-x/--mouse-y` 由格子上
+   那一個 pointermove 對**每一張卡**各寫一次（所以鼠標在中間那張時，左右兩張靠近
+   它的那條邊也會亮）。
+   --------------------------------------------------------------------------- */
+.starlit-ember::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    color-mix(in srgb, var(--ember-tint) 40%, transparent),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 500ms ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 毛哥的 `#cards:hover > .card::after`：鼠標在整個格子區時三張卡的邊都亮。 */
+@media (hover: hover) {
+  .starlit-ember-grid:hover .starlit-ember::after {
+    opacity: 1;
+  }
+}
+
+/* 與流光框並存的規則：卡片一被點燃（含正在燒、正在熄）就換流光框當邊，鼠標聚光
+   邊框淡出。前兩條要寫成含 `.starlit-ember-grid:hover` 的形態，否則權重輸給上面
+   那條（class+pseudo-class+class vs class+attr），滑鼠停在格子上時就關不掉。 */
+.starlit-ember-grid:hover .starlit-ember[data-lit='true']::after,
+.starlit-ember-grid:hover .starlit-ember[data-closing='true']::after,
+.starlit-ember-grid:hover .starlit-ember[data-burning='true']::after,
+.starlit-ember[data-lit='true']::after,
+.starlit-ember[data-closing='true']::after,
+.starlit-ember[data-burning='true']::after {
+  opacity: 0;
+}
+
+/* 毛哥的另一個偽元素：蓋在內容之上、只有鼠標所在那張卡才亮的一層淡聚光（6%）。
+   800px 圓 = CARD_SPOT_PX。 */
+.starlit-ember-spot {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 18px;
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    color-mix(in srgb, var(--ember-tint-light) 6%, transparent),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .starlit-ember:hover .starlit-ember-spot {
+    opacity: 1;
+  }
+}
+
+/* Underneath: the open face. In flow (gives the row its height), invisible
+   until the film starts to burn. Clicks on its empty areas put the card out;
+   its links keep their own clicks.
+   Ticket 44-B: `margin: 1px` 把它往內縮一圈，讓底下的鼠標聚光露出 1px 的邊。 */
+.starlit-ember-open {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  margin: 1px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 26px 24px 22px;
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--ember-tint) 10%, transparent), transparent 60%),
+    var(--starlit-surface);
+  cursor: pointer;
+}
+
+.starlit-ember-open[data-open='false'] {
+  visibility: hidden;
+}
+
+/* Ticket 40.1 — the header row: the same lucide icon, small, beside the name.
+   Its own flex line, so the icon and the name stay together at the left and the
+   row keeps its height whatever the card's tallest summary does to the rest. */
+.starlit-ember-head {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Ticket 46 — 置中 */
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.starlit-ember-head-icon {
+  flex-shrink: 0;
+  color: var(--ember-tint);
+}
+
+.starlit-ember-head-name {
+  /* Ticket 48 — 17px → 16px（使用者 2026-09-19：「卡片中央標題／簡介稍縮小，
+     減少換行」）。Ticket 46 把它從 16 調到 17 是上一步，置中不動。 */
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--starlit-text);
+  overflow-wrap: anywhere;
+}
+
+.starlit-ember-open p {
+  margin: 0;
+  /* The summary takes the slack so the header stays at the top and the links
+     stay at the bottom however tall the row's tallest card makes this one. */
+  flex: 1;
+  font-size: 14px; /* Ticket 48 — 15px → 14px，同一個要求的另一半 */
+  text-align: center; /* Ticket 46 — 置中 */
+  /* 作品文案自己帶換行（lib/projects.ts），照著排；太長仍會自動折行。 */
+  white-space: pre-line;
+  line-height: 1.65;
+  color: var(--starlit-text);
+  overflow-wrap: anywhere;
+}
+
+/* Ticket 40.2 — one link sits at the far left, two sit one at each end. A
+   single flex child under space-between is placed at the start, which is what
+   the ticket asks for（只有一個才放左邊）, so no one-child special case. */
+.starlit-ember-open .starlit-work-links {
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.starlit-ember-open .starlit-work-links a {
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  gap: 0;
+  border: 1px solid color-mix(in srgb, var(--ember-tint) 40%, transparent);
+  border-radius: 12px;
+  background: #ffffff08;
+  color: var(--ember-tint);
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.starlit-ember-open .starlit-work-links a:hover,
+.starlit-ember-open .starlit-work-links a:focus-visible {
+  background: color-mix(in srgb, var(--ember-tint) 14%, transparent);
+  border-color: var(--ember-tint);
+  color: var(--ember-tint-hot);
+}
+
+.starlit-ember-open .starlit-work-links a svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* On top: the film. A whole-card button holding the big icon and the name —
+   real DOM, always: Ticket 41 cuts its hole from outside, with an SVG clip path
+   whose `d` the canvas layer rewrites every frame. */
+.starlit-work.starlit-ember-face {
+  position: absolute;
+  /* Ticket 44-B: 1px, not 0 — 那一圈露出來的就是底下 `.starlit-ember::after` 的
+     鼠標聚光（毛哥的「邊框跟著鼠標亮」）。火的 canvas 仍然是 inset: 0，蓋滿整張
+     卡，所以燒的範圍沒有變。 */
+  inset: 1px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid var(--starlit-line);
+  border-radius: 18px;
+  /* The film carries a breath of the card's tint so that, as it burns, what
+     remains reads as film and what is gone reads as the darker face beneath
+     — same-coloured layers made the burn invisible. */
+  background:
+    radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--ember-tint) 16%, transparent), transparent 70%),
+    color-mix(in srgb, var(--starlit-surface) 92%, var(--ember-tint) 8%);
+  color: var(--starlit-text);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+/* Ticket 41.2 — the hole. `--ember-clip` is `url(#starlit-ember-clip-<id>)`,
+   written on the card by the shell; the <clipPath> it names is rendered by the
+   same component as the canvas, so it exists exactly while data-burning is on
+   and the reference is never dangling. */
+.starlit-ember[data-burning='true'] .starlit-work.starlit-ember-face {
+  -webkit-clip-path: var(--ember-clip);
+  clip-path: var(--ember-clip);
+}
+
+/* Burned through and the fire gone: there is no film left to show. Not a fade —
+   the burn's last frame already clipped it away to nothing; this only keeps it
+   away once the clip path is unmounted along with the canvas. */
+.starlit-ember[data-lit='true']:not([data-burning='true']) .starlit-work.starlit-ember-face {
+  opacity: 0;
+}
+
+/* Review F7 — the `@supports` fallback for a browser that takes neither
+   spelling of `clip-path: url(#…)` lives further down, next to the
+   reduced-motion block it borrows its behaviour from. */
+
+.starlit-ember:hover .starlit-ember-face,
+.starlit-ember-face:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--ember-tint) 45%, transparent);
+}
+
+/* Burned away: the film no longer takes the pointer (so the links underneath
+   do), stops lifting, and its border goes quiet under the turning ring. */
+.starlit-ember[data-lit='true'] .starlit-ember-face {
+  pointer-events: none;
+  transform: none;
+  border-color: transparent;
+}
+
+.starlit-ember-icon {
+  color: var(--ember-tint);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--ember-tint) 45%, transparent));
+  transition: color 180ms ease, filter 180ms ease;
+}
+
+.starlit-ember:hover .starlit-ember-icon,
+.starlit-ember-face:focus-visible .starlit-ember-icon {
+  color: var(--ember-tint-hot);
+  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--ember-tint) 70%, transparent));
+}
+
+.starlit-ember-name {
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+/* Ticket 40.3 — the film's corner「01 / 類別」label is gone, and so is the rule
+   that placed it. */
+
+/* Ticket 41.1 — the fire itself. One canvas per burning card, absolutely
+   covering it, above the film, and never present at rest: the component mounts
+   it on data-burning and unmounts it after. Everything it paints — the char
+   ring, the ember band and its brighter dots, the DOOM-fire tongues, the sparks
+   — comes from lib/ember-fire.ts in the card's own tint, so there is no colour
+   and no geometry in this stylesheet to drift out of step with it.
+   v3's two CSS fire rings, its twelve CSS sparks and their keyframes are gone,
+   along with the SVG turbulence filter they depended on. */
+.starlit-ember-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  border-radius: 18px;
+}
+
+/* Ticket 45 — 方案 C：the same canvas, drawn by a fragment shader instead of by
+   the CPU. The class is added by the component only once a WebGL1 context has
+   actually been handed over (and `data-fire` says `gl` beside it), so it names
+   what is on screen and not what was hoped for; a browser without WebGL1, a
+   fourth burning card past the three-context budget, or a lost context all keep
+   `.starlit-ember-canvas` alone with `data-fire="2d"` and the v4 fire.
+
+   `mix-blend-mode: screen` is deliberately NOT set: the shader already writes
+   premultiplied alpha and the context blends with `ONE, ONE_MINUS_SRC_ALPHA`,
+   so the白熱 core adds its light inside the canvas. A blend mode here would add
+   it a second time, against the page, and the card would glow through its own
+   border. Everything else — the box, the z-order above the film, the pointer —
+   is inherited from the rule above, on purpose: the two fires must occupy the
+   very same layer or the fallback would move. */
+.starlit-ember-gl {
+  /* Nothing is upscaled any more; there is no 2px lattice left to smooth. */
+  image-rendering: auto;
+}
+
+/* The clip path's carrier. Zero-sized, out of the card's flex flow, painting
+   nothing: only the <clipPath> inside it matters. */
+.starlit-ember-clip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Screen-reader-only hint on the film button. */
+.starlit-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Review F7 — `clip-path: url(#…)` on an HTML element is the one thing the whole
+   burn rests on, and WebKit has carried it as "partial" for years (Safari 13 and
+   earlier only ever took `-webkit-clip-path`, which is why the rule above writes
+   both). This covers a browser that takes neither: there is no hole to burn, so
+   the card does what it does under reduced-motion — the film is simply gone the
+   moment it is lit, and the fire is never drawn (the component makes the same
+   check with `CSS.supports` and refuses to mount).
+   It sits HERE, after `.starlit-ember-canvas`'s own rule, on purpose: put first,
+   its `display: none` is the first thing a rule-by-selector reader finds.
+   NOT VERIFIED ON SAFARI — no WebKit available in this environment. */
+@supports not ((clip-path: url('#x')) or (-webkit-clip-path: url('#x'))) {
+  .starlit-ember[data-lit='true']::before {
+    opacity: 1;
+    inset: -2.5px;
+    border-radius: 22.5px;
+  }
+  .starlit-ember-canvas {
+    display: none;
+  }
+  .starlit-ember[data-lit='true'] .starlit-work.starlit-ember-face {
+    opacity: 0;
+  }
+}
+
+/* Ticket 41.8 —「prefers-reduced-motion：不掛 canvas，直接切換」. The component
+   refuses to mount the canvas or the clip path here, so the film must be taken
+   away by this stylesheet instead: the moment the card is lit it is simply not
+   there, and nothing is ever clipped. */
+@media (prefers-reduced-motion: reduce) {
+  .starlit-ember[data-lit='true'],
+  .starlit-ember[data-closing='true'] {
+    animation: none;
+  }
+  .starlit-ember-canvas {
+    display: none;
+  }
+  .starlit-ember[data-burning='true'] .starlit-work.starlit-ember-face {
+    clip-path: none;
+  }
+  .starlit-ember[data-lit='true'] .starlit-work.starlit-ember-face {
+    opacity: 0;
+  }
+  .starlit-ember::before {
+    transition: none;
+  }
+  /* Ticket 44-B：一樣只去掉過渡，鼠標聚光本身留著。 */
+  .starlit-ember::after,
+  .starlit-ember-spot {
+    transition: none;
+  }
+  .starlit-ember[data-lit='true']::before {
+    /* 原有減少動態契約跳過膜，直接顯示完整框。 */
+    inset: -2.5px;
+    border-radius: 22.5px;
+    opacity: 1;
+    animation: none;
+  }
+  .starlit-work.starlit-ember-face,
+  .starlit-ember-icon {
+    transition: none;
+  }
+  .starlit-ember:hover .starlit-ember-face,
+  .starlit-ember-face:focus-visible {
+    transform: none;
+  }
+}
+
+@media (max-width: 850px) {
+  .starlit-ember-grid {
+    grid-template-columns: minmax(0, 1fr);
+    /* Ticket 47 — 單欄時這個 gap 全部變成上下距，而火往上／往下各舔 20px，所以
+       票面要求 ≥ 28px：28 ＞ 20，上一張卡的火碰不到下一張卡的框。 */
+    gap: 28px;
+  }
+  .starlit-ember {
+    min-height: 240px;
+  }
+}
+
+.starlit-work-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  color: var(--starlit-gold);
+  font-size: 15px;
+}
+
+/* Ticket 40.4 — `.starlit-text-link` went with the bottom GitHub link. */
+.starlit-work-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--starlit-gold);
+}
+
+.starlit-contact-mail {
+  margin-top: 40px;
+  padding: 32px 18px;
+  border: 1px solid var(--starlit-line);
+  border-radius: 20px;
+  background: radial-gradient(ellipse at 30% 130%, #9168cc23, transparent 65%);
+}
+
+.starlit-contact-mail p {
+  font: 11px/1.6 Arial, sans-serif;
+  letter-spacing: 2.8px;
+  color: var(--starlit-gold);
+  margin: 0 0 14px;
+}
+
+.starlit-contact-mail a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--starlit-gold);
+  font-size: clamp(15px, 1.6vw, 23px);
+  overflow-wrap: anywhere;
+}
+
+/* Social entries */
+.starlit-social-list {
+  display: grid;
+  gap: 0;
+  margin-top: 18px;
+}
+
+.starlit-social-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 4px;
+  border-bottom: 1px solid var(--starlit-line);
+  color: var(--starlit-text);
+  transition: color 150ms, background 150ms;
+}
+
+.starlit-social-line > span {
+  flex: 1;
+  min-width: 0;
+}
+
+.starlit-social-line small {
+  display: block;
+  color: var(--starlit-muted);
+  font-size: 13px;
+}
+
+.starlit-social-line svg {
+  flex: none;
+  color: var(--starlit-gold);
+}
+
+.starlit-social-line:hover,
+.starlit-social-line:focus-visible {
+  color: var(--starlit-gold);
+  background: #ffffff0a;
+}
+
+.starlit-social-line:active {
+  background: #ffffff16;
+}
+
+.starlit-social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.starlit-social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--starlit-line);
+  border-radius: 999px;
+  background: #ffffff0a;
+  color: var(--starlit-muted);
+  transition: color 150ms, border-color 150ms, background 150ms;
+}
+
+.starlit-social-icon:hover,
+.starlit-social-icon:focus-visible {
+  color: var(--starlit-gold);
+  border-color: var(--starlit-gold);
+}
+
+.starlit-social-icon:active {
+  background: #e0c49d26;
+}
+
+/* Opening state: no chapter buttons, copy slot only. */
+.starlit-intro {
+  padding: 48px 0;
+  max-width: 34em;
+}
+
+.starlit-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 60px;
+  padding: 24px 0 40px;
+  border-top: 1px solid var(--starlit-line);
+  color: var(--starlit-muted);
+  font: 12px/1.7 Arial, sans-serif;
+}
+
+@media (max-width: 850px) {
+  .starlit-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Ticket 28 v3: 這條一直只是內容頁的舞台高度。v1 把開場舞台從絕對定位的滿版層
+     改成 grid 欄之後，它會連開場一起套用，390×844 的開場星空只剩 390×506（
+     Reviewer B 阻擋項，`opening-stage-probe.cjs` 實測）。限定在內容頁。 */
+  .starlit[data-intro-complete='true'] .starlit-stage {
+    height: 60svh;
+    max-height: 560px;
+  }
+  .starlit-content {
+    height: auto;
+    overflow: visible;
+    padding: 0 20px;
+  }
+  /* Ticket 44-A：窄螢幕的欄距是固定 20px，不是上面那條 clamp。host 的負 margin
+     必須跟著改，多一個 px 就會讓整頁橫向溢出（這裡 overflow 是 visible，溢出會
+     跑到視窗上）。 */
+  .starlit-glow-host {
+    --starlit-glow-pad: 20px;
+  }
+  .starlit-header {
+    height: auto;
+    min-height: 72px;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 16px;
+  }
+  /* Ticket 28: brand and Language keep the first row; the chapters wrap under
+     them rather than squeezing Language out or overflowing sideways. */
+  .starlit-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+  .starlit-brand-name {
+    font-size: 16px;
+  }
+  .starlit-tab {
+    padding: 9px 13px;
+    font-size: 14px;
+  }
+  /* Ticket 29-A：窄螢幕技能收成單欄，長項目照舊折行，不橫向溢出。
+     30-A.4 的三軌與「13 項再分兩欄」都只是桌面的事。 */
+  .starlit-skill-columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+  .starlit-skill-column[data-wide='true'] {
+    grid-column: auto;
+  }
+  .starlit-skill-column[data-wide='true'] .starlit-plain-list {
+    column-count: 1;
+  }
+  /* Ticket 31.6 窄螢幕降級：交錯收掉，脊線移到左側，三筆全部靠右排成一欄。
+     390 寬的內容盒只有 350px，交錯會讓每張卡只剩 150px 出頭，最長的校名會被
+     擠成四、五行——票面明說不得擠壓校名。
+
+     脊線與它的微斜都留著（使用者兩次指定「保留微斜」），**只有連接線收起來**。
+     理由是幾何而不是美感：桌面那三個 `--edu-off` 成立的前提是三列等高，
+     而 390 寬時中英文的校名會各自折成兩行或三行，列高不再一致，連接線的
+     起點就會離開脊線、浮在半空——那正是這一票要避免的事。脊線本身是
+     `top: 0; bottom: 0`，不管每列多高都仍然等於區塊高度，所以它可以留下。
+     單欄下每一筆的歸屬由「都在脊線右邊」讀出來，不需要連接線。 */
+  .starlit-education {
+    /* 線寬 2px，中心因此落在 19px；卡片從 48px 開始，中間留 29px。 */
+    --edu-spine: 20px;
+    /* 連接線收起來之後，列高就只管留白、不再管幾何，所以不必再鎖成最長那筆
+       的行數 —— 回到「兩行的高度 + 32px 列距」，390 寬才不會三行字配上
+       一大片空。pitch 仍然是 32 的倍數（一行 96、兩行 128）。 */
+    --edu-row: 64px;
+    --edu-gap: 32px;
+  }
+  .starlit-education li:nth-child(odd),
+  .starlit-education li:nth-child(even) {
+    padding-left: var(--edu-clear);
+    padding-right: 0;
+    text-align: left;
+  }
+  .starlit-education li::after {
+    display: none;
+  }
+  /* Ticket 30-A.6：出血取消後重新判斷。照片仍然自己一列（390 寬的內容盒只有
+     350px，照片就算縮到 110px 寬也會把「皇家奶茶大師」擠成兩行——票面明說
+     標題不得被擠壓），但這一輪改成**照片在標題下方**：右緣一樣停在內容欄右緣，
+     不再出血，於是 DOM 順序與視覺順序終於一致，不必再用 grid-row 對調。 */
+  .starlit-about-head {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 22px;
+  }
+  .starlit-about-portrait img {
+    width: min(80vw, 330px);
+  }
+  .starlit-about-name-sub {
+    font-size: 15px;
+    letter-spacing: 0.16em;
+  }
+  .starlit-award {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 0 16px;
+  }
+}
+
+/* Narrow phones: keep the brand on one line beside the controls. */
+@media (max-width: 430px) {
+  .starlit-brand-name {
+    font-size: 14px;
+    letter-spacing: 0.02em;
+  }
+  .starlit-brand-sub {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 380px) {
+  /* 開場的 header 是 `height: auto`，英文品牌在 360px 會折成兩行、把 header 撐到
+     95px，正好壓到人物上方那段字的起點。縮一階字距讓它維持一行，天空就不必
+     再讓位（2026-09-15，360×640 實測）。 */
+  .starlit[data-intro-complete='false'] .starlit-brand-name {
+    font-size: 13px;
+    letter-spacing: 0;
+  }
+  .starlit-nav {
+    gap: 8px;
+  }
+  .starlit-tab {
+    padding: 8px 11px;
+    font-size: 13px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Opening: one full-viewport scene with the words beside the figure.
+
+   Project exception to the shared frame (recorded in DESIGN.md): for the
+   opening only, the shell drops its two-column split, its divider and its tall
+   header band, and the 3D canvas fills the whole viewport. The chapters below
+   are untouched and return to the normal frame.
+   ------------------------------------------------------------------------ */
+.starlit[data-intro-complete='false'] {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* Brand and language float over the scene instead of sitting on a band. */
+.starlit[data-intro-complete='false'] .starlit-header {
+  position: absolute;
+  inset: 0 0 auto;
+  height: auto;
+  min-height: 0;
+  padding: 12px clamp(14px, 3vw, 40px);
+  border-bottom: 0;
+  z-index: 5;
+}
+
+.starlit[data-intro-complete='false'] .starlit-brand-name {
+  font-size: 15px;
+  color: #e0c49dcc;
+}
+
+.starlit[data-intro-complete='false'] .starlit-brand-sub {
+  font-size: 9px;
+  letter-spacing: 2.4px;
+  color: #ffffff66;
+}
+
+/* Ticket 28: the opening stage is the first grid column at full width, not an
+   absolutely placed layer. Same picture as before — the header is out of flow,
+   so the column is the whole viewport — but now the track is a percentage that
+   can be interpolated into the chapter layout's 1/3. */
+.starlit[data-intro-complete='false'] .starlit-main {
+  grid-template-columns: 100% 0%;
+  padding: 0;
+}
+
+.starlit[data-intro-complete='false'] .starlit-content,
+.starlit[data-intro-complete='false'] .starlit-intro {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.starlit[data-intro-complete='false'] .starlit-stage {
+  background: #050912;
+}
+
+/* The reading surface: one native scroller that carries no words at all, and a
+   text stage fixed over it. No wheel handler and no body lock — the browser
+   scrolls, and the scroll position says which beat is being read; how much of
+   that beat is painted is a matter of time, not of scroll position.
+
+   Still no scroll snapping, for a measured reason rather than the old one. One
+   screen of scroll per beat meant a normal mouse needed seven to ten notches to
+   change anything at all (reading-layout-20260916/progress.md §1.1), so the
+   obvious cure looked like `scroll-snap-type: y mandatory`. It is worse: a
+   single wheel notch is a fraction of the screen between two snap points, so
+   the scroller pulls it straight back and the reader cannot leave the beat it
+   is on at all — forty notches, still on beat 1 (§3.1 of the same file). The
+   wheel is handled in the reader instead, one gesture to a beat, and touch
+   alongside it — the scroller stopped being natively scrollable at all (see
+   `.starlit-reader` below), so every way through the opening is now a handler
+   of the reader's own and meets the same reading gate. */
+.starlit-reader-frame {
+  position: absolute;
+  inset: 0;
+}
+
+/* `overflow: hidden`, not `auto` — and that is the whole reading gate.
+   `scrollTop` is still the reader's position store and is still set from
+   script; what goes away is the browser's own scrolling of it, which was the
+   one input path the gate could never win. When the WebGL scene blocks the
+   main thread, Chrome stops waiting for a blocking `wheel` listener and scrolls
+   on the compositor instead: ten notches during the reveal were every one of
+   them `preventDefault`ed and the reader still moved (to 1687, not even a
+   beat's resting place — `work/starlit-implementation/approved-09-18/
+   ticket-09/probe-burst.json`). With nothing natively scrollable there is
+   nothing for the compositor to move, so every way in — wheel, keys, the two
+   hint buttons, touch — goes through `goTo` and meets the same gate. */
+.starlit-reader {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.starlit-reader::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Scroll length only. Nothing readable is inside the scroller, which is what
+   keeps the copy from riding up and down with it. One length per beat, and the
+   start of each length is that beat's resting place, so `beatScrollTop(i)` is
+   `i * clientHeight`. `100%`, not `100svh`: the scroller's own height is what
+   `clientHeight` reports, and the reader measures every beat in it, so tying
+   the lengths to it keeps the two from ever disagreeing. */
+.starlit-scroll-step {
+  height: 100%;
+}
+
+/* The words live here: one stage over the scene, all six beats in the same
+   place on it, only the one being read painted. Scrolling passes straight
+   through to the scroller underneath; the entries and links take their own
+   clicks back. */
+.starlit-text-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.starlit-text-stage a,
+.starlit-text-stage button {
+  pointer-events: auto;
+}
+
+.starlit-beat {
+  position: absolute;
+  inset: 0;
+}
+
+/* Fixed in the window, never sticky inside a scrolling beat: the words hold
+   their place beside the figure and only their paint advances. */
+.starlit-copy {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  /* `minmax(0, 1fr)`, never an `auto` track: an auto column is sized to the
+     max-content of the words, and one 46px keyword on the introduction beat
+     made that track wider than the window, so the end-aligned copy ran off the
+     right edge and the line was cut. A bounded track makes the words wrap. */
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+  align-content: center;
+  padding: 92px clamp(18px, 5.5vw, 92px) 104px;
+  opacity: 0;
+  /* Hidden beats leave the tab order as well as the picture, so focus never
+     lands on words the visitor cannot see. */
+  visibility: hidden;
+  transition: opacity 380ms ease, visibility 0s linear 380ms;
+}
+
+/* Only once the camera has arrived, and only for the beat being read. */
+.starlit-beat[data-visible='true'] .starlit-copy {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 380ms ease, visibility 0s;
+}
+
+/* 正面自介：右下角的星空空位。原本垂直置中靠右，字壓在頭髮輪廓上（2026-09-15
+   使用者圖 3），所以往下移開人物最寬的那一段，右緣照舊貼著 padding 邊界。
+   右下落點只在「寬視窗」成立：`introCamera` 的 `fit = max(1, 0.8 / aspect)`
+   會在高瘦視窗放大 fov，人物寬度改成跟著視窗寬走（約佔 0.12W–0.88W），兩側
+   根本沒有天空。所以 aspect < 6/5 的視窗（含直式平板與手機）一律改讀人物
+   上方的星空，規則在下面的區塊。 */
+.starlit-copy[data-place='right-bottom'] {
+  justify-items: end;
+}
+
+@media (min-width: 800px) and (min-aspect-ratio: 1/1) {
+  .starlit-copy[data-place='right-bottom'] {
+    align-content: end;
+    /* 內容比容器高的時候不要往上溢出。英文自介四句在寬視窗各折成兩行，整塊比
+       `end` 能容納的高度還高，於是溢出到 padding 之上、首句關鍵字壓進右上語言
+       鈕（實測 1707×735 英文：文案上緣 y1，語言鈕 y17–58 / x1603–1667，文案右緣
+       1673）。`safe end` 在放不下時退回對齊起點，上緣就回到 padding 的 92px。
+       前一行的 `end` 是給不支援 `safe` 的瀏覽器的回退，不能刪，否則整條宣告失效
+       會掉回 `.starlit-copy` 的置中，字又回到壓頭髮的舊位置。 */
+    align-content: safe end;
+    /* 不貼齊視窗底：留下肩線與進度提示那一行的空間。 */
+    padding-bottom: 152px;
+    /* 2026-09-16 字級放大之後，靠右那一欄變寬，左緣壓回頭髮輪廓上（實測
+       1280×720 左緣 804、髮緣約 830）。整塊往右推到接近視窗邊，寬度不變、
+       字級不縮，左緣就退出輪廓。 */
+    padding-right: clamp(16px, 2vw, 40px);
+  }
+}
+
+/* The brand opening and the two milk-tea beats: only sky behind them, so the
+   words sit in the middle of the window. */
+.starlit-copy[data-place='center'] {
+  justify-items: center;
+  text-align: center;
+}
+
+/* The closing beat reads across the whole window: the brand and the ways in on
+   one side, the four-line poem on the other. */
+.starlit-copy[data-place='full'] {
+  justify-items: stretch;
+}
+
+.starlit-copy[data-place='center'] .starlit-copy-inner {
+  max-width: min(40rem, 92vw);
+}
+
+.starlit-copy[data-place='full'] .starlit-copy-inner {
+  max-width: min(74rem, 94vw);
+  width: 100%;
+  margin-inline: auto;
+}
+
+.starlit-copy-inner {
+  position: relative;
+  max-width: min(31rem, 88vw);
+  /* The whole contrast budget, carried by the glyphs themselves: no veil, no
+     card and no frame behind the words, and a token that has not been revealed
+     yet casts no shadow either, so nothing leaks ahead of the reveal. The halo
+     hugs the glyph rather than spreading — a wide soft cloud reads as the panel
+     this is meant to be rid of. */
+  text-shadow: 0 1px 2px #050912, 0 0 8px #050912, 0 0 18px #050912e6;
+}
+
+.starlit-beat-head {
+  margin: 0 0 16px;
+  font-size: clamp(30px, 3.7vw, 52px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #f7f3ed;
+}
+
+/* Keep a wrapped invitation balanced so its final punctuation is not alone. */
+.starlit-beat[data-beat='3'] .starlit-beat-head {
+  text-wrap: balance;
+}
+
+.starlit-beat-line {
+  margin: 0;
+  font-size: clamp(17px, 1.5vw, 24px);
+  line-height: 2.05;
+  color: #ccd3e6;
+}
+
+/* The prelude is the only beat read as a poem. */
+.starlit-beat[data-beat='0'] .starlit-beat-line {
+  font-size: clamp(17px, 1.55vw, 22px);
+  line-height: 2.15;
+  color: #e6e6f2;
+}
+
+/* 開場品牌。3D 正投影字由 scene 負責；接上之後 data-in-3d 只讓這個標題不可
+   見，仍留在文件裡供朗讀，所以畫面上永遠只有一份品牌字。 */
+.starlit-open-brand {
+  margin: 0;
+  font-size: clamp(34px, 7.4vw, 108px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  /* 長品牌字在窄螢幕換行而不是被裁掉。 */
+  overflow-wrap: break-word;
+  color: #f8f4ec;
+}
+
+.starlit-open-brand[data-in-3d='true'] {
+  /* Hidden from sight, kept for the accessibility tree. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* 正面介紹：四個關鍵字加大加粗，其餘字維持引句大小，層次一眼看得出來。 */
+.starlit-beat[data-beat='1'] .starlit-beat-line {
+  margin: 0 0 12px;
+  font-size: clamp(18px, 1.6vw, 26px);
+  line-height: 1.8;
+  color: #b9c3db;
+}
+
+/* 2026-09-16（Ticket 26）自介分成兩組：上面是問候與名字，下面是三句自介。
+   問候比關鍵字再大一級，組距由下面那一行的 margin 給，文案裡沒有多插一段空白，
+   所以朗讀仍是連續的幾行。 */
+.starlit-greeting {
+  margin: 0 0 2px;
+  font-weight: 900;
+  font-size: clamp(34px, 4.2vw, 64px);
+  line-height: 1.32;
+  letter-spacing: 0.02em;
+  color: #f8f4ec;
+}
+
+.starlit-beat[data-beat='1'] .starlit-beat-line[data-group='start'] {
+  margin-top: clamp(16px, 1.9vw, 32px);
+}
+
+.starlit-keyword {
+  position: relative;
+  font-weight: 900;
+  font-size: clamp(30px, 3.6vw, 56px);
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: #f8f4ec;
+}
+
+/* 夢想家的星光：一顆星掠過去就滅，7 秒才來一次，不是持續閃爍。
+   `white-space: nowrap`，不是 `display: inline-block`：行內區塊是不可分割的
+   原子行內盒，換行規則允許在它後面斷行，於是 1707×735 的第四句把「。」單獨
+   丟到下一行（Root Chrome 實看；`evidence/before-1707x735-zh-beat1.png`）。
+   改成行內的 nowrap 之後，關鍵字本身照樣不會被拆開，而後面的句號回到同一段
+   文字流裡，UAX #14 的禁則就不讓收尾標點起一行。`position: relative` 對行內
+   元素一樣成立，星光 ::after 仍以關鍵字自己的框為基準。 */
+.starlit-keyword[data-star='true'] {
+  white-space: nowrap;
+}
+
+.starlit-keyword[data-star='true']::after {
+  content: '';
+  position: absolute;
+  inset: -0.2em -0.3em;
+  pointer-events: none;
+  background: radial-gradient(
+      circle,
+      #fffdf4 0%,
+      #ffe9b8b3 34%,
+      transparent 70%
+    )
+    no-repeat;
+  background-size: 15px 15px;
+  /* Once, when the reveal has finished the word — not a repeating twinkle. */
+  animation: starlit-star-sweep 2.6s ease-in-out 0.2s 1 both;
+}
+
+@keyframes starlit-star-sweep {
+  0% {
+    background-position: -8% 72%;
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.95;
+  }
+  20% {
+    opacity: 0.95;
+  }
+  27%,
+  100% {
+    background-position: 108% 22%;
+    opacity: 0;
+  }
+}
+
+/* 我追求放大一級，三個輪替詞仍保留更大的層級。 */
+.starlit-pursue-lead {
+  margin: 0 0 16px;
+  font-size: clamp(24px, 2.2vw, 34px);
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.22em;
+  color: #a9b4cf;
+}
+
+/* 奶茶那一幕的落點：最後一行是強調句。 */
+.starlit-beat[data-beat='4'] .starlit-beat-line {
+  font-size: clamp(20px, 1.85vw, 30px);
+  line-height: 1.95;
+  /* 破折號不落單。`——`（U+2014）的換行類別允許在它前面斷行，所以填滿的那一行
+     之後只剩破折號自己一行（實測 1707×735 與 856×792 英文；
+     `evidence/after1-layout-console.txt`）。`balance` 把這一句折成寬度相近的
+     兩行，破折號就留在句尾；不支援的瀏覽器維持原本的折法，不會更差。 */
+  text-wrap: balance;
+  /* 只在標點處折。`balance` 單獨用會把行長拉平，於是「歡笑著」被拆成「歡」和
+     「笑著」（實測 `evidence/final-1707x735-zh-beat4.png`）；加上 `keep-all`
+     之後可折的位置只剩逗號與破折號，這一句就折成完整的子句。西文不受影響。 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  color: #cdd5e8;
+}
+
+.starlit-beat[data-beat='4'] .starlit-beat-line:last-child {
+  margin-top: 22px;
+  font-size: clamp(30px, 3.9vw, 58px);
+  font-weight: 900;
+  line-height: 1.4;
+  color: var(--starlit-gold);
+}
+
+/* Ticket 27：收尾那一句的金屬流光。金色底本身就是這條漸層畫出來的，中間夾一條
+   窄的斜向香檳金亮帶掃過去，光只在筆畫裡（`background-clip: text`），不是字外面
+   罩一層霧。漸層掛在整行的 <p> 上，`.starlit-ink` 每個字的 span 只是繼承
+   `color`，所以亮帶是跨 span 連續的一條，不會一個字一個字各自切斷。
+   只在讀完整行（`data-shimmer='true'`）時才掛上：那時候這一行沒有任何未上色的
+   字，所以透明字 + 裁切背景不可能把還沒讀到的字提前畫出來。
+   停在 `background-position: 100%`（亮帶在左邊框外），所以 reduced-motion 把
+   animation 關掉時就是一行乾淨的金字；`both` 讓掃完之後也回到同一個狀態。 */
+
+/* 漸層是對著這個盒子算的，盒子貼著字，亮帶才是掃過字而不是掃過一整條空白。
+   置中的文字縮到 fit-content 之後位置不變；窄視窗要折行時 fit-content 等於可用
+   寬度，折法也不變。寫在常駐的規則裡，掃光開始的瞬間不會有任何位移。 */
+.starlit-beat[data-beat='4'] .starlit-beat-line:last-child {
+  width: fit-content;
+  margin-inline: auto;
+}
+
+/* 字要透明才看得到底下的漸層，所以沒有文字裁切就不能把字設成透明，否則整句會
+   消失。漸層本身也一起放進來：沒有裁切的話，這條背景會變成字後面一整塊金色方塊，
+   正是這一票要避免的「文字外的大塊光」。所以回退路徑是沒有背景的實心金字，
+   只是沒有這道反光。 */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .starlit-beat[data-beat='4'] .starlit-beat-line[data-shimmer='true'] {
+    background-image: linear-gradient(
+      102deg,
+      var(--starlit-gold) 0%,
+      var(--starlit-gold) 46%,
+      #fff3cf 48.5%,
+      #fffefb 50%,
+      #ffeab6 51.5%,
+      var(--starlit-gold) 54%,
+      var(--starlit-gold) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 260% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* 字的陰影畫在背景之上、字身之下，字一透明，`.starlit-copy-inner` 那三層深色
+       光暈就直接蓋掉裁在筆畫裡的金色（實拍 v2-cup-sweep-2.jpg 初版整句發黑）。
+       改用 filter：它作用在合成後的結果上，暈仍在字的外緣，金色不被蓋住。 */
+    text-shadow: none;
+    filter: drop-shadow(0 1px 2px #050912) drop-shadow(0 0 12px #050912d9);
+    /* Ticket 28: 2.6s → 2.1s. The sweep alone; the 夢想家 star keeps 2.6s. */
+    animation: starlit-gold-sweep 2.1s ease-in-out 0.2s 1 both;
+  }
+}
+
+/* 一次，讀完才掃，不循環。 */
+@keyframes starlit-gold-sweep {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+
+/* Text reveal. The reference site (work/starlit-implementation/visual-revision/
+   reference-home.css, `.type`) wipes a clipped background across its words; a
+   horizontal wipe cuts every wrapped line at the same column, so this reveal
+   paints whole units instead — one Han character or one latin word at a time,
+   in reading order. Every unit is in the markup from the first frame and only
+   its colour changes, so the line wraps where it always would, a revealed line
+   sits exactly where the unrevealed one did, and nothing can stay clipped: at
+   full reveal every token is painted. The beat's own clock drives it (`REVEAL_MS`
+   in the reader) — no wipe and no transition of its own: the tick is the
+   pacing, so a token simply appears when the reveal reaches it. It is also the
+   cheaper paint — a transition here animates a blurred shadow on a hundred
+   glyphs at once, on the main thread, while the WebGL scene renders. */
+.starlit-ink {
+  /* Colour rather than transparency: a token faded with the opacity property
+     becomes its own compositing layer, and Chromium snaps those to whole pixels,
+     which moved a character by up to 1px at the moment it was revealed. Colour
+     has neither a layout nor a layer effect, so the glyph is painted exactly
+     where it already stood. The shadow goes with it, or a token the reveal has
+     not reached yet would cast one. */
+  color: transparent;
+  text-shadow: none;
+}
+
+.starlit-ink[data-on='true'] {
+  color: inherit;
+  text-shadow: inherit;
+}
+
+/* 「我追求」的三個關鍵詞：同一個位置輪替，三個詞都在標記裡按順序可讀。
+   移動與淡入淡出採參考網站實測的 0.3 秒；推進吃的是這一段自己的計時揭露
+   （`REVEAL_MS`），和其他字同一個節奏，不是各自跑一個輪播。
+   三個詞疊在同一個 grid 格子裡，不用絕對定位：絕對定位的子元素對本質寬度沒有
+   貢獻，這個盒子就只跟「我追求」一樣寬，`overflow: hidden` 於是把「極限」切成
+   「極」（桌機與手機都看得到）。同一格讓盒子寬到最寬的那個詞。 */
+.starlit-keywords {
+  display: grid;
+  grid-template: 1fr / 1fr;
+  justify-items: start;
+  overflow: hidden;
+  font-size: clamp(42px, 5.8vw, 80px);
+  font-weight: 900;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  color: var(--starlit-gold);
+}
+
+.starlit-keywords > span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  white-space: nowrap;
+  transition: transform 0.36s, opacity 0.36s;
+}
+
+.starlit-keywords > span[data-on='true'] {
+  opacity: 1;
+}
+
+/* Closing beat: the brand, the role and the two ways in read down the left of
+   the window; the poem goes to the sky at the right (see below). One
+   column, `minmax(0, …)`, so a long line wraps instead of leaving the window. */
+.starlit-ending {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 4.5vw, 76px);
+}
+
+/* Desktop: leave the figure between the brand and the four-line poem.
+   The poem uses the right sky; its width, rather than tiny type, fits the text. */
+@media (min-width: 800px) and (min-aspect-ratio: 1/1) {
+  .starlit-beat[data-beat='1'] .starlit-copy-inner {
+    max-width: min(38rem, 42vw);
+  }
+  .starlit-beat[data-beat='1'] .starlit-keyword {
+    font-size: clamp(30px, 3.2vw, 48px);
+  }
+  .starlit-beat[data-beat='1'] .starlit-greeting {
+    font-size: clamp(34px, 3.8vw, 58px);
+  }
+  .starlit-beat[data-beat='1'] .starlit-beat-line {
+    font-size: clamp(18px, 1.5vw, 24px);
+  }
+  :lang(en) .starlit-beat[data-beat='1'] .starlit-copy-inner {
+    max-width: none;
+    text-align: right;
+  }
+  :lang(en) .starlit-beat[data-beat='1'] .starlit-keyword {
+    font-size: clamp(28px, 2.4vw, 38px);
+  }
+  :lang(en) .starlit-beat[data-beat='1'] .starlit-greeting {
+    font-size: clamp(30px, 2.8vw, 44px);
+  }
+  .starlit-beat[data-beat='5'] .starlit-copy {
+    align-content: stretch;
+    padding-top: 180px;
+    padding-right: clamp(16px, 2vw, 40px);
+  }
+  .starlit-beat[data-beat='5'] .starlit-copy-inner,
+  .starlit-beat[data-beat='5'] .starlit-ending {
+    height: 100%;
+  }
+  .starlit-beat[data-beat='5'] .starlit-copy-inner {
+    max-width: none;
+  }
+  .starlit-beat[data-beat='5'] .starlit-ending {
+    position: relative;
+    align-content: start;
+  }
+  .starlit-beat[data-beat='5'] .starlit-ending-brand {
+    max-width: max(10rem, min(34rem, calc(50% - 22svh)));
+  }
+  .starlit-beat[data-beat='5'] .starlit-ending-poem {
+    position: absolute;
+    right: 0;
+    /* Ticket 27：右詩再低 16px（56 → 72）。 */
+    top: 72px;
+    width: max-content;
+    text-align: right;
+    max-width: none;
+  }
+  .starlit-beat[data-beat='5'] .starlit-poem-line {
+    white-space: nowrap;
+    font-size: clamp(16px, 1.5vw, 24px);
+  }
+  /* 英文詩比中文長，桌面又要求每句單行：字級下限從 16px 收到 13px，800×700 這
+     種小桌面視窗才放得下最長那一句而不越界（實測 16px 要 428px，欄寬只有
+     384px；13px 是 347px）。這是實作為了不越界而調的，不是使用者指定的數字。 */
+  :lang(en) .starlit-beat[data-beat='5'] .starlit-poem-line {
+    font-size: clamp(13px, 1.3vw, 20px);
+    line-height: 1.85;
+  }
+  .starlit-beat[data-beat='3'] .starlit-copy-inner {
+    max-width: min(54rem, 90vw);
+  }
+  :lang(en) .starlit-beat[data-beat='3'] .starlit-beat-head {
+    font-size: clamp(24px, 2.3vw, 34px);
+  }
+}
+
+.starlit-ending-name {
+  margin: 0;
+  font-size: clamp(28.34px, 3.706vw, 56.68px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  overflow-wrap: break-word;
+  color: #f8f4ec;
+}
+
+.starlit-ending-role {
+  margin: 8px 0 0;
+  font-size: clamp(14.17px, 1.2535vw, 18.53px);
+  line-height: 1.7;
+  letter-spacing: 0.2em;
+  color: #a9b4cf;
+}
+
+.starlit-ending-poem {
+  display: grid;
+  gap: 2px;
+}
+
+.starlit-poem-line {
+  margin: 0;
+  font-size: clamp(16px, 1.45vw, 24px);
+  line-height: 2.05;
+  /* 詩欄窄，最長那一行會折成兩行：支援的瀏覽器把兩段折得一樣長，不支援的照舊
+     靠右折，所以不需要為了不折行而縮字級或放寬欄位。 */
+  text-wrap: balance;
+  /* 折行只落在標點與空白上，不落在詞中間：預設的中文換行可以在任意兩個漢字
+     之間斷開，856×792 與 964×792 因此把「勾勒」「執炬」拆成兩行（實測
+     `evidence/before-856x792-zh-beat5.png`），正是 Spec R05 禁止的。
+     `keep-all` 對西文沒有影響，英文照舊在空白處折。
+     `overflow-wrap` 是保險：欄寬真的窄到一個完整子句都放不下時寧可折字，
+     也不要讓詩橫出欄位壓到人物。 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  color: #e6e6f2;
+}
+
+.starlit-entries {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 14px clamp(22px, 3.4vw, 48px);
+  margin: 26px 0 20px;
+}
+
+.starlit-entries button {
+  padding: 8px 4px;
+  border: 0;
+  border-bottom: 1px solid #e0c49d55;
+  background: transparent;
+  color: var(--starlit-gold);
+  font: inherit;
+  font-size: clamp(20.71px, 2.289vw, 32.7px);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 160ms, border-color 160ms;
+}
+
+.starlit-entries button:hover {
+  color: #fff8ec;
+  border-color: var(--starlit-gold);
+}
+
+/* The closing beat reads down one column, so the three direct links line up
+   under the two entries instead of being centred on the figure. */
+.starlit-beat[data-beat='5'] .starlit-social-row {
+  gap: 12px;
+}
+
+/* The 0.7s shooting star that carries the visitor into a chapter. */
+.starlit-meteor {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.starlit-meteor::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 46vmax;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #e0c49d66 45%,
+    #ffffff 88%,
+    transparent
+  );
+  filter: drop-shadow(0 0 10px #e0c49dcc);
+  animation: starlit-meteor-left 700ms cubic-bezier(0.3, 0, 0.2, 1) forwards;
+}
+
+.starlit-meteor[data-to='1']::after {
+  animation-name: starlit-meteor-right;
+}
+
+.starlit-meteor::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #e0c49d;
+  opacity: 0;
+  animation: starlit-meteor-flash 700ms ease-in forwards;
+}
+
+@keyframes starlit-meteor-left {
+  from {
+    opacity: 0;
+    transform: translate(105vw, -22vh) rotate(148deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(-58vw, 96vh) rotate(148deg);
+  }
+}
+
+@keyframes starlit-meteor-right {
+  from {
+    opacity: 0;
+    transform: translate(-58vw, -22vh) rotate(32deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(105vw, 96vh) rotate(32deg);
+  }
+}
+
+@keyframes starlit-meteor-flash {
+  0%,
+  55% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Below 800px, or in portrait, read above the figure. These strict ranges
+   complement the desktop's inclusive bounds without a fractional-ratio gap. */
+@media (width < 800px), (aspect-ratio < 1/1) {
+  .starlit-copy {
+    align-content: end;
+    justify-items: stretch;
+    padding: 78px 20px calc(88px + env(safe-area-inset-bottom));
+    text-align: left;
+  }
+  /* 手機的人物從畫面中段一路占到底，底下那條並不是空的（2026-09-15 Root 實看
+     更正：自介與結尾原本的下方落點是壓在人物身上）。這幾段改放人物上方的空
+     星空，`padding-top: 88px` 讓出整條 header：header 的方框底在 75px，
+     這樣字的上緣還有 13px 空隙。2026-09-16 補上「我追求」：背面那一幕在手機上
+     人物只占下面三分之一，原本靠底的落點正好壓在肩上（實測
+     `evidence/after-rest-390x844-zh-beat2.png`，字在 y 665–740、人物上緣 545）。
+     其餘段落（品牌、奶茶兩幕）本來就置中在沒有人物的天空，維持原本的落點。 */
+  .starlit-copy[data-place='right-bottom'],
+  .starlit-copy[data-place='left'],
+  .starlit-beat[data-beat='5'] .starlit-copy {
+    align-content: start;
+    padding-top: 88px;
+  }
+  /* 自介上方的天空只有約 180px，中英文四行都要放得下：字級與行距一起收一點。
+     關鍵詞仍然明顯比正文大且粗（約 18px/900 對 12.5px/400，倍率和桌面同級），
+     不是把整段縮成小字。 */
+  .starlit-beat[data-beat='1'] .starlit-keyword {
+    font-size: clamp(17px, 4.7vw, 24px);
+    line-height: 1.35;
+  }
+  .starlit-beat[data-beat='1'] .starlit-beat-line {
+    margin-bottom: 3px;
+    font-size: clamp(12px, 3.3vw, 15px);
+    line-height: 1.65;
+  }
+  /* 手機的天空更窄：問候只比關鍵字大一點，組距也跟著收，四行仍不壓到人物。 */
+  .starlit-beat[data-beat='1'] .starlit-greeting {
+    font-size: clamp(19px, 5.2vw, 27px);
+    line-height: 1.25;
+  }
+  .starlit-beat[data-beat='1'] .starlit-beat-line[data-group='start'] {
+    margin-top: 9px;
+  }
+  /* Only sky behind these three, so they stay in the middle of the phone
+     window instead of dropping to the strip under a figure that is not there. */
+  .starlit-copy[data-place='center'] {
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+  }
+  .starlit-copy[data-place='center'] .starlit-copy-inner,
+  .starlit-copy[data-place='full'] .starlit-copy-inner {
+    max-width: none;
+  }
+  .starlit-copy-inner {
+    max-width: none;
+    /* A phone window is nearly all figure, so the glyphs need one more turn of
+       their own halo. Still the glyph's shadow, still no panel. */
+    text-shadow: 0 1px 2px #050912, 0 0 7px #050912, 0 0 15px #050912,
+      0 0 26px #050912cc;
+  }
+  .starlit-beat-head {
+    font-size: clamp(22px, 6.4vw, 30px);
+    line-height: 1.6;
+  }
+  .starlit-keywords {
+    font-size: clamp(30px, 9vw, 42px);
+  }
+  .starlit-beat[data-beat='5'] .starlit-copy-inner {
+    max-width: none;
+  }
+  .starlit-entries {
+    gap: 10px 26px;
+    margin: 18px 0 14px;
+  }
+  .starlit-entries button {
+    font-size: 19px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starlit *,
+  .starlit *::before,
+  .starlit *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* With reduced motion the reveal and the rotation are off, so the words are
+   simply there: every token painted, and all three keywords stacked at once. */
+@media (prefers-reduced-motion: reduce) {
+  .starlit-ink {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  .starlit-keywords {
+    grid-template: none;
+    overflow: visible;
+  }
+  /* The slot the scroll picked is an inline style, so taking the movement off
+     again needs the same weight the rest of this block already uses. */
+  .starlit-keywords > span {
+    grid-area: auto;
+    opacity: 1;
+    transform: none !important;
+  }
+}
+
+.starlit-beat[data-beat='5'] .starlit-entries {
+  margin: 18px 0 14px;
+}
+
+/* The same windows read the closing beat as one column: brand, ways in, then
+   the poem, all of it whole — nothing is clipped and nothing scrolls sideways. */
+@media (width < 800px), (aspect-ratio < 1/1) {
+  .starlit-ending {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .starlit-ending-name {
+    font-size: clamp(26.16px, 7.63vw, 37.06px);
+  }
+  .starlit-beat[data-beat='5'] .starlit-entries {
+    margin: 14px 0 10px;
+  }
+  .starlit-poem-line {
+    font-size: clamp(13px, 3.6vw, 16px);
+    line-height: 1.85;
+  }
+  .starlit-open-brand {
+    font-size: clamp(30px, 10vw, 54px);
+  }
+  .starlit-keyword {
+    font-size: clamp(22px, 6.6vw, 32px);
+  }
+  /* 奶茶那一幕是純星空，沒有人物要閃（Root CUA 已確認第 3／4 幕沒有人物），所以
+     這一段不套「窄視窗要讓開人物」那條收字級的理由——那條理由只對自介、追求與
+     結尾成立。使用者兩句都要求加大：引句與「值得讓星空記下的事」在窄／方形／手機
+     上一起放大，維持置中；中文在手機上自然換行即可。 */
+  .starlit-beat[data-beat='4'] .starlit-beat-line {
+    font-size: clamp(20px, 2.6vw, 24px);
+    line-height: 1.85;
+  }
+  .starlit-beat[data-beat='4'] .starlit-beat-line:last-child {
+    font-size: clamp(32px, 5.2vw, 42px);
+    line-height: 1.35;
+  }
+}
+
+/* 矮螢幕：新 camera 只把全身那一幕的 film gate 往下移，人物上方的天空仍然跟著
+   視窗高度走，量到的結尾人物上緣是 302px @667、350px @720、456px @844（文字層
+   關掉的乾淨截圖）。不收緊的話英文結尾固定在 y≈405–419 結束，於是：
+
+     667 → 疊 103px    720 → 疊 55px    844 → 空 37px（Root 已看過，維持大字）
+
+   交叉點大約在 820（302 + 0.87×(H−667) ≈ 415＋安全距），所以門檻取
+   `max-height: 820px`：820 以下收緊，844 以上維持 390×844 那組較大的字。
+   收緊只動行距字級與結尾入口那一列，關鍵詞仍是正文的 1.36 倍以上並維持 900
+   字重，不是全部縮成一樣小。 */
+@media (width < 800px) and (max-height: 820px) {
+  .starlit-copy[data-place='right-bottom'],
+  .starlit-beat[data-beat='5'] .starlit-copy {
+    /* 品牌與語言鍵的可見下緣在 63px，這裡留 15px。 */
+    padding-top: 78px;
+  }
+  .starlit-beat[data-beat='1'] .starlit-keyword {
+    font-size: clamp(15px, 4.2vw, 20px);
+    line-height: 1.25;
+  }
+  .starlit-beat[data-beat='1'] .starlit-beat-line {
+    margin-bottom: 2px;
+    font-size: clamp(11px, 3vw, 13px);
+    line-height: 1.5;
+  }
+  /* 結尾：品牌、入口、連結、詩一起收，詩才有完整四行的空間。兩個入口與三個
+     連結併成同一列——這是矮螢幕唯一能一次省下一整列（約 40px）的地方，比再縮
+     一次字級划算，字級與可點區域都保得住。 */
+  .starlit-ending {
+    gap: 8px;
+  }
+  .starlit-beat[data-beat='5'] .starlit-ending-brand {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    align-items: center;
+    gap: 4px 14px;
+  }
+  .starlit-ending-name,
+  .starlit-ending-role {
+    grid-column: 1 / -1;
+  }
+  .starlit-ending-name {
+    font-size: clamp(19px, 5.2vw, 24px);
+  }
+  .starlit-ending-role {
+    margin-top: 4px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  .starlit-beat[data-beat='5'] .starlit-entries {
+    /* 不換行：換行的話這一列會變兩列，英文標籤長，正好把詩推到人物頭上。
+       375px 實測 兩個入口 187px + 三個連結 106px + 欄距 14px = 307px。 */
+    flex-wrap: nowrap;
+    gap: 0 18px;
+    margin: 6px 0 0;
+  }
+  .starlit-entries button {
+    padding: 4px 2px;
+    font-size: 15px;
+  }
+  .starlit-beat[data-beat='5'] .starlit-social-row {
+    gap: 8px;
+    margin: 6px 0 0;
+  }
+  .starlit-beat[data-beat='5'] .starlit-social-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .starlit-poem-line {
+    font-size: clamp(12px, 3.4vw, 14px);
+    line-height: 1.45;
+  }
+}
+
+
+/* Keep the desktop hierarchy through small landscape windows. Only the
+   occupied text space changes; the scene and its camera remain untouched. */
+@media (min-width: 800px) and (min-aspect-ratio: 1/1) {
+  .starlit-copy[data-place='left'] {
+    padding-left: clamp(48px, 8vw, 132px);
+  }
+  .starlit-beat[data-beat='3'] .starlit-beat-head {
+    white-space: nowrap;
+    font-size: clamp(26px, 3.2vw, 48px);
+  }
+  .starlit-beat[data-beat='1'] .starlit-beat-line {
+    white-space: nowrap;
+  }
+}
+@media (min-width: 800px) and (max-width: 1199px) and (min-aspect-ratio: 1/1) {
+  .starlit-copy[data-place='right-bottom'] {
+    padding-bottom: 180px;
+    text-align: right;
+  }
+  .starlit-beat[data-beat='1'] .starlit-copy-inner,
+  :lang(en) .starlit-beat[data-beat='1'] .starlit-copy-inner {
+    max-width: none;
+  }
+  .starlit-beat[data-beat='1'] .starlit-beat-line {
+    font-size: clamp(15px, 1.6vw, 19px);
+    margin-bottom: 8px;
+  }
+  .starlit-beat[data-beat='1'] .starlit-keyword,
+  :lang(en) .starlit-beat[data-beat='1'] .starlit-keyword {
+    font-size: clamp(24px, 2.5vw, 30px);
+  }
+  .starlit-beat[data-beat='5'] .starlit-ending-brand {
+    max-width: 24vw;
+  }
+  .starlit-ending-name {
+    font-size: clamp(28.34px, 3.27vw, 37.06px);
+  }
+  .starlit-entries {
+    gap: 8px 18px;
+  }
+  .starlit-entries button {
+    font-size: 19.62px;
+  }
+  .starlit-copy[data-place='left'] {
+    align-content: start;
+    padding-top: 150px;
+  }
+  .starlit-keywords {
+    font-size: clamp(42px, 5.8vw, 64px);
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1199px) and (min-aspect-ratio: 1/1) {
+  :lang(en) .starlit-copy[data-place='right-bottom'] {
+    padding-bottom: 130px;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 899px) and (min-aspect-ratio: 1/1) {
+  .starlit-beat[data-beat='5'] .starlit-poem-line {
+    font-size: 15.5px;
+    letter-spacing: -0.025em;
+  }
+  :lang(en) .starlit-beat[data-beat='1'] .starlit-keyword {
+    font-size: 22px;
+  }
+}
+
+/* Narrow landscape: semantic wrapping keeps the poem left of the hand's
+   starlight as well as the face, without reducing the phone type size. */
+@media (min-width: 700px) and (width < 800px) and (min-aspect-ratio: 1/1) {
+  .starlit-ending-poem {
+    max-width: 220px;
+  }
+}
+
+/* Ticket 24: only the full preview's content scene gets the original soft
+   stage envelope. The canvas film grows toward the bottom; its eye and viewing
+   direction stay unchanged. Text and the six opening beats are outside it. */
+.starlit[data-intro-complete='true'] .starlit-stage > canvas[data-variant='E'] {
+  height: 108%;
+  mask-image: radial-gradient(ellipse 68% 65% at 50% 42%, #000 70%, transparent 92%),
+    linear-gradient(transparent, #000 6%, #000 76%, transparent 91%);
+  mask-composite: intersect;
+}
+
+/* Ticket 28: that 8% is the last thing left that used to arrive in one frame —
+   the film grew taller the instant the chapters opened. It now grows over the
+   same 1.25s as the column. */
+@media (prefers-reduced-motion: no-preference) {
+  .starlit[data-intro-complete='true'] .starlit-stage > canvas[data-variant='E'] {
+    transition: height 1.25s ease;
+  }
+}
+
+/* Ticket 25: only the desktop content pages use the one-third figure column.
+   Ticket 28: the same 1:2, written as percentages of the same grid the opening
+   already uses, and reached over the chapter morph instead of in one frame.
+   The header floats here too, and the stage column is inset by its height with
+   padding — so `.starlit-main` is the whole viewport in both states and the
+   stage only changes by what is animated. Declared on the chapter state alone:
+   entering settles, the brand replay snaps straight back to the opening. */
+@media (min-width: 851px) {
+  .starlit[data-intro-complete='true'] .starlit-header {
+    position: absolute;
+    inset: 0 0 auto;
+    width: 100%;
+  }
+  /* The stage column is inset by exactly 90px, so the header has to stay one
+     row: the brand does not wrap, and the chapters give way before Language
+     does — they scroll inside their own row rather than pushing it out or
+     widening the page. In practice nothing scrolls; see the compact sizing for
+     small desktops below. */
+  .starlit-brand-name,
+  .starlit-brand-sub {
+    white-space: nowrap;
+  }
+  .starlit-nav {
+    flex-wrap: nowrap;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .starlit-controls {
+    flex: none;
+    flex-wrap: nowrap;
+  }
+  /* 只有內容頁需要：分頁已經用 auto margin 吃掉空白，Language 貼著它而不是再被
+     推到最邊。開場沒有分頁，留著基礎的 `margin-left: auto`，右上定位就由這個檔
+     自己決定，不靠 app/globals.css 的裸 `header` 規則（Reviewer B 建議）。 */
+  .starlit[data-intro-complete='true'] .starlit-controls {
+    margin-left: 0;
+  }
+}
+
+/* Small desktops: the same one row, one size down. */
+@media (min-width: 851px) and (max-width: 1180px) {
+  .starlit-nav {
+    gap: 8px;
+  }
+  .starlit-tab {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 851px) {
+  /* header 浮動不分有沒有舞台，讓位的 padding 也就不能只寫在 `data-stage='true'`
+     上，否則沒有舞台的呼叫端首 90px 會被 header 蓋住（Reviewer B 建議）。 */
+  .starlit[data-intro-complete='true'] .starlit-main {
+    padding-top: 90px;
+  }
+  .starlit[data-intro-complete='true'] .starlit-main[data-stage='true'] {
+    grid-template-columns: 33.3333% 66.6667%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .starlit[data-intro-complete='true'] .starlit-main {
+      /* 1.25s — `TIMING.chapterMorph`, so the frame finishes settling exactly
+         when the figure finishes its 2D morph. */
+      transition: grid-template-columns 1.25s ease, padding-top 1.25s ease;
+    }
+    /* The chapter column is reflowing from zero width while that runs. */
+    .starlit[data-intro-complete='true'] .starlit-content {
+      animation: starlit-content-settle 1.25s ease both;
+    }
+  }
+  .starlit[data-intro-complete='true'] .starlit-content {
+    max-width: none;
+  }
+  .starlit[data-intro-complete='true'] .starlit-stage > canvas[data-variant='E'] {
+    /* The existing shader fits proportionally below aspect .62. Its image
+       bottom then rises within the canvas: follow that edge in the 1/3 column. */
+    mask-image: radial-gradient(ellipse 68% 65% at 50% 42%, #000 70%, transparent 92%),
+      linear-gradient(transparent, #000 6%, #000 min(76%, calc(50% + 14vw)),
+        transparent min(91%, calc(50% + 22vw)));
+  }
+}
+
+@keyframes starlit-content-settle {
+  0%,
+  55% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

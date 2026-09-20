@@ -1,4 +1,74 @@
-# 首頁實驗規則（含歷次候選，最新 v0.19）
+# 首頁實驗規則（線上 v0.19；v0.20 開場草稿未發布）
+
+## 本專案例外：開場採整個視窗的 3D 畫布（2026-09-14，UI，候選）
+
+奶茶前端庫的個人網站規則以固定框架與欄位為主；本專案的星空開場在此破例，只適用開場，不回寫通用庫，章節版面完全沿用原規則。
+
+- 開場（`.starlit[data-intro-complete='false']`）取消 49/51 分欄、分隔線與 90px 標題帶。3D 畫布佔滿整個視窗，品牌與語言以無底色的方式浮在上方；`introComplete` 轉 true 後回到既有雙欄章節版面，同一個 canvas 不重新掛載。
+- 段落落點是 `BEAT_PLACE = ['center','right-bottom','left','center','center','full']`：開場品牌置中（3D 字由 scene 畫，UI 只留 sr-only 標題）、正面自介在右下、背面左側、第 3／4 段只有旋轉星空所以文字置中、結尾用整個寬度。有人物的那兩段把字放在人物輪廓之外的星空：2026-09-15 使用者實看 964×792 指出自介壓在頭髮輪廓、結尾詩壓在胸前與手臂，所以自介改成靠右並下移（`padding-bottom: 152px`，不貼視窗底也不撞進度提示），結尾詩改成釘在閱讀區右下角（`position: absolute; left: min(calc(50% + 34svh), calc(100% - 10rem)); right: 0; bottom: 0`，並在這一段取消 `.starlit-copy-inner` 的 74rem 上限）。`34svh` 對著人物右緣（`0.5W + 0.305H`，1280×720 與 964×792 實測相符）；`100% - 10rem` 是欄寬下限，詩欄永遠至少 160px，不會被夾成 0。詩欄變窄只改換行，字級不動，關鍵詞仍是大粗字。**右下落點只在 `aspect ≥ 6/5` 的視窗成立**：`introCamera` 的 `fit = max(1, 0.8/aspect)` 會在更高瘦的視窗放大 fov，人物寬度改成跟著視窗寬走（約 0.12W–0.88W），兩側沒有天空，原本的 `34svh` 會超過容器右緣把詩夾成 0 寬、逐字直排（Spec reviewer F1，1024×1366 實拍）。這些視窗改用下面手機那套「讀人物上方」的單欄。不擋眼鼻；可讀性只靠字本身的 text-shadow（2026-09-15 使用者要求拿掉明顯暗幕），不加局部漸層暗幕、實心面板或外框，字才像直接寫在那個地方而不是浮著一層。手機與任何 `aspect ≤ 6/5` 的視窗（`@media (max-width: 850px), (max-aspect-ratio: 6/5)`）不做兩欄；人物在手機是從畫面中段一路占到底，下方沒有空位（2026-09-15 Root 實看更正，先前寫成「下方安全區」是錯的），所以自介與結尾改放人物上方的空星空（`align-content: start; padding-top: 88px`，header 方框底在 75px）。自介那一段上方只有約 180px，字級與行距一起收（關鍵詞 18px/900、正文 13px/400，倍率與桌面同級），中英文四行都放得下且不出框；其餘段落（品牌、背面、奶茶兩幕）的手機落點不變。矮螢幕（`@media (max-width: 850px) and (max-height: 820px)`，例如 375×667、375×720、360×640）再收一階：`padding-top: 78px`、自介關鍵詞 `clamp(17px→15px, 4.2vw)`／正文 `clamp(11px, 3vw, 13px)`、結尾的兩個入口與三個連結併成同一列（`.starlit-ending-brand` 兩欄 grid、`.starlit-entries` 不換行），詩 `line-height: 1.45`。新 camera 只把全身那一幕的 film gate 下移，人物上方仍然只有那麼多天空：實測人物上緣 375×667 自介 183／結尾 302、375×720 結尾 350、360×640 自介 176／結尾 288（文字層 `display:none` 的乾淨截圖）。820px 這個門檻是量出來的：不收緊的英文結尾固定在 y≈405–419 結束，人物上緣隨視窗高度走（302@667、350@720、456@844），交叉點約 820，所以 820 以下收緊、844 以上維持較大的字。關鍵詞仍是正文的 1.36 倍以上並維持 900 字重，不是全部縮成一樣小。≤380px 的開場 header 另外把品牌字縮到 13px，英文才不會折成兩行把 header 撐到 95px 壓到文字。
+- 文字固定在視窗，不跟捲動上下飄（2026-09-15 使用者要求，參考 https://elvismao.com/zh-Hant/）。捲動容器 `.starlit-reader` 裡只有 `.starlit-scroll-step`／`.starlit-scroll-tail` 這些沒有字的定位塊，字全部在覆蓋其上、`position: absolute; inset: 0` 的 `.starlit-text-stage`，指標事件穿透到底下的捲動容器，只有入口按鈕與連結收回自己的點擊。取消 `scroll-snap`，否則吸附會把揭露一口氣甩過頭。
+- 捲動只決定「哪一幕」，出字由時間決定（2026-09-15 使用者改版，參考 https://elvismao.com/zh-Hant/ 捲到一段就自動顯字）：`readingStepAt(scrollTop, clientHeight) = floor(scrollTop / clientHeight)` 夾在 0..5，`beatScrollTop(i)` 落在該幕捲動螢幕的正中央（`i + 0.5`），兩個按鈕與開場都走同一條路。鏡頭 `settled` 之後，該幕以 `REVEAL_MS = 2000`、每 `REVEAL_TICK_MS = 80` 毫秒一格自動把整段揭露完（`revealAt(elapsed)`）；手離開捲軸文字照自己的節奏出完，出完就停住，永遠不會自己換幕——換幕仍然只有捲動與那兩個按鈕。已經讀完的段落記在 `read`（含 `run`），往回看立刻整段重現，不再重播一次；重播換 `run`，全部回到未讀並把捲軸送回頂端。換段、切語言、重播都是不同的 `pass`，畫面上的 `paint` 認 `pass`，所以舊計時器的字不會落到新段上；背景分頁或場景暫停（`paused`，由 `document.hidden` 與場景的 `paused` 合成）凍結在原處，回來接著走。沒有 wheel 攔截、沒有鎖 body、沒有倒數。最後一幕靠 `.starlit-scroll-tail`（80svh）讓捲動長到落得到它的中央。
+- 揭示不再用參考站 `.type` 的背景裁切橫向 wipe：換行之後那種 wipe 會把每一行都裁在同一欄。改成逐單位上色，一個漢字或一個完整英文單字為一單位（`revealTokens`），整段一開始就在標記裡、只有 `color`（連同 `text-shadow`）在動——不是 `opacity`：`opacity` 低於 1 會讓每個字自成合成層，Chromium 把合成層整到整數像素，字就位移了 1px——所以換行位置不變、字不會位移，也不可能有字被永遠裁掉——`reveal` 到 1 時每一個單位都上色。區塊依閱讀順序填滿（`revealShare`）。關鍵詞輪替沿用參考站 `.creates` 的 0.3 秒，位移用 `transform` 不是 `top`（三個詞疊在同一個 grid 格子，grid item 不能用 `top` 移動）：技藝／自由／極限跟著同一份 `reveal` 推進，依序一次，停在極限，不做無限輪播。揭示仍只在鏡頭 `settled` 後才開始。
+- 全文一次就在標記裡，只有上色在動，所以輔助科技可以讀到整段與三個關鍵詞；沒有在讀的段落用 `visibility: hidden` 同時退出畫面與 Tab 順序。結尾的兩個入口與三個直接聯絡方式屬於控制項不是文案，一到結尾就可按，不必先把字捲完。降低動態偏好時由 CSS 直接讓每個單位上色、三個關鍵詞並列，所以鏡頭一停就是完整整段，計時揭露看不出來（JS 不另外判斷媒體查詢）。
+- 移除「星願 · 序詩」／「星願 · 皇家奶茶大師」kicker、`ROYAL MILKTEA / PERSONAL UNIVERSE` caption、折線星座 svg 與 CLICK 方框。進度提示只剩一行無框淡文字「向下捲動繼續 · 向上返回」，兩側是可按、可聚焦的淡文字入口。
+- 結尾段即聯絡落點：畫面左側由上而下是品牌「Royal Milktea Master」、「AI 應用全端工程師」、「我的專案」（左、pose 1）／「關於我」（右、pose 0），最下方 Mail／GitHub／Instagram 直接連到既有網址（不採用參考網站作者的連結）；完整四行詩在右下角的星空（手機仍是單欄，詩接在入口下面）。不顯示「歡迎聯繫」——2026-09-15 修訂已把它連同那段告別文案移除，`site-copy.ts` 也沒有 `invite` 字串了。只有前兩個入口會播約 0.7 秒的流星掠過，之後才 `contentOpen=true` 並選中對應姿態；原章節內的聯絡資訊與社群不動。
+- 流星屬於「哪一次開場」：重播讓它立刻失效，舊的 0.7 秒計時不會遲到把人帶進章節。這是 Coordinator 實測到的回歸，修正在 `launchInFlight` 與它所鍵入的 effect。
+- 這是預覽路由 `/starlit-full-preview` 的候選（`mountBrandScene`），驗收也在這條路由上做。`/starlit-preview` 仍是預設的 `mountFantasyScene` 舊線，沒有天花板品牌、沒有純星空段，保留不動。正式首頁 `app/page.tsx`、`app/layout.tsx` 未改。程式測試通過不等於視覺合格，實際 3D 畫面由 Coordinator 統一驗證。
+
+
+## 最新節奏試驗：0.4 秒快速轉向（2026-09-09，本機候選）
+
+使用者提出以極短轉向掠過中間形變，先試 400ms。正面到背面及回正面的轉向均為 400ms；回正面後維持 1500ms 拉遠，文字停留不變。火種仍在拉遠開始 375ms 後才開始顯現。此次只調整開場節奏，沿用既有圖片與轉場軌跡，不宣稱解決完整 3D 連續性。已於隔離預覽檢視 24 個等距畫格、通過既有計時與端點檢查及建置，再同步本機。尚未發布、等待使用者評價。
+
+## 最新決策：撤回建模，回到圖片星點（2026-09-09）
+
+- 使用者再次明確否決模型版本：「不要再考慮任何建模相關的了，就用圖片改」「換回原本的」。本節優先於下方歷史上的 3D 繞行構想。
+- 原本圖片的髮型、臉型、服裝、姿勢、色彩與星點細節為最高優先；不得為了立體化改掉已喜歡的造型。不要自行重新引入 Blender、生成模型、輪廓加厚或模型點雲。
+- 網站恢復 `astral-clean-plate.png` 的三個原始姿態取樣、既有手部局部修正、皇冠火種、背景星光。人物仍以星點呈現，不改成不透明原圖。
+- `/camera-study` 已撤回，舊網址改為顯示原本首頁；現在不讀取模型或二進位表面。
+- 本輪被否決的模型、取樣、灰色檢查、腳本與測試頁存於 `work/camera-model/`，僅作失敗紀錄，不屬於網站發布資源。
+- 圖片可以提供高品質的固定視角及分層視差；不得把換圖、粒子重構或平面拉伸宣稱為真正的人體 360 度鏡頭繞行。正面 → 斜後頭肩 → 完整第一姿態的敘事仍保留，圖片轉場方式另行校準。
+- 主頁三章保持同頁：關於我、我的作品、聯絡資訊。主頁章節重構不因開場試驗被替換。
+- **視覺驗證先於使用者預覽：** 新候選先在與使用者頁面隔離的預覽中檢查；不得讓開著的頁面經 HMR 直接顯示未驗收試驗。原圖對照、人物辨識度、裁切與完整動畫都過關後才更新使用者頁面。程式通過測試不等於視覺品質合格。
+- 本機已恢復圖片版本；未發布，線上仍為 v0.19。下方 v0.20 背面與转場記錄為歷史候選，不能視為已核准的最終效果。
+
+## 最新修正：轉場抽動（2026-09-09，本機，等待使用者評價）
+
+上一版多視角候選仍被使用者否決：「轉場動畫一直在亂動」。只檢視少數關鍵定格不足以驗收，不得再宣稱定格清楚就等於動畫完成。
+
+- 根因：原圖近景選取範圍含胸前星點，卻全部重新配進頭肩圖片；各視角獨立依亮度重取樣又改變頭髮／臉／衣領點數分布，造成大幅上下竄動。逐段直線插值的位置雖連續，速度卻在視角邊界突然改變。
+- 修正：對齊原圖頭肩裁切，維持原圖各高度的星點數及左右鄰接順序。水平轉向時固定星點高度與深度、原法線；不再跨區域招募衣領星點，也不讓光流重新洗掉局部排列。三個完整姿態的原始取樣保持原設定。
+- 沿原圖加五個同姿勢圖片視角轉向；位置採不超出端點的平滑曲線，視角交界的速度連續。背景仍同步沿同方向轉動。此為多視角圖片動畫，不是自由 360 度模型。
+- 仍使用 `public/astral-orbit-views-v21.png`；沒有重新生成圖，也沒有重啟建模。已移除開場光流資料載入。原六格圖使用第 1、2、3、4、6 格；生成提示在 `work/image-orbit-review/prompt.txt`。
+- 節奏保持去程 1200ms；回程先 1000ms 反向，再 1500ms 拉遠至原第一姿態。近景無火種，火種只在最後拉遠後段入鏡。文字出現 900ms、完成後點擊或等待 3000ms 保持原設定。
+- 視覺自查改為同一渲染器等距擷取完整去程 72 幀，按 0–11、12–23、24–35、36–47、48–59、60–71 逐頁檢查；另檢查原尺寸背面。擷取程式僅保存於 `work/image-orbit-review/capture-72-frames.tsx.txt`，不進網站。這是開發者自查，不是使用者已核准。
+- 回歸驗證新增：頭部高度固定、鄰近星點順序、視角交界速度連續；原有粒子池、手持物、計時與端點檢查保留。資料與數值測量腳本在 `work/image-orbit-review/`。
+
+## v0.20：原圖粒子開場、背面頭肩近景（本機候選）
+
+- 已撤回 Blender / Hunyuan3D 模型方案。使用者認為原本圖片粒子質感明顯較好；新網格改變髮型、衣服與取樣分布，立體化不值得犧牲已認可的畫風。模型、腳本與二進位保留在 `work/first-pose-model/`，網站不載入、不打包。
+- 正面與完整第一姿態沿用 `public/astral-clean-plate.png` 的原始點雲、原光照及密度規則；不再於結尾從模型切回圖片，避免形體割裂。
+- 使用者曾誤選移除背面，隨即更正為保留。背面候選採直接參考第一姿態原圖補繪的 `public/astral-rear-first-pose-close-v20.png`，不是第三姿態。它透過固定身分的星點重構接到正面；**不宣稱為真正連續的 3D 繞背**。
+- 第二段依使用者裁切範例改成斜後方頭肩特寫，頭頂可略出框，後頸、衣領與肩膀佔滿畫面，腰部不入鏡。候選素材保留原比例取樣，zoom 2.5、中心 y .44，圖片本身提供斜後方視角；不再把平面背影斜轉冒充真正的側面。整體仍是圖片浮雕點雲，非完整背面網格。
+- 開場：髮頂近景 1800ms 到頭臉 → 文字 900ms 出現 → 文字結束後點擊或等 3000ms → 1800ms 星點重構到背面 → 相同停留與文字規則 → 1800ms 回到完整第一姿態。
+- 開場移動由 1250ms 放慢至 1800ms，使用平滑進出及約 .55 rad 的淺弧路徑，取消開場整圈旋轉；作品章節仍維持 1250ms 的原重構節奏。放慢不等於真正 3D 轉身，仍是不同視圖之間的粒子變形。
+- 使用者否決斜後仰角生成圖，理由是動作偏離原圖。已撤下，恢復先前背面頭肩參考。後續重新以原圖最左人物為唯一姿勢依據製作候選，排除側平舉、斜上抬手、向背後伸手。原圖是上臂向下、肘低於肩，前臂與掌心向前；在背面頭肩近景中手臂大部分應被身體遮住。最新補繪仍是推估，不能宣稱精確重建同姿勢，等待使用者核對。
+- 頭部、背面及兩者間轉場隱藏手持物；只在最後回到全身段的後 45% 顯現火種與皇冠。不刪除粒子身分；背景仍參與移動，獨立低頻閃爍保留。
+- 品牌連結回到首頁、選中關於我並重啟開場。移除日光切換及左下重播／略過按鈕。章節切換、中途連點仍可使用。
+- 手部候選 `public/astral-hands-v20.png` 只套用第二、三姿態的手部局部區域，其他部位仍取原素材；加強手指輪廓取樣。
+- 四面參考圖可增加視角切換依據，但必須同人物、同姿勢、同服装與比例。四張不同動作不能冒充四面；目前未製作左右側。
+- 查證毛哥首頁：STL 網格經 Three.js 光照與鏡頭渲染後轉 ASCII，並非正面照片加厚，也不是固定身分的逐星粒子。來源：[首頁程式](https://elvismao.com/_astro/index.astro_astro_type_script_index_0_lang.DF01ki6X.js)、[Three.js AsciiEffect](https://threejs.org/docs/pages/AsciiEffect.html)，查證日期 2026-09-09。
+- 測試涵蓋文字後 3 秒計時、點擊限制、重播、取樣數守恆、背景與手持物身分保留、逐星轉場接續。瀏覽器已檢視正面無火種及背面頭肩近景。最新鏡頭仍待使用者確認，尚未發布。
+
+### 素材產生提示（內建 ImageGen）
+
+現行背面近景候選：僅以原三聯圖最左人物為來源，固定原姿勢，鏡頭移至斜後方微仰拍；上臂下降至低於肩膀的手肘，前臂向人物前方伸出並在此背面近景被遮擋。禁止平舉、斜上抬手、向後伸手；維持頭部相對肩膀方向、原髮型與衣領，6:5 頭肩裁切，頭頂略出框、無手持物與腰。完整提示：`work/first-pose-model/rear-original-pose-prompt.txt`。
+
+被否決的斜後仰角：以既有背面圖為編修來源，要求同姿勢、左後方約 25 度、向上約 10 度的頭肩近景，保留髮型與服裝，無腰部與手持物。結果仍偏離原姿勢，已移至 `work/first-pose-model/rejected-runtime/astral-rear-oblique-v20.png`，不得當作現行素材。完整提示保存在同目錄 `oblique-prompt.txt`。
+
+手部：只修三聯圖中間與右側人物的手；消除分叉與重複指尖，保持自然五指、連續掌心與手腕，增加少量薰衣草色指緣光。第一張、髮型、臉、服裝、姿勢、構圖、比例及白底不變，不添加皇冠、物件或文字。
+
+第一姿態背面：僅參考原三聯圖最左人物；人物凍結於原姿勢，鏡頭繞至背後 180 度。呈現後腦、頸部、雙肩及衣背，右臂仍朝原正面伸出，因此在背面鏡頭右方且大半被遮擋；不可抬手至頭旁、不可回頭露臉、不可借用第三姿態。保持原紫藍捲髮、薰衣草高領、金邊與星空衣料；單人白底。
 
 ## v0.19：粉白晶體略微偏紅（候選）
 
@@ -252,3 +322,26 @@
 使用內建 image_gen，單次編輯，無 CLI。最終素材：public/astral-clean-plate.png。生成提示如下：
 
 > Use case: precise-object-edit. Asset type: high fidelity character triptych clean plate for particle sampling. Input image 1 is the EDIT TARGET. Edit this exact image, do not redesign it. Produce exactly one image. Primary request: Remove ONLY the three held magical objects and replace the checkerboard backdrop with plain solid pure white #FFFFFF. Left panel: remove the ENTIRE blue flame, all its wisps and glow, AND the golden star core inside it. Reconstruct the existing lavender coat and shoulder naturally underneath the removed flame where it occluded the clothing. Preserve the extended hand, palm and every finger untouched, with the same shape and position. Middle panel: remove the golden floating crystal, its thin hanging top ornament and its bottom ornament completely. Preserve the complete cupped hand, wrist, palm and every finger, same shapes, positions and pose. Leave the hand empty. Right panel: remove the entire purple ringed planet, its rings and glow. Preserve the raised hand and all fingers exactly in their original pose. Leave the hand empty. Invariants: exact original wide composition and aspect ratio 1672:941, all three characters aligned to the original three equal width panels. Lock all body positions, proportions, poses, silhouettes, facial shapes, hair shapes, hand anatomy and garment contours. Do not move, zoom, crop or reposition any character. Preserve every detailed garment fold, lavender and navy palette, gold trim, lighting and highlights, and the original detailed illustration rendering. Faces remain dark and featureless with NO visible eyes. Preserve clothing ornamentation and star patterns on the characters. Background: uniformly pure white #FFFFFF everywhere outside the characters; no checkerboard, no background stars, no texture, no gray, no gradient. No text or watermarks. Do not add objects. Empty hands remain in identical poses.
+
+
+## 圖片開場：背面肩部與同方向弧線（2026-09-09，待使用者預覽）
+- 背面以使用者本次提供的 612 × 512 圖片取樣：後腦、衣領、雙肩、背部金色星芒。素材為 `public/astral-rear-shoulders-v22.png`，不再使用頭部多視圖接觸表。
+- 開場前近景 → 背面肩部 → 原本第一姿態完整人物。两次快轉各 400 ms；背面文字停留與最後 1500 ms 拉遠沿用現有節奏。
+- 兩段視圖位移來自同一條順時針、向外增大半徑的螺旋弧線；第二段使用下一段弧線，不倒播第一段。背景星也沿同方向繼續轉动。
+- 這是圖片星點取樣加上弧形位移的視覺轉場，不是完整 3D 人體繞拍。中間形體仍會短暫變形；不可將數學連續性宣稱為完整人體旋轉品質。
+- 原本三姿態、手持物、閃爍、文字與章節切換不變；前兩個近景不顯示手持火種，拉遠後才顯示。
+- 已檢視兩段各 24 張等距畫格及背面完整尺寸；通過固定點數、端點、同方向背景旋轉、道具保留測試、型別檢查及正式編譯。尚未取得使用者視覺認可；只更新本機預覽。
+
+
+## 弧形甩鏡試看（2026-09-09，使用者同意先試第二種）
+- 取代上一輪開場人物形狀插值；人物星點作整體位移與微幅縮放，避免把正面揉成背面。
+- 第一段 900 ms，第二段 400 ms。兩段同方向沿弧線移出，再從另一側進場；視角樣本在畫面外更換，中間短暫只見背景星光。
+- 背面直接抵達第一姿態完整人物，不先回到正面近景再拉遠。背面仍用使用者提供的後腦、雙肩與背部星芒圖。
+- 這是可回復的甩鏡試看，不代表使用者已接受此方案，也不是持續可見的 3D 人體繞拍。原本圖案、正文、章節與手持物不改。
+- 已在隔離預覽檢查兩段各 24 張等距畫格並通過測試、型別檢查及編譯；本輪獲同意後才套用到 localhost:3000。未發佈線上。
+
+
+## 否決甩鏡：必須持續可見地繞拍（2026-09-09）
+- 使用者試看後明確否決弧形甩鏡；不能再用人物離場、背景遮掩或換圖進場代替繞拍。
+- 已撤回甩鏡試作並保存於 work/rejected-arc-pan-*。恢復試看前的圖片粒子版本，但保留第一段 900 ms 的要求。此恢復僅撤銷錯誤方向，原版的形狀扭曲、回到正面近景等問題尚未解決。
+- 驗收必須是同一人物始終可見，鏡頭同方向沿外擴弧線看到正面、側面、背面，再繼續到完整人物；不能以數學曲線方向相同或程式測試通過宣稱達成。

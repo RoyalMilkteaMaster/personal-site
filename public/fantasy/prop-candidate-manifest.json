@@ -1,0 +1,50 @@
+{
+  "schema": "fantasy-palm-prop-placement-delta-v1",
+  "status": "fixed-user-requested-hover-adjustment-pending-review",
+  "parentManifestSHA256": "75074eb4e715baf7b18d54101dba6f2ab7ed96fbb964919bb6bc83019d0eac58",
+  "meshSHA256": "db1842943d71f1814bddfd03b6fc38b4a340bf63a4272bb5f24e2f949cf2a72a",
+  "propPlacementSHA256": "cb8351c5ad81d0647a2e250e54dd6e3f3847e5d621f16ea7f3f495b5f261834c",
+  "delta": {
+    "offsetLocalBefore": [
+      1.6945394271862535e-05,
+      0.11857236403476078,
+      0.008099024636447398
+    ],
+    "offsetLocalAfter": [
+      1.6945394271862535e-05,
+      0.10957236403476078,
+      0.008099024636447398
+    ],
+    "normalOffsetDelta": -0.009
+  },
+  "files": {
+    "palm-prop.mjs": {
+      "sha256": "32a7d767eaded0a149bc8d3dc46170d0813175b1fbdf0d68a1fdfd19f4e6bb46",
+      "bytes": 5571
+    },
+    "prop-placement.json": {
+      "sha256": "cb8351c5ad81d0647a2e250e54dd6e3f3847e5d621f16ea7f3f495b5f261834c",
+      "bytes": 4426
+    },
+    "original-prop.f32": {
+      "sha256": "a4ce257ff849c75e569dcbfb596f0d179ce4f55ab47b735c2e7c981e035bcd26",
+      "bytes": 159692
+    },
+    "prop-seeds.f32": {
+      "sha256": "0497d520c0c4491bda038f04209d1724f677699bb983bfec9d87592cf66e8166",
+      "bytes": 12284
+    },
+    "prop-draw-order.u32": {
+      "sha256": "48ea142698811e02b060bf7f2ed57521cfc70e0c3c7aab0771c7e1f762b0b7f8",
+      "bytes": 12284
+    },
+    "prop-ids.u32": {
+      "sha256": "984a7d5a7a55d6041c105bba56c661933459ae32206a68eb4a2a94ae1b6dba85",
+      "bytes": 12284
+    },
+    "prop-original-draw.u32": {
+      "sha256": "eeb9ae404ca313b354f32421b98777d4103e9e5ee6a10e5e0ace151e163dcf5c",
+      "bytes": 12284
+    }
+  }
+}

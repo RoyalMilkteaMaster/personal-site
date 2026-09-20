@@ -1,0 +1,7 @@
+# Deferred Root hypothesis — do not treat as implementation instruction
+
+The latest source-complete R8 still has excess ordinary STAR ink/brightness in the whole near head-neck region. R5's rejected floor trial occurred BEFORE the complete R6/R7/R8 source bands existed. That rejection disproves the particular remedy in that snapshot; it does not mathematically establish that the implementation's20% ordinary floor is a user-mandated invariant for every later source-complete region.
+
+Do NOT reopen or apply a generic opacity change now. R9 is correctly isolating camera/source placement. After that result, if excess gray/doubled structure still exists, a minimal renderer-contribution test on the exact source-covered surface could distinguish remaining source omission/placement from duplicate old ordinary points. Any later retirement must identify actual redundant source-owned rows, preserve fixed true XYZ surfaces and authored dark/basic coverage in side/back/360, preserve all source RGB/size/IDs and unaffected regions, and demonstrate actual original-like near ANDwide gain. It cannot hide bad anatomy, remove true surfaces, or optimize box percentiles. No new floor/renderer change is authorized by this hypothesis itself; no claim the cause has been proven.
+
+Keep this only as a future method guard against treating a historical failed experiment as an unchangeable product requirement. All currently dispatched work remains unchanged.

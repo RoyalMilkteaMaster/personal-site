@@ -1,0 +1,13 @@
+# R11 independent review — follow-up after active R12 diagnostic
+
+UPDATE: Opus17993DONE full report work/model-trial/claude-opus-neck-r11-binding-check-result.md. F2 wrongshell CLOSED0/73changed(allfrontsameweldshell),72/73oldvisibleR8 and39occludedbyrealR11change; legitimate rebind notgenericfailure. New MEDIUMwrongfeatureclaim cluster5366,5642,5715,5833,5872,5913,5955,5996,5997,6038 plus5539: pale-source/paleoldtexel→blueinnernew; ~21mmnear-ray coherent relocation. Must Developer independently reproduce actualsource/anatomicalfeature; raw RGB distance and 'brightestwithin3px' alone notsemanticgroundtruth. Do NOT blindlyadoptreviewer universal>5mmcolordistanceveto. Actualmarkedside90cluster in WSL temp nk-side90-cluster.png and dump nk_73.json, scriptnk2–8.py there; retrieveexactpathifneeded. F3 text counts internally inconsistent ('9' then10IDs,5542inbothgroups), use actual17IDledger notprosecounts. Neighboringskinlabelnotproofalone. Main/A13OPEN. ReviewerIDLE,neck95188stillactive; deliverreportsafterdiagnosticDONE.
+
+Full report: work/model-trial/claude-opus-review-neck-junction-r11-result.md. Opus59419 DONE383pins, useful local acceptance, whole head/neck source art OPEN. Do NOT resume neck context while95188 active.
+
+- F1 MEDIUM disclosure: remaining-source-causes.json is pre-rebind stage,5754 16.88px not delivered residual. Label in supplemental evidence; do not mutate frozenR11.
+- F2 UNPROVEN risk:73 anchors hop>5mm,38>20mm,max45.116mm, largely near-ray direction; endpoint views little parallax. Need actual old/new skin/collar feature/material/side90+270 ownership proof. Movement itself notdefect; same projected coordinate in side views not required for legit relocation. Do not demand impossible matching to nonexistent side source truth. Use real existing foldedsurface and source class evidence to distinguish wrongshell/wrongfeature.
+- F3 LOW disclosure:17 accepted ownerMismatch need actual old/new owner and rationale, flag not universally veto. F4 darktargetuncertainty mustremainexplicit; no repicktofitcandidate.
+- F5 reviewerclosed inherited5337/5794 near exceptions; verify actualvisibility not just2Dresidual if needed. Widealignment unchanged5.70median11.03p95.
+- F6 unprovencontributionhypothesis independently matches activeR12 diagnostic. Reviewer complement-only⇒geometry is NOT exhaustive causal proof: mixed contributions and wrongbinding remain possibilities. Don'taccept simplistic dichotomy or litpixelcountsasmetric. No globalopacitychange.
+
+After95188result, SAME neckDeveloper can supplementF1/F2/F3 and independent diagnostic to ONEsameOpus. No need re-run completeglobalhealth/main. Future R11+garmentcompose stillrequires actualgeometry/fieldoverlap checks. No Ticket or A13 acceptance.

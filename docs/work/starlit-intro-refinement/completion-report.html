@@ -1,0 +1,252 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>星空網站精修驗收</title><style>body{margin:0;background:#0b101b;color:#ece8dc;font:17px/1.8 system-ui,sans-serif}main{max-width:950px;margin:auto;padding:40px 24px}h1{font-size:clamp(27px,5vw,40px);line-height:1.3}h2{margin-top:36px;font-size:24px}a{color:#d9be8c}p,li{max-width:80ch}.status{border-left:4px solid #d9be8c;padding:14px 20px;background:#151d2a}.table{overflow:auto}table{width:100%;border-collapse:collapse;font-size:15px}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #344052;padding:12px 9px}details{margin:18px 0;padding:12px 16px;background:#121b28}summary{cursor:pointer;font-weight:650}code{overflow-wrap:anywhere}small{color:#b7beca}</style><main>
+<section id="ticket-48">
+<p><small>2026-09-19 · Ticket 48 · WSL Ubuntu · 本機預覽</small></p>
+<h1>卡片完成展開後微火、3.5px 細框與 LinkedIn</h1>
+<p class="status">已完成卡片與社群修改，背景仍只討論。已實際操作桌面與 390px 版面；真機效能、Safari、背景分頁暫停尚未量測，不宣稱全面驗證。</p>
+<div class="table"><table><tr><th>原始需求</th><th>狀態</th><th>結果</th></tr>
+<tr><td>1. 外側微火</td><td>完成，視覺偏好待確認</td><td>燒穿時不出現外火；完全展開後出現約 4px 的不規則短光焰。收回立即停止，切分頁卸載。膜本身的燒穿轉場保留。</td></tr>
+<tr><td>2. 外框</td><td>完成</td><td>總厚度 3.5px，各卡原配色保留。</td></tr>
+<tr><td>3. 字級</td><td>完成</td><td>卡片標題 17→16px、簡介 15→14px；未縮小整頁標題。</td></tr>
+<tr><td>4. 背景歷史與討論</td><td>完成追溯；新效果未實作</td><td>42 曾加入星塵，43 依使用者要求移除，44 改內容與邊框聚光。本輪選「淡星雲＋局部星光」，依先討論指示未改背景。</td></tr>
+<tr><td>5. Facebook→LinkedIn</td><td>完成</td><td>共用社群資料、圖示、雙語名稱、可及性標籤及指定 URL 同步更換。</td></tr>
+<tr><td>6. 模型／特效評估</td><td>完成程式盤點；效能量測未完成</td><td>GLB 約59.6 MB、189萬三角形，模型與三項星點資料合計約75 MB原始資料。值得優先量測首次載入與模型深度繪製；不能說負擔很小。未改模型。</td></tr>
+</table></div>
+<h2>驗收與限制</h2>
+<p>CUA 實際操作：完整開場→作品；三張卡展開→切英文→390px 捲動；聯絡頁→品牌重播。手機英文內容寬度與捲動寬度皆375px，無水平溢出；落定後三卡皆無火焰 canvas。頁尾與聯絡的 LinkedIn 連結正確，測試分頁 error logs 為空。</p>
+<p><strong>測試結論：</strong>TypeScript 與七支現有測試執行成功；本票48斷言通過，已停用的舊47厚度區塊明示 SKIP，並保存原始輸出，這不是完整覆蓋。兩位獨立 Reviewer 均接受 revision2，重要 Finding 已關閉；減少動態模式延遲為已揭露的不阻擋建議。修正輪只改註解與測試，不改已驗收的視覺行為。</p>
+<p>仍保留以下限制：停用的 Ticket 47 外火厚度測試會明示 SKIP，舊 REACH=20／MARGIN=20 與10–16門檻衝突未解，不能重新啟用該效果就當作已驗證；目前新微火不走該路徑。減少動態或不支援 clip-path 時，靜態微火仍晚約3.8秒出現。背景分頁的 CSS 動畫暫停未保證。未量真機 FPS／GPU／壓縮後傳輸量，也未測 Safari。</p>
+<p>已開卡的微火用兩層 CSS 動畫，沒有持續 WebGL context，仍有合成成本。原轉場20px外擴畫布保留，後續可再量測是否縮小。只在特定人物姿態繪製高面數模型，不能把189萬面當成每頁每幀皆有的負擔。</p>
+<h2>背景方向</h2>
+<p>深藍底搭配兩片極淡紫／靛藍不規則星雲，靜止時已有層次；滑鼠靠近時少量星點與奶茶金光逐漸亮起，移開再淡回。文字區保持清楚，人物仍是焦點。此處是討論紀錄，尚未新增背景效果。</p>
+<h2>你可以確認的畫面</h2>
+<p><a href="http://localhost:5173/starlit-full-preview">開啟目前預覽</a>：進「我的專案」後展開一張卡，確認外火只在完全展開後出现，強度是否符合「微微」；再看卡片字級與 LinkedIn。功能檢查已完成，最後的火焰觀感由你確認。</p>
+<details><summary>執行與審查配置</summary><p>依使用者交接設定，Developer、Reviewer A（Spec）、Reviewer B（Standards）均使用隔離 Claude CLI 上下文；WSL Ubuntu，stream init 實際模型皆為 claude-opus-5。命令請求 effort high，stream 未独立回報實際強度，實際值記 unknown。Developer 難度判斷為高／不確定（動畫時序與既有繪圖退路）；Reviewer 不適用難度路由。Coordinator 為本 Codex 任務，負責 CUA 實際驗收。</p><p>同時執行的 Claude Desktop Ticket47 涉及相同檔案，與最新時機要求衝突，已停止該 CLI（PID33752）。保留其既有 ResizeObserver 等改動，沒有回滾整棵工作樹。</p></details>
+<details><summary>證據、修改範圍與回復</summary><p>證據目錄：<code>C:/starlit-work/starlit-implementation/followup-48/</code>。包含 developer.md、developer-revision2.md、review-A.md、review-B.md、定向複驗、coordinator-ui.md、coordinator-notes.md、增量diff及SHA256。原始與修正後測試紀錄分開保留。</p><p>產品修改：components/starlit-shell.tsx／css／test.ts、lib/ember-fire-gl.ts／test.ts、lib/site-copy.ts。未改正式 app/page.tsx、未加依賴、未提交或部署。HEAD41e27f9之上已有大量未提交內容。</p><p>回復時以本票增量diff逐段反向套用並驗證；不能直接覆蓋 baseline/lib/ember-fire-gl.ts，因為它早於另一個 Claude 的 REACH／LIFT 改動。不要用整庫 reset 或 clean。</p></details>
+</section>
+
+<details><summary>歷史驗收報告（保留原紀錄）</summary>
+
+
+<p><small>2026-09-16 · Ticket 28 v3 · WSL Ubuntu · 主預覽</small></p>
+<h1>掃光加速、進入內容不再突然變小、分頁移到右上</h1>
+<div class="status" id="latest-result"><strong>v3：兩位 Reviewer 的 Findings 已逐項回應，B 的阻擋項重現後修正完成，等待定向複驗。</strong>（Developer 不自我核准，目前沒有三方共識。）末句金屬掃光 2.6 → 2.1 秒；從結尾按「/我的專案」進內容時，畫框與取景改成在 1.25 秒內連續收束，不再一幀跳掉；「/關於我／/我的作品／/聯絡資訊」整組移到右上 Language 左側，只在內容裡出現。左 1/3 人物、右 2/3 內容的比例完全沒變。</div>
+<p><a href="http://localhost:5173/starlit-full-preview">直接看效果</a>：讀到結尾 → 按「/我的專案」。</p>
+
+<p>最終 snapshot-v3 已通過兩位 Opus 5 Reviewer 定向複驗，Developer 同意交付，阻擋項已關閉。<a href="../../../work/starlit-implementation/followup-28/recheck-A.md">Spec 審查</a> · <a href="../../../work/starlit-implementation/followup-28/recheck-B.md">Standards 審查</a> · <a href="../../../work/starlit-implementation/followup-28/consensus.md">共識依據</a> · <a href="../../../work/starlit-implementation/followup-28/coordinator-ui.md">實際 UI 驗證</a>。900px 中段取景自然度仍待使用者實機確認；未部署。</p>
+<h2>v2 追加：分頁改成斜線名稱</h2>
+<p>內容頁三個分頁拿掉 <code>01／02／03</code>，改成 <strong>/關於我</strong>、<strong>/我的作品</strong>、<strong>/聯絡資訊</strong>，英文同樣加斜線（<code>/About me</code>、<code>/My work</code>、<code>/Contact</code>），和結尾的「/我的專案」同一個寫法。編號欄位（<code>sections.number</code>）只有分頁在用，所以整個拿掉，連帶失效的樣式一併刪除。<strong>內容頁其他編號一個都沒動</strong>：作品列表的「01 / 多 Agent 系統」、獎項年份照舊，正式首頁也沒碰。v1 的入口平順、2.1 秒掃光與分頁位置全部保留，實測落定幾何與 v1 完全相同。</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-28/evidence-after/1707x735-header-tabs.jpg" alt="v1 的分頁，帶 01 02 03 編號"><figcaption>v1：01 關於我／02 我的作品／03 聯絡資訊</figcaption></figure>
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-28/evidence-after-v2/1707x735-header-tabs.jpg" alt="v2 的分頁，改成斜線名稱"><figcaption>v2：/關於我／/我的作品／/聯絡資訊</figcaption></figure></div>
+<p>v3 定向複驗（各自 exit 0，未重跑入口前後矩陣）：<code>node components/starlit-shell.test.ts</code>（含 <code>PASS 4 shell frames</code>）、<code>node lib/site-copy.test.ts</code>、<code>npx tsc --noEmit</code>、<code>node work/starlit-implementation/followup-28/ui-checks.cjs after-v3</code>、<code>node …/opening-stage-probe.cjs v2-repro|v3</code>。真實 UI 重看：三個斜線分頁仍在 Language 左邊，1707／900／390 都沒有橫向溢出，方向鍵 + Enter 換章，切英文停在 <code>/About me</code>，品牌重播分頁消失。
+
+<h2>「突然變小」的根因</h2>
+<p>進內容的那一幀，畫面幾何一次跳三個地方，中間沒有任何過渡值：</p>
+<div class="table"><table>
+<tr><th>跳的東西</th><th>原因</th><th>1707×735</th><th>900×800</th></tr>
+<tr><td>舞台寬度</td><td>開場的舞台是 <code>position:absolute; inset:0</code> 的滿版層，內容頁是 grid 的第一欄；兩種定位之間沒有可內插的屬性</td><td>1707 → 569px</td><td>900 → 300px</td></tr>
+<tr><td>舞台高度</td><td>開場 header 不佔位，內容頁 header 回到 flow 佔 90px</td><td>735 → 645px</td><td>800 → 710px</td></tr>
+<tr><td>相機視角</td><td><code>siteCamera()</code> 以 canvas 長寬比取景，欄一窄就把 fov 撐開（既有設計，不是 bug）</td><td>28° → 28°</td><td>28° → 43.13°，人物投影一次掉 39%</td></tr>
+</table></div>
+<p>另外 <code>canvas</code> 的 <code>height: 108%</code> 只在內容頁生效，切換時還多跳一次 +8%。<code>ResizeObserver</code> 又把相機重算排到下一幀，所以那一幀是用舊畫布撐開的。</p>
+
+<h2>修正</h2>
+<p>全部在既有 layout 接縫，<strong>沒有關掉任何轉場、沒有動人物素材、沒有回到 49:51</strong>：舞台在開場也變成同一個 grid 的第一欄（軌道 <code>100% 0%</code>），內容頁的 1:2 改寫成等值的 <code>33.3333% 66.6667%</code>；桌面內容頁的 header 也改成浮在畫面上，那 90px 用 <code>padding-top</code> 讓出來。這三個屬性加上 canvas 高度，一起用 1.25 秒（等於 <code>TIMING.chapterMorph</code>）過渡，畫框收完的同時人物 2D 轉場也剛好完成。相機程式一行沒改——欄寬每幀都在變，既有的 <code>ResizeObserver</code> 就讓取景自己連續跟上。偏好靜態（reduced-motion）直接到定位，品牌重播則立刻回滿版。</p>
+<div class="table"><table>
+<tr><th>視窗</th><th>切換那一幀</th><th>過程取樣（舞台寬 / fov / 人物比例）</th><th>落定</th></tr>
+<tr><td>1707×735</td><td>1707×735、fov 28、比例 663.5 —— 與開場完全相同</td><td>786px → 671px → 569px，fov 一路 28</td><td>569×696.6、fov 28、比例 628.9</td></tr>
+<tr><td>900×800</td><td>900×800、fov 28、比例 722.2 —— 與開場完全相同</td><td>414px/fov 28/699 → 374px/35.4°/544 → 334px/39.2°/486</td><td>300×766.8、fov 43.13、比例 436.7</td></tr>
+</table></div>
+<p>落定的數字與修改前<strong>完全一樣</strong>，變的只有怎麼走過去。</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-28/evidence-before/900x800-2-settled.jpg" alt="修改前 900px 進內容後的畫面"><figcaption>修改前 900px：一幀之內人物縮成小團</figcaption></figure>
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-28/evidence-after/900x800-2-settled.jpg" alt="修改後 900px 進內容後的畫面"><figcaption>修改後 900px：同樣的落定，但是連續走到的</figcaption></figure>
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-28/evidence-after/1707x735-header-tabs.jpg" alt="1707px 內容頁，分頁在右上 Language 左側"><figcaption>分頁在 Language 左側（1707px）</figcaption></figure>
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-28/evidence-after/390x844-header.jpg" alt="390px 內容頁，分頁自己一列"><figcaption>390px：分頁自己一列，不擠掉 Language</figcaption></figure></div>
+
+<h2>v3：雙審回應與一個回歸修正</h2>
+<p>Reviewer B 找到一個<strong>本票造成的回歸</strong>：v1 把開場舞台從「絕對定位的滿版層」改成 grid 欄之後，<code>@media (max-width: 850px)</code> 那條原本只屬於內容頁的 <code>.starlit-stage { height: 60svh }</code> 連開場也吃到了，390×844 的開場星空被截在 y≈506。我自己用唯讀 probe 重現後確認成立，已把那條規則限定在內容頁。</p>
+<div class="table"><table>
+<tr><th>開場舞台（唯讀量測）</th><th>390×844</th><th>850×800</th><th>900×800</th><th>1707×735</th></tr>
+<tr><td>v2（回歸）</td><td>390×506 ✗</td><td>850×480 ✗</td><td>900×800</td><td>1707×735</td></tr>
+<tr><td>v3（修正後）</td><td>390×844</td><td>850×800</td><td>900×800</td><td>1707×735</td></tr>
+</table></div>
+<p>B 另外兩項建議與它是同一個根（狀態限定漏寫），一併以最小改動處理：桌面的 <code>.starlit-controls{margin-left:0}</code> 收進內容頁（開場的 Language 右上定位改回由本檔自己的 auto margin 決定，不再靠 <code>app/globals.css</code> 的裸 <code>header</code> 規則；右邊界一點沒動），浮動 header 的 90px 讓位 <code>padding</code> 不再綁 <code>data-stage</code>（沒有舞台的呼叫端不會被蓋住）。Reviewer A 的建議：補驗了結尾另一顆入口「/關於我」，落定 <code>569×696.6 / fov 28</code> 與「/我的專案」逐項相同；凍結清單的說明也補完整（見下）。</p>
+<p>測試補了一個真實 DOM harness <code>PASS 4 shell frames</code>（開場桌面／開場手機／內容頁無舞台／內容頁有舞台），iframe 裡<strong>只載入 starlit-shell.css</strong>，所以「開場 Language 靠右」在那裡成立就等於證明它不依賴全域樣式。三個修正各自還原一次確認測試真的會紅：<code>FAIL opening-phone 506/844</code>、<code>FAIL chapters-no-stage padding 0px</code>、<code>FAIL opening-desktop Language 370/1707</code>。</p>
+<p>v3 只改 <code>starlit-shell.css</code> 與 <code>starlit-shell.test.ts</code>；<code>starlit-shell.tsx</code> 與 <code>lib/site-copy.ts</code> 雜湊與 v2 相同。入口過渡、掃光、分頁位置與落定幾何都和 v2 一致。</p>
+
+<h2>頂部分頁</h2>
+<p><code>Tabs.Root</code> 上移成 shell 最外層的那個 <code>div</code>，<code>Tabs.List</code> 進 <code>&lt;header&gt;</code> 排在 Language 之前，三個 panel 留在內容欄——<strong>仍然只有一組 TabsRoot、一組 tablist</strong>。只有進內容才 render，開場所有段（含結尾）沒有分頁，內容原來的位置也不再出現第二組。膠囊的黑底與奶茶色選取態沿用原樣式。實測：方向鍵移動焦點、Enter 換章（Base UI 預設的手動啟動，本票沒改），<code>aria-labelledby</code>／<code>aria-controls</code> 互指；切英文後停在同一章；品牌重播分頁消失。桌面維持一列 90px（舞台就是靠這個數字讓位），窄螢幕分頁自己一列，390px 與 900px 都沒有橫向溢出、Language 都在畫面內。</p>
+
+<h2>你需要確認的</h2>
+<ol><li>讀到結尾按「/我的專案」：畫框收束是否順、有沒有還感覺得到跳。</li><li>900px 這種小桌面，落定後的人物大小（比開場小 39%）能不能接受——那是既有取景公式算出來的，本票沒有改它。</li><li><strong>900px 進入內容的中段</strong>：修改後仍有一次較大的取樣落差（scale 699 → 544，相隔 6ms），成因是既有的 <code>ResizeObserver</code> 把相機重算排到下一個 rAF，在 SwiftShader 每秒 2–10 幀下被放大。<strong>請在實機 900px 寬看一次進入動作</strong>再判定；要消掉它得改場景端的相機時序，超出本票授權。</li><li>末句掃光 2.1 秒的快慢。</li><li>右上三個分頁的位置與大小。</li></ol>
+
+<h2>已知限制</h2>
+<ul>
+<li>截圖與取樣都在 WSL SwiftShader 無頭瀏覽器，更新率遠低於實機，中間取樣格數少，也不能當色彩或流暢度的最終判定。</li>
+<li>900px 落定時人物比開場小 39%，是既有 <code>siteCamera()</code> 把人物塞進 300px 欄的結果，本票只讓它連續發生。</li>
+<li>桌面 header 固定 90px；分頁若因文案變長放不下，會在自己那一列橫向捲動（不溢出、不擠掉 Language），目前中英文在 900／1707 都放得下。</li>
+<li>外緣柔暗的 <code>mask-image</code> 在兩個狀態之間無法內插，切換時仍直接套用；它不影響尺寸感。</li>
+<li>1.25 秒是對齊 <code>TIMING.chapterMorph</code> 的實作選擇，不是使用者指定值。未跑 build，不做跨瀏覽器保證：不支援 <code>grid-template-columns</code> 過渡的引擎會直接跳到最終版面，也就是修改前的行為。</li>
+</ul>
+
+<details><summary>證據、命令與回復</summary><p><a href="../../../work/starlit-implementation/followup-28/developer-v3.md">v3：對 A／B 每一項的立場、重現與修正</a> · <a href="../../../work/starlit-implementation/followup-28/incremental-v3.diff">v2→v3 增量 diff</a> · <a href="../../../work/starlit-implementation/followup-28/frozen-v3.sha256">v3 凍結雜湊（以此為準）</a> · <a href="../../../work/starlit-implementation/followup-28/v3-ui-checks-log.txt">v3 UI 複驗輸出</a> · <a href="../../../work/starlit-implementation/followup-28/opening-stage-probe.cjs">開場舞台 probe</a> · <a href="../../../work/starlit-implementation/followup-28/review-A.md">Reviewer A 報告</a> · <a href="../../../work/starlit-implementation/followup-28/review-B.md">Reviewer B 報告</a> · <a href="../../../work/starlit-implementation/followup-28/developer.md">v1／v2 紀錄</a> · <a href="../../../work/starlit-implementation/followup-28/incremental-v2.diff">v1→v2 增量 diff</a> · <a href="../../../work/starlit-implementation/followup-28/frozen-v2.sha256">v2 凍結雜湊</a> · <a href="../../../work/starlit-implementation/followup-28/incremental.diff">v1 增量 diff</a> · <a href="../../../work/starlit-implementation/followup-28/frozen.sha256">v1 凍結雜湊</a> · <a href="../../../work/starlit-implementation/followup-28/entry-probe.cjs">入口取樣腳本</a> · <a href="../../../work/starlit-implementation/followup-28/ui-checks.cjs">真實 UI 操作腳本</a> · <a href="../../../work/starlit-implementation/followup-28/evidence-before/entry-samples.json">修改前逐幀量測</a> · <a href="../../../work/starlit-implementation/followup-28/evidence-after/entry-samples.json">修改後逐幀量測</a> · <a href="../../../work/starlit-implementation/followup-28/ui-checks-log.txt">UI 檢查輸出</a></p><p>命令各自 exit 0：<code>node work/starlit-implementation/followup-28/entry-probe.cjs before|after</code>、<code>node work/starlit-implementation/followup-28/ui-checks.cjs</code>、<code>node components/starlit-shell.test.ts</code>（含 reader 接縫、12 個真實 CSS 版面、6 個自介版面）、<code>npx tsc --noEmit</code>。依指示沒有重跑 build／lint／完整截圖矩陣，未重啟服務、未安裝套件、未部署、未 commit，正式首頁與延期功能不變。</p><p>v1 改 <code>components/starlit-shell.tsx</code>、<code>starlit-shell.css</code>、<code>starlit-shell.test.ts</code>；v2 另外改 <code>lib/site-copy.ts</code>。修改前原檔在 <code>followup-28/before/</code>（含 v2 才動到的 <code>lib/site-copy.ts</code>，v1 沒改過它，所以那份就是基準版本）。回復：先反向套用 <code>incremental-v2.diff</code> 回到 v1，再反向套用 <code>incremental.diff</code> 回到基準，不動其他未提交工作。v3 另外改了 <code>starlit-shell.css</code> 與 <code>starlit-shell.test.ts</code>，回復再多一步：先反向套用 <code>incremental-v3.diff</code> 回到 v2。<strong>凍結清單以 <code>frozen-v3.sha256</code> 為準</strong>：v1 的 <code>frozen.sha256</code> 裡 <code>developer.md</code>（v2、v3 追寫同一份文件）與 <code>ui-checks.cjs</code>（v2 加輸出目錄參數、v3 加開場與第二個入口的檢查）兩筆已不符，v1 的三個產品檔雜湊仍然有效；v1／v2 清單保留為當時紀錄，不再整份 verify。Developer 依 Spec 純程式配置使用 WSL Claude CLI claude-opus-5／medium；沒有獨立的推理強度 metadata。Developer 不自我核准，狀態為 Ready for Review。</p></details>
+
+<details><summary>歷史：Ticket 27 與更早交付</summary>
+<p><small>2026-09-16 · Ticket 27 v3 · WSL Ubuntu</small></p>
+<h1>邀請、新詩與金屬流光</h1>
+<div class="status" id="ticket27-result"><strong>實作、雙人獨立審查與 Developer 共識完成。</strong>一般預覽網址已實際走完新版邀請、金字末句與結尾。金屬反光質感與小桌面英文詩字級，待你最後看效果。</div>
+<p>邀請為「給來到這裡的你：／歡迎來到我的天地~／如果有機會，／我們一起約出來喝杯奶茶吧!」。末句「值得讓星空記下的事呢~」讀完後，斜向香檳金亮帶在字形內掃過一次，回到完整金字；返回該段可重播，不增加左鍵繼續的等待。</p>
+<p>四行詩已換新稿，包含「神火」「願此長旅，終抵群星。」並去掉多餘的句尾分號；右詩下移 16px。<a href="http://localhost:5173/starlit-full-preview">直接看效果</a></p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-27/v2-invitation-1707x735-zh.jpg" alt="給來到這裡的你，新邀請四行"><figcaption>最新邀請</figcaption></figure>
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-27/v2-cup-sweep-3.jpg" alt="金字筆畫內的斜向反光"><figcaption>金屬流光取樣畫格（非影片）</figcaption></figure></div>
+<p>驗證：文案、閱讀操作、排版、型別与 lint 通過；v3 只改 CSS 相容性、測試與報告，採定向複驗，沿用 v2 畫面與其餘檢查。未部署。英文長詩在小桌面維持單行需用 13px，實際閱讀舒適度待你確認。</p>
+<details><summary>審查、執行配置與證據</summary><p><a href="../../../work/starlit-implementation/followup-27/v3-A.md">A：Spec PASS</a> · <a href="../../../work/starlit-implementation/followup-27/v3-B.md">B：Standards PASS</a> · <a href="../../../work/starlit-implementation/followup-27/consensus.md">Developer 立場與共識依據</a> · <a href="../../../work/starlit-implementation/followup-27/coordinator-ui.md">實際 UI 操作</a> · <a href="../../../work/starlit-implementation/followup-27/closeout.json">產品雜湊</a></p><p>三方根據同一 snapshot-v3 同意交付，無未解決重要或阻擋項目。A 的英文 13px 閱讀建議保留 owner 判斷。Developer 與兩位獨立 Reviewer 均按 Spec 純程式配置使用 WSL Claude CLI claude-opus-5／medium；modelUsage 含 Opus 5，推理強度依啟動旗標，無獨立 metadata。</p><p><a href="../../../work/starlit-implementation/followup-27/developer.md">v1 實作證據</a> · <a href="../../../work/starlit-implementation/followup-27/developer-v2.md">v2 最新文案與金屬反光</a> · <a href="../../../work/starlit-implementation/followup-27/developer-v3.md">v3 定向修正</a> · <a href="../../../work/starlit-implementation/followup-27/frozen-v3.sha256">最終凍結 snapshot</a>。回復依序反向套用 incremental-v3.diff、incremental-v2.diff、incremental.diff，只回復本票範圍。</p><p>隱藏分頁時凍結的是既有閱讀時鐘；已開始的 CSS 掃光不會暫停，回來可能已播完。減少動態效果設定下顯示靜態金字。v2→v3 支援文字裁切的畫面經 Reviewer 像素比對相同；不支援的分支回退至實心金字。未跑 build／production 部署驗收。</p></details>
+<details><summary>歷史：Ticket 26 與更早交付</summary>
+<p><small>2026-09-16 · Ticket 26 · WSL Ubuntu · 主預覽</small></p>
+<h1>自介分組與語言選取色</h1>
+<div class="status" id="ticket26-result"><strong>Ticket 26 v2：實作、雙人獨立審查與三方共識完成。</strong>語言選單未選取白字、已選取奶茶色；自介新增較大的「你好」並分為兩組；引句改成「我勇於追求」。Coordinator 已在一般預覽網址實際操作，最終觀感待你確認。</div>
+<table><tr><th>項目</th><th>本次調整</th></tr>
+<tr><td>自介分組</td><td>文案最前面加上「你好」（英文 Hello），下一行「我是 皇家奶茶大師。」為上組；空一個組距後接「一位 創作者，」「一名 AI全端工程師，」「一個正在一步步實現理想的 夢想家。」。留白由第二組第一行的 margin 給，文案沒有插入空白朗讀段；問候字級大於自介正文（桌面 58px 對 24px），桌面末句仍為單行。</td></tr>
+<tr><td>顯字節奏</td><td>問候沿用同一套顯字動畫與同一個時鐘；自介該段由 2.4 秒延長為 2.8 秒（新增問候後，2.8 秒是 Coordinator 的實作選擇，並非使用者指定，已記入 ticket／spec 追加節），左鍵門檻仍等整段讀完（實測 2.45 秒仍有 3 個字未出且左鍵不換段，2.8 秒後為 0 並可前進）。其餘段落節奏未動。</td></tr>
+<tr><td>語言選單</td><td>展開清單未選取項目為白字 rgb(240,237,232)，已選取為奶茶色 rgb(224,196,157) 並保留淡奶茶底。hover／鍵盤高亮只換淡白底並加不透明奶茶色 2px 外框（v2 依 Review B 由 40% 透明度改為不透明，對選單底 12.18:1、對高亮底 9.35:1），文字色不變，不把未選取文字變成選取色。黑底膠囊與既有鍵盤、外點關閉、保留段落的行為不變。</td></tr>
+<tr><td>引句用字</td><td>「我追求」改為「我勇於追求」，英文由 What I pursue 改為 What I dare to pursue；三詞輪替與 25 票的較快引句／較慢三詞節奏沿用。</td></tr></table>
+<p><strong>驗證：</strong>copy、intro、shell（含新增的 6 組自介排版量測）、reader 掛載回歸、tsc 與單檔 lint 各自 exit 0。實際 5173 主預覽量測 1707×735、900×800、390×844 的中文與 1707×735、900×800 的英文：整段讀完、內容盒不出界、組距大於組內行距、問候大於正文。未新增依賴、未部署、未改正式首頁、未提交。</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-26/after-intro-1707x735-zh.jpg" alt="自介分成問候組與三句自介組"><figcaption>桌面自介分組</figcaption></figure>
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-26/after-menu-hover-unselected.jpg" alt="語言選單未選取為白字，已選取為奶茶色"><figcaption>語言選單選取色</figcaption></figure>
+</div>
+<details><summary>本票證據與限制</summary><p><a href="../../../work/starlit-implementation/followup-26/recheck-A.md">Reviewer A：Spec PASS（複驗完成）</a> · <a href="../../../work/starlit-implementation/followup-26/recheck-B.md">Reviewer B：Standards PASS（重要項目已關閉）</a> · <a href="../../../work/starlit-implementation/followup-26/developer-v2.md">v2 定向修正與證據</a> · <a href="../../../work/starlit-implementation/followup-26/incremental-v2.diff">v1→v2 增量 diff</a> · <a href="../../../work/starlit-implementation/followup-26/frozen-v2.sha256">v2 凍結雜湊</a> · <a href="../../../work/starlit-implementation/followup-26/developer.md">Developer 紀錄：diff、命令、限制與回復</a> · <a href="../../../work/starlit-implementation/followup-26/incremental.diff">本票增量 diff</a> · <a href="../../../work/starlit-implementation/followup-26/frozen.sha256">凍結雜湊</a> · <a href="../../../work/starlit-implementation/followup-26/after-states.json">實際量測</a>。修改前檔案備份於 followup-26/before。截圖由 SwiftShader 無頭瀏覽器產生，非最終色彩判定；兩位 Reviewer 均通過；畫面觀感仍待 owner。v1 的 copy／intro／shell／reader／lint／tsc 通過，v2 定向複驗 reader、lint、tsc 與選單焦點，不重跑 build。</p></details>
+
+<p><a href="http://localhost:5173/starlit-full-preview">查看效果</a> · <a href="../../../work/starlit-implementation/followup-26/consensus.md">Developer 共識與文件措辭更正</a> · <a href="../../../work/starlit-implementation/followup-26/coordinator-ui.md">Coordinator 實際 UI</a> · <a href="../../../work/starlit-implementation/followup-26/closeout.json">產品雜湊核對</a></p><details><summary>執行配置與保留建議</summary><p>本票 Developer 與兩位獨立 Reviewer 均按 Spec 純程式配置使用 WSL Claude CLI claude-opus-5／medium；modelUsage 含 Opus 5，推理強度依啟動旗標，無獨立 metadata。組首索引與測試 helper 清理建議不阻擋，保留後續處理。結案僅更正文書與狀態，產品仍與 snapshot-v2 相同。</p></details>
+<details><summary>歷史：Ticket 25 與更早交付</summary>
+<p><small>2026-09-16 · Ticket 25 · WSL Ubuntu · 主預覽</small></p>
+<h1>閱讀、亮度與換場起動調整</h1>
+<div class="status" id="ticket25-result"><strong>Ticket 25 v2：實作、雙人獨立審查與三方共識完成。</strong>一般預覽網址已實際走完開場與三個內容頁；黑底奶茶色選單、桌面 1:2 比例及星空前段同步動勢均已納入。亮度與節奏的最終觀感待 owner 確認。</div>
+<table><tr><th>項目</th><th>本次調整</th></tr>
+<tr><td>閱讀</td><td>一般顯字 2 → 2.4 秒；追求引句 1.7 → 1 秒。三詞各約 1.1 → 1.33 秒，翻換過渡 0.3 → 0.36 秒，整段仍為 5 秒。閱讀完成門檻與返回重播沿用同一時鐘。</td></tr>
+<tr><td>結尾與語言</td><td>桌面右詩下移 24px，左側品牌、職稱、入口約大 9%；入口加「/」。黑色 Language 膠囊含地球與箭頭，Base UI 深色繁體中文／English 選單沿用現有狀態，展開後亦為黑底與奶茶色，支援鍵盤與外點關閉。</td></tr>
+<tr><td>內容比例</td><td>桌面內容三頁改為左人物 1/3、右內容 2/3；手機維持上下排列。開場／結尾構圖不套此比例，人物沿用現有等比例取景。</td></tr>
+<tr><td>人物</td><td>橢圓中央完全不透明區由 50% 擴至 70%，寬桌面底部 76–91% 漸暗保留；窄桌面漸暗位置跟隨縮小的人物底緣。無全局曝光或新素材。</td></tr>
+<tr><td>星空起動</td><td>改跟隨原人物 shader 的前段速度曲線，取消 sin² 後加濾波的延遲。六方向 60 FPS 模擬的加速位移約 98.5% 在前 57.3% 完成，峰值在 28%；仍沿原星空旋轉軸與峰值預算，並非恢復原版整圈轉場。保留卡幀保護、角度累積與暫停。</td></tr></table>
+<p><strong>證據更正：</strong>v1 的 copy 測試實際 exit 1，先前誤報為 0；已修正入口 aria 名稱包含可見斜線，未放寬原斷言。v2 的 copy、reader、單檔 lint、tsc 各自 exit 0。其餘 v1 的 Shell／intro／scene 測試及 Base UI 操作結果沿用。桌面欄寬實測 569:1138（1707px）與 300:600（900px），手機維持上下排列；同票追加修改後的型別與建置證據另列於 Developer 紀錄。兩位獨立 Reviewer 均 PASS，Developer 同意共識；最終觀感待 owner。</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-25/final-menu.jpg" alt="黑底奶茶色語言選單"><figcaption>完整主題選單</figcaption></figure>
+<figure style="margin:0"><img style="width:100%" src="../../../work/starlit-implementation/followup-25/final-1707x735-pose2.jpg" alt="桌面人物與內容一比二"><figcaption>桌面內容 1:2</figcaption></figure>
+</div>
+<details><summary>本票證據與限制</summary><p><a href="../../../work/starlit-implementation/followup-25/developer-v2.md">v2 修正、證據更正與命令</a> · <a href="../../../work/starlit-implementation/followup-25/incremental-v2.diff">v1→v2 增量 diff</a> · <a href="../../../work/starlit-implementation/followup-25/frozen-v2.sha256">v2 凍結雜湊</a>。前後畫面、讀取依據與錯誤紀錄保存在 followup-25；未新增依賴、未部署、未修改正式首頁。</p></details>
+<details><summary>最終審查與交付</summary><p><a href="../../../work/starlit-implementation/followup-25/review-A-v2.md">A：Spec PASS</a> · <a href="../../../work/starlit-implementation/followup-25/review-B-v2.md">B：Standards PASS</a> · <a href="../../../work/starlit-implementation/followup-25/consensus.md">Developer 共識</a> · <a href="../../../work/starlit-implementation/followup-25/coordinator-ui.md">正常網址實際 UI 驗收</a> · <a href="../../../work/starlit-implementation/followup-25/closeout.json">交付產品雜湊</a></p><p>重要 Finding 已關閉。舊語言 toggle 文案未被使用，保留為非阻擋清理建議，本輪不擴大清理。build 與完整截圖矩陣來自 v1；v2 僅修正入口 aria、wrapper role 與報告證據，copy／reader／lint／tsc 定向複驗通過，未冒稱重跑完整建置。結案只更新票、報告與行政證據，產品保持 v2。</p><p>Developer 採指定 Codex CLI gpt-6-astra／medium；兩個獨立 Reviewer 採 Claude CLI claude-opus-5／medium。模型／推理配置依啟動紀錄，Reviewer modelUsage 回傳含 Opus 5；沒有獨立推理強度 metadata。全程 WSL，未部署。</p></details>
+<details><summary>歷史：Ticket 24 與更早交付</summary>
+<p><small>2026-09-16 · Ticket 24 · WSL Ubuntu · 主預覽</small></p>
+<h1>三姿態星空動勢與柔邊</h1>
+<div class="status" id="ticket24-result"><strong>第 24 票實作、兩位獨立審查與 Developer 共識均完成。</strong>最終版本 ticket24-v2；卡幀加速跳動已修正並關閉。Coordinator 已實際操作三張內容場景，owner 的加速強度與柔邊觀感仍待確認。第 23 票雙審已完成，其排版／英文語感 owner 確認仍保留。</div>
+<p>切換姿態時，背景同一片多色星空平滑加速再回慢轉；角度持續累加。內容場景改為橢圓外緣與底部漸暗，畫布向下延伸 8%，人物底部自然收束。使用原生 CSS 遮罩，未新增人體分割或矩形遮蓋，文字不在遮罩內。</p>
+<p><a href="http://localhost:5173/starlit-full-preview">主預覽</a>：在結尾選「關於我」或「我的專案」，切換三個內容分頁，確認星空加速、頭手細節與衣服底部。<strong>人物新 3D 轉場、貓娘、獨立 3D 奶茶與彗星仍延期；沒有部署或改正式首頁。</strong></p>
+<div class="table"><table><tr><th>驗證範圍</th><th>Developer 證據與限制</th></tr>
+<tr><td>六向動勢</td><td>v1 實際主預覽六向切換，231 個 frame 取樣，速度峰值約 55.58 倍，最後回到約 1 倍；累積時鐘單調。實際圖像由原有 .025 rad/s 軸向旋轉；軟體算圖取樣不是裝置 FPS 承諾。<a href="../../../work/starlit-implementation/followup-24/motion-samples.json">動態取樣</a></td></tr>
+<tr><td>邊界與構圖</td><td>1707×735、1280×720、900×800、390×844，各三姿態前後共 24 張端點實拍。底部 4% 亮像素由每圖 83–200 個降到 0（JPEG 色階門檻 65），中心人物保留；仍以 owner 實際觀感為最終判定。<a href="../../../work/starlit-implementation/followup-24/pixel-bands.json">像素對照</a></td></tr>
+<tr><td>連續性與回歸</td><td>真實 scene 接縫測六方向、加速中暫停／恢復、途中重選與重播；Reader 左鍵／返回、Shell、intro、copy、原開場取景及星色測試通過。開場與純星空閱讀段不套用此 CSS。<a href="../../../work/starlit-implementation/followup-24/commands.json">命令與退出碼</a></td></tr>
+<tr><td>型別與建置</td><td>v1 最終 tsc／build 各執行一次，均 exit 0；v2 局部數值修正以定向測試複驗；結果詳見 <a href="../../../work/starlit-implementation/followup-24/developer.md">Developer 交付紀錄</a>。</td></tr>
+</table></div>
+<p><small>證據限制：SwiftShader 部分 1707px 截圖間歇漏出 header／文字層，原因尚未定位；報告選用補拍的完整畫面，其他原圖保留。Coordinator 已在實際 Chrome 主預覽確認三姿態、header 與文字正常顯示。</small></p>
+<details><summary>前後畫面與原版依據</summary>
+<p>原版 app/page.tsx → AstralScene → lib/fantasy/scene.mjs；舊星空納入 createChapterMorph 的一圈重構，平時 rotateHeldObjects 使用 .025 rad/s。主預覽改用獨立 volumeSky 後，volumeClock 原本只累加 dt，漏掉轉場動勢。原版 globals.css 的 radial stage 背景與 canvas 底部線性遮罩提供柔邊依據；InteractiveSpace 是獨立效果，並非目前首頁此 canvas 的加速來源。</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px">
+<figure style="margin:0"><img style="width:100%" alt="修改前，星空方形邊界與人物下方星點條帶" src="../../../work/starlit-implementation/followup-24/before-1707x735-pose0.jpg"><figcaption>主預覽修改前</figcaption></figure>
+<figure style="margin:0"><img style="width:100%" alt="修改後，星空橢圓柔邊與人物底部漸暗" src="../../../work/starlit-implementation/followup-24/verified-1707x735-pose0.jpg"><figcaption>主預覽修改後</figcaption></figure>
+</div>
+<p><a href="../../../work/starlit-implementation/followup-24/before-original-pose1.jpg">原版實際畫面</a> · <a href="../../../work/starlit-implementation/followup-24/after-900x800-pose2.jpg">900px 小桌面</a> · <a href="../../../work/starlit-implementation/followup-24/after-390x844-pose1.jpg">390px 手機</a>。motion-transition-0.jpg 為實際重構中畫格；此組動態證據先於最終頂緣 6% 柔化，動勢及底部遮罩相同。沒有把靜態圖當成影片。</p>
+</details>
+<details><summary>執行配置、固定 snapshot 與修改範圍</summary>
+<p>Developer：使用者／Spec 指定 Codex CLI gpt-6-astra／medium、WSL Ubuntu；啟動端紀錄見 <a href="../../../work/starlit-implementation/followup-24/runtime.md">runtime.md</a>。此回合工具未回傳可獨立核對的實際模型 metadata，實際配置依 Coordinator 啟動紀錄，不拿全域預設冒充。Reviewer A／B：兩個獨立 Claude CLI 上下文，啟動指定 claude-opus-5／medium，結果 modelUsage 確認 Opus 5；推理強度依啟動旗標紀錄，無獨立回傳 metadata。A（Spec）與 B（Standards）最終均 PASS。</p>
+<p>產品只改 scene-study.mjs 與 starlit-shell.css；擴充既有 scene-initialization.test.mjs，報告更新於原檔。保留素材、相機方向、原 2D morph、文字與輸入；無安裝、重啟服務、提交、發布、reset 或 clean。</p>
+<p><a href="../../../work/starlit-implementation/followup-24/developer.md">完整命令、限制與回復邊界</a> · <a href="../../../work/starlit-implementation/followup-24/incremental.diff">本票實際增量 diff</a> · <a href="../../../work/starlit-implementation/followup-24/frozen.sha256">凍結雜湊</a> · <a href="../../../work/starlit-implementation/followup-24/preservation.json">既有工作保留檢查</a>。</p>
+</details>
+<details><summary>最終 v2 複驗與共識</summary><p>卡幀時限制額外加速的時間步長，保留正常慢轉與相機時間。0.5 秒停頓案例由單幀 18.81° 降為 1.53°；正常 60 FPS 模擬六方向峰值約 54.83 倍。低於 20 FPS 時會減少總加速轉角，以避免補轉硬跳。</p><p>v2 只改星空積分及既有場景測試；CSS、人物、文字未變。v1 的型別與 build 均通過；v2 跑定向場景回歸，沒有重跑或冒稱新一輪完整 build／畫面矩陣。上方瀏覽器 231 幀證據屬 v1，正常步長公式在 v2 等價。</p><p><a href="../../../work/starlit-implementation/followup-24/review-A-v2.md">A：Spec PASS</a> · <a href="../../../work/starlit-implementation/followup-24/review-B-v2.md">B：Standards PASS，重要 Finding 已關閉</a> · <a href="../../../work/starlit-implementation/followup-24/consensus.md">Developer 共識</a> · <a href="../../../work/starlit-implementation/followup-24/developer-v2.md">修正證據</a> · <a href="../../../work/starlit-implementation/followup-24/frozen-v2.sha256">最終快照雜湊</a> · <a href="../../../work/starlit-implementation/followup-24/coordinator-final-ui.md">Coordinator 實際 UI</a></p><p>本次三项：換場星空加速、橢圓柔邊、人物底部融合均完成。審查資料與舊 snapshot 保留；結案只更新票與報告狀態，產品檔仍等於 v2。回復時須先反向套用 v1→v2，再反向套用本票初始產品增量，不能覆蓋前票工作。</p></details>
+<details><summary>歷史交付：Ticket 23、19–22 與更早紀錄</summary>
+
+<p><small>2026-09-16 · Ticket 23 rev3 · WSL Ubuntu · 本機主預覽</small></p>
+<h1>縮窗排版與左鍵繼續</h1>
+<div class="status" id="result-23"><strong>第 23 票實作、驗證與兩位獨立審查均通過。</strong>位置、800px 窄桌面留白及英文措辭仍待你的最後確認。保留 19–22 與更早的交付歷史。</div>
+<p>寬度至少 800px 的橫式桌面保留右側自介、右詩左品牌；寬桌面結尾兩組下移 56px。移除底部提示列，讀完後點背景或文字前進一段，結尾仍自行選入口。邀請改為核准的三句，追求引句加大並稍右移，維持 5 秒。</p>
+<p>英文自介末句與結尾採較精簡的對等翻譯，配合桌面單行；完整中英文內容可由 snapshot 檢視。<strong>翻譯語感、人物留白與下移幅度仍待 owner 確認。</strong>手機依空間保留上方閱讀區，不強行下移壓住人物。</p>
+<p><a href="tickets/23-responsive-click-refinement.md">第 23 票</a> · <a href="http://localhost:5173/starlit-full-preview">開啟主預覽</a>。請確認結尾兩側下移、自介和追求播完可左鍵繼續、縮窗位置與三行邀請文案。</p>
+<p><a href="../../../work/starlit-implementation/followup-23/recheck-A.md">Reviewer A：通過</a> · <a href="../../../work/starlit-implementation/followup-23/recheck-B.md">Reviewer B：通過</a> · <a href="../../../work/starlit-implementation/followup-23/rev3/developer.md">最終實作與驗證</a> · <a href="../../../work/starlit-implementation/followup-23/coordinator-ui.md">實際 UI 操作紀錄</a></p>
+<div class="table"><table><tr><th>驗證</th><th>結果與證據</th></tr>
+<tr><td>輸入與回讀</td><td>掛載行為回歸涵蓋 beats 0–4 左鍵、播完前／連點／延遲舊事件拒絕、控制項排除、返回重播、5 秒追求與縮窗段號。<a href="../../../work/starlit-implementation/followup-23/rev3/targeted-final.log">測試輸出</a></td></tr>
+<tr><td>實際主預覽</td><td><a href="../../../work/starlit-implementation/followup-23/click-flow.json">真實左鍵流程</a>；<a href="../../../work/starlit-implementation/followup-23/verified-bounds.json">八尺寸雙語 DOM 邊界</a>。桌面跨舊 851px／6:5 斷點；手機 390×844、375×667。</td></tr>
+<tr><td>型別與建置</td><td>目標測試、typecheck、build 與 lint 均通過。<a href="../../../work/starlit-implementation/followup-23/rev3/commands.json">命令、退出碼與時間</a>；<a href="../../../work/starlit-implementation/followup-23/developer.md">Developer 證據與限制</a>。</td></tr>
+</table></div>
+<details><summary>本票執行設定、修正與複驗歷史</summary><p>Developer：Codex CLI gpt-6-astra／medium；Reviewer A、B：隔離 Claude CLI claude-opus-5／medium。最終驗證與複驗使用 WSL Ubuntu。<a href="../../../work/starlit-implementation/followup-23/runtime.md">實際執行紀錄與限制</a>；<a href="../../../work/starlit-implementation/followup-23/consensus.md">Developer 交付共識</a>。下方保留各階段當時狀態，最終以上方通過結論為準。</p><p><strong>rev3：</strong>已逐項回應 A／B。A 的窄窗與比例空隙修正沿用 rev2；B 的縮窗競態已先重現再修正，常規測試新增 12 個實際 CSS／DOM 排版樣本（含新斷點兩側與近正方比例），並修正無效的 indexOf 檢查與過時註解。800／900／1024 實拍及純人物對照未見詩句遮住人物，B 的鏡像輪廓推算不採用；800 留白仍窄，待 owner 視覺確認。開場移除整列提示符合最新授權，補上品牌等待畫面證據。<a href="../../../work/starlit-implementation/followup-23/rev3/developer.md">逐項獨立判斷、命令與限制</a>；<a href="../../../work/starlit-implementation/followup-23/rev3/opening.jpg">實際開場</a>；<a href="../../../work/starlit-implementation/followup-23/rev3/frozen.sha256">rev3 snapshot</a>。</p>
+<p>rev3 Shell／reader／intro／copy 測試、typecheck、build 通過；只做定向實拍，未重跑 64 樣本。英文精簡措辭未再修改，仍待 owner 確認。<strong>等待兩位獨立 Reviewer 各自複驗；Developer 不自行核准。</strong></p>
+<p><strong>rev2：</strong>Developer 已獨立重現 A 的 F1：700／760×700 的最長詩句碰到人物；另確認 1440×1441 會落入長寬比查詢空隙。桌面下界收回 800px，窄版條件完整互補；700–799px 橫窗的詩欄限寬，按語意換行避開手上星光，保留字級與相機。800px 桌面構圖保持原樣。<a href="../../../work/starlit-implementation/followup-23/rev2/developer.md">rev2 定向證據與獨立判斷</a>；<a href="../../../work/starlit-implementation/followup-23/rev2/frozen.sha256">rev2 snapshot</a>。v1 snapshot／雜湊原封保留；rev2 當時未讀 Reviewer B，沒有自行宣告雙審通過。</p>
+<p>rev2 定向檢查：700×700、760×700、800×700、1440×1441，中英文共 8 個結尾樣本與 Shell／reader 測試通過；800×700 全部記錄的 DOM 邊界與 v1 相同。只改 CSS 斷點／窄詩欄及測試定位字串，未重跑 64 樣本、typecheck 或 build；下方完整矩陣與建置結果屬保留的 v1 證據。英文措辭沒有再次修改，仍依下段揭露等待 owner 確認。</p>
+</details>
+<details><summary>前後畫面、位置與固定 snapshot</summary>
+<p>1707×735 結尾品牌 y 124→180、詩 y 156→212；小桌面移除舊版窄窗排版，不以舊版左下詩的位置作相同方向的比較。</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px">
+<figure style="margin:0"><img style="width:100%" alt="800×700 修改前，品牌與詩都在左側" src="../../../work/starlit-implementation/followup-23/before-800x700-zh-5.jpg"><figcaption>800×700 修改前</figcaption></figure>
+<figure style="margin:0"><img style="width:100%" alt="800×700 修改後，左品牌與右側四行詩" src="../../../work/starlit-implementation/followup-23/verified-800x700-zh-5.jpg"><figcaption>800×700 修改後</figcaption></figure>
+</div>
+<p><a href="../../../work/starlit-implementation/followup-23/baseline-hashes.json">基準雜湊</a> · <a href="../../../work/starlit-implementation/followup-23/incremental.diff">本票增量 diff</a> · <a href="../../../work/starlit-implementation/followup-23/frozen.sha256">固定 snapshot 雜湊</a>。原相機、素材、正式首頁與延期功能未改；未提交、未部署。</p>
+</details>
+<details><summary>歷史交付：Tickets 19–22 與更早紀錄</summary>
+
+<p><small>2026-09-16 · Tickets 19–22 最新追加範圍 · WSL Ubuntu · 僅本機主預覽</small></p>
+<h1>桌面排版、回讀節奏與近距離背面修正</h1>
+<div class="status" id="result-19-22">追加票 19–22 的實作、驗證與雙人獨立審查已完成，無未關閉的重要或阻擋問題；Developer 已確認交付共識。<strong>桌面構圖、正背取景與速度感待你最終視覺確認。</strong>本節取代歷史 18 對排版、背面、回讀節奏及驗收缺口的舊結論；原延期功能仍不計為完成。</div>
+<p><a href="http://localhost:5173/starlit-full-preview">開啟主預覽</a>。22 只更新報告與驗證證據，未修改產品。既有變更與素材均保留，未部署、未替換正式首頁。</p>
+<p>本次追加票：<a href="tickets/19-desktop-copy-layout.md">19</a> ／ <a href="tickets/20-reading-replay-tempo.md">20</a> ／ <a href="tickets/21-desktop-rear-camera.md">21</a> ／ <a href="tickets/22-followup-acceptance.md">22</a>。審查後僅行政更新本報告狀態與連結，產品維持凍結版本。</p><h2>本次交付</h2><div class="table"><table><tr><th>Ticket</th><th>實作與程式驗證</th><th>證據／狀態</th></tr>
+<tr><td>19 rev2</td><td>桌面中文自介右下四句單行、結尾四句詩右側單行、左側品牌組下移。邀請為「如果有機會，」／「我們一起在星空下喝一杯奶茶吧~!」，英文對等同步；最後放寬邀請欄寬，保留字級。三桌面中英文邀請各兩個實際文字行，其他英文段落不冒稱單行。</td><td><a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-19/developer.md">排版與文案</a>；<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-19/rev2/developer.md">邀請寬度修正</a>；<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-19/rev2/after.json">六樣本 Range 量測</a>。A／B 通過，畫面待 owner 確認。</td></tr>
+<tr><td>20 rev2</td><td>向上回讀自介與追求會重新播放，向下等待本次顯字完成且不累積被拒輸入。追求設定 5000 ms；22 真實滾輪、相機落定後觀測約 5.042 秒，依序技藝→自由→極限後停住。</td><td><a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-20/rev2/developer.md">行為測試與變異證據</a>；<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/smoke-results.json">最終實際滾輪結果</a>。A／B 通過；軟體算圖觀測時長不作精確效能承諾。</td></tr>
+<tr><td>21 rev2</td><td>桌面近距離正背微仰視，保留頭肩、不露腰；桌面獨立取景，手機沿用原鏡頭。原人物／手持物／其餘五落點及 2D 轉場保留。</td><td><a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-21/rev2/developer.md">近景投影與保留檢查</a>；<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/desktop-pursuit.png">1707×735 最終背面</a>。A／B 通過；美感待 owner 確認。</td></tr>
+<tr><td>22</td><td>1707×735 開場→自介→追求→兩段星空→結尾→三個內容分頁→品牌重播；真實滾輪回讀與重進。390×844 手機完整閱讀到結尾、聯絡與重播基本回歸，無頁面橫向溢出。最終 build／tsc 各一次 exit 0。</td><td><a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/developer.md">交付紀錄</a>；<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/smoke-results.json">整合斷言</a>；<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/build.log">build</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/tsc.log">tsc</a>。A／B 獨立審查通過，程式驗證完成，待使用者確認畫面。</td></tr>
+</table></div>
+<h2>原 18 三項缺口：現在的直接證據</h2><div class="table"><table><tr><th>原未定向重測項目</th><th>22 結果與範圍</th></tr>
+<tr><td>社群目的地</td><td>實際結尾 Email／GitHub／Instagram，以及聯絡頁全部四個 anchor 的 href 屬性和解析後 href 精確符合 Spec：mailto:leslie0907@gmail.com、https://github.com/RoyalMilkteaMaster、https://www.instagram.com/royal_milktea_master/、https://www.facebook.com/lin.pin.hong.446283。沒有寄信或外連點擊。<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/preparation-smoke.json">DOM 逐項結果</a>。</td></tr>
+<tr><td>背景暫停／恢復</td><td>沿用 20 真實背景分頁：確認 document.hidden、技藝與閱讀門檻停住 5.5 秒，回前景後完成至極限。22 另以測試分頁暫覆 hidden／visibilityState 並 dispatch visibilitychange，原生監聽器使數值 scene clock 在 1.718 秒內保持 22.9159，恢復後至 23.3492。22 暫停樣本顯示「技藝」；閱讀中段停住 5.5 秒的證據明確引用 20，不誤稱本次重測同一情境。<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-20/pause.json">真實分頁結果</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-20/pause.mjs">方法</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/smoke-results.json">數值時鐘結果</a>。</td></tr>
+<tr><td>可恢復 WebGL 錯誤與 Retry</td><td>Playwright 測試分頁注入 getContext('webgl2') 回傳 null，驗證實際錯誤 UI、未進內容、scene 未 ready；恢復原生 API，點真正「重試完整體驗」，確認 ready=true／failed=false／waiting 且錯誤消失。僅測試注入，沒有新增 production hooks；不宣稱覆蓋啟動後 GPU context-loss。<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/prepare.cjs">可重現腳本</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/preparation-smoke.json">結果</a>。</td></tr>
+</table></div>
+<h2>仍延期與待確認</h2>
+<p><strong>3D 奶茶與開頭貓娘仍隱藏，原素材保留；貓娘完整動畫／互動、人物新 3D 整合與六向轉場、彗星入口仍延期，音訊仍不在本輪範圍。</strong>13、14 原動畫整合、15／16／17 的未完成範圍不因 19–22 變成完成。14 隱藏補充與原 2D 轉場保留的既有證據沿用。</p>
+<p>請 owner 確認自介右下、兩句邀請、結尾右側四句與品牌位置，以及近距離背面和追求速度。<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/desktop-intro.png">自介</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/desktop-invitation.png">邀請</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/desktop-ending.png">結尾</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/mobile-ending.png">手機</a>。<a href="../../../work/starlit-implementation/desktop-followup-19-22/coordinator-ui.md">Root 實際 Chrome UI 紀錄</a>另載全流程與邀請修正後兩行確認，不代替 owner 最終接受。</p>
+<p>限制：測試使用既有 5173 devserver 與 WSL Chromium／SwiftShader，不是 production server 或手機硬體效能驗收；未重跑全尺寸矩陣、英文全流程與跨瀏覽器。手機橫式提示、aspect .8 分界與邀請句寬餘裕等既有建議未擴充修正。console 只有既有 favicon.ico 404，未擴張處理；有效執行沒有 pageerror 或 HMR 更新，其他票的 HMR 無效紀錄不採作通過證據。</p>
+<details><summary>審查、沿用與凍結證據</summary>
+<p>19 rev2：<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-19-recheck-A.md">A 通過</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-19-recheck-B.md">B 通過</a>；20 rev2：<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-20-recheck-A.md">A 通過</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-20-recheck-B.md">B 通過</a>；21 rev2：<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-21-recheck-A.md">A 通過</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-21-recheck-B.md">B 通過</a>。22：<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22-review-A.md">A 通過</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22-review-B.md">B 通過</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22-consensus.md">Developer 交付共識</a>。</p>
+<p>19 自介／結尾單行及文案、21 原始模型與取景保留、20 掛載／變異測試均沿用各票既有證據，未重跑大矩陣。18 雙語 canvas 名稱及隱藏資產證據沿用，<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/preserved-18-product.json">相關模組比對</a>記錄舊版與現值；19–21 預期變動以各自 rev2 凍結為準。</p>
+<p><a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/before-product-hashes.json">整合前產品雜湊</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/frozen-sha256.json">最終產品、報告與證據雜湊</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/actual.diff">本票報告 diff</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/smoke.cjs">最終腳本</a>／<a href="../../../work/starlit-implementation/desktop-followup-19-22/ticket-22/smoke.log">執行記錄</a>。準備階段證據完整保留，與最終執行分開。</p>
+<p>Developer22：沿用原 preparation session，Codex CLI gpt-6-astra／medium，依 Root 啟動紀錄；WSL Ubuntu，無 agents／install／commit／push／deploy／server restart。<a href="../../../work/starlit-implementation/desktop-followup-19-22/runtime.md">Root CLI／Reviewer 配置</a>。全部產品前後雜湊一致，22 未改產品；兩個新獨立 Reviewer 均通過。</p>
+</details>
+<details id="history-18"><summary>歷史 09–18 報告（原文保留，當時「完成」僅指縮減範圍；衝突結論由上方 19–22 取代）</summary>
+
+<p><small>2026-09-16 · WSL 實作 · 僅本機主預覽</small></p><h1>保留原角色與 2D 轉場，統一星空與文字排版</h1>
+<div class="status" id="result">本輪縮減範圍已完成：09／10／11（含共用星空）／12 奶茶隱藏／14 開頭貓娘隱藏／18 整合驗收，皆經兩位獨立 Reviewer 通過，無未關閉的重要或阻擋問題。最終產品 build、型別檢查及兩次桌面整合測試通過。<strong>原貓娘動畫、人物 3D 轉場與彗星入口依使用者指示延期，不計為完成。</strong></div>
+<p><a href="http://localhost:5173/starlit-full-preview">開啟主預覽</a>。本次依使用者最新指示縮減範圍：貓娘與人物 3D 轉場延期，保留原有粒子切換；開頭貓娘與全部3D奶茶都依使用者新指示暫移除。3035 的動畫候選沒有接入網站。</p>
+<h2>本次改了什麼</h2><ul><li>圖二、圖三使用圖一同一片多色立體星空與旋轉時間；人物、衣服、頭髮與手持物資料保留。</li><li>文字逐句顯現、讀完再前進；追求文字翻轉一次後停「極限」。修正鍵盤、回讀與閱讀門檻。</li><li>整理中文四行詩、英文長句換行、關鍵字與標點；英文自介避開語言鈕，結尾不再裁切。手機提示避開背面人物。</li><li>保留已驗證的背面近景、手機取景；3D奶茶素材保留，主預覽開頭、結尾與內容均先移除。</li><li>開頭貓娘依最新指示不再建立或繪製，插畫素材與既有 2D 程式全部保留（14，雙審通過）。</li><li>畫面已無 3D 杯後，canvas 的螢幕閱讀器名稱改成中性且真實的雙語描述：中文「星空與星點人物」、英文「The stars and the starlit figure」（18 本次唯一產品修改）。</li></ul>
+<h2>需求狀態</h2><div class="table"><table><thead><tr><th>原需求</th><th>狀態</th><th>實際結果</th></tr></thead><tbody>
+<tr><td>A01–A02 閱讀、翻字與文案</td><td>完成</td><td>09／10 已雙審；杯與詩留白試改取消並精確恢復rev3，原字體修正保留。</td></tr>
+<tr><td>A03 近景與手機方向</td><td>完成</td><td>11 rev3 已雙審，完整雙肩、腰部畫外，保留原相機方向。</td></tr>
+<tr><td>A04 星空段與結尾排版</td><td>完成</td><td>中文四句在 1707×735 與 1280×720 都各佔一行；英文是四句語意分段，1707×735 實測 5 行（19.68px），1280×720 字級收到 15px 但完整未裁切。<strong>不冒稱英文四行。</strong></td></tr>
+<tr><td>A05–A06 貓娘動作與互動</td><td>延期／本輪範圍外，不算完成</td><td>13 動作開發與 14 原完整動畫整合依使用者指示延期，候選與素材保留。</td></tr><tr><td>（使用者追加）移除開頭貓娘</td><td>完成（僅隱藏補充）</td><td>14 只停用開場貓娘的建立與繪製；場景測試與瀏覽器實測顯示各階段與 replay 後 catgirlDraws=0、圖集點陣圖 0 次請求。見 <a href="../../../work/starlit-implementation/approved-09-18/ticket-14-hidden/developer.md">14 交付紀錄</a>；<strong>兩位獨立 Reviewer 均通過</strong>。</td></tr>
+<tr><td>A07–A08 GLB整合與六向3D動作</td><td>未完成，依使用者指示延期</td><td>15候選未達品質，不採用；16不啟動。保留原2D人物／粒子轉場。</td></tr>
+<tr><td>A09–A10 新轉場控制與彗星入口</td><td>延期／本輪範圍外</td><td>依「轉場跟現在一樣」不啟動17，維持既有行為。</td></tr>
+<tr><td>A11 奶茶與背景</td><td>完成（奶茶素材保留，展示暫移除）</td><td>12-hidden 已雙審（<a href="../../../work/starlit-implementation/approved-09-18/ticket-12-hidden-review-A.md">A</a>／<a href="../../../work/starlit-implementation/approved-09-18/ticket-12-hidden-review-B.md">B</a>），開頭／結尾／內容皆不建立或繪製 3D 奶茶，12 的精修原材料保留但不展示。11-sky 已雙審，三姿態共用同一 midpoint 星空。</td></tr>
+<tr><td>A12 整合與操作</td><td>完成（本輪縮減範圍）</td><td>最終產品 <code>npm run build</code> exit 0、<code>tsc --noEmit</code> exit 0；1440×900 桌面冒煙連兩次 exit 0：雙語 canvas 描述、逐段真實點擊到結尾、三個章節 tab、品牌鍵 replay，全程 catgirlDraws=0／cupDraws=0、無 pageerror。Coordinator 另以原生 Chrome 實際操作桌面、手機與中英文。</td></tr>
+</tbody></table></div>
+<h2>你需要確認的畫面</h2><ol><li>開啟主預覽：看自介與追求的字體、兩段星空文字及結尾詩。</li><li>點「我的專案」或「關於我」，切換三個分頁，確認圖二、圖三背景旋轉與圖一一致，角色細節維持原樣。</li><li>切英文，確認長句自然換行；手機直式再看一次結尾與閱讀提示。</li></ol>
+<h2>已知限制</h2><ul><li>本機瀏覽器與模擬手機尺寸已測，未宣稱手機硬體實機 FPS。較舊瀏覽器不支援 cqw／safe alignment 時會回退，未做跨瀏覽器保證。</li><li>英文詩在窄桌面最低15px；中文寬桌面約16–22px。英文末句較長，保留原文與可讀性，允許換行。</li><li>844×390橫式手機的追求提示仍可能壓住後腦，屬既有低嚴重度限制，非本輪修正造成；直式手機與指定桌面尺寸已另驗。</li><li>星空共用時舊背景槽仍保留但透明，以維持原粒子配對；除錯點數欄位不可直接當作全場景效能統計。</li><li>18 的整合冒煙跑在本機已在執行的開發伺服器（WSL Chromium／SwiftShader 軟體算圖），不是正式 build 的伺服器；build 產物只用字串比對確認新描述已進 bundle、舊杯描述已不存在。未啟停任何服務，也不宣稱 GPU 或實機效能數字。</li><li>社群目的地、切背景暫停、WebGL 重試接縫本輪未改，未另外定向重測。最終 18 只補雙語無障礙描述，手機流程沿用 14 與前票驗證；不宣稱最終版手機全流程已再次人工重跑。</li></ul>
+<details><summary>實作與審查配置</summary><div class="table"><table><tr><th>Ticket</th><th>Developer</th><th>Reviewer A／B</th></tr><tr><td>09、10</td><td>Claude CLI · claude-opus-5 · medium</td><td>兩個隔離 Claude CLI · claude-opus-5 · medium</td></tr><tr><td>11、11-sky、12</td><td>Codex CLI · gpt-6-astra · medium</td><td>兩個隔離 Claude CLI · claude-opus-5 · medium</td></tr><tr><td>13、15候選</td><td>Codex CLI · gpt-6-astra · medium</td><td>使用者停止，未完成正式雙審</td></tr><tr><td>14隱藏補充</td><td>Claude CLI · claude-opus-5 · medium</td><td>兩位獨立 Reviewer 通過；原完整動畫整合延期</td></tr><tr><td>16、17</td><td>未派發</td><td>未派發</td></tr><tr><td>18</td><td>Claude CLI · claude-opus-5 · medium</td><td>兩個全新獨立上下文均通過；Developer 確認交付共識</td></tr></table></div><p>配置依已核准Spec明示，不使用自動難度選模。全程命令在 WSL Ubuntu 執行；Windows僅承載桌面與啟動WSL。實際CLI紀錄見 <a href="../../../work/starlit-implementation/approved-09-18/coordinator-runtime.md">配置與執行紀錄</a>。</p></details>
+<details><summary>驗證與證據</summary><p>最終版本（含 12-hidden、14-hidden 與 18 的雙語描述）各跑一次：<code>npm run build</code> exit 0、<code>tsc --noEmit</code> exit 0。桌面 1440×900 整合冒煙 <code>smoke.cjs</code> 連續兩次 exit 0。較早那次 10 rev3／11-sky rev1 的 build（<a href="../../../work/starlit-implementation/approved-09-18/final-build.log">final-build.log</a>）保留為當時紀錄，不用來代表現在的版本。</p><ul><li><a href="../../../work/starlit-implementation/approved-09-18/ticket-18/build.log">18 最終 build.log</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-18/tsc.log">tsc.log</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-18/smoke.cjs">冒煙腳本</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-18/smoke-results.json">逐步實測值</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-18/developer.md">18 交付紀錄</a></li><li><a href="../../../work/starlit-implementation/approved-09-18/ticket-14-hidden/developer.md">14 移除開頭貓娘交付與實測</a>（雙審通過）</li>
+<li>最終審查：<a href="../../../work/starlit-implementation/approved-09-18/ticket-14-hidden-review-A.md">14 A</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-14-hidden-review-B.md">14 B</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-18-review-A.md">18 A</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-18-review-B.md">18 B</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-18-consensus.md">18 Developer 共識</a></li><li><a href="../../../work/starlit-implementation/approved-09-18/user-scope-update-2d.md">使用者最新範圍</a></li><li><a href="../../../work/starlit-implementation/approved-09-18/final-coordinator-ui.md">Coordinator實際UI操作與發現</a></li><li><a href="../../../work/starlit-implementation/approved-09-18/ticket-09-recheck-A.md">09 A</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-09-recheck-B.md">09 B</a></li><li><a href="../../../work/starlit-implementation/approved-09-18/ticket-10-recheck-A.md">10 rev3 A</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-10-recheck-B.md">10 rev3 B</a></li><li><a href="../../../work/starlit-implementation/approved-09-18/ticket-11-recheck-A.md">11原相機 A</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-11-recheck-B.md">11原相機 B</a></li><li><a href="../../../work/starlit-implementation/approved-09-18/ticket-11-sky/rev2/developer.md">共用星空修正與測試</a></li><li><a href="../../../work/starlit-implementation/approved-09-18/ticket-12-recheck-A.md">12 A</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-12-recheck-B.md">12 B</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-12-hidden-review-A.md">12-hidden A</a> ／ <a href="../../../work/starlit-implementation/approved-09-18/ticket-12-hidden-review-B.md">12-hidden B</a></li><li><a href="../../../work/starlit-implementation/approved-09-18/candidate-v1-assessment.md">3D候選不採用的依據</a></li></ul></details>
+<details><summary>修改範圍與回復</summary><p>基準 main <code>41e27f9eb99e6c93d344dc5f9e5ebd6df855f0f6</code>，保留所有原有未提交資料。各票保存修改前當下檔案、增量diff及最終snapshot；回復應按票的before/diff還原，不使用 git reset/clean 抹掉其他工作。主預覽不依赖3035/5193候選服務。未Commit、Push、發布，也未替換正式首頁。</p><p>主要產品檔：<code>components/starlit-shell.tsx/css</code>（閱讀與文字）、<code>app/starlit-sky-study/brand-sky.mjs</code>及<code>lib/fantasy/camera.mjs</code>（取景）、<code>scene-study.mjs / legacy-study.mjs</code>（共用星空），奶茶相關檔依12的固定清單。14 另改 <code>app/starlit-sky-study/brand-ceiling.mjs</code>、<code>scene-study.mjs</code> 與其測試；18 只改 <code>lib/site-copy.ts</code> 的兩行雙語 canvas 描述。各票最終檔案雜湊見 <a href="../../../work/starlit-implementation/approved-09-18/ticket-18/frozen-sha256.json">18 凍結快照</a> 與 <a href="../../../work/starlit-implementation/approved-09-18/ticket-14-hidden/frozen-sha256.json">14 凍結快照</a>。</p></details>
+<p><small>結案只更新本報告狀態與審查連結，產品檔維持兩位 Reviewer 驗證的凍結雜湊；歷史快照與當時「審查中」記錄保留。</small></p>
+</details>
+</details>
+</details>
+</details>
+</details>
+</details>
+</details>
+</details>
+</main></html>

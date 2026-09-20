@@ -1,0 +1,6 @@
+# Root actual UI — frozen cloth foreground R2
+2026-09-12. Reused hidden IABtab20; user WC1tab19 unchanged. Loaded raw-cloth-foreground-astra-r2/index.html and finalguards mesh9ae30717/poolffd32c60/607702points/NVIDIA4090ANGLE. Actual wide STAR, inspector/full100/propOFF90 and270 SOLID,180STAR, then inspectorOFF/propON/Replay.
+The restored inner panel is visible in the former torso-exposure region, and the descending foreground reads more complete in wide STAR than R1. Both side views show joined cloth, without an obvious new free pocket or floating cap in these selected views. The hem remains a stylized straight-edged construction; these views alone do not establish exact original cloth drape. Back remains coherent. This is a useful local gain suitable for reviewer evaluation and eventual guarded combined comparison, not whole-character/source-likeness or Main/Ticket approval. Other unresolved R13 head/hand features are outside this cloth delta.
+Actual screenshots in conversation tool outputs only, no invented local paths. Current title/assetguards identifyR2; near caption still has older r5/r1 wording and should be corrected in the next mutable combined runtime. Userpreview unchanged.
+
+Observed Replay reaches12s/wide with propON. QA20 endsclothR2STARwide12propONinspectOFF.

@@ -1,0 +1,181 @@
+{
+  "status": "Intact new-model intake; no artistic approval",
+  "sourcePath": "C:\\Users\\leslie\\Desktop\\\u81e8\u6642\\cosmic+fantasy+character+3d+model.glb",
+  "file": "source.glb",
+  "sha256": "db1842943d71f1814bddfd03b6fc38b4a340bf63a4272bb5f24e2f949cf2a72a",
+  "bytes": 59631268,
+  "asset": {
+    "generator": "Tripo",
+    "version": "2.0"
+  },
+  "vertices": 1085045,
+  "triangles": 1891326,
+  "indexRange": [
+    0,
+    1085044
+  ],
+  "primitiveCount": 1,
+  "materialCount": 1,
+  "localBounds": [
+    [
+      -0.40095531940460205,
+      0.0,
+      -0.4774627983570099
+    ],
+    [
+      0.40095531940460205,
+      0.97918701171875,
+      0.4774627983570099
+    ]
+  ],
+  "worldBounds": [
+    [
+      -0.40090954303741455,
+      0.0,
+      -0.4779053032398224
+    ],
+    [
+      0.40100109577178955,
+      0.97918701171875,
+      0.4770202934741974
+    ]
+  ],
+  "localToWorldTranslation": [
+    4.57763671875e-05,
+    0.0,
+    -0.0004425048828125
+  ],
+  "worldFromLocal": "world XYZ = local XYZ + node0.translation; right-handed +Y up; no normalization or alignment applied",
+  "worldToLocal": "local XYZ = world XYZ - node0.translation",
+  "indexNamespace": "fantasy-db184294/mesh0/primitive0; source accessor vertex/index order unchanged; no correspondence to old-model indices",
+  "attributes": {
+    "POSITION": {
+      "accessor": 0,
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 1085045,
+      "max": [
+        0.40095531940460205,
+        0.97918701171875,
+        0.4774627983570099
+      ],
+      "min": [
+        -0.40095531940460205,
+        0,
+        -0.4774627983570099
+      ],
+      "type": "VEC3",
+      "sha256": "4bc58a53e4a39f027cf687c0665029751f103bfe88962afe07807783637a3233"
+    },
+    "NORMAL": {
+      "accessor": 1,
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 1085045,
+      "type": "VEC3",
+      "sha256": "f078f1089b7ae93bb35cad7cae0f9507162c5316810168a9fcff0b987941a3eb"
+    },
+    "TEXCOORD_0": {
+      "accessor": 2,
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 1085045,
+      "type": "VEC2",
+      "sha256": "d47f718c7780f0b302e212c591a003107f9ef1b6f4f0f8819b379e1ceca527c2"
+    }
+  },
+  "indexSHA256": "05cf706bb660803e73f67863ae1bafedae533387a48ee6a23121aadf30e191b3",
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "tripo_node_a0f4e007-3939-49a2-8a9b-27eb37694c39",
+      "translation": [
+        4.57763671875e-05,
+        0,
+        -0.0004425048828125
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_mat_a0f4e007-3939-49a2-8a9b-27eb37694c39",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicRoughnessTexture": {
+          "index": 2
+        }
+      }
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "images": [
+    {
+      "bufferView": 4,
+      "mimeType": "image/jpeg",
+      "name": "cosmic_fantasy_character_3d_model_normal",
+      "sha256": "5aa374be618dbf1a186c0d37cef81eabcbfd559abfbf9825e655b83bc186a5b9",
+      "bytes": 514877,
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "bufferView": 5,
+      "mimeType": "image/jpeg",
+      "name": "cosmic_fantasy_character_3d_model_basecolor",
+      "sha256": "646789b702e5b8c9ff6883abf9f580ddd23078bc667147e03116e583bf56d256",
+      "bytes": 1190578,
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "bufferView": 6,
+      "mimeType": "image/jpeg",
+      "name": "cosmic_fantasy_character_3d_model_rm",
+      "sha256": "80ed585b55cf6f507484f2f373c4da6489c638f859c48014548318a21e258a16",
+      "bytes": 506509,
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "skins": 0,
+  "animations": 0,
+  "uvRange": [
+    [
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0
+    ]
+  ],
+  "normalLengthRange": [
+    0.9999998807907104,
+    1.0000001192092896
+  ],
+  "oldModelBindingsLoaded": false
+}

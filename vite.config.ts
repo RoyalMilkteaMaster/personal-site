@@ -48,9 +48,11 @@ export default defineConfig(async () => {
     resolve: { dedupe: ['react', 'react-dom'] },
     optimizeDeps: { include: ['@base-ui/react/tabs'] },
     css: { postcss: { plugins: [tailwindcss()] } },
-    server: isCodexSeatbeltSandbox
-      ? { watch: { useFsEvents: false, usePolling: true } }
-      : undefined,
+    server: { watch: {
+      ignored: ['**/work/**', '**/outputs/**'],
+      ...(isCodexSeatbeltSandbox || process.platform === 'win32'
+        ? { useFsEvents: false, usePolling: true } : {}),
+    } },
     plugins: [
       vinext(),
       sites(),

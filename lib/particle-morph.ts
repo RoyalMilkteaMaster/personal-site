@@ -9,13 +9,14 @@ export class ParticleMorph {
  private start=0;
  private duration=1;
  private direct=false;
+ private closeup=false;
  constructor(initial:Float32Array){this.current=initial.slice();this.from=initial.slice();this.target=initial.slice();}
  update(now:number){
   const raw=Math.max(0,Math.min(1,(now-this.start)/this.duration));
   if(raw===1){this.current.set(this.target);return this.current;}
   for(let k=0;k<this.current.length;k+=STRIDE){
    const id=k/STRIDE,delay=(id*.61803398875)%1*(this.direct?.025:.12);
-   const t=Math.max(0,Math.min(1,(raw-delay)/(1-delay))),p=this.direct?chapterProgress(t):ease(t),appearance=p;
+   const t=Math.max(0,Math.min(1,(raw-delay)/(1-delay))),p=this.direct&&!this.closeup?chapterProgress(t):ease(t),appearance=p;
    if(t===0){this.current.set(this.from.subarray(k,k+STRIDE),k);continue;}
    const arc=Math.sin(Math.PI*p);
    const phase=id*2.399963,spin=arc*1.45,c=Math.cos(spin),s=Math.sin(spin);
@@ -37,7 +38,7 @@ export class ParticleMorph {
     const sr=Math.hypot(sx,sq),tr=Math.hypot(tx,tq);
     const a=Math.atan2(sq,sx),end=Math.atan2(tq,tx);
     const delta=Math.atan2(Math.sin(end-a),Math.cos(end-a));
-    const winding=2*Math.PI*p+.8*arc*Math.sin(sr*13+phase*.04);
+    const winding=this.closeup?.55*arc:2*Math.PI*p+.8*arc*Math.sin(sr*13+phase*.04);
     const angle=a+delta*p+winding,r=sr+(tr-sr)*p;
     const height=tilt*y+u*z,q=Math.sin(angle)*r;
     this.current[k]=Math.cos(angle)*r;
@@ -58,11 +59,11 @@ export class ParticleMorph {
   return this.current;
  }
  complete(now:number){return now>=this.start+this.duration;}
- retarget(target:Float32Array,now:number,duration=1050,displayed?:Float32Array,direct=false){
+ retarget(target:Float32Array,now:number,duration=1050,displayed?:Float32Array,direct=false,closeup=false){
   if(target.length!==this.current.length)throw new Error('Particle counts must remain equal');
   if(displayed&&displayed.length!==this.current.length)throw new Error('Displayed particle counts must remain equal');
   if(displayed)this.current.set(displayed);else this.update(now);
-  this.from.set(this.current);this.target.set(target);this.start=now;this.duration=Math.max(1,duration);this.direct=direct;
+  this.from.set(this.current);this.target.set(target);this.start=now;this.duration=Math.max(1,duration);this.direct=direct;this.closeup=closeup;
  }
 }
 export function galaxy(count:number,angle=0,out=new Float32Array(count*STRIDE)){

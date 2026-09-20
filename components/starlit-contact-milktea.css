@@ -1,0 +1,34 @@
+/* Ticket 03（starlit-moon-contact）— 聯絡區右側的 3D 貓貓奶茶。
+   與關於我的 .starlit-about-head 同一種兩欄 grid：文字欄拿剩下的寬度，
+   奶茶欄 auto、右緣停在內容欄右緣。畫布透明、不接指標事件，失敗時整欄收起。 */
+.starlit-contact-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0 clamp(20px, 3vw, 44px);
+}
+
+.starlit-contact-intro {
+  min-width: 0;
+}
+
+.starlit-contact-milktea {
+  display: block;
+  justify-self: end;
+  /* 上限 330px，其餘依視窗寬縮放；標題實際行數隨字體與欄寬自然換行，不在此保證固定行數。 */
+  width: clamp(200px, 23vw, 330px);
+  aspect-ratio: 4 / 5;
+  pointer-events: none;
+}
+
+@media (max-width: 850px) {
+  /* 窄螢幕照關於我的做法：奶茶另起一列，在文字下方、Email 區塊上方置中。 */
+  .starlit-contact-head {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 12px;
+  }
+  .starlit-contact-milktea {
+    justify-self: center;
+    width: clamp(200px, 58vw, 300px);
+  }
+}

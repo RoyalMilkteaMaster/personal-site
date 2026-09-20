@@ -1,0 +1,179 @@
+{
+  "schema": "fantasy-palm-prop-v1",
+  "meshSHA256": "db1842943d71f1814bddfd03b6fc38b4a340bf63a4272bb5f24e2f949cf2a72a",
+  "indexNamespace": "fantasy-db184294/mesh0/primitive0",
+  "witnessCamera": {
+    "az": 0,
+    "el": 50,
+    "dist": 0.66,
+    "target": [
+      -0.27,
+      0.39,
+      0.36
+    ]
+  },
+  "witnesses": {
+    "center": {
+      "face": 113127,
+      "vertices": [
+        292483,
+        292226,
+        292260
+      ],
+      "bary": [
+        0.08064981832477966,
+        0.7348970505045134,
+        0.18445313117070697
+      ],
+      "xyz": [
+        -0.27429028027761165,
+        0.3751442737460896,
+        0.30934890775443175
+      ],
+      "distance": 0.7045586181783723,
+      "pixel": [
+        489,
+        375
+      ],
+      "normal": [
+        0.19629232819681003,
+        0.7005704219024868,
+        0.6860443061506397
+      ]
+    },
+    "across": {
+      "face": 80411,
+      "vertices": [
+        291432,
+        291375,
+        291599
+      ],
+      "bary": [
+        0.5157243903672042,
+        0.42557982574949865,
+        0.058695783883297055
+      ],
+      "xyz": [
+        -0.23482256893952125,
+        0.37604016151816355,
+        0.3059370533576453
+      ],
+      "distance": 0.7070660022570956,
+      "pixel": [
+        590,
+        367
+      ],
+      "normal": [
+        -0.22172161446504615,
+        0.6586778996500112,
+        0.7177291967351594
+      ]
+    },
+    "distal": {
+      "face": 81418,
+      "vertices": [
+        298798,
+        298985,
+        298612
+      ],
+      "bary": [
+        0.11449099674556484,
+        0.3401430044893658,
+        0.5453659987650693
+      ],
+      "xyz": [
+        -0.2768742053998296,
+        0.3695391983923607,
+        0.3388430654341918
+      ],
+      "distance": 0.6893143472759261,
+      "pixel": [
+        482,
+        442
+      ],
+      "normal": [
+        0.2134602842204212,
+        0.9311912278824311,
+        0.29496290637886435
+      ]
+    }
+  },
+  "basisRule": "u=normalize(across-center); v=normalize(distal-center minus u projection); n=cross(v,u); columns=[u,n,v]",
+  "basis": [
+    [
+      0.9960296253016652,
+      -0.006208169156039538,
+      0.08880565385804193
+    ],
+    [
+      0.022609133686197897,
+      0.9824978954202784,
+      -0.18489649149911744
+    ],
+    [
+      -0.0861034993213632,
+      0.18617020204762513,
+      0.9787373719615301
+    ]
+  ],
+  "anchor": [
+    -0.27429028027761165,
+    0.3751442737460896,
+    0.30934890775443175
+  ],
+  "offsetLocal": [
+    1.6945394271862535e-05,
+    0.10957236403476078,
+    0.008099024636447398
+  ],
+  "orientationLocal": [
+    [
+      0.9960296253016652,
+      0.022609133686197897,
+      -0.0861034993213632
+    ],
+    [
+      -0.006208169156039538,
+      0.9824978954202784,
+      0.18617020204762513
+    ],
+    [
+      0.08880565385804193,
+      -0.18489649149911744,
+      0.9787373719615301
+    ]
+  ],
+  "scale": 0.515,
+  "spinAxis": "prop local +Y",
+  "spinRadiansPerSecond": 0.55,
+  "initialPhase": 0,
+  "propCount": 3071,
+  "sourceLocalPivot": [
+    -0.22672000527381897,
+    0.10384000092744827,
+    -0.28999999165534973
+  ],
+  "localBounds": [
+    [
+      -0.12164410948753357,
+      -0.1079636262729764,
+      -0.11371639370918274
+    ],
+    [
+      0.11030592024326324,
+      0.37687256187200546,
+      0.11749120056629181
+    ]
+  ],
+  "sourceIdentity": "primary prop ordinal 0..3070, original combined pre-shuffle ordinal 28830..31900; draw IDs and seeds preserved",
+  "sourceRawSHA256": "1986f975c699a685f1605aad8edf699cedfb101fd1c320ebe46770e415ae8be6",
+  "assetHashes": {
+    "original-prop.f32": "a4ce257ff849c75e569dcbfb596f0d179ce4f55ab47b735c2e7c981e035bcd26",
+    "prop-ids.u32": "984a7d5a7a55d6041c105bba56c661933459ae32206a68eb4a2a94ae1b6dba85",
+    "prop-original-draw.u32": "eeb9ae404ca313b354f32421b98777d4103e9e5ee6a10e5e0ace151e163dcf5c",
+    "prop-seeds.f32": "0497d520c0c4491bda038f04209d1724f677699bb983bfec9d87592cf66e8166",
+    "prop-draw-order.u32": "48ea142698811e02b060bf7f2ed57521cfc70e0c3c7aab0771c7e1f762b0b7f8"
+  },
+  "material": "Original authored RGB, normals, held/emission2 unchanged; emission branch RGB*1.15 and original premultiplied radial point fragment. New 3D camera requires world-scaled point size.",
+  "oldMeshAnchorUsed": false
+}

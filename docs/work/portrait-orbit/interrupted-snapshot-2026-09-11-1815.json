@@ -1,0 +1,1917 @@
+{
+  "status": "interrupted by Claude shared session limit; NOT reviewed or final",
+  "createdAt": "2026-09-11T10:15:12.523307+00:00",
+  "resetReported": "2026-09-11 21:20 Asia/Taipei",
+  "files": [
+    {
+      "path": "work/model-trial/raw-integrated-r4/camera-r4.json",
+      "bytes": 837,
+      "sha256": "4d70c1b1a55d5803a3943470162f37b2ec730836494b8d433a7b05d2ddae8aa4"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/capture.mjs",
+      "bytes": 10365,
+      "sha256": "38ff9c72132cab21c10806041474d97714e43b2d2c1b3c63831ce95e075d7a50"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/index.html",
+      "bytes": 5117,
+      "sha256": "167b051523a695dcfe547dbc9604931ed6b5b33908b0c1c040cc30f351d178e0"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/integrated.js",
+      "bytes": 35449,
+      "sha256": "219e40843092294527802e8d5bde6f3c4c5e6f9b72d2111c2b5e365220309fbc"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/merge_source.py",
+      "bytes": 7811,
+      "sha256": "d8618ab1614e94ebdf668779479668e9065155a97891caef3dd335d7db3cb270"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/merged-r4.glb",
+      "bytes": 31291868,
+      "sha256": "8fec6a488136e36d72696ac04dd48a149e40c92bf2074f685f456d30b2221161"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/merged-r4.glb.json",
+      "bytes": 1047,
+      "sha256": "58a67764bd370e9ede4fbfa46bdf670fbc427bd524c3fc06347390abf16515f8"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/palm-anchor-r4.json",
+      "bytes": 2438,
+      "sha256": "47663b1d940baadcd04ebf98f50f22ccc75496a2824af7638e7487f7ab36f667"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/palm-anchor.json",
+      "bytes": 3215,
+      "sha256": "4a5900839f8bb950576a328ade7b9857ef378913b3116e3eec90489c47df0155"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/recompute_anchor.py",
+      "bytes": 2113,
+      "sha256": "7ea7ce89c4ac2b26f1db0a46fcb1986989e50a1427e78c1133ca5441e18e961e"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/baseline-front.png",
+      "bytes": 345016,
+      "sha256": "ab2a0644d272df21824a8d8475fa0ac3bcf3aa39dca67e38dbd99484442fac36"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/baseline-wide.png",
+      "bytes": 498232,
+      "sha256": "c90f19bc4009b0f3a4dd102019164d79814bd327bd44bbd6fbdce6a83889d4da"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/compare-sheet-r4.png",
+      "bytes": 1391551,
+      "sha256": "1291e218ce5d16a23f47dd1d0e41123d06f75421fc10ff7300149590e052b83a"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/front-near-after.png",
+      "bytes": 295145,
+      "sha256": "04912e80bd860e7589ca682d1e44fbd20b55c61f01c4a7405ec730bd483ef455"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/front-near-before.png",
+      "bytes": 187605,
+      "sha256": "cfd82555322602b42ecdd70eca47767a4c9ddc4918947359b32ecd3be7b118a7"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/front-near-tex.png",
+      "bytes": 379857,
+      "sha256": "1e93d227a7c86ad29889cc00ca09727918f6fce3d842399f36800256f0e65541"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-above-after.png",
+      "bytes": 778076,
+      "sha256": "4fc121fdcb15d4346fb7f3e916a3b4dfec2bf4beacb211842850b741fef3638c"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-above-tex.png",
+      "bytes": 716022,
+      "sha256": "161fea57fcad85fd88574cb6d6587d5cd5a0fe5450e1b29c4d83f87ce2fa9168"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az0-after.png",
+      "bytes": 934814,
+      "sha256": "7844a8ee623159891ceb99682af93b3d22da2b6af012e432ca15b4dddcb9207c"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az0-tex.png",
+      "bytes": 793383,
+      "sha256": "c6c395f51bbf3d9470208f8cb28d23eef7297019a1100176b76fc5792d895008"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az120-after.png",
+      "bytes": 461028,
+      "sha256": "14109661b60ecd7dde9259f1795e055077e91aa387d446cd6be2bda40afcafee"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az120-tex.png",
+      "bytes": 468677,
+      "sha256": "2233154dc87eaa3f4db60cd8882c321ce6b19563c427b6baa34f3c2d57142f0d"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az200-after.png",
+      "bytes": 270347,
+      "sha256": "a520670470c151ee6ab3cdf3d824d4ede0a24b50ba8ae787f1b34870129f6a06"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az200-tex.png",
+      "bytes": 365548,
+      "sha256": "3e4254c9505b40e4072740066907c1de962d30ca4763e928235febfc79bfc9a6"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az300-after.png",
+      "bytes": 504799,
+      "sha256": "6cdabc298a8a9d039e5380006ad8e86caaf852fdcb8304063a2cd48ffbd32542"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az300-tex.png",
+      "bytes": 554418,
+      "sha256": "57e8362fadda732b2b4356f6ec145b015904b89480a02e431f5bdd6c5dda81e7"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az60-after.png",
+      "bytes": 651879,
+      "sha256": "54da351edca593724bb3a9293c1447c5f2cba1204e76a981018b2ea7b96eb5da"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-az60-tex.png",
+      "bytes": 593970,
+      "sha256": "0f296f6e45e26f165b99fbe8f3d53003491f5bd669d9a04f230002a3bf31d34b"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-below-after.png",
+      "bytes": 667558,
+      "sha256": "5eacbdc5b700a7856237d1f6d19a13445611a2c0ca117ae437ed70a51585f271"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-below-tex.png",
+      "bytes": 631840,
+      "sha256": "2420cdefab63b188e01e99c594fb8a9733310641bfe9c541ca6afe6668b5789b"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-spin0-tex.png",
+      "bytes": 719350,
+      "sha256": "66a12226ec95f8a5f9459f6a32b6631632af831c7acd17092be39efaf6b3052f"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-spin180-tex.png",
+      "bytes": 718056,
+      "sha256": "033c299a10c7a9466af443a0e6f8bb5536daa87a51231dc73ba638996fda6a22"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-spin270-tex.png",
+      "bytes": 719393,
+      "sha256": "b546d98a9d23b6c1cb632fe17702c894e675c9afc8c623e9b3678e581cbbe0d2"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand-spin90-tex.png",
+      "bytes": 719083,
+      "sha256": "dc3bf439c8d8f4371937ba3a304f55b170d200b98287ee333ba9b72a08fbb937"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/hand.json",
+      "bytes": 6856,
+      "sha256": "99f60a9516ce78081e9302d4d836dd6a8532994a383c0d7175ace52f18ea2f09"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az0-after.png",
+      "bytes": 313675,
+      "sha256": "3002cefb7a8abe396e5dcf914a31ca960314341f1332fd6d9e223f832e6d3f13"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az0-solid.png",
+      "bytes": 111641,
+      "sha256": "8436072a55a28e73968d14ddf8d9910535406cb3fbead5b3430f142712bd13a1"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az0-tex.png",
+      "bytes": 354933,
+      "sha256": "3979eeb460a4901e2dded127ccc50b5636cd7194b0e08872825c9a12d2457c48"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az135-after.png",
+      "bytes": 335692,
+      "sha256": "ff97d07bfc4999d82ad437d0df2a869f16e4a4c4997cc61c3a8269999b28112c"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az135-solid.png",
+      "bytes": 131063,
+      "sha256": "2c2a5b09d57a624619a9c6ee54ccf75cf85c93bdb04e02ab82aee509e44d8beb"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az135-tex.png",
+      "bytes": 361110,
+      "sha256": "2542a54f8b578a87df4661d9d24db40c2202b5b0c8db1ce7e4db82ba917d83e8"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az180-after.png",
+      "bytes": 332199,
+      "sha256": "a16e3acce2693f633f70fca5285f58a417ff0dcdf3cb3be6bfe5cf45d4c42929"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az180-solid.png",
+      "bytes": 90315,
+      "sha256": "f9cbf966af7adad66a988692d8125671ea5d78311e9de6c5fb956dd0e0306ebe"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az180-tex.png",
+      "bytes": 295795,
+      "sha256": "8f8b81fa040006d7c88d80870f088314fb4f7c9ad02cdbe8948a0f90e7e37298"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az225-after.png",
+      "bytes": 336573,
+      "sha256": "37db15fa83d23b7a4cc16ddded9af4620bae546746ef69ff08eebe88770a0921"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az225-solid.png",
+      "bytes": 103614,
+      "sha256": "0226ff0c0023d4efd04eaf20e631a8dfcb4c233e55f15dea9aa3dc78646b6e83"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az225-tex.png",
+      "bytes": 334316,
+      "sha256": "cb83202d535f64470fcc581fe413deade5c2590a1691a51e6c73141be9d6620d"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az270-after.png",
+      "bytes": 334335,
+      "sha256": "87db32e882fc1ed7acef6a3c7559722a73eef66bb55784c27ffa028bf707aced"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az270-solid.png",
+      "bytes": 105547,
+      "sha256": "e1f9bc4bf30fb517d15767e8144e68002992237673afb62a538776d8502e92f8"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az270-tex.png",
+      "bytes": 354982,
+      "sha256": "68cab404bfee549fe2d0ab6b57952f985645ad76f93c9eb7bd82287ee26f2904"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az315-after.png",
+      "bytes": 225047,
+      "sha256": "0a279cd4f6e7b210b194d2f83c2291561bf785f1582945cef791541e14db7474"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az315-solid.png",
+      "bytes": 92915,
+      "sha256": "2910d4c6f7342b016cc6c43fbff28ff7cbc27140e8deba57afe1bdc257ac373b"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az315-tex.png",
+      "bytes": 308898,
+      "sha256": "9bd3975fd68931e821813e4842e652c80eca02b46c9dc2216cb1814a51898e42"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az45-after.png",
+      "bytes": 402418,
+      "sha256": "29ad410a5610508123ad0e2b611157206f1a9f0eecd9fe6accd2e1273f46f3bd"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az45-solid.png",
+      "bytes": 117685,
+      "sha256": "c5cac5bf16ef4f6412edcc8b47538d06451ad61345bbbbcfcf8bd4dc44c8f181"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az45-tex.png",
+      "bytes": 407929,
+      "sha256": "532c23295174d0fbf0112aeb57f306c990f8de3e80885fc85563533c5b829039"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az90-after.png",
+      "bytes": 382913,
+      "sha256": "522900052ebded4459e16be248abe33816fad750e290258dd4b6b0aaf4f958cd"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az90-solid.png",
+      "bytes": 115601,
+      "sha256": "2ee6bc0d75386fd7dfe46c12747d765c05d0e6a40dadf9a918bb799c69069248"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head-az90-tex.png",
+      "bytes": 418314,
+      "sha256": "12bab8c758f099dd05c44b3588f79bf633c9b7fa77ae6949571f27aad5213cc9"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/head.json",
+      "bytes": 8978,
+      "sha256": "4d1aaa3f75ddce305bf0a29548c2576d4dd80420f2d8972529f10e3846863bd5"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/interaction-arrowRight.png",
+      "bytes": 333954,
+      "sha256": "4e5ffd02ad5f85bb41095af5fe51acab2ecd50bfa2b2d6750c4e5a315d910cc6"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/interaction-autoContinue.png",
+      "bytes": 246285,
+      "sha256": "bd3404e04e1d1c7a324d4e601aad3550416bd8d8cd90efb39aae73745fd4de24"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/interaction-clickAfterTyped.png",
+      "bytes": 241282,
+      "sha256": "49ecc0e4779f67c22eaeb301fa991d002f8ab7452c916493f1e99f629598d3fb"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/interaction-clickWhileTyping.png",
+      "bytes": 242592,
+      "sha256": "49cbc5457cdcdc426ffe0d4c235ff3d1a662119192d262e19d973c552113ca0f"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/interaction-enter.png",
+      "bytes": 241692,
+      "sha256": "047100104b7474aac0fc801eff78079112874dc2e7c3d6e1b52973006ea9816a"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/interaction-rapidClicksBack.png",
+      "bytes": 339638,
+      "sha256": "bc3df541558c8ace70c752d39adb38a59ee74abe34a3a9488a83b6c6c576749c"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/interaction-replayMidway.png",
+      "bytes": 241504,
+      "sha256": "d27b6cd0bc1ed5aa443d023ab2552ed6851c3c857f792c5bd9daa3d7e7099a5a"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/key.json",
+      "bytes": 5914,
+      "sha256": "b113e603428b2c24e3b7334a911d88b1b5be713b0fc06472f5786744de8de572"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az0-after.png",
+      "bytes": 272944,
+      "sha256": "71337cddfbf40d834138159dcbc074379add3f5e6932baff5eaa00ef73b8cad7"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az0-solid.png",
+      "bytes": 125115,
+      "sha256": "8b920fb66283c92c0ad7bb9ce0ff39fdc282b02ef6e7988752e20b8b8c053518"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az0-tex.png",
+      "bytes": 235934,
+      "sha256": "46b628d8832e48b29ed18a13d41f5491951d463f7114f0886cb4fe5be2c15a5f"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az135-after.png",
+      "bytes": 319668,
+      "sha256": "8483d121924ac1cf8e162baaf523985e88e5a8ef9d56d474b6c8e1c28378d318"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az135-solid.png",
+      "bytes": 128624,
+      "sha256": "2af26dba5de2665d21a84488c7cad5c96546c199ae5bb05e6c71891e214e4a57"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az135-tex.png",
+      "bytes": 251612,
+      "sha256": "d2264a3d30d87b1000af848b0b58b690402fd7d62e2d5637dcf42e3f6fc06497"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az180-after.png",
+      "bytes": 335128,
+      "sha256": "6951ab23b3d85b9e0d3a416f64e92bda9718e210afdb592a37048f8ea60cb7e4"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az180-solid.png",
+      "bytes": 111493,
+      "sha256": "2a28501d2ba01c0baf3191a83a0eb01fcb2366d8e889f965827f86a2f25b6639"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az180-tex.png",
+      "bytes": 246372,
+      "sha256": "5bd56ce1bd4bac0f459cf445b840f44e7e3f6905f3b59eee3d3ca649462f60cb"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az225-after.png",
+      "bytes": 369967,
+      "sha256": "176c5b13d4c35666b1c58979de472476e1f61aabf6fd567c65000174780108d6"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az225-solid.png",
+      "bytes": 116079,
+      "sha256": "118e68cff46e4eb84a0ed001b2a1ebdb8ccab522881621c072665a0bac0f80d4"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az225-tex.png",
+      "bytes": 276897,
+      "sha256": "6c004c74cb15919b0a9990289bde3ab4351617c80f8ace29a149782c5baf5072"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az270-after.png",
+      "bytes": 335787,
+      "sha256": "1aa57015a2357ef5ddbc072bf4e54b942203aa1afb7ddfa6441802721e3784e4"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az270-solid.png",
+      "bytes": 123575,
+      "sha256": "f777dd74ec8f8cd02c54fd16b7314368f98d8a5e287589f04db79f0f57ba1a2e"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az270-tex.png",
+      "bytes": 261813,
+      "sha256": "1457c401b73b6b7b3bf0ce381f564688693bc58776c5e57f5f6649763f14529e"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az315-after.png",
+      "bytes": 280226,
+      "sha256": "8af6b69573b237e0062444ec4c25c497dbeeac5afc24f30ddff529c3cebd945a"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az315-solid.png",
+      "bytes": 122344,
+      "sha256": "37ed81937a78bb6bc366116a11f8986d2a654a8c3e06020bfc24fb9863a0a50a"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az315-tex.png",
+      "bytes": 235369,
+      "sha256": "85000cd8a917b07708b5e956647bb2591ce8e9b88de71401a49e193b7156fc56"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az45-after.png",
+      "bytes": 337383,
+      "sha256": "ae629c854b1b63a95f1af1859c0a14f27630e5bcecd10bb06892d555a0a0accd"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az45-solid.png",
+      "bytes": 133692,
+      "sha256": "f7bce54bedb4a1b7164986d9af14e17f4770a3d61d19ceca6faf0e103c8c0759"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az45-tex.png",
+      "bytes": 280893,
+      "sha256": "fcadea09078a0c51f8713fe66418ea1dc9a3f76b99c7b24fe6ddec79935c95a0"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az90-after.png",
+      "bytes": 353778,
+      "sha256": "13db098c30b75c94cc836e7543ab6b04ab39db7c86572119ee89e17f0ed24752"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az90-solid.png",
+      "bytes": 132285,
+      "sha256": "4b1bab8fad3e959511e60b7c2a7612925246be935d1c34d49e4a8ed27ccef493"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit-az90-tex.png",
+      "bytes": 291699,
+      "sha256": "726af5e4817893036260b3f66d7c71d52f4ef4adeca0582cabdf14252bacb87f"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/orbit.json",
+      "bytes": 9016,
+      "sha256": "74c028f59665b8b52c0470be7c6e4bf9cd91345ee748a11fcc5ba38254eab5b3"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/play-1.5.png",
+      "bytes": 244531,
+      "sha256": "34ab65b6c06442fd02eea87e3b20038c396658d390c1e279ca77889a209bbe8f"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/play-11.6.png",
+      "bytes": 425059,
+      "sha256": "5917bb941ce5d2a2f2e3849a2053d97f480d3d454a74d0697cc70e83cf2968ca"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/play-4.3.png",
+      "bytes": 306371,
+      "sha256": "aab6e191056e0f725b2de5f0b36231012966ac8e4b40c3d5c091ae411592b5ae"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/play-6.5.png",
+      "bytes": 339068,
+      "sha256": "9a48c45c021012390d5d26fca4d95d461578e72e45e9f061d49ce9a5f7b5ad72"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/play-9.5.png",
+      "bytes": 564694,
+      "sha256": "9c7429f4ad8d75b5e421d2cb63bd4ea6b0a67fbd414df9177671762fb48641e5"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/play-trace.json",
+      "bytes": 40019,
+      "sha256": "7ec82e73f9b8e543b40b56c2102b23fe5792c0317c64fc5933610dabaa4adaf0"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/play.json",
+      "bytes": 5248,
+      "sha256": "50a9b1d7b5eaf4f939844039621b1639a075697f661a0ff95f2456619541eb3d"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/rear-after.png",
+      "bytes": 364151,
+      "sha256": "570ef896482ab7d4113367900fb0b67875e0dc3897f53daf89bed041d374426e"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/rear-before.png",
+      "bytes": 186985,
+      "sha256": "7ffdb28e66e4c832e07f19f8d9cb14aa97b99d5fbc6ba082e5d218bb6cfd1afc"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/rear-tex.png",
+      "bytes": 331220,
+      "sha256": "c9fedcfcb77c06d3e22fe85162ee4cbc62aa965c9e80b704d5afd2bd292bfe7f"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/return-10.8-after.png",
+      "bytes": 457614,
+      "sha256": "40ec8c9a2b19710321523500455f268d801cebe16d02292179ee581b8dbe6b18"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/return-9.8-after.png",
+      "bytes": 623114,
+      "sha256": "6835870f412237e06c43062c36cd134699b76c7e5ba057f7e62f33d8c05f58f3"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/turn-4.35-after.png",
+      "bytes": 351792,
+      "sha256": "45976e45ecba39046b50131a5814db63f1a1fd2288a364296100677110539a5d"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/wide-after-noprop.png",
+      "bytes": 462222,
+      "sha256": "4ed9df01fd34f28fba16888eeb95386dd911cd58636940ad7d956ef9f2237764"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/wide-after-nosky.png",
+      "bytes": 462804,
+      "sha256": "6d5edf184c1a24468ce8f98e312301546de60255a4d7292151786d626f988e69"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/wide-after.png",
+      "bytes": 472171,
+      "sha256": "7e48956238ca07bc9e8f337955f86d36f57f57acc65e81d18f3afdfb55b9ecc3"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/wide-before.png",
+      "bytes": 377739,
+      "sha256": "b6d3efc779e3922cf68fcc1e24478423564157abcfbd794f18cc23a50f0fd8fe"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/shots/wide-tex.png",
+      "bytes": 421880,
+      "sha256": "77b6808748555cec63c4836b8d3aa0a8f8214e12d22ed433fc0f50cf2bd4168a"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/stars-r4.bin",
+      "bytes": 19200000,
+      "sha256": "90a5a3ef4c302975a632801b619696fb413a9fa6d75a380804de8e2bd934d86f"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/stars-r4.json",
+      "bytes": 1952,
+      "sha256": "127c49090f0576887d23f2c123c1ca9e10511ee7984cd7b5c2ec58df664d4cbf"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/texture-r4-1024.rgb",
+      "bytes": 3145728,
+      "sha256": "94466aeededa7c4e01553405e1e818a9c1545595818cbd63bd2bda8ac2a15d4a"
+    },
+    {
+      "path": "work/model-trial/raw-integrated-r4/texture-r4-1024.rgb.json",
+      "bytes": 563,
+      "sha256": "48838d545cebf17a1002d8adeded4029bebe662c724d981d8c7d2e23e5599814"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/art-head-grid.png",
+      "bytes": 729402,
+      "sha256": "568ac803b4142e4c720ade699f9e92e98710abcffec118c2b13dad189c762800"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/art_head_grid.py",
+      "bytes": 1256,
+      "sha256": "75498c8c883620e57b4fa674c8df682e52295635ab21a8345bd2094efd961e49"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/baseline-front-grid.png",
+      "bytes": 418970,
+      "sha256": "24d03b1ca88e9607c714c4612e2d2f182c38799e7d83dcd6f7f34e63d8f3158d"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/baseline-front-mask.png",
+      "bytes": 9056,
+      "sha256": "db63b02d2113e106afc44d0f04e98f60854db7937bebd958abd19a9a77582409"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/cam.py",
+      "bytes": 1209,
+      "sha256": "f9d79b7a1baaff4392171f06388293ea9e50a88e88171b5a68a1ed2c84444af9"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/capture.mjs",
+      "bytes": 3570,
+      "sha256": "b68884c74ad4152a53243c4237fc11b57d08ef6e1e5cdc7576eb038d32dfe8d2"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/face_aspect.py",
+      "bytes": 1933,
+      "sha256": "44652c11577f90856909f7caa9099242c58442090524cdd187e27e2a31a557fe"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/glb_io.py",
+      "bytes": 4231,
+      "sha256": "390c7657902a4bb6d5299425d3c1921484170aa67fa0d84f99488994373fb25f"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head-a-delta.npy",
+      "bytes": 3395396,
+      "sha256": "fbabd3f845929e35ffc183c51a13217d6e24019269c19939267a9a365f5ccba2"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head-a-weight.npy",
+      "bytes": 1131884,
+      "sha256": "272244bfa1d46abb6f021a353546e2c0ea14fa95648ad3793e0ca8ffe1875e52"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head-a.glb",
+      "bytes": 18671036,
+      "sha256": "5c27a82626d5cb7b852057d341eee326cd0b36850d01b27661dcd0dbaf4afd01"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head-a.json",
+      "bytes": 1682,
+      "sha256": "7d88f1970f647a4f9f4c53188b69ffcbde70217241cab62b13d08024f996dfdc"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head-b-delta.npy",
+      "bytes": 3395396,
+      "sha256": "124603ed00c18c780dfa2df2dd82c46db0f5b1d99eb8482b41e132ed9355306f"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head-b-weight.npy",
+      "bytes": 1131884,
+      "sha256": "2d87fd5393eb25eeb741018011c2563c8a09aa8b6b942c42406d6fef2794af1c"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head-b.glb",
+      "bytes": 18671036,
+      "sha256": "80eb9c8705a2ddbcf5bf51c5b714c7b551de16c996231af8357ed965289f46ab"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head-b.json",
+      "bytes": 1675,
+      "sha256": "bc87e6cc32942decbd0d0b5a224747ee7fc0f66d3877432a471e743f47184cd2"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head_apply.py",
+      "bytes": 3493,
+      "sha256": "ecf1d2f7aa7ccb1f4cfbe8b3d090bdb314ed2a86d8555d31b1e82eed31fdb783"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head_landmarks.py",
+      "bytes": 1860,
+      "sha256": "acdb3e98f1b4fd20f6e0951368ac6e97323586ed046f629de572cf58c60bc338"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/head_rigid.py",
+      "bytes": 4514,
+      "sha256": "65ab0c7eb06901a8684eafc77f67f6520b60acd033d79e7d4b6bfd75903cbb9d"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/index.html",
+      "bytes": 11776,
+      "sha256": "3d3034fffa2b835425d1fae5ecfd29208d7cd46a10dd95f0b244463a2382426d"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/near-cam-search.json",
+      "bytes": 1105,
+      "sha256": "210594a340f28aa9ceef488a23b3b00d7cb5a10f50f8a184a83da5c5f892c627"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/near_cam_search.py",
+      "bytes": 2166,
+      "sha256": "c2954ba0a6515a5b42ddb25f51a7cd18e5f2de4bce8602990c4fbb75e04127a8"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/near_silhouette.py",
+      "bytes": 1590,
+      "sha256": "2b62afca45266d101e2f5d0a55980955643cde3a76c1cfa365c2dfadb018b0c0"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/pixdiff.py",
+      "bytes": 547,
+      "sha256": "c4ab5112ecff25f06f988c5064908021a9169328845b2e51aa4585521e2fba54"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/rigid-sweep.json",
+      "bytes": 738,
+      "sha256": "d13e880e593234d11250bce76857d261c87a62d4b6b2ffa5f4c1006ff63513ab"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/sheet-01-low.png",
+      "bytes": 1798076,
+      "sha256": "1d2c3a24d922603ead09ef53b1df55b82cfd295be99c899c40cfa8de7f6c6b24"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/sheet-02-near.png",
+      "bytes": 739452,
+      "sha256": "7d0d9a90de592c73455e69446e453f814103908c26a86ef01c585d17d845309d"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/sheet-03-neck.png",
+      "bytes": 283222,
+      "sha256": "af538a947d5c7f612441d3b2172ee585bfb97ba3c4c3470c6ced9cde7074bac2"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/sheet-04-head8-A.png",
+      "bytes": 729365,
+      "sha256": "8c1e50ec5ab71da15d1b07180b0b22da5eff9529e5e03294d5ee18a1b0c0704c"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/sheet.py",
+      "bytes": 752,
+      "sha256": "b7407e88879221c536bf3977647c7691312990c4f2f8ecd38aae188841723c4a"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-base.json",
+      "bytes": 670,
+      "sha256": "cce00e4433265229148a293ea11dd772c07af30abfb9a850cf96432fa73f5995"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/delta-az45.png",
+      "bytes": 206763,
+      "sha256": "a163c3659064280236e29b63d64fce7f839a2f0ee4f664a27f8d8c4d635aa0b8"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az0-solid.png",
+      "bytes": 110889,
+      "sha256": "6e8898eb8cc9aed3d8ef3bce49c63fb21dd1e1fa79de0cdec8565d0c3ea7da64"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az0-tex.png",
+      "bytes": 340618,
+      "sha256": "fd3e3ae6cf26c58d48356b3c1a6368e0d9d7012cc19c02b49f788ca75612d671"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az135-solid.png",
+      "bytes": 112302,
+      "sha256": "afc453cea70feccd9871b0055df310c603995352ac19f8b2bc4aa191eafed716"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az135-tex.png",
+      "bytes": 350950,
+      "sha256": "d29ee311f5ce8e5b609a6fdcb73ff23696319054bc58de4c94ea640403626661"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az180-solid.png",
+      "bytes": 94238,
+      "sha256": "e8a55608313c4e1ecc70e55f2cb8885547303fba88dc0a13c1a66d364956162e"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az180-tex.png",
+      "bytes": 291212,
+      "sha256": "577152113ab632e4277f826e4d08452779ade44b940277e830cf9efce81d0249"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az225-solid.png",
+      "bytes": 83524,
+      "sha256": "21ab538edab27360cb7db78377ff351c809acfa0c4635c363e18224ecbfcbcd1"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az225-tex.png",
+      "bytes": 299311,
+      "sha256": "5a97366d792fffe4f77169a900606216d09e50fa1359cb5b91b1256a8b5c004e"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az270-solid.png",
+      "bytes": 97560,
+      "sha256": "f4b6818c6ad8ad6a66d833ebfe74e587564da43b8a6a720745dd5e3d465880a3"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az270-tex.png",
+      "bytes": 316796,
+      "sha256": "572595f47d0a7f0672b2bef51f2736b549796937e71735f2cdb69847c209aa85"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az315-solid.png",
+      "bytes": 80202,
+      "sha256": "550df7116f681658c1f243e458a4d9d54ee17ebdbd8bc4b7fa038900cafa2ad4"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az315-tex.png",
+      "bytes": 263644,
+      "sha256": "12fd86785ab9b02a9deae3376766f204e911deb9816f6fab78f9f6bfa6f4ee08"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az45-solid.png",
+      "bytes": 108339,
+      "sha256": "754ad782af1f0e6b25d368cee3dca7f9c62bee813b03c1517de2b52598ccd899"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az45-tex.png",
+      "bytes": 361302,
+      "sha256": "6c3199340e303c037bde27347017fcbf7447977b0db3023d3a324359515ed5a2"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az90-solid.png",
+      "bytes": 111817,
+      "sha256": "6af80458a1457d7e1ee5ee0643b9584fd425893d12cb0e09f5297389bd9eacda"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/head-az90-tex.png",
+      "bytes": 381707,
+      "sha256": "bb9ac2a0d4d768df2a20ac33bce42d843972d1a7bef1f5e8a1440c342ab31fe9"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/low-ov50.png",
+      "bytes": 701723,
+      "sha256": "8af0dfb510eace5ffb3261a614d228da01d04b45f2017a726397350ad1c6dded"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/low-solid.png",
+      "bytes": 175016,
+      "sha256": "15413dabc90676f4bcb6c1302580eb757c8785e50b9ac14589366209e61f115f"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/low-tex.png",
+      "bytes": 516747,
+      "sha256": "fc82b6c5ea7849b95c61f98cc2db38f1a1ca58b636c9812d192851258cd02e3b"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/near-v2-solid.png",
+      "bytes": 133822,
+      "sha256": "51ff7f69dcf0807fce92894c2e98c72a8909c2c763977899c0e6b30b23c56e73"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/near-v2-tex.png",
+      "bytes": 419567,
+      "sha256": "ed2d54d8522e94a1933814e67283aed64ec06d99d5fa80b190ea5e4b724500f6"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/neck-az0-solid.png",
+      "bytes": 122789,
+      "sha256": "b02c5a8a1b7cb983dedff9df61024cfea6cdd8d38d67052a91afa93581dff717"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/neck-az180-solid.png",
+      "bytes": 70090,
+      "sha256": "a8e4aa3821c0f592d096bf1b4d3af59fea019abc4f0429a2a974f98665bf932b"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/neck-az270-solid.png",
+      "bytes": 97537,
+      "sha256": "cdd1bcc4c3a8a673887cb0b3bd4eab5b9ef9a6eb0c9a00843fb523178cfd8b66"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/neck-az90-solid.png",
+      "bytes": 134072,
+      "sha256": "f90de806e6057a3e57a2b5d111c9125f9057f61af684e1f4cb52336209e845c7"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-a/result.json",
+      "bytes": 1363,
+      "sha256": "f0eff388d44988c9cd4e25788fde63774580017ee52565313a3b27c5f62c9329"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/delta-az45.png",
+      "bytes": 208503,
+      "sha256": "e6d044405fc1236d063ecba84e0dad6733d2dedf89257b6e8102ccf09e6ab33a"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az0-solid.png",
+      "bytes": 118553,
+      "sha256": "dcf98b1c32eabd3338c9aff5690cf70e402db8413ee3d2eb72738285c61a0f3c"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az0-tex.png",
+      "bytes": 377401,
+      "sha256": "523f932e48a6d0bc57c4bfce6f495b7fbddb8ac0dc1becc5c6704450c58c723f"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az135-solid.png",
+      "bytes": 129698,
+      "sha256": "57374991368e7a47d145d52faa4cce92f726a34dafe6c160c8e1063c267d2b38"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az135-tex.png",
+      "bytes": 424929,
+      "sha256": "49f48ecd03e2f1094ff6982ce4011d24a2181f29f7f73c963b842841d34372c9"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az180-solid.png",
+      "bytes": 108457,
+      "sha256": "d6156e6690995d64ccb9240948f0310a8e606eb43583edc1755cf3e816195f39"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az180-tex.png",
+      "bytes": 351445,
+      "sha256": "c0a7b2fee8dc652c1c273384481b1932a10a647b46a80270774362ed64813e1e"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az225-solid.png",
+      "bytes": 104789,
+      "sha256": "3123ebf5891d146b9a459534614ef3dce725e894014c5ad11dbe1e93fae9c01e"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az225-tex.png",
+      "bytes": 361618,
+      "sha256": "5a267590823920bf19cb39e534410788e518c3e42a84c72d301b2064d6316965"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az270-solid.png",
+      "bytes": 118058,
+      "sha256": "746240252a93816e1c2ab9f87665688cb1ee181516f870df39f4ae19db17cfc0"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az270-tex.png",
+      "bytes": 380429,
+      "sha256": "e3346ac65d2d1bca09eab75dd48c17bb08fb51d3eb3fc76d61f2a41ae8d5b1ad"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az315-solid.png",
+      "bytes": 89094,
+      "sha256": "7904b4a5ce8a6873a69b1195f55b437ac1cac89339edaf749a18db023961a34b"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az315-tex.png",
+      "bytes": 300517,
+      "sha256": "9b83a4131b450826279a9d1a0abf2c9a740148b4edd67d5712de66221073d8ec"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az45-solid.png",
+      "bytes": 119891,
+      "sha256": "669d8734bb184ff821cda40f4faafffebb56001f3863c4abb69032aa6830ce17"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az45-tex.png",
+      "bytes": 416932,
+      "sha256": "22db1dff1b666b43a9667fc91d3a50280112988269ea766453792eb37a037be9"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az90-solid.png",
+      "bytes": 126423,
+      "sha256": "172e19ad96f07aa681d6013a702a6417e361737d5838ca8d7ce394c0b80c963e"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/head-az90-tex.png",
+      "bytes": 449862,
+      "sha256": "c5ae15df51bd25d9a42693e6c76c87fdd2ef169337cc56135c0885170e5ac1e4"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/low-ov50.png",
+      "bytes": 709498,
+      "sha256": "38ca304c716128d8076764fab5eeff390a59bc73381a3b8ce4d88adff1b3e9a4"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/low-solid.png",
+      "bytes": 178484,
+      "sha256": "a61afc9165d571c694bedb524631e4398afd8a33e1f1017216bcea0525594269"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/low-tex.png",
+      "bytes": 531572,
+      "sha256": "00c566be4fe45018016fdf4d21de12971cc59013e55534cc8d4b8464a728cfb9"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/near-v2-solid.png",
+      "bytes": 146308,
+      "sha256": "82ba86d9d3786975fdb11075355be4b1332f8a99464846018dd64211bf8800eb"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/near-v2-tex.png",
+      "bytes": 479649,
+      "sha256": "e5f6730c2e9c91e5052acf0671de382ab5e41bf062b95f6ed078186f9c47fa67"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/neck-az0-solid.png",
+      "bytes": 118123,
+      "sha256": "3a46ec2722b3181339718bea115d21469045cf5f2efddaf4d4b4ac7f1012e61c"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/neck-az180-solid.png",
+      "bytes": 63389,
+      "sha256": "c39e91a5da94722ad5462db5d0b8d6543f062a0ccbef37835281a26d0e54ca38"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/neck-az270-solid.png",
+      "bytes": 97640,
+      "sha256": "d606d046bbf609644c205b4dc2aa77d81e257f37b2cac408da9435a8fbc5f52f"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/neck-az90-solid.png",
+      "bytes": 129370,
+      "sha256": "8661a9d47bbd70d4e939519af185b89ff85d9dba0a36857c997a2e8fb6cb88a1"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head-b/result.json",
+      "bytes": 1363,
+      "sha256": "c508d48575bfd899f92970d1a58adc924c6e8d20efac4382d69189e14e0f3174"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-head.json",
+      "bytes": 4136,
+      "sha256": "97973909fa3124ca36f6a01fe884dc799c8330888172c2e69a1c6862905363fd"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/delta-az45.png",
+      "bytes": 142924,
+      "sha256": "a91157c85e8da876c521f79805c2b0fb0d2e7c6972e857b98094eb77df42d0bc"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az0-solid.png",
+      "bytes": 99259,
+      "sha256": "51404b4d01138455b949a76421de92fdca482fb3b5203b567c42807c0b7d1d32"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az0-tex.png",
+      "bytes": 320079,
+      "sha256": "4822d901af19a19fa2f49fa7daab6e097b118646a5597f785705b0ee1a56a007"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az135-solid.png",
+      "bytes": 99756,
+      "sha256": "c5c17321170c19442f23b8d14232962c8254d75afb3e87d7d632764034321fbe"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az135-tex.png",
+      "bytes": 321102,
+      "sha256": "7358fd5e3d944eee630c818872cfc0dcce7fa90f5f95ac3e4fb13979b002de92"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az180-solid.png",
+      "bytes": 78975,
+      "sha256": "9564bcbcba0c6a2548f9cd5077e22106af7dbe1fc371d96fb4e8e6647ce582ea"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az180-tex.png",
+      "bytes": 260730,
+      "sha256": "ebcc93b9902f3ec1a50a914dd0e1e257adb77a92416e4f29f9fb011c4b43075b"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az225-solid.png",
+      "bytes": 73335,
+      "sha256": "57d1d185fc767f6cf616efa774eb97fa24ad9f6ddf12d32c36d47325780af1fd"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az225-tex.png",
+      "bytes": 282322,
+      "sha256": "0d908f7b21fcc77b77b30c54b1ae2c669c0fc014ce352636cb1e4491ea603262"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az270-solid.png",
+      "bytes": 86680,
+      "sha256": "1e7df23d2646e543ee692ebc124e0e9dc1c05aef09d951646d6fbbb4c9642314"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az270-tex.png",
+      "bytes": 312285,
+      "sha256": "981bfb81a530911153fb1f876abaef5783a6db1f70f1025e8ef5740a72653d37"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az315-solid.png",
+      "bytes": 83202,
+      "sha256": "7a72c674d1c3ea640a17543c08f748aefa583f3d12a381d0450166189c8d9463"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az315-tex.png",
+      "bytes": 280434,
+      "sha256": "be4cd4d46de2d3f7b676c056bca04397d5ea76048d70214b9143e292b99965e8"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az45-solid.png",
+      "bytes": 98244,
+      "sha256": "fd87333aae2c5ad1fe45405db1cab91875ddd35a5b7befd522c4ff2c36ca76dd"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az45-tex.png",
+      "bytes": 353620,
+      "sha256": "49accd8cbf26df569ca28e1009e356f3493f0e8cb8b455314fc3081b9a87d8ab"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az90-solid.png",
+      "bytes": 101110,
+      "sha256": "5963ec02e686fb76dc88be6c285cf49184397b18d0b8a97464d3e0fc37e8f09d"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/head-az90-tex.png",
+      "bytes": 368481,
+      "sha256": "6d41b7abfdef5a994b90b7304afbed5d68e1fd3ec5143df815ab90acbf85a4a0"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/low-ov50.png",
+      "bytes": 697500,
+      "sha256": "97ad82f63d0a7a74c3ddb13e486224282cc1e4404ce8a0fbdd145e9fc4633c88"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/low-solid.png",
+      "bytes": 169853,
+      "sha256": "60a109dc276f017c3f317f792a21af256ea3e52a48f1adb11cecf01466794255"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/low-tex.png",
+      "bytes": 509227,
+      "sha256": "a97dff6894303b02356aeed8fe5ccc5883c7f21a52908fa5664c18406ac094c5"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/near-low-solid.png",
+      "bytes": 111938,
+      "sha256": "a2b61b029b3759f0a4a1d9e9ce617edcf3a6abaf31bc661ff808faa9184a3f18"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/near-v2-solid.png",
+      "bytes": 121490,
+      "sha256": "44689ed7636dcce70cdbffbdad774c76289faeca249e0f1da8207187e65c097c"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/near-v2-tex.png",
+      "bytes": 407019,
+      "sha256": "43acf08cc4732596204ed404d5f5a7dc3369295b4eff37209cfaf98a279b400e"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/neck-az0-solid.png",
+      "bytes": 111122,
+      "sha256": "36881aafc94322151524a3f72a8748101fb365c21097cb686dd1c68dc201dae4"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/neck-az180-solid.png",
+      "bytes": 60681,
+      "sha256": "c875ec9fadaa480b9feb4d7acf7adbe3228bd4ee7fffa5505aab6d57eb8f799d"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/neck-az270-solid.png",
+      "bytes": 85035,
+      "sha256": "36793eaf465eea9e96efb2f900ab38b2916a2f899cf85ef124d26b3089829469"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/neck-az90-solid.png",
+      "bytes": 117149,
+      "sha256": "f5d3ee35603beb2879e2d245bbf4141e77bb88cc6eeb74a67e0e86dea17b90df"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/shots-source/result.json",
+      "bytes": 1346,
+      "sha256": "09631c5c68a2db3613cf31d0992e494a39ee6f3381686731489ef9dd7e768fa6"
+    },
+    {
+      "path": "work/model-trial/raw-head-calibration-r1/silhouette.py",
+      "bytes": 1654,
+      "sha256": "8a20eb2a142f5a3c37bc3262d67668944d7851027356b620863fc635f8e99ae9"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/build-stars.mjs",
+      "bytes": 8087,
+      "sha256": "91d76153480e5cc0b211e4bbff37ba7c27d5539365f7e4699c6945240e520028"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/build_detail.py",
+      "bytes": 10540,
+      "sha256": "4ab3a54d8ffa0631216b1ca7467d6e6144d2d49359a0343c9499e895870db16a"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/candidate-d-clothes.glb",
+      "bytes": 31078136,
+      "sha256": "15f2743ce04fd618a9a6b1775f8bf7906323d32c3a14c806dc56a66134b1f14a"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/candidate-d-provenance.json",
+      "bytes": 1576,
+      "sha256": "693f8beb072d10d153f939e7f4151ae9f5a5e5c45040e6f910214cc6e5e07a6e"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/candidate-d-test.log",
+      "bytes": 1237,
+      "sha256": "cf2baa36f06bc77b7217f4f7e53460c28f2964b1ead866dd90cf969a99e530a5"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/candidate_test.py",
+      "bytes": 4381,
+      "sha256": "cd89fdf4478ed2d6f5e82fd6a2b886f21ea62016ba914bf5d5c885fc69c8c1d0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/capture-stars.mjs",
+      "bytes": 6790,
+      "sha256": "12a86a4befb084726abdb537cca96245032e42d4f275a9e9333c236ff843ced5"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/capture.mjs",
+      "bytes": 4965,
+      "sha256": "f74361dc6c65f0c1c7480310e5c1a05e160dc6710c4e3748f6c2fec9fe8e417c"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/extract-texture.py",
+      "bytes": 1976,
+      "sha256": "146842c351862f8d60d7f5896cb6752de4de3c9c6b72fe3dc09f54d8a9990099"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/glb_io.py",
+      "bytes": 4231,
+      "sha256": "390c7657902a4bb6d5299425d3c1921484170aa67fa0d84f99488994373fb25f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/index.html",
+      "bytes": 15430,
+      "sha256": "129946432736bf072efd2d1aa6782c7efbe1ac7c68fcdfb2c51d87dc738d325d"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/ref/front-input.png",
+      "bytes": 1053151,
+      "sha256": "3c1d2b78d8461dbd6a0b77f36ba35f77ec107d99bde919847c4991a4c2cb323a"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/ref/rear-reference.png",
+      "bytes": 513206,
+      "sha256": "efef34da882184913242b51a2bc4637a28b9167b70f60caff94f6a2b17a55ab0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/ref/side-profile-candidate-v1.png",
+      "bytes": 2016410,
+      "sha256": "52100bc0ae9136bf6b5051a2fbaa2e81addd2c0743894e1e95ecb04ddfa9b807"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/sheet-d-collar8.png",
+      "bytes": 797092,
+      "sha256": "86d7e0e3bbddf0960f9ce8ff9aea92ea3849dfc7e4f738fcdae64a33b3794f7f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/sheet-d-head8-full4.png",
+      "bytes": 340830,
+      "sha256": "d4bc07a744ef2b7975a83cf2ec03b96f9f76644828b74d5a0b1de23838a2e68a"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/sheet-d-stars-back.png",
+      "bytes": 960208,
+      "sha256": "848f9d181febd0a352a7fbffe0dc09db4438bff50fff36d87bd6917dabf08900"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/sheet-d-vs-c-b4.png",
+      "bytes": 1640197,
+      "sha256": "b5301fd3e173f42d779ffa384ea72b9a971a9d86b6a10c8150f915c5e43ae4d0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/sheet-side-collar-vs-reference.png",
+      "bytes": 1256330,
+      "sha256": "7aa4fdd4bf3f5c3cdea69b4b7d14701ef53ad03c322337357a9277020ac2795f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/sheet-source-side-collar.png",
+      "bytes": 527393,
+      "sha256": "1b631d2421d3d8fb6c9f71959fe17d4d79dfb684270907616c857597d5b36caa"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/sheet.py",
+      "bytes": 1110,
+      "sha256": "7c5845751489dad971da2560260570445227dff5992150785937d5d745e1454c"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-c-b4-gpu/collar-az180-tex.png",
+      "bytes": 543461,
+      "sha256": "ab44c7ca67ea5bdee7311e7adcb279f8ad67c608a705e6509e4ab703b6c182fb"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-c-b4-gpu/collar-az250-tex.png",
+      "bytes": 608306,
+      "sha256": "9865ed69d8daf3bc91b6a86e03621ca498e8e9020433ea47cf54eb380e503ec9"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-c-b4-gpu/collar-az270-tex.png",
+      "bytes": 592929,
+      "sha256": "63f318937dfa5cd1cc3ab92ccffcc0a14323d6b9af89c697b87efc199d37fc3f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-c-b4-gpu/collar-az90-tex.png",
+      "bytes": 697999,
+      "sha256": "27289a66adbc65af454e6f92b11e72fb3a658392fd3c17433916157eac478416"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-c-b4-gpu/result.json",
+      "bytes": 783,
+      "sha256": "bb639f23ce35ef3560fc428a31d15cb6e66dc516025bf2f62947e17213700344"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-b4-gpu/collar-az180-tex.png",
+      "bytes": 581394,
+      "sha256": "f2a3cda8da3383a1b9011da709b02a760c498b96c7a89a5a276a31a6116db8e3"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-b4-gpu/collar-az250-tex.png",
+      "bytes": 647696,
+      "sha256": "179e89c184f301d5c89e9bd8facf33ca5059eb5ad871f0d077b0eee4e553db8f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-b4-gpu/collar-az270-tex.png",
+      "bytes": 634279,
+      "sha256": "6a572c9666b5317af6978a08568b93bf291710f7bf460eb5079ca59b23ddf2a8"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-b4-gpu/collar-az90-tex.png",
+      "bytes": 716357,
+      "sha256": "d0537a282589c4e01be3767347447e6b3fe9b05750e3ef1174506707247af4e0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-b4-gpu/result.json",
+      "bytes": 739,
+      "sha256": "beb3b0d06d76cbce7be5730fd9e02ba61978af05b7fc59e019d5b25a90cfe2bb"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az0-tex.png",
+      "bytes": 623203,
+      "sha256": "073f7aa892157c49b740cb0fde225b68f8f5df203e0e8aa44d01b4e4cc14f765"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az135-tex.png",
+      "bytes": 572557,
+      "sha256": "179f24d05789dc181de006ade19b366fc8d3288b71d9275b72b03ef0a4e1e8d4"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az180-tex.png",
+      "bytes": 581394,
+      "sha256": "f2a3cda8da3383a1b9011da709b02a760c498b96c7a89a5a276a31a6116db8e3"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az225-tex.png",
+      "bytes": 638374,
+      "sha256": "1c35f2e940a2c706c4e571aa28064b2ae3c24dc9ddc5d3e89432a0a8409bf10f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az270-el15-tex.png",
+      "bytes": 624800,
+      "sha256": "4bcbb457ca5a7f732e93eace65922b04f412f9983d7ecdfb1323dc3b276e7064"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az270-tex.png",
+      "bytes": 634279,
+      "sha256": "6a572c9666b5317af6978a08568b93bf291710f7bf460eb5079ca59b23ddf2a8"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az315-tex.png",
+      "bytes": 516959,
+      "sha256": "c5acbc0f65a361fb0eb136303c5a1b1fe03af2478c7c2433399ad7dcccfbaf88"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az45-tex.png",
+      "bytes": 754493,
+      "sha256": "636b6f68d114ecad757afcb5bf5c61571b3610772c37eca1762f501443e743ea"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az90-el15-tex.png",
+      "bytes": 747210,
+      "sha256": "e50df866ca0e007ac3afc9946b522327b6ae90600f675a08d3ab15467db9372b"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/collar-az90-tex.png",
+      "bytes": 716357,
+      "sha256": "d0537a282589c4e01be3767347447e6b3fe9b05750e3ef1174506707247af4e0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/full-az0-tex.png",
+      "bytes": 251054,
+      "sha256": "b5061c9015681d7359dd74e31131cab95a664ef62b25461de569be76c20c8344"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/full-az180-tex.png",
+      "bytes": 286903,
+      "sha256": "87997a30145c87b56e452f1e24a484de1a1feb1312b8acfc0572185830bf285c"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/full-az270-tex.png",
+      "bytes": 289772,
+      "sha256": "0e7d5ae3dc45bf55436dc5eb66afbe40af2d31dea767eca48652e2b315ec6415"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/full-az90-tex.png",
+      "bytes": 312102,
+      "sha256": "1bda171424d9ef34e68adec7f0f8e736bb0f2d81cc1e3edfc65e118e756804e1"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/head-az0-tex.png",
+      "bytes": 399111,
+      "sha256": "0c8768987ef1e8ca9e56acbec71c67c660c9d091e535f2979776e16c94a89667"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/head-az135-tex.png",
+      "bytes": 400125,
+      "sha256": "7a59ce0f2786b74fe4b4a92bef6210db55050329e1b635c2c1936d87a3069c64"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/head-az180-tex.png",
+      "bytes": 324499,
+      "sha256": "38128f79bde086e5533f0802b6e8c6bc9ad65ae71809a5a68e47b754fea358ea"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/head-az225-tex.png",
+      "bytes": 344154,
+      "sha256": "5a73a5f0c361621e184dcfc6877f576066f5d3a1f18589e330ec9696f7193363"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/head-az270-tex.png",
+      "bytes": 378474,
+      "sha256": "5db347296081eed1ae05ef1185a07a141aa358e6831f3bb8bded313c840585d0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/head-az315-tex.png",
+      "bytes": 342757,
+      "sha256": "79e4a6de7c995dad277f627dd86c5d1ad09ef4382916086f651f512396d357a1"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/head-az45-tex.png",
+      "bytes": 432361,
+      "sha256": "730d59eae68aa862f40972402e1b0af0e17814cad45fee28e4ee2699afda11aa"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/head-az90-tex.png",
+      "bytes": 452780,
+      "sha256": "2e26766fa4c0dd3fd3b6d3bd021a0c6bf035287a252a65cde9a82268453e921f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-d-full-gpu/result.json",
+      "bytes": 1146,
+      "sha256": "fef6355f836516d02cc4fac1f4bacec967718465d68978925342cc56221d485c"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artfull-after.png",
+      "bytes": 520468,
+      "sha256": "9f9e03299d5349f7285e208854039a34dd98d4be8560b98b1d9adac661964f5a"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artfull-before.png",
+      "bytes": 383120,
+      "sha256": "01606866dc5f17320dbca2b773624c04464bb86bd7b400e4cbd82af521dbe697"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artfull-solid.png",
+      "bytes": 134826,
+      "sha256": "0d9c61874a7264a7725a5b20af191951d9766df4c3ec3b637cd8b9f0afc00424"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artfull-tex.png",
+      "bytes": 349123,
+      "sha256": "d1c92f33ad2ac00aa35e98f02028088eeaee953cd22dcd50a0a038ed815bb095"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artnear-after.png",
+      "bytes": 360317,
+      "sha256": "f4a0c304d00234eb646d466c7201b84cf40caadb231c83c6e3c9275339365f31"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artnear-before.png",
+      "bytes": 189748,
+      "sha256": "759ca7f634f064eaeb25d4b80b4b829f18ec9020f5421b382f9d40b01824c57c"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artnear-solid.png",
+      "bytes": 114633,
+      "sha256": "d8df98f5fc1253dc6a9ab70e338605734b677e901d5cbff227343a96aef73bc9"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artnear-tex.png",
+      "bytes": 440098,
+      "sha256": "110d66cd2dec30f7d4ef4e3d00f1ed02fc4c4892427b33e8ae2d4feb5f16ef31"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artwide-after.png",
+      "bytes": 676002,
+      "sha256": "8f7284087f280b422aacc9663d96d62240d3649c6a1b18d69b88c9f6fcccb9fa"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artwide-before.png",
+      "bytes": 395515,
+      "sha256": "fe10f5b2f8b6aa45f750a1803ebcc5c9edd7eaab4ef322db370393c00e901063"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artwide-solid.png",
+      "bytes": 153901,
+      "sha256": "460c3cc4700b5dd5bd3bb7d70a45938f793bc7c053a1f22811135b4c11d1332e"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/artwide-tex.png",
+      "bytes": 466131,
+      "sha256": "26c97a468f001f10bd4e5f91e54849fec9884e6709e3460cf9c8c4365c3dd268"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az0-after.png",
+      "bytes": 431002,
+      "sha256": "687f7e6421f1371854dbd45d487a6804779a5b17d3af82fdc1c96ad2c9ea07ce"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az0-before.png",
+      "bytes": 349535,
+      "sha256": "4742bb806249fe994ed26f6f439ce6e474653f359e11abcd612f202b73c6a948"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az0-solid.png",
+      "bytes": 126941,
+      "sha256": "1e5fe333405b2bdc5567fe35f69c1754495768b91b12143602cd35a4c9849acf"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az0-tex.png",
+      "bytes": 300879,
+      "sha256": "dc8d536ae80884efb6dcdd46978bb61e4704668b51ae0bcf2df256c4dea043a3"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az135-after.png",
+      "bytes": 500790,
+      "sha256": "63ed05192e45f2867b3b1c0d6db0640e26de54232cf19492ee8938dbe89b06a2"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az135-before.png",
+      "bytes": 353624,
+      "sha256": "5a8dab07c800d5149c4119c99883a3f2508909e909eeff7c32168f4e949a9a5b"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az135-solid.png",
+      "bytes": 135263,
+      "sha256": "9eb1add20980ed8052c604acff927e264af03b666ebb7e4c22ae614d2f209281"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az135-tex.png",
+      "bytes": 322411,
+      "sha256": "30ea50a6abcb58f0f9af44947fd1b01a306545665ee90d2563a878a8d07e6623"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az180-after.png",
+      "bytes": 571869,
+      "sha256": "2c0f6ae8b969909739e8c77ca5c02d6fba04a98fcde19dc6a92ab0fa3e68b234"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az180-before.png",
+      "bytes": 381518,
+      "sha256": "7dc924f380957c234ad7890f5fd7478ad9f09c97423a17cc98d420f9916b2e36"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az180-solid.png",
+      "bytes": 125417,
+      "sha256": "4b651c4fd756b4e8a415d50572202633e9c70fa2343698ae4fcc88f61cfb15f9"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az180-tex.png",
+      "bytes": 338799,
+      "sha256": "4311579b840f9b5b3f3d0b4aad2cf63c705ecfaee77921e55135e95643671b4e"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az225-after.png",
+      "bytes": 637856,
+      "sha256": "11f0821c94cb3d1ba10ceca329b85e21ed4eefa4950f5865b2967c8273b97162"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az225-before.png",
+      "bytes": 421641,
+      "sha256": "34d34eda80c915e6fa469a8764288061f14e4e6bc3886047a6a28035c3be54ab"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az225-solid.png",
+      "bytes": 130378,
+      "sha256": "a2d78178ad961781f1c8e2fde1a8f397b75f38ab0f1cdeb2b4fd081f9f13097a"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az225-tex.png",
+      "bytes": 384726,
+      "sha256": "9a5ee68203ce5f45d90bc13c2d6d45edf367b61047647c48d628b479a65e7a4a"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az270-after.png",
+      "bytes": 554201,
+      "sha256": "e9ed67da96792020cf56012816ed888c4e82e74f5d1e6d0023ae8a12119ee334"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az270-before.png",
+      "bytes": 401573,
+      "sha256": "5bbfaecc2ca2660697fb15093ce930b9fb03e36f9f41f39dc86030109d7a79b4"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az270-solid.png",
+      "bytes": 126764,
+      "sha256": "ae245d724b6043f7eac395d2f7b2126cff51e1812ab944175884a05ec9bd52a2"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az270-tex.png",
+      "bytes": 345776,
+      "sha256": "9d2764b8646b099b6cedba823405848d72fc692cfe9ff407e610e52083f53d22"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az315-after.png",
+      "bytes": 435742,
+      "sha256": "46d4c51835a5804ad9cf7091d2f32779b5e2a51b9cf24cdfb62c7ef79c5412ab"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az315-before.png",
+      "bytes": 331461,
+      "sha256": "67cb28afe8d1b059e9e807bdaf1d247c44f2916fc13cc72a8be016ac6e8e5469"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az315-solid.png",
+      "bytes": 124900,
+      "sha256": "c68f77df7f0a19eda43100c0f84012d44b43e0482cd69fbcd131db362ab35238"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az315-tex.png",
+      "bytes": 293878,
+      "sha256": "9d5b02bd84d5fb785dac45a9279a22cfedd3d4cc6fddd6e4dea2084d7e5d3759"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az45-after.png",
+      "bytes": 551840,
+      "sha256": "008c1d14a58095cd71fc5c714bd814a674a1f739a8301690ee027e87557af482"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az45-before.png",
+      "bytes": 417056,
+      "sha256": "7a8d7e02e6268a093b50f60a3bd85ee8fd6ce3ba97c9da20c1bba86e781ae46f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az45-solid.png",
+      "bytes": 135473,
+      "sha256": "634c4e7842051c59f828b12a41c789f2c583a2248b72351166a194810c752f97"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az45-tex.png",
+      "bytes": 357653,
+      "sha256": "fbea646b9002f18f074e6aa6e0b408e58d454a5811c6ff72d3b8f9d52a2be30b"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az90-after.png",
+      "bytes": 567713,
+      "sha256": "48816e037c5deaa05ecba28ab5debabd6a780407a7fad373568ae8fdff5df9b2"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az90-before.png",
+      "bytes": 400690,
+      "sha256": "0fd597b96a56ac52960b7aa212536b9cd50f112d28ac6e057ffc37b4d339fc97"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az90-solid.png",
+      "bytes": 135423,
+      "sha256": "e555103cd353c1a08a16c5347d80b1b8157f3f070d7a21b720b7ef0ca2c0bf09"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/full-az90-tex.png",
+      "bytes": 374414,
+      "sha256": "83d8dfae90886cac413ca9586244f8a8fd655dee95b82cdc9e3aee3c67d0ac2b"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az0-after.png",
+      "bytes": 402351,
+      "sha256": "70ca58709c049bb0a4544cdc5165331cf10200e0b0e364dfc544e6dfd57ea466"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az0-before.png",
+      "bytes": 221679,
+      "sha256": "b833dc9d0e54444ceb9a13ae27f62aa26ee460aa0cd2720c52b43a231ea98bbf"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az0-solid.png",
+      "bytes": 134597,
+      "sha256": "0e82e22212bb31eeec76405d8a8990aca23a9052451c3f2684ef460b82e904b0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az0-tex.png",
+      "bytes": 463214,
+      "sha256": "0955f09d760f6744a9b9406c98ed6489276b6fa06bcea7d3dd0db0d41a962828"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az135-after.png",
+      "bytes": 486307,
+      "sha256": "a7bee533f28d7516e563ca7595e0898a3baecbf7c29b8a6e00d17d0fc30cf1c7"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az135-before.png",
+      "bytes": 225807,
+      "sha256": "fd128cbae4b91b18efc41ba2958e7ea9ba53a764e1d8b829339dd743ecd09525"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az135-solid.png",
+      "bytes": 140596,
+      "sha256": "76c854c7e05601b953f6ae132f3effaee05c95613796856388edc5f61a5cb41e"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az135-tex.png",
+      "bytes": 489306,
+      "sha256": "bc0e4a9b04e70e62ed659164a2a626f7ea53eb72667cddc55d9c353c9520c289"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az180-after.png",
+      "bytes": 440152,
+      "sha256": "c68758ca4ab2fc83e41f33a58b7f49e581545851a94a76b8fbfae737b6e5e183"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az180-before.png",
+      "bytes": 195820,
+      "sha256": "0e822f8eeca8984a24367379872c4d88849f5cdf1fa558b1deffd8312f793218"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az180-solid.png",
+      "bytes": 108900,
+      "sha256": "6c8d4a71caad32a75559a2822ccffbb3d160cb9e8c5fe88c85b3a270ca37c26a"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az180-tex.png",
+      "bytes": 385824,
+      "sha256": "941523992318641e943c838967b91dc4b8b30bcf6d5d8415118a98772c6451d3"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az225-after.png",
+      "bytes": 399499,
+      "sha256": "e075c260438bc3711808058504af8ff7e17ef3097c2439ec19e81ff4cc23d083"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az225-before.png",
+      "bytes": 176077,
+      "sha256": "2b3412c9da7b1b8a4691da0a371b75e506bc7250dbecf204ba44906d9ad2b8f4"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az225-solid.png",
+      "bytes": 98652,
+      "sha256": "4d19de184376d03c741fc770fc32702f22ec63624f8299c418c9f63921ca559e"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az225-tex.png",
+      "bytes": 393073,
+      "sha256": "f07bd778c7d02f915032fcf38c12c600695c7c0a132f011e43a027332438c96c"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az270-after.png",
+      "bytes": 401459,
+      "sha256": "aa34727b061e70a11518911374cc024c608f4a6ae3c3c484cdd979d4c653fdc7"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az270-before.png",
+      "bytes": 203851,
+      "sha256": "83facf669cda9cae90a12bfc8f2c9b85aa63c3304431648e3576e5c538edb9d1"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az270-solid.png",
+      "bytes": 116288,
+      "sha256": "ac2d5a84b30493928bbca9f36b4430e91314acc6c30cffa564b4b7e779145626"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az270-tex.png",
+      "bytes": 453538,
+      "sha256": "06265b43f92ab5362fd6f8210388bff8efeeebe382ca12382313f7dbccaa20a4"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az315-after.png",
+      "bytes": 316349,
+      "sha256": "7da33f48821cf9463e0cf69b06f3b072d54ec384b7fd4fc75d493403e4f38da7"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az315-before.png",
+      "bytes": 172091,
+      "sha256": "6582cbc49ccd5ddb22012ac30a58d33ce5b568d833d7f9120dda6637d1aab24f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az315-solid.png",
+      "bytes": 115790,
+      "sha256": "f170040232174b7316ec126663ecfdd37364976b6030d966739a54e98d3edccc"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az315-tex.png",
+      "bytes": 421828,
+      "sha256": "a24daaff9d94c28561866122df40ebe8f24ee03f1f4615a33df4e936fd29b32d"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az45-after.png",
+      "bytes": 488648,
+      "sha256": "01da2f5e93760b2cbe2752049647e492e3f154c24845b56d5c67934ffb9c5cd0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az45-before.png",
+      "bytes": 242990,
+      "sha256": "be3126c093771f758750116e7c0a186db969cffd1a92477439da9ad391251e94"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az45-solid.png",
+      "bytes": 132696,
+      "sha256": "4d500aac0c059fc21a72a62552fcfa0b640bc5eaf2ad031afe2d683d47cb2da4"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az45-tex.png",
+      "bytes": 515430,
+      "sha256": "9269decc39646c0d81e90f38fdfaeb0066905cf002d9ebe3f1c858b469a4898a"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az90-after.png",
+      "bytes": 494778,
+      "sha256": "76eb2b411ebfbb5bcbb618ec314669a21ae9ab0518d9c18f2e04a18a71995cc0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az90-before.png",
+      "bytes": 232417,
+      "sha256": "17acee12ce4731f5469748d83c408123b7d5f211b91477ac1cef67011fa33fb5"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az90-solid.png",
+      "bytes": 138590,
+      "sha256": "6726e73a2cd16b34fd68ce43b03b2a516e2fbf83501fcf27a175520ab31db4f5"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/head-az90-tex.png",
+      "bytes": 541892,
+      "sha256": "a06d140c881e68057c3fafcf8cbde318d4dec943a91339014e73676d7b44bca7"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-full-cand-d/result.json",
+      "bytes": 25023,
+      "sha256": "a6625b2263623fac1dba4b9cc78fe37b954af5426e6de682224569be2c90ac9b"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/result.json",
+      "bytes": 914,
+      "sha256": "ad7714db12195e46c40637ec7e13527f124e7b1d5b076819d148dee0d2c81bd0"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az120-solid.png",
+      "bytes": 161734,
+      "sha256": "205eec610755676e6c3579d10ce047fd4cc1b848a8e537ac925a8e872053d980"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az120-tex.png",
+      "bytes": 646970,
+      "sha256": "dab4a3fdb5e5a6f2b28eab88d90432572389a4fe2cf8d3a8510646810a58048c"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az240-solid.png",
+      "bytes": 91447,
+      "sha256": "9a231aabf15100f922917373e7700e15f3cd3bd1b67e60ad4640eaa82d9e9a9b"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az240-tex.png",
+      "bytes": 485550,
+      "sha256": "b8415cd78d1e15ae674231493c58b6e7eb1186d0d0e21eeda3b2ab5242033026"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az270-solid.png",
+      "bytes": 123808,
+      "sha256": "0068fe980a9e6c01eab39e805a130c5fdd774b181fa6e18892e67001d60e1ddb"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az270-tex.png",
+      "bytes": 545252,
+      "sha256": "e6b191a7ec305646eaab4ea46f9c01728570e7205c2c7d073eea316ce8517499"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az300-solid.png",
+      "bytes": 131147,
+      "sha256": "4eb0caceb9f317c28c7076e9188c601f3d74d7e48492626ab09d009ba68fecfc"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az300-tex.png",
+      "bytes": 500025,
+      "sha256": "7041f72ddcabe24a85118c381aba1a82e614fb30e2c24acf86c68ad049b0d15e"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az60-solid.png",
+      "bytes": 148170,
+      "sha256": "e35513b7eb83bef34c648901d5990353600f67d0c2f98c653b363e2e92775f70"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az60-tex.png",
+      "bytes": 710266,
+      "sha256": "746d87fe4214649ab239fe87a444a3cce83e8e8fa1ab51124e47d8ca9a3706f7"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az90-solid.png",
+      "bytes": 154039,
+      "sha256": "1f8bd8c5b14dd2991232c283d4e07cc576ac49a6e90463fd3d1df1fcdaa2a9d1"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/shots-source-side-gpu/side-az90-tex.png",
+      "bytes": 712236,
+      "sha256": "b0671c3c4bae772d9daebb3365c7cee4145b565d1074a4c653df27461c5b42fd"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/stars-cand-d.bin",
+      "bytes": 19200000,
+      "sha256": "4f5f61fdc96902bdd1dbd2769605b306dc6357e0e776de355c53c081613a9dd5"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/stars-cand-d.json",
+      "bytes": 1989,
+      "sha256": "d53f54c6aba0e43c76f62cc57bdbc14b0a2d68d626d73f9d02548ccbd3709f8e"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/stars.html",
+      "bytes": 33180,
+      "sha256": "627311645966f08285017c21d26e17a282ffc3cdba821621451a76d56d342ad2"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/texture-cand-d-1024.rgb",
+      "bytes": 3145728,
+      "sha256": "9f3fc0798f47a42c960c18c951170909d73c18008adf060e154bc675a5a2b6f6"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/texture-cand-d-1024.rgb.json",
+      "bytes": 577,
+      "sha256": "1a6f78aa5ed4dd7e333690a5fbc875c684119778d8f7d4a7058aa7d109dc667f"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/texture-candidate-d.png",
+      "bytes": 16005042,
+      "sha256": "7df5cbc3f5c6461dcfe0321c9c23333b512ca2bff7fc797e0b0ee9adad6099cb"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/weight-d-ornament.png",
+      "bytes": 28487,
+      "sha256": "be7cb7fde34b5647510ecc565c96b4d297921ae02660648593ad13bd8a090627"
+    },
+    {
+      "path": "work/model-trial/raw-clothes-detail-r1/weight-d-vs-source.png",
+      "bytes": 56419,
+      "sha256": "739ef0b83d621b4827281bc6da5b16ac5eea1b80a00906e87aa60f299a9b20cd"
+    }
+  ]
+}

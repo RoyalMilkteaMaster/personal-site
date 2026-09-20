@@ -1,0 +1,11 @@
+{
+  "stride": 13,
+  "rows": 28830,
+  "wrongStride3Rows": 124930,
+  "nearFloat32Exact": true,
+  "minimumDenominator": 2.780116856098175,
+  "holdouts": 48,
+  "nearMaxPX": 2.4324208655719296e-05,
+  "wideMaxPX": 3.119209182216978e-05,
+  "focalRatio": 1.6431676725154984
+}

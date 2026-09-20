@@ -1,0 +1,16 @@
+{
+  "meshSHA256": "db1842943d71f1814bddfd03b6fc38b4a340bf63a4272bb5f24e2f949cf2a72a",
+  "namespace": "fantasy-db184294/surface-seed20260913-v1",
+  "count": 240000,
+  "seed": 20260913,
+  "source": "NEW mesh triangles and NEW basecolor UV; no original canonical IDs or old-model bindings",
+  "sampling": "Area times (0.12 + 0.88 * basecolor luminance^0.8); fixed once before playback; sqrt-uniform barycentric triangle sampling",
+  "finite": true,
+  "maxBaryPositionError": 2.9802316725557887e-08,
+  "hashes": {
+    "surface-stars.f32": "e91c8fbd3fbcbf2d1b38ba277dbf66fee628acd7048b63f9f79f5ca2069a940c",
+    "star-faces.u32": "6e41170af46b28834b28bef4e006ce79248cc8a0caabe9897ab6f8d9ae477f81",
+    "star-bary.f64": "98b8f58ee1bed8684f85c10dda8e239d980ec417a178f7ff944d93ec9f0e2b97"
+  },
+  "geometryUnchanged": true
+}

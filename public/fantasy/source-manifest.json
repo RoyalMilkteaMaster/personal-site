@@ -1,0 +1,6709 @@
+{
+  "meshSHA256": "db1842943d71f1814bddfd03b6fc38b4a340bf63a4272bb5f24e2f949cf2a72a",
+  "count": 6264,
+  "namespace": "primary-gpu-body-v1",
+  "ordinaryNamespace": "fantasy-db184294/surface-seed20260913-v1",
+  "hashes": {
+    "reference-stars.f32": "3624ebb1a10eb3926c9e00441a9c56f8263c7056b2f28c9719ee5c7491d7e165",
+    "reference-faces.u32": "34685ba6372f66ec9efb17a78acb9e153acd2d0869bbf409e01adbe50c2279dd",
+    "reference-bary.f64": "0c7b430be10baec7e3fe889115975335086b0d89317933699cad0b4646ea0898",
+    "reference-primary-ids.u32": "e74ab89a3304c7618e008272138dc63d1e47ae917ff3020ae1b7f9f1e462fc0a",
+    "ordinary-support.f32": "a43e7996020705ecad301ac6c62ee113897415724d42d0cf0780528083277f0f",
+    "reference-render.f32": "d1fe41b56c3e0ac9434066e2a1f0d0851472f7f604e7d09fe4d17d1054197d19",
+    "reference-near-rgb.f32": "e56eb76c9cf1cba7f4c04b86dc57e68e87e10ac4c87185ed3ec2d09854cb8c3d",
+    "reference-size-opacity-id.f32": "0df36ca3b42300f651a63d5970b921f74a1f2755c119fdc210f9b1e297f8144d",
+    "ordinary-palette.f32": "a3c97cd0c1e3fbdd8211d0323c5ed20ac76e59fb13d61258cecba9a9ee799634"
+  },
+  "countsByRegion": {
+    "0": 3086,
+    "1": 990,
+    "2": 1867,
+    "3": 321
+  },
+  "coverage": [
+    {
+      "region": 0,
+      "modifiedRows": 2606,
+      "radius": 0.0035
+    },
+    {
+      "region": 1,
+      "modifiedRows": 1013,
+      "radius": 0.0035
+    },
+    {
+      "region": 2,
+      "modifiedRows": 3087,
+      "radius": 0.0045
+    },
+    {
+      "region": 3,
+      "modifiedRows": 584,
+      "radius": 0.0045
+    }
+  ],
+  "regions": {
+    "0": "hair",
+    "1": "face/ear",
+    "2": "left visible lapel",
+    "3": "right visible lapel"
+  },
+  "sourcePolygons": {
+    "face": [
+      [
+        244,
+        164
+      ],
+      [
+        272,
+        165
+      ],
+      [
+        290,
+        155
+      ],
+      [
+        311,
+        167
+      ],
+      [
+        331,
+        174
+      ],
+      [
+        339,
+        159
+      ],
+      [
+        353,
+        182
+      ],
+      [
+        383,
+        197
+      ],
+      [
+        375,
+        234
+      ],
+      [
+        346,
+        269
+      ],
+      [
+        312,
+        294
+      ],
+      [
+        289,
+        283
+      ],
+      [
+        253,
+        247
+      ],
+      [
+        240,
+        215
+      ],
+      [
+        217,
+        211
+      ],
+      [
+        215,
+        184
+      ],
+      [
+        231,
+        174
+      ]
+    ],
+    "leftLapel": [
+      [
+        194,
+        263
+      ],
+      [
+        225,
+        267
+      ],
+      [
+        266,
+        288
+      ],
+      [
+        295,
+        378
+      ],
+      [
+        330,
+        468
+      ],
+      [
+        357,
+        578
+      ],
+      [
+        350,
+        640
+      ],
+      [
+        319,
+        651
+      ],
+      [
+        289,
+        565
+      ],
+      [
+        250,
+        424
+      ],
+      [
+        210,
+        338
+      ],
+      [
+        194,
+        295
+      ]
+    ],
+    "rightLapel": [
+      [
+        329,
+        300
+      ],
+      [
+        363,
+        317
+      ],
+      [
+        372,
+        344
+      ],
+      [
+        357,
+        389
+      ],
+      [
+        394,
+        495
+      ],
+      [
+        390,
+        575
+      ],
+      [
+        352,
+        640
+      ],
+      [
+        369,
+        559
+      ],
+      [
+        361,
+        486
+      ],
+      [
+        332,
+        392
+      ]
+    ]
+  },
+  "newNativePolygons": {
+    "faceNear": [
+      [
+        476,
+        323
+      ],
+      [
+        498,
+        305
+      ],
+      [
+        533,
+        298
+      ],
+      [
+        561,
+        287
+      ],
+      [
+        603,
+        297
+      ],
+      [
+        640,
+        319
+      ],
+      [
+        669,
+        302
+      ],
+      [
+        707,
+        334
+      ],
+      [
+        744,
+        351
+      ],
+      [
+        739,
+        399
+      ],
+      [
+        716,
+        445
+      ],
+      [
+        688,
+        489
+      ],
+      [
+        654,
+        527
+      ],
+      [
+        626,
+        538
+      ],
+      [
+        597,
+        528
+      ],
+      [
+        555,
+        497
+      ],
+      [
+        515,
+        453
+      ],
+      [
+        498,
+        397
+      ],
+      [
+        471,
+        388
+      ],
+      [
+        462,
+        346
+      ]
+    ],
+    "leftLapelWide": [
+      [
+        586,
+        220
+      ],
+      [
+        616,
+        227
+      ],
+      [
+        644,
+        271
+      ],
+      [
+        670,
+        334
+      ],
+      [
+        695,
+        411
+      ],
+      [
+        699,
+        452
+      ],
+      [
+        683,
+        478
+      ],
+      [
+        665,
+        460
+      ],
+      [
+        654,
+        404
+      ],
+      [
+        622,
+        337
+      ],
+      [
+        591,
+        295
+      ],
+      [
+        559,
+        266
+      ],
+      [
+        584,
+        250
+      ]
+    ],
+    "rightLapelWide": [
+      [
+        666,
+        239
+      ],
+      [
+        695,
+        246
+      ],
+      [
+        705,
+        268
+      ],
+      [
+        693,
+        294
+      ],
+      [
+        726,
+        365
+      ],
+      [
+        742,
+        423
+      ],
+      [
+        725,
+        470
+      ],
+      [
+        695,
+        482
+      ],
+      [
+        716,
+        445
+      ],
+      [
+        720,
+        387
+      ],
+      [
+        699,
+        331
+      ],
+      [
+        672,
+        283
+      ]
+    ]
+  },
+  "rejected": [
+    {
+      "primaryID": 209,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 252,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 253,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 254,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 255,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 259,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 272,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 273,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 274,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 275,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 276,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 277,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 294,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 295,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 296,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 297,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 298,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 299,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 300,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 301,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 317,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 318,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 319,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 320,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 321,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 322,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 323,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 340,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 341,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 342,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 343,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 344,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 362,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 363,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 364,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 365,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 388,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 389,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 390,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 391,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 392,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 393,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 394,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 411,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 412,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 413,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 415,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 416,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 417,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 418,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 419,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 441,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 446,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 447,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 448,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 466,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 470,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 489,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 548,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 660,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 681,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 682,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 683,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 703,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 725,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 747,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 748,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 771,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 795,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 796,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 817,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 837,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 838,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 857,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 858,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 859,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 879,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 880,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 899,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 900,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 908,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 920,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 921,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 924,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 941,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 966,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 967,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 968,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 992,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 993,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1018,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1019,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1042,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1043,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1066,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1088,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1089,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1101,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 1112,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 1114,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 1143,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 1270,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1271,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1291,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1292,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1293,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1294,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1313,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1314,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1315,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1336,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1337,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1338,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1357,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1358,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1359,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1379,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1380,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1398,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1399,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1419,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1440,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1461,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1486,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1509,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1530,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1552,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1553,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1557,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 1575,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1667,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 1726,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1768,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1790,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1791,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1792,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1812,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1813,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1834,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1835,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1836,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1857,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1860,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 1881,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1884,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 1905,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 1999,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 2081,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2124,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2125,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2147,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2169,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2190,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2213,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2235,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2236,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2258,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2259,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2277,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2298,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 2301,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2307,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 2333,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2334,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2363,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2365,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2367,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 2395,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2465,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2481,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 2498,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2512,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2513,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2531,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 2544,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2576,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2593,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2608,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2640,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2641,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2642,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2656,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2673,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2674,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2675,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2692,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2707,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2708,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2709,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2710,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2728,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2741,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2742,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2744,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2745,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2750,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2760,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2777,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2778,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2779,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2781,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2795,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2811,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2812,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2814,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2815,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2830,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2843,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2844,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2845,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2848,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2862,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2876,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2877,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2878,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2880,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2881,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2884,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2903,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2904,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2907,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2908,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2910,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2911,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2921,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2927,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2928,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2929,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2933,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2934,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2946,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 2954,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2955,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2959,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2961,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 2986,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3008,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3009,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3031,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3032,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3033,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3056,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3079,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3081,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3102,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3128,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3129,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3139,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 3152,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3174,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3175,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3207,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3208,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3228,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3229,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3248,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3249,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3299,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3320,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3321,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3342,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3426,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3466,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3486,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3526,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3527,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3547,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3565,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3602,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3621,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3642,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3662,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3663,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3685,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3686,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3705,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3706,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3723,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3724,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3741,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3742,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3759,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3760,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3776,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3791,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3808,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3809,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3820,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3821,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3822,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3823,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3824,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3825,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3836,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3837,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3838,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3839,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3840,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3841,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3852,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3853,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3854,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3855,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3856,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3857,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3858,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3859,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3870,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3871,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3872,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3873,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3874,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3885,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3886,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3887,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3888,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3899,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3900,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3901,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3902,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3903,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3904,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3916,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3917,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3918,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3919,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3920,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3921,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3933,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3934,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3936,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3937,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3938,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3939,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3952,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3953,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3954,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3955,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3956,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3957,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3969,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3970,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3971,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3972,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3973,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3974,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3987,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3988,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 3989,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3990,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 3991,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4003,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4005,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4007,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4008,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4020,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4024,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4025,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4040,
+      "region": 0,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 4043,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4055,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4056,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4060,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4061,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4062,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4072,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4073,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4074,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4077,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4078,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4079,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4091,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4092,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4095,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4096,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4097,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4109,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4111,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4112,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4113,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4114,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4115,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4116,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4117,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4118,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4119,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4130,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4131,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4132,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4133,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4134,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4135,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4136,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4137,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4138,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4139,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4140,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4141,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4152,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4153,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4154,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4155,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4156,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4157,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4158,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4159,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4160,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4161,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4162,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4163,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4164,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4174,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4175,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4176,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4177,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4178,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4179,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4180,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4181,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4182,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4183,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4194,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4195,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4196,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4197,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4198,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4199,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4200,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4201,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4202,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4212,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4213,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4214,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4215,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4216,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4217,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4218,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4219,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4220,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4221,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4232,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4233,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4234,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4235,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4236,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4237,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4238,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4239,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4240,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4241,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4252,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4253,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4254,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4255,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4256,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4257,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4258,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4259,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4260,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4261,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4271,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4272,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4273,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4274,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4275,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4276,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4277,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4278,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4279,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4280,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4281,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4290,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4291,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4292,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4293,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4294,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4295,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4296,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4297,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4298,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4299,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4300,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4310,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4311,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4312,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4313,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4314,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4315,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4316,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4317,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4318,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4319,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4320,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4330,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4331,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4332,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4333,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4334,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4335,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4336,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4337,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4347,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4348,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4349,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4350,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4351,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4360,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4361,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4362,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4363,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4364,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4374,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4375,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4376,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4377,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4387,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4388,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4389,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4390,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4399,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4400,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4401,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4402,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4403,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4404,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4413,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4414,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4415,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4416,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4417,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4418,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4426,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4427,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4428,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4429,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4430,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4431,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4440,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4441,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4442,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4443,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4444,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4445,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4446,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4453,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4454,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4455,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4456,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4457,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4458,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4459,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4467,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4468,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4469,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4470,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4471,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4472,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4480,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4481,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4482,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4483,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4484,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4485,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4486,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4494,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4495,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4496,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4497,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4498,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4499,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4507,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4508,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4509,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4510,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4511,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4512,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4520,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4521,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4522,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4523,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4524,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4525,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4533,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4534,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4535,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4536,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4537,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4538,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4546,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4547,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4548,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4549,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4550,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4551,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4552,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4559,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4560,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4561,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4562,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4563,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4564,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4565,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4566,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4573,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4574,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4575,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4576,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4577,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4578,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4579,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4585,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4586,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4587,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4588,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4589,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4590,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4591,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4592,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4593,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4599,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4600,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4601,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4602,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4603,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4604,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4605,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4606,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4607,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4608,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4609,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4610,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4611,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4612,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4613,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4614,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4615,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4616,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4623,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4625,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4626,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4627,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4628,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4629,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4630,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4631,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4632,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4633,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4634,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4635,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4636,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4637,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4638,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4639,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4640,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4641,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4642,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4643,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4644,
+      "region": 0,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4645,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4646,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4647,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4648,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4649,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4650,
+      "region": 0,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5234,
+      "region": 1,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4624,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4657,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4658,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4659,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4705,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4722,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4732,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4735,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4736,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4737,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4752,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4763,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4764,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4765,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4788,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4789,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4810,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4811,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4850,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4861,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4869,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4870,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4880,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4887,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4888,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4889,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4899,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4906,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4907,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4908,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4925,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4926,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4936,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4937,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4944,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4945,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4946,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4955,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4956,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 4964,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4965,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4983,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4984,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 4985,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5002,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5003,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5004,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5013,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5022,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5023,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5024,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5031,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5032,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5041,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5042,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5043,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5051,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5052,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5062,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5063,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5064,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5072,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5073,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5083,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5084,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5085,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5086,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5093,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5104,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5105,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5106,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5113,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5124,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5125,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5126,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5127,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5134,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5146,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5147,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5148,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5155,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5156,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5166,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5167,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5168,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5169,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5170,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5176,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5187,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5188,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5189,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5196,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5197,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5207,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5208,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5209,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5210,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5217,
+      "region": 2,
+      "reason": "ray misses intact mesh"
+    },
+    {
+      "primaryID": 5227,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5228,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5229,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5230,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5250,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5251,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5252,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5276,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5277,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5278,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5300,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5301,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5302,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5303,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5329,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5330,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5331,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5332,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5358,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5359,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5360,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5361,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5386,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5387,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5388,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5389,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5405,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5416,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5417,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5418,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5445,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5446,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5447,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5473,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5474,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5475,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5501,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5502,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5536,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5537,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5538,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5569,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5570,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5571,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5603,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5604,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5627,
+      "region": 2,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 5635,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5636,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5637,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5638,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5668,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5669,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5670,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5708,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5709,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5747,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5748,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5749,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5787,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5788,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5789,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5826,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5827,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5865,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5866,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5898,
+      "region": 2,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 5905,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5906,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5907,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5947,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5948,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5989,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5990,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 5991,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6031,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6032,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6033,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6074,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6075,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6114,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6115,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6154,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6155,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6156,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6193,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6194,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6233,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6234,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6271,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6272,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6273,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6310,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6311,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6349,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6387,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6388,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6438,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6551,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 6570,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 7132,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 7151,
+      "region": 3,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 7175,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 7195,
+      "region": 3,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 7307,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 7396,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 7418,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 7419,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 7492,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 7643,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 7682,
+      "region": 2,
+      "reason": "grazing or back-facing surface"
+    },
+    {
+      "primaryID": 7891,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 8045,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 8149,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 8512,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 8718,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 8770,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 8925,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 8926,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 8976,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 9080,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 9132,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 9603,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 9765,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 9816,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 9921,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 9973,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 9974,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10026,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10081,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10135,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10416,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10473,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10531,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10704,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10763,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10823,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10884,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 10946,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11008,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11190,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11240,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11367,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11549,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11602,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11675,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11795,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11796,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11806,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11861,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11870,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11927,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 11935,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12063,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12120,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12127,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12184,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12191,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12379,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12386,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12444,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12450,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12506,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12570,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12577,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12632,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12639,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12702,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12703,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12886,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12893,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 12949,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13011,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13018,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13073,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13080,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13197,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13198,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13260,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13261,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13322,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13323,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13324,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13328,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13329,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13385,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13386,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13387,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13449,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13450,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13451,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13456,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13514,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13515,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13516,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13517,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13582,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13583,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13588,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13648,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13649,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13650,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13651,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13656,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13716,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13717,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13722,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13782,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13783,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13789,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13847,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13848,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13849,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13912,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13913,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13914,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13915,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13919,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13920,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13978,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 13979,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14042,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14043,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14044,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14049,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14107,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14108,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14113,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14171,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14172,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14173,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14178,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14236,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14237,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14242,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14300,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14301,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14363,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14364,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14365,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14369,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14427,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14432,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14490,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14491,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14496,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14554,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14555,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14560,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14618,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14619,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14624,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14683,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14684,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14689,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14749,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14754,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14813,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14818,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14876,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14881,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14938,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 14939,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15000,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15061,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15066,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15121,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15179,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15180,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15185,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15237,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15238,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15243,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15294,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15295,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15300,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15353,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15358,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15412,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15417,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15469,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15470,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15474,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15475,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15527,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15583,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15584,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15640,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15645,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15696,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15701,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15752,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15757,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15808,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15864,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15918,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15919,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15923,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15924,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15973,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15974,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 15978,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16027,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16028,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16032,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16081,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16086,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16134,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16135,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16139,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16187,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16244,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16292,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16344,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16348,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16394,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16395,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16399,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16445,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16450,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16496,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16501,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16546,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16550,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16595,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16600,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16693,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16698,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16742,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16746,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16747,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16790,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16838,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16889,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16931,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 16977,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17023,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17066,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17071,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17110,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17114,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17153,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17196,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17239,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17243,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17281,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17285,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17322,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17323,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17326,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17406,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17410,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17449,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17493,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17496,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17540,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17579,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17580,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17583,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17668,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17717,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17718,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17764,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17806,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17810,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17852,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17899,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 17947,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18045,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18095,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18098,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18146,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18149,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18247,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18298,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18302,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18353,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18401,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18456,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18457,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18504,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18558,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18559,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18610,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18657,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18661,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18708,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18758,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18808,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18811,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18861,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18907,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18911,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18959,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 18963,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19017,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19069,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19124,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19184,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19240,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19295,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19345,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19347,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19348,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19374,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19399,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19420,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19423,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19447,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19469,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19472,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19494,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19519,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19522,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19547,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19571,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19594,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19596,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19619,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19622,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19648,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19670,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19673,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19698,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19722,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19748,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19751,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19775,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19777,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19803,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19855,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19857,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19882,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19884,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19911,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19912,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19938,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19939,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19964,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19965,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 19994,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20048,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20051,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20078,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20079,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20108,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20135,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20137,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20167,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20194,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20224,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20254,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20256,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20285,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20286,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20316,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20317,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20318,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20346,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20347,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20348,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20378,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20379,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20409,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20410,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20440,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20441,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20442,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20472,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20473,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20503,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20504,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20536,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20567,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20568,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20599,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20630,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20631,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20661,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20662,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20663,
+      "region": 3,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20693,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20694,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20725,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20726,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20757,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20758,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20790,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20822,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20853,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20854,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20886,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20918,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20919,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    },
+    {
+      "primaryID": 20950,
+      "region": 2,
+      "reason": "first surface belongs to different anatomical region"
+    }
+  ],
+  "note": "First source variant; offline native semantic regions restrict true finite first-hit surface. No model deformation, nearest-miss clamping, RGB replacement or old mesh bindings. Native likeness unapproved.",
+  "nearErrorQuantiles": [
+    0.0,
+    1.8198773652309366e-13,
+    25.06890173231698,
+    163.71466137404732
+  ],
+  "wideErrorQuantiles": [
+    0.0,
+    3.456196737473374,
+    11.437892974847461,
+    16.099968523337786
+  ],
+  "ordinaryPalette": "Four nearest SAME semantic finite source neighbors, <=0.016 head/0.020 cloth world units; aligned normals; exact stored source RGB interpolated only onto new ordinary namespace. No canonical RGB changes. Fixed world field; original material elsewhere."
+}
