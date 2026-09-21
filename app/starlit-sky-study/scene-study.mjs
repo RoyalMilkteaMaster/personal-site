@@ -385,11 +385,18 @@ export function mountFantasyScene(
       volumeClock += (dt + boostDt * ((previousSpeed + skySpeed) / 2 - 1)) * (canvas.dataset.speed === '3' ? 3 : 1);
     }
     cupOpacity = 0; cupDrawn = false;
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-    gl.colorMask(true, true, true, true);
-    gl.depthMask(true);
-    gl.clearColor(0, 0, 0, 0);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    // Ticket 07: a canvas scrolled fully out of view skips only the GPU work.
+    // Clock, commands, camera, morph completion and reports above/below keep
+    // running, so a chapter chosen offscreen is complete when it scrolls back.
+    // One-time snapshots for a chapter command (startMorph) are not gated.
+    const paint = visible;
+    if (paint) {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.colorMask(true, true, true, true);
+      gl.depthMask(true);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    }
     if (phase === 'morph') {
       const t = (clock - transition.at) / path.timing.chapterMorph;
       let transform = identity();
@@ -401,15 +408,17 @@ export function mountFantasyScene(
           transition.sourceInverse,
         );
       }
-      if (sharedSky) drawSharedSky();
-      morph.draw(t, canvas.width / canvas.height, transform);
+      if (paint) {
+        if (sharedSky) drawSharedSky();
+        morph.draw(t, canvas.width / canvas.height, transform);
+      }
       done();
     } else if (active === 0) {
       currentCamera = camera();
       const options = nativeOptions();
       const pureSky = brandRevision && phase === 'intro' && isPureSky(intro.state());
-      if (pureSky) midpointSky.draw(currentCamera, volumeClock);
-      else native.draw(currentCamera, {
+      if (paint && pureSky) midpointSky.draw(currentCamera, volumeClock);
+      else if (paint) native.draw(currentCamera, {
         ...options,
         // Keep the same close-up face; the original legacy sky orbits behind it.
         background: () => {
@@ -428,11 +437,11 @@ export function mountFantasyScene(
         },
       });
       // The ceiling belongs only to the opening and its transition into the face.
-      if (brandRevision && phase === 'intro' && isBrandOpening(intro.state())) brandCeiling.draw(currentCamera, clock, media.matches);
+      if (paint && brandRevision && phase === 'intro' && isBrandOpening(intro.state())) brandCeiling.draw(currentCamera, clock, media.matches);
       cupOpacity = studyCup ? (brandRevision && phase === 'intro' ? endingCupOpacity(intro.state()) : 1) : 0;
-      if (studyCup && !pureSky && cupOpacity > 0) cupDrawn = studyCup.draw(currentCamera, clock, cupOpacity, media.matches);
+      if (paint && studyCup && !pureSky && cupOpacity > 0) cupDrawn = studyCup.draw(currentCamera, clock, cupOpacity, media.matches);
       // Cup visibility belongs to the shot, independently of its geometry/model.
-      if (constellation) {
+      if (paint && constellation) {
         const weights = intro.state().cameraWeights;
         constellation.draw(
           currentCamera,
@@ -451,8 +460,10 @@ export function mountFantasyScene(
         });
       } else done();
     } else {
-      if (sharedSky) drawSharedSky();
-      legacy.draw(active, reduced ? 0 : clock - holdAt, reduced);
+      if (paint) {
+        if (sharedSky) drawSharedSky();
+        legacy.draw(active, reduced ? 0 : clock - holdAt, reduced);
+      }
       done();
     }
     Object.assign(canvas.dataset, {

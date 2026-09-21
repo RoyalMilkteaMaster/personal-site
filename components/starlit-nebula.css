@@ -28,6 +28,23 @@
   mask-image: radial-gradient(ellipse var(--nebula-radius, 240px) 180px at var(--nebula-x, 0px) var(--nebula-y, 0px), #000 0%, transparent 100%);
 }
 .starlit-nebula-light .starlit-nebula-field { opacity: 0.24; }
+/* Ticket 10：手機（既有 ≤850px 斷點）改用預先算好的雲 alpha 貼圖，不即時跑 SVG 濾鏡；
+   顏色、透明度、漂移與暫停規則沿用同一組 .starlit-nebula-field／-dark／-light 選擇器。
+   貼圖 URL 只出現在手機規則內，桌面不下載也不改變原 svg。 */
+.starlit-nebula-texture { display: none; }
+@media (max-width: 850px) {
+  svg.starlit-nebula-field { display: none; }
+  .starlit-nebula-texture {
+    display: block;
+    background: currentColor;
+    -webkit-mask-image: url(/starlit-nebula-cloud.png);
+    mask-image: url(/starlit-nebula-cloud.png);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+}
 .starlit-nebula-far {
   position: absolute;
   inset: 0;

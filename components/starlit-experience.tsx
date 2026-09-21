@@ -2,7 +2,7 @@
 import { Menu } from '@base-ui/react/menu';
 import { Globe, ChevronDown, Check } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import StarlitShell, { StarlitReader } from '@/components/starlit-shell';
+import StarlitShell, { ENDING_ENTRIES, StarlitReader } from '@/components/starlit-shell';
 import { mountFantasyScene } from '@/lib/fantasy/scene.mjs';
 import { createIntro } from '@/lib/fantasy/starlit-intro.mjs';
 import {
@@ -38,6 +38,12 @@ const loading = (): Progress => ({
   text: '',
   settled: false,
 });
+/**
+ * Ticket 02: how long the opening waits for the scene's first report before
+ * the chapters are offered anyway. An engineering bound on the UI wait, not a
+ * performance threshold: the scene keeps loading and takes over when ready.
+ */
+export const SLOW_LOAD_MS = 8000;
 
 export default function StarlitExperience({ mountScene = mountFantasyScene, study = false }: { mountScene?: typeof mountFantasyScene; study?: boolean }) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -46,6 +52,9 @@ export default function StarlitExperience({ mountScene = mountFantasyScene, stud
   // preference of this browser is applied right after mount.
   const [language, setLanguage] = useState<Language>('zh');
   const [switched, setSwitched] = useState(false);
+  // Ticket 09: `?nebula-diag=1` (full comparison) or `?nebula-diag=off` (simple
+  // pause with a restore button); read after mount so server and client agree.
+  const [diagnostic, setDiagnostic] = useState<'full' | 'simple' | undefined>();
   // The beat the visitor scrolled to, and whether the chapters are open. Both
   // are commands to the scene; nothing is queued, the scene always sees the
   // latest target.
@@ -55,7 +64,9 @@ export default function StarlitExperience({ mountScene = mountFantasyScene, stud
     [replay, setReplay] = useState(0);
   const [attempt, setAttempt] = useState(0),
     [failed, setFailed] = useState(false),
-    [hidden, setHidden] = useState(false);
+    [hidden, setHidden] = useState(false),
+    // The scene attempt whose bounded wait has run out; -1 for none yet.
+    [slowFor, setSlowFor] = useState(-1);
   const command = useRef({
     pose,
     replay,
@@ -78,6 +89,8 @@ export default function StarlitExperience({ mountScene = mountFantasyScene, stud
     // The stored choice of this browser, applied once the client is running.
     // oxlint-disable-next-line react/react-compiler
     setLanguage(readLanguage());
+    const flag = new URLSearchParams(location.search).get('nebula-diag');
+    setDiagnostic(flag === '1' ? 'full' : flag === 'off' ? 'simple' : undefined);
   }, []);
   // The tab title and `lang` follow the chosen language, and are handed back
   // untouched when the language changes again or the route goes away.
@@ -122,8 +135,59 @@ export default function StarlitExperience({ mountScene = mountFantasyScene, stud
     saveLanguage(next);
     setSwitched(true);
   };
+  // Ticket 02 (2026-09-21 approved revision): the chapters never wait on the
+  // scene. A failed scene keeps its error and retry over the stage while the
+  // content stays readable; from the opening the error also offers the two
+  // entries, since the reader itself cannot advance without the scene.
+  const retry = () => {
+    setFailed(false);
+    setIntro(loading);
+    setStep(0);
+    setAttempt((n) => n + 1);
+  };
+  // A scene that neither reports nor fails must not lock the chapters: once an
+  // attempt has gone SLOW_LOAD_MS without a report, the wait is shown and the
+  // two entries are offered. A report (`stage` past 'loading'), a failure or an
+  // open chapter takes the notice away; a retry is a new attempt with its own
+  // wait, and a replay of a still-silent scene shows it again at once.
+  useEffect(() => {
+    const id = setTimeout(() => setSlowFor(attempt), SLOW_LOAD_MS);
+    return () => clearTimeout(id);
+  }, [attempt]);
+  const stalled =
+    slowFor === attempt && intro.stage === 'loading' && !failed && !contentOpen;
+  // Phones: the page scrolls and the chapter sits under the 60svh stage, so
+  // after the meteor the first screen was the figure alone and nothing pointed
+  // at the content (ticket-02 evidence, 390×664). Bring the stage top to the
+  // window's own scroll padding on entry and on every chapter switch; desktop's
+  // window has nothing to scroll, so this is a no-op there. `behavior` is left
+  // to the stylesheet (smooth, or none under reduced motion).
+  useEffect(() => {
+    const stage = canvas.current?.parentElement;
+    if (!contentOpen || !stage) return;
+    const pad =
+      parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) ||
+      0;
+    window.scrollTo({ top: stage.getBoundingClientRect().top + scrollY - pad });
+  }, [contentOpen, pose]);
   const t = copy(language);
-  const open = contentOpen && !failed;
+  // The same two ways in as the ending beat, for the error and the slow-load
+  // notice; both call the reader's own `enter`.
+  const entries = (
+    <span className="starlit-entries">
+      {ENDING_ENTRIES.map((entry) => (
+        <button
+          key={entry.pose}
+          type="button"
+          data-pose={entry.pose}
+          onClick={() => enter(entry.pose)}
+          aria-label={t.preview[entry.aria]}
+        >
+          {t.preview[entry.label]}
+        </button>
+      ))}
+    </span>
+  );
   // 07 reports the beat it is actually showing; before it does, the scroll
   // position this page owns is the only answer.
   const shown = intro.readingStep ?? step;
@@ -135,11 +199,12 @@ export default function StarlitExperience({ mountScene = mountFantasyScene, stud
       data-language={language}
     >
       <StarlitShell
-        introComplete={open}
+        introComplete={contentOpen}
         active={String(pose)}
         onActiveChange={(value) => setPose(Number(value))}
         onReplay={restart}
         language={language}
+        diagnostic={diagnostic}
         controls={
           <div
             role="presentation"
@@ -174,39 +239,43 @@ export default function StarlitExperience({ mountScene = mountFantasyScene, stud
           </div>
         }
         stage={
-          <canvas
-            key={attempt}
-            ref={canvas}
-            data-variant={study ? 'E' : undefined}
-            data-opening-study={study ? 'true' : undefined}
-            data-playing={study ? 'true' : undefined}
-            data-speed={study ? '1' : undefined}
-            className={styles.canvas}
-            aria-label={t.preview.canvas}
-            // WebGL requires canvas; an img cannot represent this live scene.
-            // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
-            role="img"
-          />
+          <>
+            <canvas
+              key={attempt}
+              ref={canvas}
+              data-variant={study ? 'E' : undefined}
+              data-opening-study={study ? 'true' : undefined}
+              data-playing={study ? 'true' : undefined}
+              data-speed={study ? '1' : undefined}
+              className={styles.canvas}
+              aria-label={t.preview.canvas}
+              // WebGL requires canvas; an img cannot represent this live scene.
+              // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
+              role="img"
+            />
+            {failed ? (
+              // Over the stage only: the whole viewport during the opening, the
+              // scene column once the chapters are open, so the error is always
+              // in sight and the content is never behind it.
+              <div role="alert" className={styles.failure}>
+                <p>{t.preview.error}</p>
+                {contentOpen ? null : entries}
+                <button className={styles.retry} onClick={retry}>
+                  {t.preview.retry}
+                </button>
+              </div>
+            ) : stalled ? (
+              // Not an error: the scene is still loading. Identifiable as such,
+              // and the chapters are reachable meanwhile.
+              <output data-scene="slow" className={styles.failure}>
+                <p>{t.preview.statusSlow}</p>
+                {entries}
+              </output>
+            ) : null}
+          </>
         }
       >
-        {failed ? (
-          <div role="alert" className={styles.failure}>
-            <p>{t.preview.error}</p>
-            <button
-              className={styles.retry}
-              onClick={() => {
-                setFailed(false);
-                setIntro(loading);
-                setPose(0);
-                setStep(0);
-                setContentOpen(false);
-                setAttempt((n) => n + 1);
-              }}
-            >
-              {t.preview.retry}
-            </button>
-          </div>
-        ) : (
+        {failed || stalled ? null : (
           <StarlitReader
             language={language}
             step={step}
@@ -223,13 +292,15 @@ export default function StarlitExperience({ mountScene = mountFantasyScene, stud
         )}
         {/* Frameless status line; it never advances anything on its own. */}
         <output className={styles.status}>
-          {intro.paused
-            ? t.preview.statusPaused
-            : intro.stage === 'loading'
-              ? t.preview.statusLoading
-              : intro.settled
-                ? ' '
-                : t.preview.statusMoving}
+          {failed
+            ? ' '
+            : intro.paused
+              ? t.preview.statusPaused
+              : intro.stage === 'loading'
+                ? t.preview.statusLoading
+                : intro.settled
+                  ? ' '
+                  : t.preview.statusMoving}
         </output>
       </StarlitShell>
       {/* Announces the switch without moving anyone's place in the opening. */}

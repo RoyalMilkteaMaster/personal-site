@@ -184,6 +184,8 @@ export type SiteCopy = {
     statusLoading: string;
     statusMoving: string;
     statusPaused: string;
+    /** Ticket 02: the 3D is taking long; the chapters are offered meanwhile. */
+    statusSlow: string;
     /** Closing beat: the brand, the role under it, then the two entries. */
     brand: string;
     role: string;
@@ -322,7 +324,7 @@ export const SITE_COPY: Record<Language, SiteCopy> = {
       creditsFile: '完整授權與改動說明',
     },
     preview: {
-      title: '星空開場預覽 · 皇家奶茶大師',
+      title: '皇家奶茶大師 · 星空工房',
       canvas: '星空與星點人物',
       reading: '開場閱讀 · 向下捲動繼續，向上返回',
       beats: [
@@ -341,6 +343,7 @@ export const SITE_COPY: Record<Language, SiteCopy> = {
       statusLoading: '正在凝聚星光…',
       statusMoving: '星光正在移動…',
       statusPaused: '已暫停 · 回到這個分頁就接續',
+      statusSlow: '星光凝聚得比平常久。可以先進入章節，完整體驗會在載入完成後接續。',
       brand: BRAND_NAME,
       role: 'AI 應用全端工程師',
       entryWorks: '/我的專案',
@@ -481,7 +484,7 @@ export const SITE_COPY: Record<Language, SiteCopy> = {
       creditsFile: 'Full licence and change notes',
     },
     preview: {
-      title: 'Starlit Opening Preview · Royal Milktea Master',
+      title: 'Royal Milktea Master · Starlit Studio',
       canvas: 'The stars and the starlit figure',
       reading: 'The opening · scroll down to go on, scroll up to go back',
       beats: [
@@ -500,6 +503,7 @@ export const SITE_COPY: Record<Language, SiteCopy> = {
       statusLoading: 'Gathering starlight…',
       statusMoving: 'The starlight is moving…',
       statusPaused: 'Paused · it continues when you come back to this tab',
+      statusSlow: 'The starlight is taking longer than usual. You can open a chapter now; the full experience continues once it has loaded.',
       brand: BRAND_NAME,
       role: 'AI application full-stack engineer',
       entryWorks: '/My projects',

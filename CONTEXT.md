@@ -99,3 +99,42 @@
 - 新工作包 starlit-moon-contact：需求已核准，Spec 待核准；舊效果工作包保留。
 
 新工作包 starlit-moon-contact 的 Spec 已核准，四票拆分已確認並保存；規劃完成，尚未實作。此狀態覆蓋本文件先前的待核准記錄。
+
+## 2026-09-21 最新手機驗收基準與實機追加（覆蓋相衝的舊手機假設）
+使用者確認標準款 iPhone 17＋Safari。後續所有手機排版／流程調整均以此為主要基準，不能只使用舊390×844全螢幕假設。
+本地Playwright1.62.1的 iPhone 17 preset：screen402×874、viewport402×681、DPR3、touch/mobile、預設WebKit；實際Safari工具列、安全區與iOS版本仍須真機確認，不把模擬等同實機。另檢查工具列收合時可視高度變化與桌面回歸。
+最新明確要求：手機「說不定」段改為三行「說不定我們暢談著，歡笑著，／就一起幹了件——／值得讓星空記下的事呢~」，桌面原兩行不變；手機Language移到更右上，與RoyalMilkteaMaster頁首同列對齊。首頁大致可接受，關於我／作品捲動仍嚴重卡頓，需另診斷runtime，先前載入改善不代表滑動效能已驗收。
+詳見 docs/work/starlit-mobile-optimization/iphone17-followup.md。本次排版修正不等於使用者接受全部原視覺保留項，粒子數／畫質／桌面保護仍有效。
+## 2026-09-21 最新核准：捲動效能實作
+使用者核准依序：07離屏停止GPU繪製但保留章節狀態/時鐘/report/done；08避免作品每幀CPU全池重算與重傳；09再以iPhone17Safari真機量測星雲效果後決定。覆蓋前輪僅診斷限制。保留畫質/粒子/動畫/既有排版，不直接省略深度預繪。證據scroll-performance；Spec仍為starlit-mobile-optimization并以iphone17-followup最新節為準。
+
+2026-09-21 捲動追加：07離屏GPU繪製閘門、08粒子GPU運動已雙審查及實際UI驗收；公共手機預覽已更新兩項，正常星雲效果未改。09依使用者無Mac、iPhone17 Safari預覽協測的方式準備明確opt-in星雲對照入口，尚未取得真機量測，不可宣稱FPS改善。證據docs/work/starlit-mobile-optimization/tickets/07..09及work/starlit-mobile-optimization/scroll-performance。
+
+2026-09-21 09-r2：手機opt-in診斷準備通過Developer+兩位原Reviewer技術審查，公開預覽已更新（原URL加?nebula-diag=1），正常效果不變。使用者回報07／08有所改善但上下滑動About／Works新露出內容仍白屏數秒；此問題未解決。真機ABBA資料尚待回傳，不能宣稱順暢或星雲為根因。每段0.5s穩定+10s，同章四段，touchmove與scroll必要、帶主觀空白答案；四段後面板進第2輪。收尾QA進行中，詳細ticket-09與completion-report.html。
+
+2026-09-21 最終09-r3：使用者無法使用四段診斷（不知道怎麼用／被拒絕），本輪停止要求ABBA與複製，改提供原URL加?nebula-diag=off，自動暫停星雲，可恢復／再次暫停。正常URL不變。原Developer/A/B技術審查與收尾QA完成，公開5173為保留09-r3build。使用者真機定性「關掉星雲後是否仍白屏」尚待回覆；白屏成因未證實、未修復、不宣稱FPS。QA05舊流程難用為歷史，QA06按鈕36px及無關閉測試列為輕微建議，未擴大修正。09量測尚未完成。
+
+2026-09-21 真機回傳：使用者以09-r3簡易暫停連結測試後答「白畫面明顯減少或消失」。這是定性真機對照，支持優先處理星雲整層負載；不是量化GPU/FPS，不證明星雲為唯一原因或正常版本已修復。正常URL仍保留既有星雲，正評估保留外觀的最小後續方案。詳細device/iphone-white-screen-feedback.md。
+
+## 2026-09-21 追加手機星雲修正已核准
+使用者明確表示「手機板就用省效能的版本，繼續完成修正」。Ticket10：手機雲霧由原 SVG 預產生貼圖，保留漂移、星光、觸控光暈，桌面原效果。09 定性回報支持優先處理整層，不視為單一濾鏡根因證明。實作與獨立審查後更新原預覽，真機顺暢度最後仍由使用者確認。
+
+## Ticket10 真機確認
+手機星雲貼圖版已更新原public正常網址，使用者iPhone17＋Safari回覆「白屏已消失，滑動順暢」。兩位原Reviewer已PASS、重要Finding closed；r2只調測試，產品hash未變。收尾QA進行中，最後報告仍需寫入QA結果。預覽5173保存build /home/leslie/starlit-scroll-10-20260921（exec84386），候選8824 exec11650。
+
+## 下一個使用者問題：首頁等待能否低於2.5秒
+使用者表示目前其他部分已沒什麼問題，詢問最開始首頁等待能否壓到2.5s以下／是否困難。尚未批准新的視覺降級或改首幕流程，也尚未實作本項。
+已唯讀查證：scene-study.mjs:497–520 仍依序 await brandCeiling、legacy、native(createFantasy)、camera JSON後才ready；renderer-study.mjs createFantasy等完整模型positions/index、stars等檔齊備。前01/06同條件測量冷載入傳輸約30.6MB，20Mbps/100ms/CPU4x下3D就緒約14.7s，暖載入約4.9s；均為舊Chromium模擬，不是目前iPhone實測秒數。本機無限速曾約1.3s，不能當行動網路承諾。
+已向使用者說明：重訪2.5s較有機會，首訪完整3D難度較高；應分辨首幕可操作與全部3D ready。下一步若核准：評估首幕必要資料與後段資料分批／並行，不改提示倒數冒充載入改善、不降粒子畫質、不破壞後段切換。未量化本輪實際Safari冷暖載入，不虛構保證。
+
+## 本輪結案
+Ticket10技術共識、獨立QA、公開更新及iPhone17Safari真機定性驗收完成，QA本次未發現問題。使用者回覆白屏消失、滑動順暢，其他目前亦可。使用者詢問是否還有空間／若屬裝置網路限制則先不修；已回覆仍有載入順序與非首幕資料的軟體空間，但建議先停在已穩定版本，不追加首頁2.5s實作。未改粒子數、畫質或載入流程。完成報告更新。
+
+## 使用者重新核准 Ticket11（首幕優先）
+使用者明確要求「延後下載後面章節才需要的資料，讓首幕更早開始，這邊幫我做一下」，並詢問後段是否反而卡。現在已授權本項，不沿用上一輪先停的狀態。
+採先辨認首幕真正需要的資料、首幕先可見、後續背景預載；快速操作資料未到需保留內容／可恢復等待與最新意圖，不能假ready。不承諾2.5秒、不降畫質粒子，桌面與10版滑動修正保護。
+Ticket docs/work/starlit-mobile-optimization/tickets/11-opening-priority-loading.md。新Fable5.1 high Developer啟動，exec21986，log scroll-performance/developer-11.jsonl。baseline完整production /home/leslie/starlit-scroll-10-20260921:8824，原public5173同baseline，未更新。root產品候選預計8825。角色三方新session、等待固定snapshot後雙審。
+
+## 2026-09-21 Ticket11 方案撤回（最新指示優先）
+使用者：「不要搞一堆後續資料仍在準備 這種東西 這樣還不如一開始就準備好」。停止分階段載入與新增等待UI；原Developer已中斷，續同session只撤回自己的11改動，保留全部既有07/08/10與其他dirty work。公開預覽從未切到11，仍為已驗收10版本。不得自行重新開始11、增加提示或改載入體驗；回復驗證記錄見 work/starlit-mobile-optimization/scroll-performance/ticket-11/withdrawal.md。
+撤回完成：Developer withdrawal.md 已記錄回復與測試；Coordinator獨立核對載入/介面baseline及Ticket10星雲四檔hash一致。11新測試已移出app，線上未更新。

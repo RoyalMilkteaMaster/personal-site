@@ -117,6 +117,25 @@ export function rotateHeldObjects(source:Float32Array,seconds:number,out:Float32
  return out;
 }
 
+// GPU form of rotateHeldObjects (legacy-study vertex shader). Every time term
+// is reduced to [0,2π) here in double precision and each buffer index carries
+// its own pre-reduced phases, so float32 trig stays exact enough at the last
+// index of the pool and after a long hold. Keep both functions in step.
+export const MOTION_STRIDE=5; // twinkle seed, sky shimmer phase, body drift phases x/y/z.
+export function motionPhases(count:number){
+ const out=new Float32Array(count*MOTION_STRIDE),tau=Math.PI*2;
+ for(let i=0;i<count;i++){
+  const k=i*MOTION_STRIDE,phase=i*2.399963;
+  out[k]=(i*0.61803398875)%1;out[k+1]=(i*STRIDE)%tau;out[k+2]=phase%tau;out[k+3]=(phase*1.4)%tau;out[k+4]=(phase*.7)%tau;
+ }
+ return out;
+}
+export function motionUniforms(seconds:number,reduced:boolean){
+ if(reduced)return {held:[1,0],sky:[1,0],drift:[0,0,0,0],shimmer:[0,0]};
+ const tau=Math.PI*2,angle=seconds*.48,sky=seconds*.025;
+ return {held:[Math.cos(angle),Math.sin(angle)],sky:[Math.cos(sky),Math.sin(sky)],drift:[(seconds*.95)%tau,(seconds*.8)%tau,(seconds*.6)%tau,ease(seconds/.8)],shimmer:[(seconds*.9)%tau,.15]};
+}
+
 export function backgroundStars(count:number,pose:number){
  const out=new Float32Array(count*STRIDE);
  const noise=(i:number)=>{const n=Math.sin(i*127.1+311.7)*43758.5453;return n-Math.floor(n);};

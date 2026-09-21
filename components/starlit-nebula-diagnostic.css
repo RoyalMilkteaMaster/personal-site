@@ -1,0 +1,43 @@
+/* Ticket 09：只在 ?nebula-diag=1 掛載的固定小面板。樣式隨 shell 一同打包（約 1 KB），
+   規則全部限定在 .starlit-diag* 之下；無 query 時面板不掛載。 */
+.starlit-diag {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  max-height: 46vh;
+  overflow-y: auto;
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  background: #0b1020f2;
+  border-top: 1px solid var(--starlit-line, #ffffff20);
+  color: var(--starlit-text, #f0ede8);
+  font: 13px/1.5 system-ui, sans-serif;
+}
+.starlit-diag[data-running='true'] { max-height: none; overflow: visible; }
+.starlit-diag p, .starlit-diag fieldset { margin: 0 0 6px; padding: 0; border: 0; min-width: 0; }
+.starlit-diag legend { padding: 0; float: left; width: 100%; margin-bottom: 4px; }
+.starlit-diag-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.starlit-diag-row button {
+  margin-left: auto;
+  min-height: 36px;
+  padding: 4px 12px;
+  border: 1px solid var(--starlit-gold, #e0c49d);
+  border-radius: 8px;
+  background: #101b30;
+  color: var(--starlit-gold, #e0c49d);
+  font: inherit;
+}
+.starlit-diag-row button + button, fieldset.starlit-diag-row button { margin-left: 0; }
+.starlit-diag-note, .starlit-diag-hint { color: var(--starlit-muted, #b1b6ca); font-size: 12px; }
+.starlit-diag-hint { color: var(--starlit-gold, #e0c49d); }
+.starlit-diag-text {
+  width: 100%;
+  height: 96px;
+  box-sizing: border-box;
+  border: 1px solid var(--starlit-line, #ffffff20);
+  border-radius: 8px;
+  background: #060a14;
+  color: inherit;
+  font: 11px/1.4 ui-monospace, monospace;
+}

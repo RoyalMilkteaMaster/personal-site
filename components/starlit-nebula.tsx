@@ -60,11 +60,15 @@ export default function StarlitNebula({ hostRef, active, visible = true }: {
         </defs>
         <use href={`#${cloudId}-field`} />
       </svg>
+      {/* Ticket 10：≤850px 改顯示由同一幾何預先算好的 alpha 貼圖（scripts/render-nebula-cloud.mjs），
+          不再即時跑 SVG 濾鏡；桌面由 CSS 保持原 svg。同樣的 field 類別讓漂移／暫停／reduced-motion 一致。 */}
+      <div className="starlit-nebula-field starlit-nebula-texture starlit-nebula-dark" />
       <div className="starlit-nebula-reactive">
       <div className="starlit-nebula-light">
         <svg className="starlit-nebula-field" viewBox="0 0 800 1000" preserveAspectRatio="none" focusable="false">
           <use href={`#${cloudId}-field`} />
         </svg>
+        <div className="starlit-nebula-field starlit-nebula-texture" />
       </div>
       <div className="starlit-nebula-stars">
       {NEBULA_STARS.map((star, i) => (

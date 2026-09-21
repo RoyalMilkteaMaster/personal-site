@@ -1114,6 +1114,7 @@ const {
   keywordFromReveal,
   KEYWORD_LEAD,
   readingLines,
+  cupLines,
   splitKeyword,
   keywordSlot,
   wheelStep,
@@ -1574,6 +1575,40 @@ assert.deepEqual(readingLines('我追求\n\n技藝\n自由\n極限\n'), [
   '自由',
   '極限',
 ]);
+
+// 2026-09-21 iPhone 17 追加：手機把奶茶那一拍的中文斷成三行，桌面維持兩行，
+// 英文原樣不動。字也不能在斷行的過程中掉半個。
+//
+// 期望值是這裡自己持有的字面三行，不是 `CUP_PHONE_LINES` —— 拿受測常數當期望值
+// 只是把它跟自己比，核准文案被改動時不會有任何測試失敗（Reviewer B r1 重要項）。
+{
+  const APPROVED_PHONE_LINES = [
+    '說不定我們暢談著，歡笑著，',
+    '就一起幹了件——',
+    '值得讓星空記下的事呢~',
+  ];
+  const zh = readingLines(introCopy('zh').cup);
+  const en = readingLines(introCopy('en').cup);
+  assert.deepEqual(cupLines(zh, false), zh, '桌面維持原本兩行');
+  assert.deepEqual(cupLines(zh, true), APPROVED_PHONE_LINES, '手機是核准的三行');
+  assert.equal(cupLines(zh, true).length, 3);
+  // 破折號必須是兩個真正的 U+2014，不是連字號或減號。
+  assert.equal(cupLines(zh, true)[1], '就一起幹了件\u2014\u2014');
+  // 斷行不得吃掉或多出任何一個字。
+  assert.equal(
+    cupLines(zh, true).join(''),
+    APPROVED_PHONE_LINES.join(''),
+    '三行接回來就是核准的整段',
+  );
+  assert.deepEqual(cupLines(en, true), en, '英文不翻譯也不改斷行');
+  assert.equal(
+    cupLines(zh, true).at(-1),
+    '值得讓星空記下的事呢~',
+    '收尾那一句沒變，data-shimmer 的光仍落在同一句上',
+  );
+  // 來源文案改了就安靜退回原文，不會顯示過期的三行。
+  assert.deepEqual(cupLines(['別的文案'], true), ['別的文案']);
+}
 
 // 2026-09-15：開場是品牌，四行詩移到結尾右欄。
 const BRAND = introCopy('zh').waiting;

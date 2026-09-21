@@ -49,24 +49,27 @@ console.log('Direct CCW arc and opening-only ceiling: 303 intermediate samples p
 
 // 腰部與肩部是來源幾何區域；數值僅作裁切回歸，仍須實看輪廓。
 // 不以頭頂佔畫面百分比冒充使用者需求。
+// R4（2026-09-21）：手機背面與桌面共用同一觀看方向、俯仰與人物朝向；
+// 直式只改取景：頭頂落在畫面上半、腰線與來源底部切口留在畫外，
+// 兩側衣袍允許裁切（不再要求完整肩寬，也不再把人物壓到畫面底部）。
 const rawRear=fs.readFileSync('public/fantasy/surface-stars.f32');
 const rearPoints=new Float32Array(rawRear.buffer,rawRear.byteOffset,rawRear.byteLength/4);
 const rearState={cameraWeights:[0,0,1,0,0,0]};
 const desktopRear=brandSkyCamera(path,rearState,1280/720);
-const phoneRear=brandSkyCamera(path,rearState,390/844);
-const sizes=[[344,882],[360,838],[360,800],[412,915],[390,844],[375,667],[360,640],[1280,720]];
+const sizes=[[344,882],[360,838],[360,800],[412,915],[390,844],[390,664],[375,667],[360,640],[320,568],[1280,720]];
 // 包含 portrait 飽和點 .46 與短手機中段 .56，避免只保護幾個幸運的尺寸。
 for(let n=30;n<=65;n++) sizes.push([390,390/(n/100)]);
 for(const [width,height] of sizes){
  const aspect=width/height,c=brandSkyCamera(path,rearState,aspect),m=cameraFrame(c,{width,height}).screenM;
- for(const key of ['az','el','dist','target','roll']) assert.deepEqual(c[key],(aspect<.8?phoneRear:desktopRear)[key],'各自觀看方向不隨取景比例改變');
- let maxCut=-Infinity,minShoulderY=Infinity,maxHead=-Infinity,maxWaist=-Infinity;
+ for(const key of ['az','el','dist','target','roll']) assert.deepEqual(c[key],desktopRear[key],'手機與桌面背面共用同一眼位、方向與俯仰');
+ let maxCut=-Infinity,minShoulderY=Infinity,maxHead=-Infinity,maxWaist=-Infinity,headXmin=Infinity,headXmax=-Infinity;
  for(let i=0;i<rearPoints.length;i+=8){
   const a=rearPoints,w=m[3]*a[i]+m[7]*a[i+1]+m[11]*a[i+2]+m[15];
   assert(w>.02,'背面測量點在相機前方');
   const x=(m[0]*a[i]+m[4]*a[i+1]+m[8]*a[i+2]+m[12])/w,y=(m[1]*a[i]+m[5]*a[i+1]+m[9]*a[i+2]+m[13])/w;
   maxHead=Math.max(maxHead,y);
-  if(a[i+1]>.52){minShoulderY=Math.min(minShoulderY,y);assert(Math.abs(x)<.97,'完整肩寬');assert(y<1,'後腦不出框');}
+  if(a[i+1]>.7){headXmin=Math.min(headXmin,x);headXmax=Math.max(headXmax,x);}
+  if(a[i+1]>.52){minShoulderY=Math.min(minShoulderY,y);if(aspect>=.8)assert(Math.abs(x)<.97,'桌面完整肩寬');assert(y<1,'後腦不出框');}
   if(a[i+1]<.025)maxCut=Math.max(maxCut,y);
   if(a[i+1]<.2)maxWaist=Math.max(maxWaist,y);
  }
@@ -74,11 +77,14 @@ for(const [width,height] of sizes){
  assert(maxWaist<-1,'桌面與手機均不露腰');
  if(aspect<.8){
   assert(maxWaist<-1.03,`${width}x${height} 腰部必須在畫外並保留餘裕: ${maxWaist}`);
-  assert(minShoulderY>-.96,`${width}x${height} 雙肩下緣須完整入鏡: ${minShoulderY}`);
+  const headTop=(1-maxHead)/2;
+  assert(headTop>.3&&headTop<.45,`${width}x${height} 頭頂應落在畫面上半（三成至四成五）: ${headTop}`);
+  assert(minShoulderY>-1,`${width}x${height} 肩線須在畫面內: ${minShoulderY}`);
+  assert(Math.abs(headXmin+headXmax)/2<.2&&headXmax-headXmin<1.7,`${width}x${height} 後腦置中且不溢出兩側: ${headXmin},${headXmax}`);
  }
- if(Number.isInteger(height))console.log({width,height,headY:(1-maxHead)*height/2,shoulderBottom:(1-minShoulderY)*height/2,waistMargin:(-1-maxWaist)*height/2});
+ if(Number.isInteger(height))console.log({width,height,headY:(1-maxHead)*height/2,shoulderBottom:(1-minShoulderY)*height/2,waistMargin:(-1-maxWaist)*height/2,headX:[+headXmin.toFixed(2),+headXmax.toFixed(2)]});
 }
-console.log('背面：8個實際尺寸＋aspect .30–.65連續區間，雙肩／腰部／方向通過');
+console.log('背面：10個實際尺寸＋aspect .30–.65連續區間，桌面方向共用／頭頂上半／腰部畫外通過');
 
 // Freeze the calibrated view observed in ticket-21/ui.json + ui-step-2.png.
 // This is a visual-regression baseline, not owner acceptance of the artwork.

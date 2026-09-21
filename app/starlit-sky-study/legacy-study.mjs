@@ -2,7 +2,9 @@ import { portraitPoints } from '../../lib/fantasy/../portrait-points.ts';
 import { heldObjectPoints } from '../../lib/fantasy/../held-object-points.ts';
 import {
   backgroundStars,
-  rotateHeldObjects,
+  motionPhases,
+  motionUniforms,
+  MOTION_STRIDE,
   assignParticleIds,
   STRIDE,
 } from '../../lib/fantasy/../particle-morph.ts';
@@ -12,12 +14,14 @@ import { stageShot, WIDE_RADIUS } from '../../lib/fantasy/../camera-sequence.ts'
 import { program, snapshotShader, capture } from '../../lib/fantasy/../fantasy-particles.mjs';
 const vertex = `#version 300 es
 
-in vec3 aPosition;
-in vec3 aColor;
-in vec3 aNormal;
-in float aHeld;
-in float aSeed;
-in float aEdgeFade;
+layout(location=0) in vec3 aPosition;
+layout(location=1) in vec3 aColor;
+layout(location=2) in vec3 aNormal;
+layout(location=3) in float aHeld;
+layout(location=4) in float aSeed;
+layout(location=5) in float aEdgeFade;
+layout(location=6) in vec3 aPivot;
+layout(location=7) in vec4 aPhase;
 uniform vec3 uEye;
 uniform vec3 uRight;
 uniform vec3 uUp;
@@ -30,6 +34,10 @@ uniform float uTwinkle;
 uniform float uPropReveal;
 uniform float uPointScale;
 uniform float uOpening;
+uniform vec2 uHeldTurn;
+uniform vec2 uSkyTurn;
+uniform vec4 uDrift;
+uniform vec2 uShimmer;
 out vec3 vColor;
 out float vOpacity;
 uniform bool backgroundOnly;
@@ -37,12 +45,26 @@ uniform bool hideSky;
 void main(){
  vec3 p=aPosition;
  vec3 n=aNormal;
+ vec3 color=aColor;
+ // rotateHeldObjects (lib/particle-morph.ts) on the GPU: the same sky turn and
+ // shimmer, body drift ramp and held-object pivot spin, from motionUniforms
+ // and the pre-reduced per-index phases. Reduced motion passes the identity.
+ if(aHeld<-.5){
+  p.xy=vec2(p.x*uSkyTurn.x-p.y*uSkyTurn.y,p.x*uSkyTurn.y+p.y*uSkyTurn.x);
+  color*=(1.-uShimmer.y)+uShimmer.y*cos(uShimmer.x+aPhase.x);
+ }else if(aHeld<.5){
+  p+=vec3(.0032*sin(uDrift.x+aPhase.y),.0055*sin(uDrift.y+aPhase.z),.002*sin(uDrift.z+aPhase.w))*uDrift.w;
+ }else{
+  vec2 d=vec2(p.x-aPivot.x,p.z-aPivot.z);
+  p.xz=vec2(d.x*uHeldTurn.x+d.y*uHeldTurn.y+aPivot.x,-d.x*uHeldTurn.y+d.y*uHeldTurn.x+aPivot.z);
+  n.xz=vec2(n.x*uHeldTurn.x+n.z*uHeldTurn.y,-n.x*uHeldTurn.y+n.z*uHeldTurn.x);
+ }
  vec3 rel=p-uEye;
  float depth=-dot(rel,uBack);
  float fit=min(1.0,uAspect/.62);
  gl_Position=vec4(dot(rel,uRight)*3.8*fit/uAspect,dot(rel,uUp)*3.8*fit,depth*.998-.2,depth);
  if(backgroundOnly)gl_Position.z=gl_Position.w*.9999;
- float bright=max(aColor.r,max(aColor.g,aColor.b));
+ float bright=max(color.r,max(color.g,color.b));
  // Normalised on the wide stop, so the chapters keep the star size the site
  // has always drawn and only the close-ups grow.
  float scale=clamp(uPointScale/depth,.6,1.7);
@@ -62,11 +84,11 @@ void main(){
  vec3 light=vec3(.60)+vec3(1.0,.89,.75)*diffuse*.56+vec3(.46,.57,1.0)*cool*.19;
  light=mix(light,vec3(.38)+vec3(1.0,.94,.85)*diffuse*1.12+vec3(.46,.57,1.0)*cool*.22,clamp(aHeld,0.0,1.0));
  light=mix(light,vec3(1.15),step(1.5,aHeld));
- float surface=uSurface*step(.1,length(aNormal));
- vColor=aColor*mix(vec3(1.0),light,surface);
+ float surface=uSurface*step(.1,length(n));
+ vColor=color*mix(vec3(1.0),light,surface);
  float phase=fract(uTime/(14.0+aSeed*26.0)+fract(aSeed*73.13));
  float pulse=pow(max(0.0,1.0-abs(phase-.5)/.0225),2.0)*uTwinkle;
- vColor=mix(vColor,min(vec3(1.25),aColor*.45+vec3(.8)),pulse*.9);
+ vColor=mix(vColor,min(vec3(1.25),color*.45+vec3(.8)),pulse*.9);
  gl_PointSize*=1.0+pulse*.8;
  // Only the starlit opening remaps the existing orbit into a blue full-window sky.
  if(backgroundOnly){vColor=mix(vColor,vec3(.30,.48,1.)*(.55+.45*bright),uOpening);gl_PointSize*=1.+.35*uOpening;}
@@ -172,63 +194,75 @@ export async function createLegacy(gl, canvas, { separateSky = false } = {}) {
       fragment,
       true,
     );
-  const vao = gl.createVertexArray(),
-    buffer = gl.createBuffer(),
-    seeds = gl.createBuffer();
-  gl.bindVertexArray(vao);
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  for (const [name, size, offset] of [
-    ['aPosition', 3, 0],
-    ['aColor', 3, 12],
-    ['aNormal', 3, 24],
-    ['aEdgeFade', 1, 36],
-    ['aHeld', 1, 48],
-  ]) {
-    const a = gl.getAttribLocation(p, name);
-    gl.enableVertexAttribArray(a);
-    gl.vertexAttribPointer(a, size, gl.FLOAT, false, 52, offset);
-  }
-  gl.bindBuffer(gl.ARRAY_BUFFER, seeds);
-  gl.bufferData(
-    gl.ARRAY_BUFFER,
-    Float32Array.from(
-      { length: pool.count },
-      (_, i) => (i * 0.61803398875) % 1,
-    ),
-    gl.STATIC_DRAW,
-  );
-  const attr = gl.getAttribLocation(p, 'aSeed');
-  gl.enableVertexAttribArray(attr);
-  gl.vertexAttribPointer(attr, 1, gl.FLOAT, false, 4, 0);
-  // Explicit attribute locations keep the snapshot program on the same layout.
-  for (const name of [
-    'aPosition',
-    'aColor',
-    'aNormal',
-    'aEdgeFade',
-    'aHeld',
-    'aSeed',
-  ]) {
-    if (gl.getAttribLocation(saved, name) !== gl.getAttribLocation(p, name))
+  // Every source (each pose, each sky) is uploaded once into its own vertex
+  // array; the frame only changes uniforms. aPivot shares the body's aEdgeFade
+  // slot exactly as the STRIDE=13 layout does (offset 9 is pivot or edge fade
+  // by role). The static phases buffer carries the twinkle seed and the
+  // per-index motion phases.
+  const attributes = {};
+  for (const name of ['aPosition', 'aColor', 'aNormal', 'aEdgeFade', 'aPivot', 'aHeld', 'aSeed', 'aPhase']) {
+    attributes[name] = gl.getAttribLocation(p, name);
+    // layout(location) pins both programs to one layout; keep the check honest.
+    if (gl.getAttribLocation(saved, name) !== attributes[name])
       throw Error('Chapter snapshot attribute mismatch');
   }
-  const drawData = new Float32Array(pool.count * STRIDE),
-    skyData = new Float32Array(skyB.length),
-    shot = stageShot('done', 1),
-    camera = portraitCamera(shot.angle, shot.radius, shot.target);
-  function bind(pr, pose, seconds, reduced, skyOnly = false, opening = 0) {
-    sky = canvas.dataset.variant === 'C' ? skyB : skyA;
-    const data = skyOnly ? skyData.subarray(0, sky.length) : drawData,
-      source = skyOnly ? sky : targets[pose];
-    if (reduced) data.set(source);
-    else rotateHeldObjects(source, seconds, data);
-    if (gl.getParameter(gl.CURRENT_PROGRAM) !== pr) gl.useProgram(pr);
+  const phases = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, phases);
+  gl.bufferData(gl.ARRAY_BUFFER, motionPhases(pool.count), gl.STATIC_DRAW);
+  const uploads = new Map();
+  function upload(source) {
+    let entry = uploads.get(source);
+    if (entry) return entry;
+    const vao = gl.createVertexArray(),
+      buffer = gl.createBuffer();
     gl.bindVertexArray(vao);
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, source, gl.STATIC_DRAW);
+    for (const [name, size, offset] of [
+      ['aPosition', 3, 0],
+      ['aColor', 3, 12],
+      ['aNormal', 3, 24],
+      ['aEdgeFade', 1, 36],
+      ['aPivot', 3, 36],
+      ['aHeld', 1, 48],
+    ]) {
+      gl.enableVertexAttribArray(attributes[name]);
+      gl.vertexAttribPointer(attributes[name], size, gl.FLOAT, false, STRIDE * 4, offset);
+    }
+    gl.bindBuffer(gl.ARRAY_BUFFER, phases);
+    for (const [name, size, offset] of [
+      ['aSeed', 1, 0],
+      ['aPhase', 4, 4],
+    ]) {
+      gl.enableVertexAttribArray(attributes[name]);
+      gl.vertexAttribPointer(attributes[name], size, gl.FLOAT, false, MOTION_STRIDE * 4, offset);
+    }
+    gl.bindVertexArray(null);
+    uploads.set(source, (entry = { vao, buffer }));
+    return entry;
+  }
+  const locations = new Map();
+  function location(pr, name) {
+    let known = locations.get(pr);
+    if (!known) locations.set(pr, (known = new Map()));
+    if (!known.has(name)) known.set(name, gl.getUniformLocation(pr, name));
+    return known.get(name);
+  }
+  const shot = stageShot('done', 1),
+    camera = portraitCamera(shot.angle, shot.radius, shot.target);
+  // The caller selects the program: draw() below, capture() for snapshots
+  // (useProgram is not allowed while transform feedback is active).
+  function bind(pr, pose, seconds, reduced, skyOnly = false, opening = 0) {
+    sky = canvas.dataset.variant === 'C' ? skyB : skyA;
+    gl.bindVertexArray(upload(skyOnly ? sky : targets[pose]).vao);
+    const motion = motionUniforms(seconds, reduced);
+    gl.uniform2fv(location(pr, 'uHeldTurn'), motion.held);
+    gl.uniform2fv(location(pr, 'uSkyTurn'), motion.sky);
+    gl.uniform4fv(location(pr, 'uDrift'), motion.drift);
+    gl.uniform2fv(location(pr, 'uShimmer'), motion.shimmer);
     for (const name of ['eye', 'right', 'up', 'back'])
       gl.uniform3fv(
-        gl.getUniformLocation(pr, 'u' + name[0].toUpperCase() + name.slice(1)),
+        location(pr, 'u' + name[0].toUpperCase() + name.slice(1)),
         camera[name],
       );
     for (const [name, value] of Object.entries({
@@ -243,15 +277,16 @@ export async function createLegacy(gl, canvas, { separateSky = false } = {}) {
       uPropReveal: 1,
       uPointScale: WIDE_RADIUS / PORTRAIT_SCALE,
     }))
-      gl.uniform1f(gl.getUniformLocation(pr, name), value);
-    gl.uniform1i(gl.getUniformLocation(pr, 'backgroundOnly'), skyOnly ? 1 : 0);
-    gl.uniform1i(gl.getUniformLocation(pr, 'hideSky'), separateSky ? 1 : 0);
+      gl.uniform1f(location(pr, name), value);
+    gl.uniform1i(location(pr, 'backgroundOnly'), skyOnly ? 1 : 0);
+    gl.uniform1i(location(pr, 'hideSky'), separateSky ? 1 : 0);
   }
   return {
     pool,
     targets,
     skyCount: pool.sky(0),
     draw(pose, seconds, reduced, skyOnly = false, opening = 0) {
+      gl.useProgram(p);
       bind(p, pose, seconds, reduced, skyOnly, opening);
       gl.enable(gl.BLEND);
       gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
@@ -265,22 +300,23 @@ export async function createLegacy(gl, canvas, { separateSky = false } = {}) {
     snapshot(pose, seconds, reduced, skyOnly = false, depthTexture = null) {
       return capture(gl, saved, skyOnly ? sky.length / STRIDE : pool.count, (pr) => {
         bind(pr, pose, seconds, reduced, skyOnly);
-        gl.uniform1i(
-          gl.getUniformLocation(pr, 'useSnapshotDepth'),
-          depthTexture ? 1 : 0,
-        );
-        gl.uniform1i(gl.getUniformLocation(pr, 'snapshotDepth'), 3);
+        gl.uniform1i(location(pr, 'useSnapshotDepth'), depthTexture ? 1 : 0);
+        gl.uniform1i(location(pr, 'snapshotDepth'), 3);
         if (depthTexture) {
           gl.activeTexture(gl.TEXTURE3);
           gl.bindTexture(gl.TEXTURE_2D, depthTexture);
         }
         gl.drawArrays(gl.POINTS, 0, skyOnly ? sky.length / STRIDE : pool.count);
+        gl.bindVertexArray(null);
       });
     },
     dispose() {
-      gl.deleteBuffer(buffer);
-      gl.deleteBuffer(seeds);
-      gl.deleteVertexArray(vao);
+      for (const { vao, buffer } of uploads.values()) {
+        gl.deleteBuffer(buffer);
+        gl.deleteVertexArray(vao);
+      }
+      uploads.clear();
+      gl.deleteBuffer(phases);
       gl.deleteProgram(p);
       gl.deleteProgram(saved);
     },

@@ -96,6 +96,7 @@ import {
 import { localizedProjects } from '@/lib/projects';
 import { copy, type Language } from '@/lib/site-copy';
 import StarlitNebula from './starlit-nebula';
+import StarlitNebulaDiagnostic from './starlit-nebula-diagnostic';
 import './starlit-shell.css';
 
 export type StarlitSection = {
@@ -2238,6 +2239,40 @@ export const readingLines = (text: string) =>
     .map((line) => line.trim())
     .filter(Boolean);
 
+/** 手機／窄螢幕，與 `starlit-shell.css` 的版面斷點同一條。 */
+const PHONE_QUERY = '(max-width: 850px)';
+
+/** 初值 false（＝桌面），伺服器端與 hydration 的第一次繪製才會一致。 */
+export function usePhoneLayout() {
+  const [phone, setPhone] = useState(false);
+  useEffect(() => {
+    if (typeof matchMedia !== 'function') return;
+    const mql = matchMedia(PHONE_QUERY);
+    const read = () => setPhone(mql.matches);
+    read();
+    mql.addEventListener('change', read);
+    return () => mql.removeEventListener('change', read);
+  }, []);
+  return phone;
+}
+
+/**
+ * 2026-09-21 核准：奶茶那一拍的中文在手機斷成三行，逐字照抄使用者給的文字。
+ * 桌面維持原本兩行。
+ */
+export const CUP_PHONE_LINES = [
+  '說不定我們暢談著，歡笑著，',
+  '就一起幹了件——',
+  '值得讓星空記下的事呢~',
+];
+
+/**
+ * 手機版的奶茶拍行序。認的是中文原文案的尾句而不是拍號或語言旗標：英文不改，
+ * 來源文案哪天改了也會安靜退回原文。尾句沒變，`data-shimmer` 仍落在同一句上。
+ */
+export const cupLines = (lines: string[], phone: boolean) =>
+  phone && lines.at(-1) === CUP_PHONE_LINES.at(-1) ? CUP_PHONE_LINES : lines;
+
 /**
  * Controls that own their own click or key: starting the opening from one of
  * these would steal the brand replay, the language switch or a link.
@@ -2519,6 +2554,8 @@ export function StarlitReader({
   brandIn3D = false,
 }: StarlitReaderProps) {
   const t = copy(language);
+  // Only the milk-tea beat's Chinese reads differently here; see `cupLines`.
+  const phone = usePhoneLayout();
   const view = useRef<HTMLElement>(null);
   const requestedStep = useRef(step);
   useEffect(() => { requestedStep.current = step; }, [step]);
@@ -2807,7 +2844,7 @@ export function StarlitReader({
     // `begin` and `goTo` only read refs, so this never needs to re-subscribe.
     // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const lines = readingLines(text);
+  const lines = cupLines(readingLines(text), phone);
 
   return (
     <div className="starlit-reader-frame">
@@ -3143,6 +3180,8 @@ export type StarlitShellProps = {
   footerExtra?: ReactNode;
   /** Opening copy, rendered only while `introComplete` is false. */
   children?: ReactNode;
+  /** Ticket 09: opt-in nebula diagnostic ('full' comparison or 'simple' pause); absent keeps the shell unchanged. */
+  diagnostic?: 'full' | 'simple';
 };
 
 /**
@@ -3355,8 +3394,12 @@ export default function StarlitShell({
   controls,
   footerExtra,
   children,
+  diagnostic,
 }: StarlitShellProps) {
   const t = copy(language);
+  // Ticket 09: the diagnostic pauses the nebula through its existing `visible`
+  // seam, which unmounts the layer and detaches attachNebula's listeners.
+  const [nebulaPaused, setNebulaPaused] = useState(false);
   const works = localizedProjects(language);
   // Ticket 39: which cards are burned open. Any number at once (the user
   // dropped v1's one-at-a-time rule). A card that is being put out stays
@@ -3517,6 +3560,7 @@ export default function StarlitShell({
                 key={active}
                 hostRef={glowHostRef}
                 active={introComplete && ['0', '1', '2'].includes(active)}
+                visible={!nebulaPaused}
               />
               <Tabs.Panel value="0" className="starlit-chapter">
                 {/* Ticket 29-A: the name card. One grid row; 29-B fills the
@@ -3541,7 +3585,7 @@ export default function StarlitShell({
                       a feathered image mask removes its black exterior. */}
                   <div className="starlit-about-portrait">
                     <img
-                      src="/portrait-milktea-moon-v2.webp"
+                      src="/portrait-milktea-moon-v3.webp"
                       alt={t.about.portraitAlt}
                       width={768}
                       height={768}
@@ -3857,6 +3901,15 @@ export default function StarlitShell({
           )}
         </div>
       </main>
+      {diagnostic ? (
+        <StarlitNebulaDiagnostic
+          mode={diagnostic}
+          introComplete={introComplete}
+          chapter={active}
+          contentRef={contentRef}
+          onPausedChange={setNebulaPaused}
+        />
+      ) : null}
     </Tabs.Root>
   );
 }

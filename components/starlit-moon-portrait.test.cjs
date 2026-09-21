@@ -32,10 +32,13 @@ const { chromium } = require(process.env.PLAYWRIGHT_PATH || '/home/leslie/coordi
     await page.addScriptTag({ path: path.join(out, 'moon.js') });
     const img = page.locator('.starlit-about-portrait img');
     await img.waitFor();
+    assert.equal(await img.getAttribute('src'), '/portrait-milktea-moon-v3.webp',
+      'About portrait must use the restored petting-hand moon asset');
     await img.evaluate(async el => { await el.decode(); });
-    assert.deepEqual(await img.evaluate(el => [el.naturalWidth, el.naturalHeight]),
-      await img.evaluate(el => [Number(el.getAttribute('width')), Number(el.getAttribute('height'))]),
-      'Reserved dimensions must match the delivered asset');
+    assert.deepEqual(await img.evaluate(el => [el.naturalWidth, el.naturalHeight]), [768, 768],
+      'Delivered WebP dimensions must match the square layout reservation');
+    assert.deepEqual(await img.evaluate(el => [Number(el.getAttribute('width')), Number(el.getAttribute('height'))]), [768, 768],
+      'Existing square layout reservation must remain unchanged');
     // Isolate the actual portrait DOM on a known backdrop, including the
     // stacking isolation that exposed black corners during the original reveal.
     await page.evaluate(() => {
@@ -59,7 +62,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_PATH || '/home/leslie/coordi
       }
       assert.ok(pixels.center.reduce((a, b) => a + b, 0) > 180, 'Moon itself must remain visible');
     }
-    console.log('PASS delivered dimensions, visible moon and transparent corners at desktop/mobile sizes');
+    console.log('PASS restored asset filename, source/layout dimensions, visible moon and transparent corners at desktop/mobile sizes');
   } finally {
     if (browser) await browser.close();
     fs.rmSync(out, { recursive: true, force: true });

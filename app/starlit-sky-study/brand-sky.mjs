@@ -17,34 +17,22 @@ export function brandSkyCamera(path,state,aspect) {
     camera.filmOffsetY=-.67*full*portrait;
   }
   const rear=state.cameraWeights[2];
-  if(rear && aspect>=.8){
+  if(rear){
     // Calibrated against the model's head/collar centreline, not world -Z.
-    // Desktop keeps its close lens; portrait fitting stays in the branch below.
+    // R4 (2026-09-21): phones share this exact desktop eye, orientation and
+    // pitch; only the portrait framing below differs.
     camera.az+=rear*(195-path.rear.az);
     camera.el+=rear*(-6-path.rear.el);
     camera.dist+=rear*(1.4-path.rear.dist);
     camera.target[0]+=rear*(.03-path.rear.target[0]);
     camera.target[1]+=rear*(.76-path.rear.target[1]);
-  } else if(rear){
-    // 手機保留既有頭肩取景，不反向影響桌面校準。
-    camera.az+=rear*(183-path.rear.az);
-    camera.el+=rear*(-6-path.rear.el);
-    camera.dist+=rear*(1.5-path.rear.dist);
-    camera.target[0]+=rear*(.015-path.rear.target[0]);
-    camera.target[1]+=rear*(.80-path.rear.target[1]);
-    // 窄螢幕稍收視野，並移動 film gate；保留手機既有觀看方向。
-    const fit=Math.max(1,(1.45-.15*portrait)/Math.max(.1,aspect));
-    const oldFit=Math.max(1,.8/Math.max(.1,aspect));
+  }
+  if(rear && aspect<.8){
+    // 直式取景：固定垂直視野，讓頭頂落在畫面約四成高、腰線留在畫外；
+    // 兩側衣袍隨窄螢幕裁切，不抬高鏡頭、不把人物壓到畫面底部。
     const fov=scale=>Math.atan(Math.tan(14*Math.PI/180)*scale)*360/Math.PI;
-    camera.fov+=rear*(fov(fit)-fov(oldFit));
-    // 手機抬高頭肩取景；原 y<.4 包含上背，不能當腰部全數排除。
-    let gate=Math.min(0,-1.04+.93/fit)+.24*portrait;
-    // FOV28 下來源腰區最高投影約 -1.517；隨 fit 保留裁切餘裕，
-    // 不能讓 portrait 飽和後繼續露腰。較寬視窗不觸及此上限。
-    if(portrait) gate=Math.min(gate,-1.04+1.50/fit);
-    camera.filmOffsetY=(camera.filmOffsetY||0)+rear*gate;
-    // 沒有水平偏移的桌面相機保持原物件形狀；有偏移才累加。
-    if(portrait) camera.filmOffsetX=(camera.filmOffsetX||0)+.10*rear*portrait;
+    camera.fov+=rear*(fov(1.74)-fov(Math.max(1,.8/aspect)));
+    camera.filmOffsetY=(camera.filmOffsetY||0)-.17*rear;
   }
   const weight=state.cameraWeights[3]+state.cameraWeights[4];
   const opening=state.cameraWeights[0];

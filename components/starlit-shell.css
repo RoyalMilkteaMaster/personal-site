@@ -2369,6 +2369,20 @@
     align-content: start;
     padding-top: 88px;
   }
+  /* 2026-09-21 Ticket 03：背面那一幕的首行被 Language 鈕蓋住。上面那條 88px 是
+     照「header 方框底 75px」寫的，但手機上 header 會換行，語言鈕的可見下緣實
+     測在 114px。讓到鈕下方；字級、行距與顯字節奏都不動——縮字才是把長句變難讀。
+
+     再往下調以前先看這件事：讓開之後，英文的關鍵詞帶在矮螢幕上已經**低於人物
+     頭頂**（en 320×568 低 34px），中文才還在頭頂之上（餘 2–9px）。英文不遮到
+     人物靠的是左側的水平留白，而 320／360×568 的水平淨距已接近 0，iOS 實機字
+     寬只要略寬就會真的壓到人物。逐案數字與實機必看清單在
+     `work/starlit-mobile-optimization/ticket-03/layout/evidence/head-clearance.md`。
+
+     其餘幕（品牌、自介、奶茶、結尾）的落點不在本次核准範圍內，維持原樣。 */
+  .starlit-copy[data-place='left'] {
+    padding-top: 112px;
+  }
   /* 自介上方的天空只有約 180px，中英文四行都要放得下：字級與行距一起收一點。
      關鍵詞仍然明顯比正文大且粗（約 18px/900 對 12.5px/400，倍率和桌面同級），
      不是把整段縮成小字。 */
@@ -2425,6 +2439,96 @@
     font-size: 19px;
   }
 
+}
+
+/* 2026-09-21 Ticket 03：窄橫向的背面。上面那個區塊的第一個條件只看寬度，所以橫向
+   手機與被縮窄的桌面視窗也走手機閱讀版面，但 aspect ≥ .8 用的是桌面相機、人物置
+   中，於是整欄寬的英文首行 "What I dare to pursue" 直接橫越頭部。
+
+   只收「首行」那一段，不是整欄。r3 收整欄時 `.starlit-keywords` 跟著變窄，而它是
+   `overflow: hidden` + `nowrap`（見上面 2085 行那段註解記的舊事故），最寬的輪替詞
+   `Freedom` 實測 186px @42px，欄寬 30vw 在 620px 以下就放不下，會被無聲切掉。
+   首行折行後關鍵詞帶整體下移，所以這裡同時把起點提到量到的橫向 header 下緣
+   （58px）之下，把那段位移還回去。字級、行距與顯字都不動。
+
+   首行帶的人物左緣實測 254 @667×375、296 @780×440（約 0.38W，只對首行帶、
+   aspect ≈ 1.78 成立，不能外推到關鍵詞那一列）；30vw 使首行右緣為 20px + 0.30W。
+   下限 200px：30vw 在 568 寬只有 170，首行會折成三行，把關鍵詞推到衣袍上（Root
+   實拍 `coordinator-final/r4/candidate-01-568x320-limits.png`）。200px 是已驗證的
+   667 用的同一個寬度，折兩行。667 以上 30vw ≥ 200，取值不變。
+   下界 480px：量到的 header 一排（下緣 58px）只在 480 以上確認過。 */
+@media (width < 800px) and (min-width: 480px) and (min-aspect-ratio: 1/1) {
+  .starlit-copy[data-place='left'] {
+    padding-top: 72px;
+  }
+  .starlit-copy[data-place='left'] .starlit-pursue-lead {
+    max-width: max(30vw, 200px);
+  }
+}
+
+/* 窄橫向的行距：首行折兩行之後，關鍵詞那一列會掉到人物身上。字級與層次不動，只收
+   這一幕的行距與段距，把關鍵詞帶往上提。最寬的 `Freedom` 墨跡實測 20→206，這一段
+   是為它留的餘裕，不是為畫面上停住的 `Limits`（20→148）。
+   原本只套在 400 高以下；667×667 的實拍（`coordinator-final/r4/
+   en-667x667-freedom-2.png`）顯示同樣需要——那裡的關鍵詞帶在 y190–228，髮緣約
+   x207，`Freedom` 的字尾正好貼上去。提上來之後髮緣退到 x215 以外。 */
+@media (width < 800px) and (min-width: 480px) and (min-aspect-ratio: 1/1) {
+  .starlit-copy[data-place='left'] .starlit-pursue-lead {
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+  .starlit-copy[data-place='left'] .starlit-keywords {
+    line-height: 1.2;
+  }
+}
+
+/* 480–567 寬的橫向：人物在這個寬度佔得更靠左，首行帶的人物左緣實測約 185px
+   （Root 實拍 `coordinator-final/r4/en-480x320-boundary.png`：首行墨跡到 209，
+   「dare」與「pursue」壓在頭頸上）。200px 的下限在這裡太寬，改成讓首行折三行；
+   左上角只有品牌字（墨跡下緣約 50px），語言鈕在右邊，所以起點可以再提。 */
+@media (width < 568px) and (min-width: 480px) and (min-aspect-ratio: 1/1) {
+  .starlit-copy[data-place='left'] {
+    padding-top: 58px;
+  }
+  .starlit-copy[data-place='left'] .starlit-pursue-lead {
+    max-width: 150px;
+  }
+  /* 這個寬度的天空欄放不下 42px 的關鍵詞：人物最左緣實測約 185px，扣掉 20px 內縮
+     只剩 165px，而最寬的 `Freedom` 在 42px 是 186px——比它要待的位置還寬，所以移
+     動或收行距都救不了（Root 實拍 en-480x320-boundary-candidate-final-2.png，字尾
+     `om` 壓在領口上）。只有這一段改字級：32px 讓 `Freedom` 收到約 142px，字尾離
+     人物還有約 23px 暗底。仍是直式關鍵詞下限 30px 之上，也還是首行 24px 的 1.33
+     倍並保持 900 字重，層次沒有被抹掉，不是縮成難讀小字。 */
+  .starlit-copy[data-place='left'] .starlit-keywords {
+    font-size: 32px;
+  }
+}
+
+/* 近正方形的窄橫向（480–640 寬、aspect ≤ 1.3）：Root 實拍 568×568
+   （`coordinator-final/r4/reviewA-568x568-before-2.png`）確認 42px 的 `Freedom`
+   壓在頭髮上，Reviewer A 的投影成立。這個區間的人物比 1.78 的橫向佔得更寬、更靠
+   左（實圖量到髮緣約 0.33W），而 header 是固定像素，視窗越小就把文字推進頭部更寬
+   的那一段，所以只提上去或只收欄寬都不夠。
+   這裡同時做三件小事：首行收成三列讓它退到髮緣左邊、行距收緊讓整塊貼著 header
+   下方（左上只有品牌字，墨跡下緣約 50px，語言鈕 58px 在右側）、關鍵詞用直式已在
+   出貨的 30px 下限（`Freedom` 約 133px，比 42px 的 186px 少 53px）。
+   字級層次不變：關鍵詞 30px／900／金，首行 24px／400／灰。
+   上界 640px：667×667 已有實拍通過，維持 42px 不動。 */
+@media (min-width: 480px) and (max-width: 640px) and (min-aspect-ratio: 1/1) and (max-aspect-ratio: 1.3/1) {
+  .starlit-copy[data-place='left'] {
+    padding-top: 56px;
+    /* 最窄的 480 近正方形，髮緣量到約 148px，扣掉原本 20px 內縮只剩 128px 的天空，
+       而 30px 的 `Freedom` 要 133px。這 8px 是這一格唯一還能讓出來的空間，左右仍
+       有留白。 */
+    padding-left: 12px;
+  }
+  .starlit-copy[data-place='left'] .starlit-pursue-lead {
+    max-width: 150px;
+    line-height: 1.25;
+  }
+  .starlit-copy[data-place='left'] .starlit-keywords {
+    font-size: 30px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2758,5 +2862,40 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+/* 2026-09-21 iPhone 17 追加：手機的 Language 回到頁首同一列的右上角。
+
+   402 邏輯寬度下品牌加上 Language 本來就比 header 的內容寬度寬，所以
+   `flex-wrap: wrap` 會把 Language 掉到第二列。要「同列」就得兩邊各讓一點：
+   品牌縮一階字級（≤380px 那條為了同樣的理由做過同一件事），Language 只收掉
+   它本來就寬鬆的留白與圖示尺寸 —— `min-height` 與完整的 Language 字樣都留著。
+   `align-self: flex-start` 讓它的上緣對齊品牌上緣。全部關在 ≤430px 裡。 */
+@media (max-width: 430px) {
+  .starlit .starlit-brand {
+    gap: 8px;
+    padding: 6px;
+    margin-left: -6px;
+  }
+  .starlit .starlit-brand-name,
+  .starlit[data-intro-complete='false'] .starlit-brand-name {
+    font-size: 13px;
+    letter-spacing: 0;
+  }
+  /* 靠上，跟品牌同一列的上緣切齊；章節那一列仍然自己 wrap 到第三列。 */
+  .starlit .starlit-controls {
+    align-self: flex-start;
+  }
+  /* 屬性選擇器而不是 CSS module 的 class：控制項本體住在別人的檔案裡，這一票
+     只碰 shell 的 CSS。`.starlit` 前綴是為了贏過那邊的 `.preview .language`。 */
+  .starlit .starlit-controls [aria-label='Language'] {
+    gap: 5px;
+    padding: 8px 11px;
+    font-size: 13px;
+  }
+  .starlit .starlit-controls [aria-label='Language'] svg {
+    width: 18px;
+    height: 18px;
   }
 }
