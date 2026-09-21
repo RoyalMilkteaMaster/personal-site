@@ -4,7 +4,7 @@
 
 林品宏（Royal Milktea Master）的個人網站與作品集，分享 AI 應用、自動化與系統開發作品。
 
-**[進入個人網站 →](https://royal-milktea-studio.leslie0907.chatgpt.site)**
+**[進入個人網站 →](https://royalmilkteamaster.github.io/)**
 
 網站可直接公開瀏覽，無須登入。建議使用桌面或手機瀏覽器開啟，跟著星空導覽探索「關於我」、「我的作品」與聯絡方式。
 
@@ -28,9 +28,10 @@ npm ci
 npm run dev
 ```
 
-正式建置：`npm run build`。網站由 Sites 託管；GitHub 保存原始碼，推送 GitHub 不會自動發布網站。
+GitHub Pages 建置：`npm run build:pages`。推送到 `RoyalMilkteaMaster/RoyalMilkteaMaster.github.io` 的 `main` 分支後，GitHub Actions 會自動建置並發布。原本的 Sites 建置指令 `npm run build` 仍保留。
 
 ## 聯絡
 
 - [GitHub · RoyalMilkteaMaster](https://github.com/RoyalMilkteaMaster)
 - [Email · leslie0907@gmail.com](mailto:leslie0907@gmail.com)
+

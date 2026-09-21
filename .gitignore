@@ -40,3 +40,4 @@ next-env.d.ts
 # Local build metadata and accidental shell output
 *.tsbuildinfo
 /=880
+/dist-pages/
